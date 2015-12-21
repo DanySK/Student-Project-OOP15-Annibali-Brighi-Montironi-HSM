@@ -3,3 +3,4 @@ syntax: glob
 *.class
 */doc/*
 .checkstyle
+/.settings
