@@ -4,14 +4,12 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
+
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JScrollPane;
-import javax.swing.JTabbedPane;
-import javax.swing.JTable;
+import javax.swing.JOptionPane;
 
 /**
  * The main frame of the application.
@@ -25,36 +23,29 @@ public class MainFrame {
     private static final String MENU_ITEM_EXIT = "Exit";
     private static final double PROPORTION = 1.3;
     private final JFrame frame;
-    private final String[] columnsName = {"Nome", "Nome Latino", "ph", "Luminosità", "Temperatura"};
-    private final Object[][] data = {
-        {"Pomodoro", "Solanum lycopersicum", "4", "1475", "21"},
-        {"Mandarino", "Citrus reticulata", "2", "1765", "25"}
-    };
+    private final Tabel tabel;
+
     /**
-     * The main frame only constructor.
+     * Create the main frame.
      */
     public MainFrame() {
+        this.tabel = new Tabel();
         this.frame = new JFrame(FRAME_TITLE);
         this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        final JTabbedPane tabel = new JTabbedPane();
-        final JTable table = new JTable(data, columnsName);
-        table.setAutoCreateRowSorter(true);
-        final JScrollPane scrollPane = new JScrollPane(table);
-        table.setFillsViewportHeight(true);
-        tabel.add("Plants", scrollPane);
-        tabel.add("Other tabel", new JLabel("Other tabel"));
-        this.frame.getContentPane().add(tabel, BorderLayout.CENTER);
         final JMenuBar menuBar = new JMenuBar();
         final JMenu file = new JMenu(MENU_FILE);
         final JMenuItem addPlant = new JMenuItem(MENU_ITEM_ADD_PLANT);
         final JMenuItem exit = new JMenuItem(MENU_ITEM_EXIT);
-        exit.addActionListener(e -> System.exit(0));
+        exit.addActionListener(e -> this.exit());
         file.add(addPlant);
         file.addSeparator();
         file.add(exit);
         file.setMnemonic(KeyEvent.VK_F);
         menuBar.add(file);
+        final GUIComponent lowPanel = new LowPanel();
         this.frame.getContentPane().add(menuBar, BorderLayout.PAGE_START);
+        this.frame.getContentPane().add(this.tabel.getMainPanel());
+        this.frame.getContentPane().add(lowPanel.getMainPanel(), BorderLayout.PAGE_END);
     }
 
     /**
@@ -69,6 +60,20 @@ public class MainFrame {
         this.frame.setVisible(true);
     }
 
+    private void exit() {
+        if (JOptionPane.showConfirmDialog(frame, "Do you want to Exit?", "Exit", JOptionPane.YES_NO_OPTION) == 0) {
+            System.exit(0);
+        }
+    }
+
+    /**
+     * Insert a plant into database.
+     * @param plant
+     * The plant to insert.
+     */
+    public void insertPlant(final Object... plant) {
+        this.tabel.insertRow(plant);
+    }
     /**
      * Prova per la visualizzazione.
      * @param args
