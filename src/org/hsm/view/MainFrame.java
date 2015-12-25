@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -19,8 +21,11 @@ public class MainFrame {
 
     private static final String FRAME_TITLE = "Hydroponic System Manager";
     private static final String MENU_FILE = "File";
+    private static final String MENU_INFORMATION = "Information";
+    private static final String MENU_HELP = "Help";
     private static final String MENU_ITEM_ADD_PLANT = "Add Plant";
     private static final String MENU_ITEM_EXIT = "Exit";
+    private static final String MENU_ITEM_ABOUT = "About Hydroponic System Manager";
     private static final double PROPORTION = 1.3;
     private final JFrame frame;
     private final Tabel tabel;
@@ -31,21 +36,37 @@ public class MainFrame {
     public MainFrame() {
         this.tabel = new Tabel();
         this.frame = new JFrame(FRAME_TITLE);
-        this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.frame.setLayout(new BorderLayout());
+        this.frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        this.frame.addWindowListener(new WindowAdapter() {
+            public void windowClosing(final WindowEvent windowEvent) {
+                exit();
+            }
+        });
         final JMenuBar menuBar = new JMenuBar();
         final JMenu file = new JMenu(MENU_FILE);
+        final JMenu information = new JMenu(MENU_INFORMATION);
+        final JMenu help = new JMenu(MENU_HELP);
         final JMenuItem addPlant = new JMenuItem(MENU_ITEM_ADD_PLANT);
         final JMenuItem exit = new JMenuItem(MENU_ITEM_EXIT);
+        final JMenuItem about = new JMenuItem(MENU_ITEM_ABOUT);
         exit.addActionListener(e -> this.exit());
         file.add(addPlant);
         file.addSeparator();
         file.add(exit);
         file.setMnemonic(KeyEvent.VK_F);
+        information.setMnemonic(KeyEvent.VK_I);
+        help.setMnemonic(KeyEvent.VK_H);
+        help.add(about);
         menuBar.add(file);
+        menuBar.add(information);
+        menuBar.add(help);
         final GUIComponent lowPanel = new LowPanel();
-        this.frame.getContentPane().add(menuBar, BorderLayout.PAGE_START);
-        this.frame.getContentPane().add(this.tabel.getMainPanel());
-        this.frame.getContentPane().add(lowPanel.getMainPanel(), BorderLayout.PAGE_END);
+        final ToolBar toolbar = new ToolBar();
+        this.frame.setJMenuBar(menuBar);
+        this.frame.getContentPane().add(this.tabel.getComponent());
+        this.frame.getContentPane().add(toolbar.getComponent(), BorderLayout.PAGE_START);
+        this.frame.getContentPane().add(lowPanel.getComponent(), BorderLayout.PAGE_END);
     }
 
     /**

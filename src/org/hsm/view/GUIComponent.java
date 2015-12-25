@@ -1,6 +1,6 @@
 package org.hsm.view;
 
-import javax.swing.JPanel;
+import javax.swing.JComponent;
 
 /**
  *All the GUI components must implements this interface. 
@@ -9,9 +9,9 @@ import javax.swing.JPanel;
 public interface GUIComponent {
 
     /**
-     * Get the panel of the component.
-     * @return the panel of the component.
+     * Get the component.
+     * @return the component.
      */
-    JPanel getMainPanel();
+    JComponent getComponent();
 
 }

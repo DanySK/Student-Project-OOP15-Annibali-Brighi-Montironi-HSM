@@ -3,6 +3,7 @@ package org.hsm.view;
 import java.awt.FlowLayout;
 
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JPanel;
 
 /**
@@ -33,7 +34,7 @@ public class LowPanel implements GUIComponent {
     }
 
     @Override
-    public JPanel getMainPanel() {
+    public JComponent getComponent() {
         return this.panel;
     }
 

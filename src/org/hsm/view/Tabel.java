@@ -2,6 +2,8 @@ package org.hsm.view;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -52,7 +54,7 @@ public class Tabel implements GUIComponent {
     }
 
     @Override
-    public JPanel getMainPanel() {
+    public JComponent getComponent() {
         return this.panel;
     }
 }
