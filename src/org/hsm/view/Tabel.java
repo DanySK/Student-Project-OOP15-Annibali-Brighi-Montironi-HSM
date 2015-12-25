@@ -40,7 +40,7 @@ public class Tabel implements GUIComponent {
         panelPlants.add(panelPlantNorth, BorderLayout.CENTER);
         panelPlants.add(panelPlantSouth, BorderLayout.PAGE_END);
         tabbed.add("Plants", panelPlants);
-        final ImageIcon image = new ImageIcon("res/icona.png");
+        final ImageIcon image = new ImageIcon("res/plant.png");
         tabbed.add("Graphic", new JLabel(image));
         this.panel.add(tabbed, BorderLayout.CENTER);
     }
