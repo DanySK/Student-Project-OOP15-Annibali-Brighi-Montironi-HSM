@@ -3,6 +3,7 @@ package org.hsm.view;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 
+import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -39,7 +40,8 @@ public class Tabel implements GUIComponent {
         panelPlants.add(panelPlantNorth, BorderLayout.CENTER);
         panelPlants.add(panelPlantSouth, BorderLayout.PAGE_END);
         tabbed.add("Plants", panelPlants);
-        tabbed.add("Graphic", new JLabel("Graphic"));
+        final ImageIcon image = new ImageIcon("res/icona.png");
+        tabbed.add("Graphic", new JLabel(image));
         this.panel.add(tabbed, BorderLayout.CENTER);
     }
 
