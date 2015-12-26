@@ -1,6 +1,7 @@
 package org.hsm.view;
 
 import javax.swing.Box;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
@@ -19,11 +20,16 @@ public class ToolBar implements GUIComponent {
      *Create a toolbar.
      */
     public ToolBar() {
+        final GUIFactory factory = new MyGUIFactory();
         this.bar = new JToolBar("Toolbar");
         this.label = new JLabel("No GreenHouse Selected");
-        final JButton addGreenhouseButton = new JButton("Add GreenHouse");
-        final JButton removeGreenhouseButton = new JButton("Remove GreenHouse");
-        bar.add(addGreenhouseButton);
+        final JButton createGreenhouseButton = factory.createButton("Create GreenHouse", new ImageIcon("res/new.png")); 
+        final JButton removeGreenhouseButton = factory.createButton("Remove GreenHouse", new ImageIcon("res/delete.png"));
+        final JButton openGreenhouseButton = factory.createButton("Open GreenHouse", new ImageIcon("res/open.png"));
+        final JButton saveGreenhouseButton = factory.createButton("Save", new ImageIcon("res/save.png"));
+        bar.add(createGreenhouseButton);
+        bar.add(openGreenhouseButton);
+        bar.add(saveGreenhouseButton);
         bar.add(removeGreenhouseButton);
         bar.add(Box.createHorizontalGlue());
         bar.add(new JLabel("GreenHouse:  "));
