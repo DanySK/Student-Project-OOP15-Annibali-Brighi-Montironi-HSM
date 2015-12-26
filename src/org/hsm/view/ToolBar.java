@@ -22,7 +22,7 @@ public class ToolBar implements GUIComponent {
     public ToolBar() {
         final GUIFactory factory = new MyGUIFactory();
         this.bar = new JToolBar("Toolbar");
-        this.label = new JLabel("No GreenHouse Selected");
+        this.label = new JLabel("NO GREENHOUSE SELECTED");
         final JButton createGreenhouseButton = factory.createButton("Create GreenHouse", new ImageIcon("res/new.png")); 
         final JButton removeGreenhouseButton = factory.createButton("Remove GreenHouse", new ImageIcon("res/delete.png"));
         final JButton openGreenhouseButton = factory.createButton("Open GreenHouse", new ImageIcon("res/open.png"));

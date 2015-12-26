@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
  * The main frame of the application.
  *
  */
-public class MainFrame {
+public class MainFrame implements UserInteface {
 
     private static final String FRAME_TITLE = "Hydroponic System Manager";
     private static final String MENU_FILE = "File";
@@ -87,14 +87,16 @@ public class MainFrame {
         }
     }
 
-    /**
-     * Insert a plant into database.
-     * @param plant
-     * The plant to insert.
-     */
+    @Override
     public void insertPlant(final Object... plant) {
         this.tabel.insertRow(plant);
     }
+
+    @Override
+    public void removeSelectedPlant() {
+        this.tabel.removeSelectedRow();
+    }
+
     /**
      * Prova per la visualizzazione.
      * @param args

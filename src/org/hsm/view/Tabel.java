@@ -55,6 +55,14 @@ public class Tabel implements GUIComponent {
         model.addRow(row);
     }
 
+    /**
+     *Remove the selected row into the table.
+     */
+    public void removeSelectedRow() {
+        final DefaultTableModel model = (DefaultTableModel) this.table.getModel();
+        model.removeRow(this.table.getSelectedRow());
+    }
+
     @Override
     public JComponent getComponent() {
         return this.panel;
