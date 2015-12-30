@@ -15,7 +15,7 @@ public interface Controller {
 
 	/**
 	 * Create a new Greenhouse.
-	 *  
+	 *
 	 * @param name
 	 * 			the name for Greenhouse
 	 * @param greenhouseType
