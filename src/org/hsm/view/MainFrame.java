@@ -82,8 +82,9 @@ public class MainFrame implements UserInteface {
     }
 
     private void exit() {
-        if (JOptionPane.showConfirmDialog(frame, "Do you want to Exit?", "Exit", JOptionPane.YES_NO_OPTION) == 0) {
+        if (JOptionPane.showConfirmDialog(frame, "Do you want to Exit?", "Exit", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
             System.exit(0);
+            //metodo del controller che salva il modello sul file
         }
     }
 
@@ -95,7 +96,9 @@ public class MainFrame implements UserInteface {
     @Override
     public void removeSelectedPlant() {
         this.tabel.removeSelectedRow();
+        //chiama il metodo del controller che rimuove la pianta
     }
+    //CREARE UN METODO CHE INSERISCI LE PIANTE DELLA SERRA ATTRAVERSO LETTURA FILE UTILIZZANDO THREAD (SWINGUTILITIES. INVOKE-LATER)
 
     /**
      * Prova per la visualizzazione.

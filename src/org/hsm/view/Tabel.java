@@ -18,7 +18,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Tabel implements GUIComponent {
 
-    private static final Object[] COLUMN_LIST = new Object[]{"Nome", "Nome Latino", "ph", "Luminosità", "Temperatura"};
+    private static final Object[] COLUMN_LIST = new Object[]{"Nome", "Nome Latino", "Luminosita", "ph"};
     private final JPanel panel;
     private final JTable table;
 
