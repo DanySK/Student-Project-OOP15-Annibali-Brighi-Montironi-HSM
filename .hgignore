@@ -3,5 +3,5 @@ syntax: glob
 *.class
 *doc/*
 .checkstyle
-/.settings
+*.settings/*
 .pmd
