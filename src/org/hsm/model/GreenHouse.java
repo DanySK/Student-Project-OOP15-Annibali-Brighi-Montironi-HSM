@@ -1,5 +1,11 @@
 package org.hsm.model;
 
-public class GreenHouse {
+/**
+ * Interface for Greenhouse.
+ * 
+ */
+public interface GreenHouse {
+	
+	
 
 }

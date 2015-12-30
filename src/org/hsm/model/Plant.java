@@ -1,5 +1,9 @@
 package org.hsm.model;
 
-public class Plant {
+/**
+ * Plant interface. 
+ */
 
+public interface Plant {
+	
 }
