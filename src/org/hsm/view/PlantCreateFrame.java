@@ -19,20 +19,21 @@ import javax.swing.JTextField;
  *The frame which you can add plants in the table.
  *
  */
-public class PlantAddFrame {
+public class PlantCreateFrame {
 
-    private static final List<String> NAMES = new ArrayList<>(Arrays.asList("Nome", "Nome Latino", "ph", "Luminosità", "Temperatura"));
+    private static final List<String> NAMES = new ArrayList<>(Arrays.asList("Name", "Botanical Name", "ph", "Brightness",
+            "Conductibility", "Optimal Growth Time", "Temperature", "Life (Days)", "Size (cm3)", "Cost (€)"));
     private static final int NUM_CHAR = 15;
     private static final int NUM_ROW = NAMES.size();
     private static final int INSET = 3;
-    private static final String TITLE = "Add Plant";
+    private static final String TITLE = "Create new Plant";
     private final JFrame frame;
     private final List<JTextField> fieldList;
 
     /**
      * Create the add plant frame.
      */
-    public PlantAddFrame() {
+    public PlantCreateFrame() {
         this.fieldList = new ArrayList<>();
         for (int i = 0; i < NAMES.size(); ++i) {
             this.fieldList.add(new JTextField(NUM_CHAR));
@@ -56,17 +57,16 @@ public class PlantAddFrame {
         final JPanel southPanel = new JPanel(new FlowLayout());
         final JButton add = new JButton("Add");
         southPanel.add(add);
-        add.addActionListener(e -> addPlant());
+        add.addActionListener(e -> createPlant());
         this.frame.getContentPane().add(southPanel, BorderLayout.PAGE_END);
     }
 
-    //QUESTO METODO RIMANE INUTILIZZATO DATE CHE NON HO A DISPOSIZIONE IL CONTROLLER
-    private void addPlant() {
+    private void createPlant() {
         final List<String> list = new ArrayList<>();
         for (final JTextField field: this.fieldList) {
             list.add(field.getText());
         }
-        //CHIAMATA AL CONTROLLER CON L'INVIO DELLA LISTA DI INFORMAZIONI SU PIANTA DA AGGIUNGERE
+        //Controller.createNewPlant(list);
     }
 
     /**
@@ -83,6 +83,6 @@ public class PlantAddFrame {
      * @param args args
      */
     public static void main(final String... args) {
-        new PlantAddFrame().start();
+        new PlantCreateFrame().start();
     }
 }
