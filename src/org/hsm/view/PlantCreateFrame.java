@@ -6,7 +6,6 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -21,10 +20,8 @@ import javax.swing.JTextField;
  */
 public class PlantCreateFrame {
 
-    private static final List<String> NAMES = new ArrayList<>(Arrays.asList("Name", "Botanical Name", "ph", "Brightness",
-            "Conductibility", "Optimal Growth Time", "Temperature", "Life (Days)", "Size (cm3)", "Cost (€)"));
     private static final int NUM_CHAR = 15;
-    private static final int NUM_ROW = NAMES.size();
+    private static final int NUM_ROW = PlantCharacteristics.values().length - 1;
     private static final int INSET = 3;
     private static final String TITLE = "Create new Plant";
     private final JFrame frame;
@@ -35,7 +32,7 @@ public class PlantCreateFrame {
      */
     public PlantCreateFrame() {
         this.fieldList = new ArrayList<>();
-        for (int i = 0; i < NAMES.size(); ++i) {
+        for (int i = 0; i < NUM_ROW; ++i) {
             this.fieldList.add(new JTextField(NUM_CHAR));
         }
         this.frame = new JFrame(TITLE);
@@ -48,7 +45,7 @@ public class PlantCreateFrame {
             gbc.gridy = i;
             gbc.gridx = 0;
             gbc.anchor = GridBagConstraints.LINE_END;
-            panel.add(new JLabel(NAMES.get(i)), gbc);
+            panel.add(new JLabel(PlantCharacteristics.values()[i + 1].getDescription()), gbc);
             gbc.gridx = 1;
             gbc.anchor = GridBagConstraints.LINE_START;
             panel.add(this.fieldList.get(i), gbc);

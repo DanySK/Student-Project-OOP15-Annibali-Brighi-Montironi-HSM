@@ -23,6 +23,9 @@ public class LowPanel implements GUIComponent {
         layout.setAlignment(FlowLayout.RIGHT);
         this.panel.setLayout(layout);
         final JButton add = new JButton("Add Plant");
+        add.addActionListener(e -> {
+            new PlantAddFrame().start();
+        });
         final JButton remove = new JButton("Remove Plant");
         final JButton createPlant = new JButton("Create new Plant");
         createPlant.addActionListener(e -> {
