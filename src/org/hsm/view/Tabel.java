@@ -2,6 +2,9 @@ package org.hsm.view;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
@@ -11,6 +14,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *The class which create and use the Tabel.
@@ -18,7 +22,6 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Tabel implements GUIComponent {
 
-    private static final Object[] COLUMN_LIST = new Object[]{"Nome", "Nome Latino", "Luminosita", "ph"};
     private final JPanel panel;
     private final JTable table;
 
@@ -28,7 +31,16 @@ public class Tabel implements GUIComponent {
     public Tabel() {
         final JTabbedPane tabbed = new JTabbedPane();
         this.panel = new JPanel(new BorderLayout());
-        this.table = new JTable(new DefaultTableModel(COLUMN_LIST, 0));
+        final List<String> columns = IntStream.range(0, PlantCharacteristics.values().length)
+                .mapToObj(x -> PlantCharacteristics.values()[x].getDescription())
+                .collect(Collectors.toList());
+        final TableModel model = new DefaultTableModel(columns.toArray(), 0) {
+            private static final long serialVersionUID = 8517517831747874057L;
+            public boolean isCellEditable(final int rowIndex, final int mColIndex) {
+                return false;
+            }
+        };
+        this.table = new JTable(model);
         table.setAutoCreateRowSorter(true);
         table.setFillsViewportHeight(true);
         final JScrollPane scrollPane = new JScrollPane(table);

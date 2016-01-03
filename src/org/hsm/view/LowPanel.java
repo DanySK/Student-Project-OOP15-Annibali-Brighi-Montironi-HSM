@@ -28,6 +28,9 @@ public class LowPanel implements GUIComponent {
         });
         final JButton remove = new JButton("Remove Plant");
         final JButton createPlant = new JButton("Create new Plant");
+        createPlant.addActionListener(e -> {
+            new PlantCreateFrame().start();
+        });
         this.panel.add(add);
         this.panel.add(remove);
         this.panel.add(createPlant);
