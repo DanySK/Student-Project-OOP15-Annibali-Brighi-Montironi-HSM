@@ -34,70 +34,48 @@ public class PlantImp implements Plant {
 		this.optimalTemperature = optimalTemperature;
 	}
 
-	@Override
 	public int getID() {
-		// TODO Auto-generated method stub
-		return 0;
+		return id;
 	}
 
-	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
+		return name;
 	}
 
-	@Override
 	public String getBotanicalName() {
-		// TODO Auto-generated method stub
-		return null;
+		return botanicalName;
 	}
 
-	@Override
 	public int getPH() {
-		// TODO Auto-generated method stub
-		return 0;
+		return ph;
 	}
 
-	@Override
 	public int getBrightness() {
-		// TODO Auto-generated method stub
-		return 0;
+		return brightness;
 	}
 
-	@Override
 	public int getOptimalGrowthTime() {
-		// TODO Auto-generated method stub
-		return 0;
+		return optimalGrowthTime;
 	}
 
-	@Override
 	public int getLife() {
-		// TODO Auto-generated method stub
-		return 0;
+		return life;
 	}
 
-	@Override
 	public int getSize() {
-		// TODO Auto-generated method stub
-		return 0;
+		return size;
 	}
 
-	@Override
 	public int getCost() {
-		// TODO Auto-generated method stub
-		return 0;
+		return cost;
 	}
 
-	@Override
-	public int getConducibility() {
-		// TODO Auto-generated method stub
-		return 0;
+	public int getConductibility() {
+		return conductibility;
 	}
 
-	@Override
 	public int getOptimalTemperature() {
-		// TODO Auto-generated method stub
-		return 0;
+		return optimalTemperature;
 	}
 	
 	

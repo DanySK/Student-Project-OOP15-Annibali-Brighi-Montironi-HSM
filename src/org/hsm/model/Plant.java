@@ -24,7 +24,7 @@ public interface Plant {
 	
 	public int getCost();
 	
-	public int getConducibility();
+	public int getConductibility();
 	
 	public int getOptimalTemperature();
 }
