@@ -33,6 +33,72 @@ public class PlantImp implements Plant {
 		this.conductibility = conductibility;
 		this.optimalTemperature = optimalTemperature;
 	}
+
+	@Override
+	public int getID() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public String getName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getBotanicalName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int getPH() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getBrightness() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getOptimalGrowthTime() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getLife() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getSize() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getCost() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getConducibility() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getOptimalTemperature() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 	
 	
 	
