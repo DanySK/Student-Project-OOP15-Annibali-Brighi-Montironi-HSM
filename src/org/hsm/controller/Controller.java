@@ -79,8 +79,8 @@ public interface Controller {
      * @param cost
      *            the cost in euro of the plant
      */
-    void createNewPlant(String name, String id, String botanicalName, String ph, String brightness, String conductibility,
-            String optimalGrowthTime, String temperature, String life, String size, String cost);
+    void createNewPlant(String name, int id, String botanicalName, int ph, int brightness, int conductibility,
+            int optimalGrowthTime, int temperature, int life, int size, int cost);
 
     /**
      * Save the current Greenhouse opened in the program.

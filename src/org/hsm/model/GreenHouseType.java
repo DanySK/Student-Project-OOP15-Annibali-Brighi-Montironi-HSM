@@ -6,5 +6,10 @@ package org.hsm.model;
  *
  */
 public enum GreenHouseType {
+	/**
+	 * Type of disposition of the plants in the greenhouse.
+	 * 
+	 */
+	GRID, LINEAR, CIRCULAR; 
 
 }
