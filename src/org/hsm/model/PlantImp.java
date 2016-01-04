@@ -15,11 +15,11 @@ public class PlantImp implements Plant {
 	private int life;
 	private int size;
 	private int cost;
-	private int conductibility;
+	private int conductivity;
 	private int optimalTemperature;
 	
 	protected PlantImp(final int id, final  String name, final String botanicalName, final int ph, final int brightness, 
-			final int optimalGrowthTime, final int life, final int size, final int cost, final int conductibility, final int optimalTemperature) {
+			final int optimalGrowthTime, final int life, final int size, final int cost, final int conductivity, final int optimalTemperature) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -30,7 +30,7 @@ public class PlantImp implements Plant {
 		this.life = life;
 		this.size = size;
 		this.cost = cost;
-		this.conductibility = conductibility;
+		this.conductivity = conductivity;
 		this.optimalTemperature = optimalTemperature;
 	}
 
@@ -70,8 +70,8 @@ public class PlantImp implements Plant {
 		return cost;
 	}
 
-	public int getConductibility() {
-		return conductibility;
+	public int getConductivity() {
+		return conductivity;
 	}
 
 	public int getOptimalTemperature() {
