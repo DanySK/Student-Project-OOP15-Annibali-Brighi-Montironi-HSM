@@ -116,6 +116,7 @@ public class MainFrame implements UserInteface {
             System.out.println("errore visualizzazione gui");
         }
         new MainFrame().start();
+
     }
 
 }
