@@ -6,7 +6,7 @@ import java.util.TreeMap;
 /**
  * Database of the plants that the user can add to his Greenhouse.
  */
-public class DBplants {
+public class DBplants implements Database {
     
     private Map<String, Plant> db = new TreeMap<>();
 
