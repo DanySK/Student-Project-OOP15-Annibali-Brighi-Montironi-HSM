@@ -4,6 +4,7 @@ import java.awt.FlowLayout;
 
 import javax.swing.JButton;
 import javax.swing.JComponent;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 /**
@@ -16,20 +17,22 @@ public class LowPanel implements GUIComponent {
 
     /**
      * Create low panel for options.
+     * @param frame
+     * the maine frame of the app
      */
-    public LowPanel() {
+    public LowPanel(final JFrame frame) {
         this.panel = new JPanel();
         final FlowLayout layout = new FlowLayout();
         layout.setAlignment(FlowLayout.RIGHT);
         this.panel.setLayout(layout);
         final JButton add = new JButton("Add Plant");
         add.addActionListener(e -> {
-            new PlantAddFrame().start();
+            new PlantAddDialog(frame).start();
         });
         final JButton remove = new JButton("Remove Plant");
         final JButton createPlant = new JButton("Create new Plant");
         createPlant.addActionListener(e -> {
-            new PlantCreateFrame().start();
+            new PlantCreateDialog(frame).start();
         });
         this.panel.add(add);
         this.panel.add(remove);

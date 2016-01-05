@@ -12,6 +12,8 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  * The main frame of the application.
@@ -48,6 +50,7 @@ public class MainFrame implements UserInteface {
         final JMenu information = new JMenu(MENU_INFORMATION);
         final JMenu help = new JMenu(MENU_HELP);
         final JMenuItem addPlant = new JMenuItem(MENU_ITEM_ADD_PLANT);
+        //addPlant.addActionListener(e -> new PlantAddDialog(frame).start());
         final JMenuItem exit = new JMenuItem(MENU_ITEM_EXIT);
         final JMenuItem about = new JMenuItem(MENU_ITEM_ABOUT);
         exit.addActionListener(e -> this.exit());
@@ -61,8 +64,8 @@ public class MainFrame implements UserInteface {
         menuBar.add(file);
         menuBar.add(information);
         menuBar.add(help);
-        final GUIComponent lowPanel = new LowPanel();
-        final ToolBar toolbar = new ToolBar();
+        final GUIComponent lowPanel = new LowPanel(frame);
+        final ToolBar toolbar = new ToolBar(this.frame);
         this.frame.setJMenuBar(menuBar);
         this.frame.getContentPane().add(this.tabel.getComponent());
         this.frame.getContentPane().add(toolbar.getComponent(), BorderLayout.PAGE_START);
@@ -106,6 +109,12 @@ public class MainFrame implements UserInteface {
      * inutili argomenti
      */
     public static void main(final String... args) {
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (ClassNotFoundException | InstantiationException
+                | IllegalAccessException | UnsupportedLookAndFeelException e) {
+            System.out.println("errore visualizzazione gui");
+        }
         new MainFrame().start();
     }
 

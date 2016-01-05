@@ -1,6 +1,7 @@
 package org.hsm.view;
 
 import java.awt.BorderLayout;
+import java.awt.Dialog;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -12,6 +13,7 @@ import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -22,7 +24,7 @@ import javax.swing.JTextField;
  *This frame can be used to create a new greenhouse.
  *
  */
-public class GreenhouseCreateFrame {
+public class GreenhouseCreateDialog {
 
     private static final String FRAME_TITLE = "Create new Greenhouse";
     private static final String LABEL_NAME = "Greenhouse name : ";
@@ -30,16 +32,18 @@ public class GreenhouseCreateFrame {
     private static final String LABEL_INIT = "Insert information about the new Greenhouse";
     private static final int INSET = 5;
     private static final int TXT_DIM = 17;
-    private final JFrame frame;
+    private final JDialog dialog;
     private final JLabel pictureLabel;
 
     /**
-     *Create the create greanhouse frame.
+     *Create the dialog to make a new Greenhouse.
+     *@param frame
+     *the main frame of the app.
      */
-    public GreenhouseCreateFrame() {
-        this.frame = new JFrame(FRAME_TITLE);
-        this.frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        this.frame.setLayout(new BorderLayout());
+    public GreenhouseCreateDialog(final JFrame frame) {
+        this.dialog = new JDialog(frame, FRAME_TITLE, Dialog.ModalityType.APPLICATION_MODAL);
+        this.dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        this.dialog.setLayout(new BorderLayout());
         this.pictureLabel = new JLabel("", new ImageIcon("res/linear.jpg"), JLabel.CENTER);
         final JPanel panelUp = new JPanel();
         panelUp.add(new JLabel(LABEL_INIT));
@@ -89,9 +93,9 @@ public class GreenhouseCreateFrame {
         final JButton addButton = new JButton("Add");
         //addButton.addActionListener(e -> chiama funzione del controller);
         southPanel.add(addButton);
-        this.frame.getContentPane().add(panelUp, BorderLayout.NORTH);
-        this.frame.getContentPane().add(panel);
-        this.frame.getContentPane().add(southPanel, BorderLayout.SOUTH);
+        this.dialog.getContentPane().add(panelUp, BorderLayout.NORTH);
+        this.dialog.getContentPane().add(panel);
+        this.dialog.getContentPane().add(southPanel, BorderLayout.SOUTH);
     }
 
     private class AdapterImageHandler implements ActionListener {
@@ -120,11 +124,11 @@ public class GreenhouseCreateFrame {
     }
 
     /**
-     *Set the frame visible.
+     *Set the dialog visible.
      */
     public void start() {
-        this.frame.pack();
-        this.frame.setLocationByPlatform(true);
-        this.frame.setVisible(true);
+        this.dialog.pack();
+        this.dialog.setLocationByPlatform(true);
+        this.dialog.setVisible(true);
     }
 }
