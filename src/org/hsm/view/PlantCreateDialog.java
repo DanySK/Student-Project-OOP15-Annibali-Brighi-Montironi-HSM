@@ -1,6 +1,7 @@
 package org.hsm.view;
 
 import java.awt.BorderLayout;
+import java.awt.Dialog;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -9,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -18,26 +20,28 @@ import javax.swing.JTextField;
  *The frame which you can add plants in the table.
  *
  */
-public class PlantCreateFrame {
+public class PlantCreateDialog {
 
     private static final int NUM_CHAR = 15;
     private static final int NUM_ROW = PlantCharacteristics.values().length - 1;
     private static final int INSET = 3;
     private static final String TITLE = "Create new Plant";
-    private final JFrame frame;
+    private final JDialog dialog;
     private final List<JTextField> fieldList;
 
     /**
-     * Create the add plant frame.
+     * Create the add plant dialog.
+     * @param frame
+     * the main frame of the app
      */
-    public PlantCreateFrame() {
+    public PlantCreateDialog(final JFrame frame) {
         this.fieldList = new ArrayList<>();
         for (int i = 0; i < NUM_ROW; ++i) {
             this.fieldList.add(new JTextField(NUM_CHAR));
         }
-        this.frame = new JFrame(TITLE);
-        this.frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        this.frame.setLayout(new BorderLayout());
+        this.dialog = new JDialog(frame, TITLE, Dialog.ModalityType.APPLICATION_MODAL);
+        this.dialog.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        this.dialog.setLayout(new BorderLayout());
         final JPanel panel = new JPanel(new GridBagLayout());
         final GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(INSET, INSET, INSET, INSET);
@@ -50,12 +54,12 @@ public class PlantCreateFrame {
             gbc.anchor = GridBagConstraints.LINE_START;
             panel.add(this.fieldList.get(i), gbc);
         }
-        this.frame.getContentPane().add(panel);
+        this.dialog.getContentPane().add(panel);
         final JPanel southPanel = new JPanel(new FlowLayout());
         final JButton add = new JButton("Add");
         southPanel.add(add);
         add.addActionListener(e -> createPlant());
-        this.frame.getContentPane().add(southPanel, BorderLayout.PAGE_END);
+        this.dialog.getContentPane().add(southPanel, BorderLayout.PAGE_END);
     }
 
     private void createPlant() {
@@ -67,19 +71,12 @@ public class PlantCreateFrame {
     }
 
     /**
-     *Set the frame visible.
+     *Set the dialog visible.
      */
     public void start() {
-        this.frame.pack();
-        this.frame.setLocationByPlatform(true);
-        this.frame.setVisible(true);
+        this.dialog.pack();
+        this.dialog.setLocationByPlatform(true);
+        this.dialog.setVisible(true);
     }
 
-    /**
-     * Test.
-     * @param args args
-     */
-    public static void main(final String... args) {
-        new PlantCreateFrame().start();
-    }
 }
