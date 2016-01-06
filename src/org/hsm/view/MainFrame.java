@@ -3,14 +3,11 @@ package org.hsm.view;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
-import javax.swing.JMenu;
 import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -22,21 +19,16 @@ import javax.swing.UnsupportedLookAndFeelException;
 public class MainFrame implements UserInteface {
 
     private static final String FRAME_TITLE = "Hydroponic System Manager";
-    private static final String MENU_FILE = "File";
-    private static final String MENU_INFORMATION = "Information";
-    private static final String MENU_HELP = "Help";
-    private static final String MENU_ITEM_ADD_PLANT = "Add Plant";
-    private static final String MENU_ITEM_EXIT = "Exit";
-    private static final String MENU_ITEM_ABOUT = "About Hydroponic System Manager";
     private static final double PROPORTION = 1.3;
     private final JFrame frame;
-    private final Tabel tabel;
+    private final Tabbed tabel;
 
     /**
      * Create the main frame.
      */
     public MainFrame() {
-        this.tabel = new Tabel();
+        this.setSystemLook();
+        this.tabel = new Tabbed();
         this.frame = new JFrame(FRAME_TITLE);
         this.frame.setLayout(new BorderLayout());
         this.frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -45,28 +37,10 @@ public class MainFrame implements UserInteface {
                 exit();
             }
         });
-        final JMenuBar menuBar = new JMenuBar();
-        final JMenu file = new JMenu(MENU_FILE);
-        final JMenu information = new JMenu(MENU_INFORMATION);
-        final JMenu help = new JMenu(MENU_HELP);
-        final JMenuItem addPlant = new JMenuItem(MENU_ITEM_ADD_PLANT);
-        //addPlant.addActionListener(e -> new PlantAddDialog(frame).start());
-        final JMenuItem exit = new JMenuItem(MENU_ITEM_EXIT);
-        final JMenuItem about = new JMenuItem(MENU_ITEM_ABOUT);
-        exit.addActionListener(e -> this.exit());
-        file.add(addPlant);
-        file.addSeparator();
-        file.add(exit);
-        file.setMnemonic(KeyEvent.VK_F);
-        information.setMnemonic(KeyEvent.VK_I);
-        help.setMnemonic(KeyEvent.VK_H);
-        help.add(about);
-        menuBar.add(file);
-        menuBar.add(information);
-        menuBar.add(help);
-        final GUIComponent lowPanel = new LowPanel(frame);
+        final GUIComponent lowPanel = new LowPanel(this.frame);
         final ToolBar toolbar = new ToolBar(this.frame);
-        this.frame.setJMenuBar(menuBar);
+        final MenuBar menuBar = new MenuBar(this);
+        this.frame.setJMenuBar((JMenuBar) menuBar.getComponent());
         this.frame.getContentPane().add(this.tabel.getComponent());
         this.frame.getContentPane().add(toolbar.getComponent(), BorderLayout.PAGE_START);
         this.frame.getContentPane().add(lowPanel.getComponent(), BorderLayout.PAGE_END);
@@ -84,7 +58,18 @@ public class MainFrame implements UserInteface {
         this.frame.setVisible(true);
     }
 
-    private void exit() {
+    /**
+     * Get the JFrame of the MainFrame.
+     * @return the JFrame
+     */
+    public JFrame getFrame() {
+        return this.frame;
+    }
+
+    /**
+     *The exit procedure.
+     */
+    protected void exit() {
         if (JOptionPane.showConfirmDialog(frame, "Do you want to Exit?", "Exit", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
             System.exit(0);
             //metodo del controller che salva il modello sul file
@@ -103,20 +88,22 @@ public class MainFrame implements UserInteface {
     }
     //CREARE UN METODO CHE INSERISCI LE PIANTE DELLA SERRA ATTRAVERSO LETTURA FILE UTILIZZANDO THREAD (SWINGUTILITIES. INVOKE-LATER)
 
-    /**
-     * Prova per la visualizzazione.
-     * @param args
-     * inutili argomenti
-     */
-    public static void main(final String... args) {
+    private void setSystemLook() {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (ClassNotFoundException | InstantiationException
                 | IllegalAccessException | UnsupportedLookAndFeelException e) {
             System.out.println("errore visualizzazione gui");
         }
-        new MainFrame().start();
+    }
 
+    /**
+     * Prova per la visualizzazione.
+     * @param args
+     * inutili argomenti
+     */
+    public static void main(final String... args) {
+        new MainFrame().start();
     }
 
 }
