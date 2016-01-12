@@ -58,8 +58,6 @@ public interface Controller {
      * 
      * @param name
      *            the name of the plant
-     * @param id
-     *            the identifier of the plant
      * @param botanicalName
      *            the scientific name for the plant
      * @param ph
@@ -79,7 +77,7 @@ public interface Controller {
      * @param cost
      *            the cost in euro of the plant
      */
-    void createNewPlant(String name, int id, String botanicalName, int ph, int brightness, int conductibility,
+    void createNewPlant(String name, String botanicalName, int ph, int brightness, int conductibility,
             int optimalGrowthTime, int temperature, int life, int size, int cost);
 
     /**
