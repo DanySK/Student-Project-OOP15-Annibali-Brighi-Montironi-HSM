@@ -38,6 +38,9 @@ public class GreenhouseCreateDialog extends AbstractAddDialog {
     private static final int TXT_DIM = 20;
     private static final int SPINNER_TXT_DIM = 18;
     private final JLabel pictureLabel;
+    private final JTextField nameField; 
+    private final JSpinner spinner;
+    private final ButtonGroup group;
 
     /**
      *Create the dialog to make a new Greenhouse.
@@ -47,6 +50,7 @@ public class GreenhouseCreateDialog extends AbstractAddDialog {
     public GreenhouseCreateDialog(final JFrame frame) {
         super(frame, DIALOG_TITLE, Dialog.ModalityType.APPLICATION_MODAL);
         this.pictureLabel = new JLabel("", new ImageIcon("res/linear.jpg"), JLabel.CENTER);
+        this.nameField = new JTextField(TXT_DIM);
         final JPanel panelUp = new JPanel();
         panelUp.add(new JLabel(LABEL_INIT));
         final JLabel name = new JLabel(LABEL_NAME);
@@ -60,12 +64,11 @@ public class GreenhouseCreateDialog extends AbstractAddDialog {
         gbc.anchor = GridBagConstraints.LINE_START;
         panel.add(name, gbc);
         ++gbc.gridx;
-        final JTextField text = new JTextField(TXT_DIM);
-        panel.add(text, gbc);
+        panel.add(nameField, gbc);
         gbc.gridx = 0;
         ++gbc.gridy;
         panel.add(size, gbc);
-        final JSpinner spinner = new JSpinner(new SpinnerNumberModel(START_VALUE, 1, MAX_VALUE, 1));
+        this.spinner = new JSpinner(new SpinnerNumberModel(START_VALUE, 1, MAX_VALUE, 1));
         final Component mySpinnerEditor = spinner.getEditor();
         final JFormattedTextField jftf = ((JSpinner.DefaultEditor) mySpinnerEditor).getTextField();
         jftf.setColumns(SPINNER_TXT_DIM);
@@ -89,7 +92,7 @@ public class GreenhouseCreateDialog extends AbstractAddDialog {
         final JRadioButton pyramidalButton = new JRadioButton("pyramidal");
         pyramidalButton.setActionCommand("pyramidal");
         pyramidalButton.addActionListener(new AdapterImageHandler());
-        final ButtonGroup group = new ButtonGroup();
+        this.group = new ButtonGroup();
         group.add(linearButton);
         group.add(circularButton);
         group.add(reticularButton);
@@ -134,7 +137,9 @@ public class GreenhouseCreateDialog extends AbstractAddDialog {
 
     @Override
     protected void addAction() {
-        // TODO Auto-generated method stub
+        System.out.println(this.nameField.getText());
+        System.out.println(this.spinner.getValue());
+        this.group.equals("a");
     }
 
 }

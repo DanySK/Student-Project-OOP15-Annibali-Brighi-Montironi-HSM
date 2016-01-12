@@ -16,19 +16,19 @@ import javax.swing.UnsupportedLookAndFeelException;
  * The main frame of the application.
  *
  */
-public class MainFrame implements UserInteface {
+public class MainFrame implements View {
 
     private static final String FRAME_TITLE = "Hydroponic System Manager";
     private static final double PROPORTION = 1.3;
     private final JFrame frame;
-    private final Tabbed tabel;
+    private final Tabbed tab;
 
     /**
      * Create the main frame.
      */
     public MainFrame() {
         this.setSystemLook();
-        this.tabel = new Tabbed();
+        this.tab = new Tabbed();
         this.frame = new JFrame(FRAME_TITLE);
         this.frame.setLayout(new BorderLayout());
         this.frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -41,7 +41,7 @@ public class MainFrame implements UserInteface {
         final ToolBar toolbar = new ToolBar(this.frame);
         final MenuBar menuBar = new MenuBar(this);
         this.frame.setJMenuBar((JMenuBar) menuBar.getComponent());
-        this.frame.getContentPane().add(this.tabel.getComponent());
+        this.frame.getContentPane().add(this.tab.getComponent());
         this.frame.getContentPane().add(toolbar.getComponent(), BorderLayout.PAGE_START);
         this.frame.getContentPane().add(lowPanel.getComponent(), BorderLayout.PAGE_END);
     }
@@ -66,6 +66,11 @@ public class MainFrame implements UserInteface {
         return this.frame;
     }
 
+    @Override
+    public void setGreenhouse() {
+        this.tab.activeTabbed();
+    }
+
     /**
      *The exit procedure.
      */
@@ -78,12 +83,12 @@ public class MainFrame implements UserInteface {
 
     @Override
     public void insertPlant(final Object... plant) {
-        this.tabel.insertRow(plant);
+        this.tab.insertRow(plant);
     }
 
     @Override
     public void removeSelectedPlant() {
-        this.tabel.removeSelectedRow();
+        this.tab.removeSelectedRow();
         //chiama il metodo del controller che rimuove la pianta
     }
     //CREARE UN METODO CHE INSERISCI LE PIANTE DELLA SERRA ATTRAVERSO LETTURA FILE UTILIZZANDO THREAD (SWINGUTILITIES. INVOKE-LATER)

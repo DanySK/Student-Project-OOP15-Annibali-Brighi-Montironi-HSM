@@ -4,7 +4,6 @@ import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JToolBar;
@@ -32,7 +31,8 @@ public class ToolBar implements GUIComponent {
         final JButton openGreenhouseButton = factory.createButton("Open GreenHouse", new ImageIcon("res/open.png"));
         final JButton saveGreenhouseButton = factory.createButton("Save", new ImageIcon("res/save.png"));
         createGreenhouseButton.addActionListener(e -> new GreenhouseCreateDialog(frame).start());
-        openGreenhouseButton.addActionListener(e -> new JFileChooser().showOpenDialog(bar));
+        openGreenhouseButton.addActionListener(e -> new OpenFileDialog(frame).getPath());
+        saveGreenhouseButton.addActionListener(e -> new SaveFileDialog(frame).getPath());
         bar.add(createGreenhouseButton);
         bar.add(openGreenhouseButton);
         bar.add(saveGreenhouseButton);

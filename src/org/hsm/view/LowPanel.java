@@ -34,7 +34,9 @@ public class LowPanel implements GUIComponent {
         createPlant.addActionListener(e -> {
             new PlantCreateDialog(frame).start();
         });
+        final JButton addPlants = new JButton("Add Plants");
         this.panel.add(add);
+        this.panel.add(addPlants);
         this.panel.add(remove);
         this.panel.add(createPlant);
     }

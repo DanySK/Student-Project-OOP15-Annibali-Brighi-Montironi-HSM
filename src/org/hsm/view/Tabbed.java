@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
@@ -17,6 +18,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
+import javax.swing.border.EtchedBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
@@ -36,13 +38,16 @@ public class Tabbed implements GUIComponent {
     private static final int MINIMUM_Y_SIZE = 50;
     private final JPanel panel;
     private final JTable table;
+    private final JTabbedPane informationTabbed;
 
     /**
      *Create the Tabel.
      */
     public Tabbed() {
-        final JTabbedPane tabbed = new JTabbedPane();
+        this.informationTabbed = new JTabbedPane();
+        //this.informationTabbed.setVisible(false);
         this.panel = new JPanel(new BorderLayout());
+        panel.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED));
         final List<String> columns = IntStream.range(0, PlantCharacteristics.values().length)
                 .mapToObj(x -> PlantCharacteristics.values()[x].getDescription())
                 .collect(Collectors.toList());
@@ -61,13 +66,7 @@ public class Tabbed implements GUIComponent {
         final DefaultPieDataset dataset = new DefaultPieDataset();
         dataset.setValue("Used Space", MINIMUM_Y_SIZE);
         dataset.setValue("Free Space", MINIMUM_Y_SIZE);
-        final JFreeChart chart = ChartFactory.createPieChart(
-                "Greenhouse Space Chart",
-                dataset,
-                true, // legend?
-                true, // tooltips?
-                false // URLs?
-                );
+        final JFreeChart chart = ChartFactory.createPieChart("Greenhouse Space Chart", dataset, true, true, false);
         final ChartPanel p = new ChartPanel(chart);
         panelGreenhouse.add(p);
 
@@ -121,10 +120,10 @@ public class Tabbed implements GUIComponent {
         split.setOneTouchExpandable(true);
         split.setContinuousLayout(true);
 
-        tabbed.add("Greenhouse Information", split);
-        tabbed.add("Plants Database", panelPlants);
-        tabbed.add("Graphic", new JLabel(image));
-        this.panel.add(tabbed, BorderLayout.CENTER);
+        informationTabbed.add("Greenhouse Information", split);
+        informationTabbed.add("Plants Database", panelPlants);
+        informationTabbed.add("Graphic", new JLabel(image));
+        this.panel.add(informationTabbed, BorderLayout.CENTER);
     }
 
     /**
@@ -143,6 +142,20 @@ public class Tabbed implements GUIComponent {
     public void removeSelectedRow() {
         final DefaultTableModel model = (DefaultTableModel) this.table.getModel();
         model.removeRow(this.table.getSelectedRow());
+    }
+
+    /**
+     *Set the tabbed visible and usable.
+     */
+    public void activeTabbed() {
+        this.informationTabbed.setVisible(true);
+    }
+
+    /**
+     *Set the tabbed disabled and unusable.
+     */
+    public void disableTabbed() {
+        this.informationTabbed.setVisible(false);
     }
 
     @Override
