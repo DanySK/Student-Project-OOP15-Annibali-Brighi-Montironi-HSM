@@ -7,7 +7,6 @@ import org.hsm.model.Plant;
  * Implementation of Controller Interface.
  *
  */
-
 public class ControllerImpl implements Controller {
 
     /**
@@ -49,7 +48,7 @@ public class ControllerImpl implements Controller {
     }
 
     @Override
-    public void createNewPlant(final String name, final int id, final String botanicalName, final int ph, final int brightness, final int conductibility,
+    public void createNewPlant(final String name, final String botanicalName, final int ph, final int brightness, final int conductibility,
             final int optimalGrowthTime, final int temperature, final int life, final int size, final int cost) {
         // TODO Auto-generated method stub
     }
