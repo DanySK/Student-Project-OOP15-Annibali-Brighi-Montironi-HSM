@@ -26,10 +26,10 @@ public class ToolBar implements GUIComponent {
         final GUIFactory factory = new MyGUIFactory();
         this.bar = new JToolBar("Toolbar");
         this.label = new JLabel("NO GREENHOUSE SELECTED");
-        final JButton createGreenhouseButton = factory.createButton("Create GreenHouse", new ImageIcon("res/new.png")); 
-        final JButton removeGreenhouseButton = factory.createButton("Remove GreenHouse", new ImageIcon("res/delete.png"));
-        final JButton openGreenhouseButton = factory.createButton("Open GreenHouse", new ImageIcon("res/open.png"));
-        final JButton saveGreenhouseButton = factory.createButton("Save", new ImageIcon("res/save.png"));
+        final JButton createGreenhouseButton = factory.createButton("Create GreenHouse", new ImageIcon(getClass().getResource("/new.png"))); 
+        final JButton removeGreenhouseButton = factory.createButton("Remove GreenHouse", new ImageIcon(getClass().getResource("/delete.png")));
+        final JButton openGreenhouseButton = factory.createButton("Open GreenHouse", new ImageIcon(getClass().getResource("/open.png")));
+        final JButton saveGreenhouseButton = factory.createButton("Save", new ImageIcon(getClass().getResource("/save.png")));
         createGreenhouseButton.addActionListener(e -> new GreenhouseCreateDialog(frame).start());
         openGreenhouseButton.addActionListener(e -> new OpenFileDialog(frame).getPath());
         saveGreenhouseButton.addActionListener(e -> new SaveFileDialog(frame).getPath());

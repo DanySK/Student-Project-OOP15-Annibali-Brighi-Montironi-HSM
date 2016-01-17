@@ -45,7 +45,7 @@ public class Tabbed implements GUIComponent {
      */
     public Tabbed() {
         this.informationTabbed = new JTabbedPane();
-        //this.informationTabbed.setVisible(false);
+        this.informationTabbed.setVisible(false);
         this.panel = new JPanel(new BorderLayout());
         panel.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED));
         final List<String> columns = IntStream.range(0, PlantCharacteristics.values().length)
@@ -112,7 +112,6 @@ public class Tabbed implements GUIComponent {
         final JScrollPane scrollPane = new JScrollPane(table);
         final JPanel panelPlants = new JPanel(new BorderLayout());
         panelPlants.add(scrollPane, BorderLayout.CENTER);
-        final ImageIcon image = new ImageIcon("res/plant.png");
         final JSplitPane split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, informationPanel, panelGreenhouse);
         final Dimension minimumSize = new Dimension(MINIMUM_X_SIZE, MINIMUM_Y_SIZE);
         informationPanel.setMinimumSize(minimumSize);
@@ -122,7 +121,7 @@ public class Tabbed implements GUIComponent {
 
         informationTabbed.add("Greenhouse Information", split);
         informationTabbed.add("Plants Database", panelPlants);
-        informationTabbed.add("Graphic", new JLabel(image));
+        informationTabbed.add("Graphic", new JPanel());
         this.panel.add(informationTabbed, BorderLayout.CENTER);
     }
 

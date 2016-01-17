@@ -49,7 +49,7 @@ public class GreenhouseCreateDialog extends AbstractAddDialog {
      */
     public GreenhouseCreateDialog(final JFrame frame) {
         super(frame, DIALOG_TITLE, Dialog.ModalityType.APPLICATION_MODAL);
-        this.pictureLabel = new JLabel("", new ImageIcon("res/linear.jpg"), JLabel.CENTER);
+        this.pictureLabel = new JLabel("", new ImageIcon(this.getClass().getResource("/linear.jpg")), JLabel.CENTER);
         this.nameField = new JTextField(TXT_DIM);
         final JPanel panelUp = new JPanel();
         panelUp.add(new JLabel(LABEL_INIT));
@@ -117,19 +117,19 @@ public class GreenhouseCreateDialog extends AbstractAddDialog {
             final JRadioButton button = (JRadioButton) e.getSource();
             switch (button.getActionCommand()) {
             case "linear" : 
-                pictureLabel.setIcon(new ImageIcon("res/linear.jpg"));
+                pictureLabel.setIcon(new ImageIcon(this.getClass().getResource("/linear.jpg")));
                 return;
             case "reticular" : 
-                pictureLabel.setIcon(new ImageIcon("res/reticular.jpg"));
+                pictureLabel.setIcon(new ImageIcon(this.getClass().getResource("/reticular.jpg")));
                 return;
             case "pyramidal" : 
-                pictureLabel.setIcon(new ImageIcon("res/pyramidal.jpg"));
+                pictureLabel.setIcon(new ImageIcon(this.getClass().getResource("/pyramidal.jpg")));
                 return; 
             case "circular" : 
-                pictureLabel.setIcon(new ImageIcon("res/circular.jpg"));
+                pictureLabel.setIcon(new ImageIcon(this.getClass().getResource("/circular.jpg")));
                 return; 
             default :
-                pictureLabel.setIcon(new ImageIcon("res/linear.jpg"));
+                pictureLabel.setIcon(new ImageIcon(this.getClass().getResource("/linear.jpg")));
             }
         }
 
