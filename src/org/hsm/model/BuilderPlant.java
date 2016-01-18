@@ -5,8 +5,7 @@ package org.hsm.model;
  */
 
 public class BuilderPlant {
-	
-	private int id;
+
 	private String name;
 	private String botanicalName;
 	private int ph;
@@ -17,25 +16,16 @@ public class BuilderPlant {
 	private int cost;
 	private int conductivity;
 	private int optimalTemperature;
-	
+
 	/**
 	 * @param s is the name of the plant.
-	 * @return obj. 
+	 * @return obj.
 	 */
 	public BuilderPlant name(final String s) {
 		this.name = s;
 		return this;
 	}
-	
-	/**
-	 * @param i is the id of the plant
-	 * @return obj
-	 */
-	public BuilderPlant iD(final int i) {
-		this.id = i;
-		return this;
-	}
-	
+
 	/**
 	 * @param s is the botanical name of the plant
 	 * @return obj
@@ -44,7 +34,7 @@ public class BuilderPlant {
 		this.botanicalName = s;
 		return this;
 	}
-	
+
 	/**
 	 * @param p is the optimal ph value of the plant
 	 * @return obj
@@ -53,17 +43,17 @@ public class BuilderPlant {
 		this.ph = p;
 		return this;
 	}
-	
-	
+
+
 	/**
-	 * @param b is  
+	 * @param b is
 	 * @return obj
 	 */
 	public BuilderPlant brightness(final int b) {
 		this.brightness = b;
 		return this;
 	}
-	
+
 	/**
 	 * @param ogt is the time-growth of the plant
 	 * @return obj
@@ -72,7 +62,7 @@ public class BuilderPlant {
 		this.optimalGrowthTime = ogt;
 		return this;
 	}
-	
+
 	/**
 	 * @param l represent time-life of the plant
 	 * @return obj
@@ -81,34 +71,34 @@ public class BuilderPlant {
 		this.life = l;
 		return this;
 	}
-	
+
 	/**
-	 * @param s is the maximum size of the plant expressed in cm³ 
+	 * @param s is the maximum size of the plant expressed in cm³
 	 * @return obj
 	 */
 	public BuilderPlant size(final int s) {
 		this.size = s;
 		return this;
 	}
-	
+
 	/**
-	 * @param c is 
+	 * @param c is
 	 * @return obj
 	 */
 	public BuilderPlant cost(final int c) {
 		this.cost = c;
 		return this;
 	}
-	
+
 	/**
-	 * @param c is the conductivity 
+	 * @param c is the conductivity
 	 * @return obj
 	 */
 	public BuilderPlant conductivity(final int c) {
 		this.conductivity = c;
 		return this;
 	}
-	
+
 	/**
 	 * @param ot is the optimal temperature for the plant
 	 * @return obj
@@ -117,16 +107,16 @@ public class BuilderPlant {
 		this.optimalTemperature = ot;
 		return this;
 	}
-	
+
 	/**
 	 * @return a Plant
-	 * @throws IllegalArgumentException 
+	 * @throws IllegalArgumentException
 	 */
-	public Plant build() throws IllegalArgumentException {
+	public PlantModel build() throws IllegalArgumentException {
 		//TODO THROW exception
-		return new PlantImp(this.id, this.name, this.botanicalName, this.ph, this.brightness, this.optimalGrowthTime,
+		return new PlantModelImpl(this.name, this.botanicalName, this.ph, this.brightness, this.optimalGrowthTime,
 							this.life, this.size, this.cost, this.conductivity, this.optimalTemperature);
 	}
-	
-	
+
+
 }

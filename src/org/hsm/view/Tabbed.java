@@ -45,7 +45,7 @@ public class Tabbed implements GUIComponent {
      */
     public Tabbed() {
         this.informationTabbed = new JTabbedPane();
-        this.informationTabbed.setVisible(false);
+        //this.informationTabbed.setVisible(false);
         this.panel = new JPanel(new BorderLayout());
         panel.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED));
         final List<String> columns = IntStream.range(0, PlantCharacteristics.values().length)
@@ -53,6 +53,7 @@ public class Tabbed implements GUIComponent {
                 .collect(Collectors.toList());
         final TableModel model = new DefaultTableModel(columns.toArray(), 0) {
             private static final long serialVersionUID = 8517517831747874057L;
+            @Override
             public boolean isCellEditable(final int rowIndex, final int mColIndex) {
                 return false;
             }

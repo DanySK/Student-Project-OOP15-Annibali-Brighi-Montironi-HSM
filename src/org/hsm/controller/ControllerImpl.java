@@ -1,7 +1,7 @@
 package org.hsm.controller;
 
 import org.hsm.model.GreenHouseType;
-import org.hsm.model.Plant;
+import org.hsm.model.PlantModel;
 
 /**
  * Implementation of Controller Interface.
@@ -15,7 +15,7 @@ public class ControllerImpl implements Controller {
     private static final ControllerImpl CONTROLLER_IMPL = new ControllerImpl();
 
     /**
-     * 
+     *
      * @return the istance of controller
      */
     public static ControllerImpl getController() {
@@ -23,7 +23,7 @@ public class ControllerImpl implements Controller {
     }
 
     @Override
-    public void crateGreenhouse(final String name, final GreenHouseType greenhouseType) {
+    public void crateGreenhouse(final String name, final GreenHouseType greenhouseType, double cost) {
         // TODO Auto-generated method stub
     }
 
@@ -33,7 +33,7 @@ public class ControllerImpl implements Controller {
     }
 
     @Override
-    public void addPlants(final int nPlants, final Plant plant) {
+    public void addPlants(final int nPlants, final PlantModel plant, int cost) {
         // TODO Auto-generated method stub
     }
 
@@ -43,13 +43,13 @@ public class ControllerImpl implements Controller {
     }
 
     @Override
-    public void delPLants(final Plant plant) {
+    public void delPLants(final PlantModel plant) {
         // TODO Auto-generated method stub
     }
 
     @Override
     public void createNewPlant(final String name, final String botanicalName, final int ph, final int brightness, final int conductibility,
-            final int optimalGrowthTime, final int temperature, final int life, final int size, final int cost) {
+            final int optimalGrowthTime, final int temperature, final int life, final int size) {
         // TODO Auto-generated method stub
     }
 
