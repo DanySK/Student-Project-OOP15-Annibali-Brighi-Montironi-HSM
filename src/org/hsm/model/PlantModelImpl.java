@@ -19,7 +19,6 @@ public class PlantModelImpl implements PlantModel {
     private final int optimalTemperature;
 
     /**Constructor used by a Builder.
-     * @param id id plant
      * @param name name plant
      * @param botanicalName botanical name plant
      * @param ph optimal ph value for the plant
@@ -136,24 +135,31 @@ public class PlantModelImpl implements PlantModel {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
+    public boolean equals(final Object obj) {
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
+        }
         PlantModelImpl other = (PlantModelImpl) obj;
         if (botanicalName == null) {
-            if (other.botanicalName != null)
+            if (other.botanicalName != null) {
                 return false;
-        } else if (!botanicalName.equals(other.botanicalName))
+            }
+        } else if (!botanicalName.equals(other.botanicalName)) {
             return false;
+        }
         if (name == null) {
-            if (other.name != null)
+            if (other.name != null) {
                 return false;
-        } else if (!name.equals(other.name))
+            }
+        } else if (!name.equals(other.name)) {
             return false;
+        }
         return true;
     }
 

@@ -22,7 +22,7 @@ public class GreenhouseImp implements GreenHouse {
      */
     @Override
     public void addPlants(final int n, final Plant plant) {
-        for (int i = 0; i < n ; i++){
+        for (int i = 0; i < n; i++) {
             this.plantMap.put(productID.getID(), plant);
         }
     }
@@ -47,8 +47,8 @@ public class GreenhouseImp implements GreenHouse {
     @Override
     public void delPlants(final PlantModel plant) {
         final Set<Integer> set = new HashSet<>();
-       for(Map.Entry<Integer, Plant> elem : this.plantMap.entrySet()){
-           if(elem.getValue().getModel().equals(plant)){
+       for (Map.Entry<Integer, Plant> elem : this.plantMap.entrySet()) {
+           if (elem.getValue().getModel().equals(plant)) {
               set.add(elem.getKey());
            }
        }
