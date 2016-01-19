@@ -58,10 +58,14 @@ public class GreenhouseImp implements GreenHouse {
     }
 
     @Override
+    public Map<Integer, Plant> getPlants() {
+        return plantMap;
+    }
+
+    @Override
     public String toString() {
         return "GreenhouseImp [plantMap=" + plantMap + ", productID=" + productID + "]";
     }
-
 
 
 }

@@ -1,5 +1,7 @@
 package org.hsm.model;
 
+import java.util.Map;
+
 /**
  * interface for the communication between the model and the controller.
  */
@@ -27,5 +29,11 @@ public interface GreenHouse {
      *      type of plant to remove
      */
     void delPlants(final PlantModel plant);
+    
+    /**
+     * @return Map<Integer, Plant>
+     *      return a Map. The key is ID plant. The value is Plant
+     */
+    Map<Integer, Plant> getPlants();
 
 }
