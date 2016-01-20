@@ -28,7 +28,7 @@ public class MainFrame implements View {
      */
     public MainFrame() {
         this.setSystemLook();
-        this.tab = new Tabbed();
+        this.tab = new Tabbed(this.frame);
         this.frame = new JFrame(FRAME_TITLE);
         this.frame.setLayout(new BorderLayout());
         this.frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -37,13 +37,13 @@ public class MainFrame implements View {
                 exit();
             }
         });
-        final GUIComponent lowPanel = new LowPanel(this.frame);
+        //final GUIComponent lowPanel = new LowPanel(this.frame);
         final ToolBar toolbar = new ToolBar(this.frame);
         final MenuBar menuBar = new MenuBar(this);
         this.frame.setJMenuBar((JMenuBar) menuBar.getComponent());
         this.frame.getContentPane().add(this.tab.getComponent());
         this.frame.getContentPane().add(toolbar.getComponent(), BorderLayout.PAGE_START);
-        this.frame.getContentPane().add(lowPanel.getComponent(), BorderLayout.PAGE_END);
+        //this.frame.getContentPane().add(lowPanel.getComponent(), BorderLayout.PAGE_END);
     }
 
     /**
@@ -83,13 +83,14 @@ public class MainFrame implements View {
 
     @Override
     public void insertPlant(final Object... plant) {
-        this.tab.insertRow(plant);
+        int i = 1 + 1;
+        i = i + 1;
     }
 
     @Override
     public void removeSelectedPlant() {
-        this.tab.removeSelectedRow();
-        //chiama il metodo del controller che rimuove la pianta
+        int i = 1 + 1;
+        i = i + 1;
     }
     //CREARE UN METODO CHE INSERISCI LE PIANTE DELLA SERRA ATTRAVERSO LETTURA FILE UTILIZZANDO THREAD (SWINGUTILITIES. INVOKE-LATER)
 
