@@ -1,5 +1,7 @@
 package org.hsm.model;
 
+import java.util.Map;
+
 /**
  *Interface for DBplants.
  */
@@ -25,4 +27,6 @@ public interface Database {
     public void removePlantModel(final String botanicalName);
 
     public PlantModel getPlantModel(final String str);
+
+    Map<String, PlantModel> getDb();
 }

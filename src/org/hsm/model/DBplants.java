@@ -53,4 +53,11 @@ public class DBplants implements Database {
     public PlantModel getPlantModel(String str) {
         return this.db.get(str);
     }
+
+    @Override
+    public Map<String, PlantModel> getDb() {
+        return db;
+    }
+    
+    
 }
