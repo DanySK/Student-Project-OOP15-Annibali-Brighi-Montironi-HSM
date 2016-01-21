@@ -14,7 +14,7 @@ public interface GreenHouse {
      * @param plant
      *      type of plant to add
      */
-    void addPlants(final int n, final Plant plant);
+    void addPlants(final int n, final PlantModel plant, final int cost);
 
     /**
      * Remove a single plant from the Greenhouse.

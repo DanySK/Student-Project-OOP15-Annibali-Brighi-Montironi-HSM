@@ -21,9 +21,9 @@ public class GreenhouseImp implements GreenHouse {
      *      an object of type Plant
      */
     @Override
-    public void addPlants(final int n, final Plant plant) {
+    public void addPlants(final int n, final PlantModel model, final int cost) {
         for (int i = 0; i < n; i++) {
-            this.plantMap.put(productID.getID(), plant);
+            this.plantMap.put(productID.getID(), new PlantImpl(model, cost));
         }
     }
 
