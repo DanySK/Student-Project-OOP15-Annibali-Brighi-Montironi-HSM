@@ -8,14 +8,14 @@ public class BuilderPlant {
 
 	private String name;
 	private String botanicalName;
-	private int ph;
-	private int brightness;
+	private double ph;
+	private double brightness;
 	private int optimalGrowthTime;
 	private int life;
-	private int size;
+	private double size;
 	private int cost;
-	private int conductivity;
-	private int optimalTemperature;
+	private double conductivity;
+	private double optimalTemperature;
 
 	/**
 	 * @param s is the name of the plant.
@@ -39,7 +39,7 @@ public class BuilderPlant {
 	 * @param p is the optimal ph value of the plant
 	 * @return obj
 	 */
-	public BuilderPlant ph(final int p) {
+	public BuilderPlant ph(final double p) {
 		this.ph = p;
 		return this;
 	}
@@ -49,7 +49,7 @@ public class BuilderPlant {
 	 * @param b is
 	 * @return obj
 	 */
-	public BuilderPlant brightness(final int b) {
+	public BuilderPlant brightness(final double b) {
 		this.brightness = b;
 		return this;
 	}
@@ -76,7 +76,7 @@ public class BuilderPlant {
 	 * @param s is the maximum size of the plant expressed in cm³
 	 * @return obj
 	 */
-	public BuilderPlant size(final int s) {
+	public BuilderPlant size(final double s) {
 		this.size = s;
 		return this;
 	}
@@ -94,7 +94,7 @@ public class BuilderPlant {
 	 * @param c is the conductivity
 	 * @return obj
 	 */
-	public BuilderPlant conductivity(final int c) {
+	public BuilderPlant conductivity(final double c) {
 		this.conductivity = c;
 		return this;
 	}
@@ -103,7 +103,7 @@ public class BuilderPlant {
 	 * @param ot is the optimal temperature for the plant
 	 * @return obj
 	 */
-	public BuilderPlant optimalTemperature(final int ot) {
+	public BuilderPlant optimalTemperature(final double ot) {
 		this.optimalTemperature = ot;
 		return this;
 	}

@@ -22,13 +22,13 @@ public interface PlantModel {
 	 * @return
 	 * 		return the optimal PH for the plant
 	 */
-	int getPH();
+	double getPH();
 
 	/**
 	 * @return
 	 * 		return the light needed by the plant
 	 */
-	int getBrightness();
+	double getBrightness();
 
 	/**
 	 * @return
@@ -46,18 +46,18 @@ public interface PlantModel {
 	 * @return
 	 * 		return the maximum size of the plant expressed in cm³
 	 */
-	int getSize();
+	double getSize();
 
 
 	/**
 	 * @return
 	 * 		return the conductivity needed by the plant
 	 */
-	int getConductivity();
+	double getConductivity();
 
 	/**
 	 * @return
 	 * 		return the optimal temperature for the plant
 	 */
-	int getOptimalTemperature();
+	double getOptimalTemperature();
 }

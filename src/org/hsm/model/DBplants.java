@@ -24,8 +24,8 @@ public class DBplants implements Database {
      * @param optimalTemperature optimal temperature for the plant
      */
     @Override
-    public void addPlantModel(final  String name, final String botanicalName, final int ph, final int brightness,
-            final int optimalGrowthTime, final int life, final int size, final int conductivity, final int optimalTemperature) {
+    public void addPlantModel(final  String name, final String botanicalName, final double ph, final double brightness,
+            final int optimalGrowthTime, final int life, final double size, final double conductivity, final double optimalTemperature) {
 
         final PlantModel p = new BuilderPlant()
                         .name(name)

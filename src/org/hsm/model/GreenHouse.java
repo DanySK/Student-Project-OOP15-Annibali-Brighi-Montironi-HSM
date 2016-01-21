@@ -13,6 +13,8 @@ public interface GreenHouse {
      *      number of plants to add
      * @param plant
      *      type of plant to add
+     * @param cost
+     *      cost of the single plant
      */
     void addPlants(final int n, final PlantModel plant, final int cost);
 

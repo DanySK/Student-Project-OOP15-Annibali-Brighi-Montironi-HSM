@@ -19,8 +19,8 @@ public interface Database {
      * @param conductivity conductivity
      * @param optimalTemperature optimal temperature for the plant
      */
-    void addPlantModel(final  String name, final String botanicalName, final int ph, final int brightness,
-            final int optimalGrowthTime, final int life, final int size, final int conductivity, final int optimalTemperature);
+    void addPlantModel(final  String name, final String botanicalName, final double ph, final double brightness,
+            final int optimalGrowthTime, final int life, final double size, final double conductivity, final double optimalTemperature);
 
     public void removePlantModel(final String botanicalName);
 

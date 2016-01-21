@@ -9,14 +9,14 @@ public class PlantModelImpl implements PlantModel {
 
     private final String name;
     private final  String botanicalName;
-    private final int ph;
-    private final int brightness;
+    private final double ph;
+    private final double brightness;
     private final int optimalGrowthTime;
     private final int life;
-    private final int size;
+    private final double size;
     private final int cost;
-    private final int conductivity;
-    private final int optimalTemperature;
+    private final double conductivity;
+    private final double optimalTemperature;
 
     /**Constructor used by a Builder.
      * @param name name plant
@@ -31,8 +31,8 @@ public class PlantModelImpl implements PlantModel {
      * @param optimalTemperature optimal temperature for the plant
      *
      */
-    protected PlantModelImpl(final  String name, final String botanicalName, final int ph, final int brightness,
-            final int optimalGrowthTime, final int life, final int size, final int cost, final int conductivity, final int optimalTemperature) {
+    protected PlantModelImpl(final  String name, final String botanicalName, final double ph, final double brightness,
+            final int optimalGrowthTime, final int life, final double size, final int cost, final double conductivity, final double optimalTemperature) {
         super();
         this.name = name;
         this.botanicalName = botanicalName;
@@ -66,7 +66,7 @@ public class PlantModelImpl implements PlantModel {
      * @return ph
      */
     @Override
-    public int getPH() {
+    public double getPH() {
         return ph;
     }
 
@@ -74,7 +74,7 @@ public class PlantModelImpl implements PlantModel {
      * @return brightness
      */
     @Override
-    public int getBrightness() {
+    public double getBrightness() {
         return brightness;
     }
 
@@ -98,7 +98,7 @@ public class PlantModelImpl implements PlantModel {
      * @return size
      */
     @Override
-    public int getSize() {
+    public double getSize() {
         return size;
     }
 
@@ -113,7 +113,7 @@ public class PlantModelImpl implements PlantModel {
      * @return conductivity
      */
     @Override
-    public int getConductivity() {
+    public double getConductivity() {
         return conductivity;
     }
 
@@ -121,7 +121,7 @@ public class PlantModelImpl implements PlantModel {
      * @return optimalTemperature
      */
     @Override
-    public int getOptimalTemperature() {
+    public double getOptimalTemperature() {
         return optimalTemperature;
     }
 

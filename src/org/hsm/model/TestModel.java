@@ -9,7 +9,7 @@ public class TestModel {
 
         final GreenHouse gn = new GreenhouseImp();
 
-        gn.addPlants(5, new PlantImpl(db.getPlantModel("pasticcio"), 12));
+       gn.addPlants(5, db.getPlantModel("pasticcio"), 12);
 
 
 
