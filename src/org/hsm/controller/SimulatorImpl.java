@@ -13,12 +13,13 @@ public class SimulatorImpl implements Simulator {
 
     private Random random = new Random();
     private static int maxrand = 2;
+    private Controller controller = ControllerImpl.getController();
 
     @Override
     public int getSimulatedPh(final String botanicalName) {
-        // int j = PlantImp.getPH(botanicalName) - maxrand;
-        // int n = PlantImp.getPH(botanicalName) + maxrand - j;
-        // return random.nextInt(n) + j;
+        //int j = controller.getPH(botanicalName) - maxrand;
+       // int n = PlantImp.getPH(botanicalName) + maxrand - j;
+       // return random.nextInt(n) + j;
         return 0;
     }
 
@@ -43,11 +44,11 @@ public class SimulatorImpl implements Simulator {
     @Override
     public List<Integer> getPhDays(final String botanicalName, final int days) {
         List<Integer> list = new ArrayList<>();
-//        int j = PlantImp.getPH(botanicalName) - maxrand;
-//        int n = PlantImp.getPH(botanicalName) + maxrand - j;
-//        for (int i = 0; i < days; i++) {
-//            list.add(random.nextInt(n) + j);
-//        }
+        // int j = PlantImp.getPH(botanicalName) - maxrand;
+        // int n = PlantImp.getPH(botanicalName) + maxrand - j;
+        // for (int i = 0; i < days; i++) {
+        // list.add(random.nextInt(n) + j);
+        // }
         return list;
     }
 

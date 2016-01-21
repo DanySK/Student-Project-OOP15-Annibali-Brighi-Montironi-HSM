@@ -14,6 +14,8 @@ public interface Controller {
      *
      * @param name
      *            the name for Greenhouse
+     * @param size
+     *            the size of Greenhouse
      * @param greenhouseType
      *            the type of greenhouse you want (watch enumeration)
      */
@@ -31,6 +33,8 @@ public interface Controller {
      *            number of plants to insert in the Greenhouse
      * @param plant
      *            the type of plant to insert
+     * @param cost
+     *             the cont in euro of the plant
      *
      * @throws IllegalArgumentException
      *             in case of the plant doesn't exist
@@ -64,7 +68,7 @@ public interface Controller {
      *            optimal ph for the plant
      * @param brightness
      *            optimal brightness for the plant
-     * @param conductibility
+     * @param conductivity
      *            optimal terrain conductibility for the plant
      * @param optimalGrowthTime
      *            optimal Growth time for the plant
@@ -74,11 +78,9 @@ public interface Controller {
      *            the life of the plant
      * @param size
      *            the space occupied from the plant in the greenhouse
-     * @param cost
-     *            the cost in euro of the plant
      */
-    void createNewPlant(String name, String botanicalName, int ph, int brightness, int conductibility,
-            int optimalGrowthTime, int temperature, int life, int size);
+    void createNewPlant(String name, String botanicalName, double ph, double brightness, double conductivity,
+            int optimalGrowthTime, double temperature, int life, double size);
 
     /**
      * Save the current Greenhouse opened in the program.
