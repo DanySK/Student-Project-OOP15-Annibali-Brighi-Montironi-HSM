@@ -30,8 +30,8 @@ public class PlantsTab implements GUIComponent {
      */
     public PlantsTab(final JFrame frame) {
         final List<String> columns = IntStream.range(0, PlantCharacteristics.values().length)
-                .mapToObj(x -> PlantCharacteristics.values()[x].getDescription())
-                .collect(Collectors.toList());
+                                     .mapToObj(i -> PlantCharacteristics.values()[i].getDescriprion())
+                                     .collect(Collectors.toList());
         final TableModel model = new DefaultTableModel(columns.toArray(), 0) {
             private static final long serialVersionUID = 8517517831747874057L;
             @Override
@@ -52,15 +52,12 @@ public class PlantsTab implements GUIComponent {
             new PlantAddDialog(frame).start();
         });
         final JButton remove = new JButton("Remove Plant");
-        final JButton createPlant = new JButton("Create new Plant");
-        createPlant.addActionListener(e -> {
-            new PlantCreateDialog(frame).start();
-        });
+        final JButton updateValues = new JButton("Update Plant Values");
         final JButton addPlants = new JButton("Add Plants");
         southPanel.add(add);
         southPanel.add(addPlants);
         southPanel.add(remove);
-        southPanel.add(createPlant);
+        southPanel.add(updateValues);
         southPanel.setSize(southPanel.getPreferredSize());
         southPanel.setAlignmentX(Component.RIGHT_ALIGNMENT);
 

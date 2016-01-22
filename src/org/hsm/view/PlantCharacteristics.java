@@ -1,55 +1,39 @@
 package org.hsm.view;
 
 /**
- *The enum represents all the characteristics of the plant.
+ *The enum represents all the current characteristics of a plant in a greenhouse.
  *
  */
 public enum PlantCharacteristics {
 
     /**
-     *The ID of the plant.
+     *The personal id of the plant in the greenhouse.
      */
     ID("ID"),
     /**
-     *The traditional name of the plant.
+     *The typology of the plant (model).
      */
-    NAME("Name"),
+    TYPE("Type"),
     /**
-     *The botanical name of the plant.
+     *The single cost of the plant.
      */
-    BOTANICAL_NAME("Botanical Name"),
+    COST("Cost (€)"),
     /**
-     *The optimal ph of the plant.
+     *The current ph of the plant.
      */
     PH("ph"),
     /**
-     *The optimal brightness for the plant.
+     *The current value of brightness of the plant.
      */
-    BRIGHTNESS("Brigtness"),
+    BRIGHTNESS("Brightness"),
     /**
-     *The consucibility optimal level for the plant.
+     *The current value of conductivity of the plant. 
      */
-    CONDUCTIBILITY("Conductibility"),
+    CONDUCTIVITY("Conductivity"),
     /**
-     *The optimal growth time for the plant.
+     *The current temperature of the plant.
      */
-    OPTIMAL_GROWTH_TIME("Optimal Growth Time"),
-    /**
-     *The temperature of the plant.
-     */
-    TEMPERATURE("Temperature"),
-    /**
-     *The days of life of the plant.
-     */
-    LIFE("Life (Days)"),
-    /**
-     *The plant size.
-     */
-    SIZE("Size (cm3)"),
-    /**
-     *The plant cost.
-     */
-    COST("Cost (€)");
+    TEMPERATURE("Temperature");
 
     private final String name;
 
@@ -58,10 +42,10 @@ public enum PlantCharacteristics {
     }
 
     /**
-     * Get a description of the specific enum.
-     * @return the string represents the enum
+     *Get the name of the characteristic.
+     * @return the name of the characteristic.
      */
-    public String getDescription() {
+    public String getDescriprion() {
         return this.name;
     }
 

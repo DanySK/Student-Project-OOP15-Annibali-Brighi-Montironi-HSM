@@ -19,7 +19,7 @@ import javax.swing.JTextField;
 public class PlantCreateDialog extends AbstractAddDialog {
 
     private static final int NUM_CHAR = 15;
-    private static final int NUM_ROW = PlantCharacteristics.values().length - 1;
+    private static final int NUM_ROW = PlantModelCharacteristics.values().length;
     private static final int INSET = 3;
     private static final String DIALOG_TITLE = "Create new Plant";
     private final List<JTextField> fieldList;
@@ -42,7 +42,7 @@ public class PlantCreateDialog extends AbstractAddDialog {
             gbc.gridy = i;
             gbc.gridx = 0;
             gbc.anchor = GridBagConstraints.LINE_END;
-            panel.add(new JLabel(PlantCharacteristics.values()[i + 1].getDescription()), gbc);
+            panel.add(new JLabel(PlantModelCharacteristics.values()[i].getDescription()), gbc);
             gbc.gridx = 1;
             gbc.anchor = GridBagConstraints.LINE_START;
             panel.add(this.fieldList.get(i), gbc);

@@ -1,11 +1,9 @@
 package org.hsm.view;
 
-import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JToolBar;
 
 /**
@@ -15,7 +13,6 @@ import javax.swing.JToolBar;
 public class ToolBar implements GUIComponent {
 
     private final JToolBar bar;
-    private final JLabel label;
 
     /**
      *Create a toolbar.
@@ -25,7 +22,6 @@ public class ToolBar implements GUIComponent {
     public ToolBar(final JFrame frame) {
         final GUIFactory factory = new MyGUIFactory();
         this.bar = new JToolBar("Toolbar");
-        this.label = new JLabel("NO GREENHOUSE SELECTED");
         final JButton createGreenhouseButton = factory.createButton("Create GreenHouse", new ImageIcon(getClass().getResource("/new.png"))); 
         final JButton removeGreenhouseButton = factory.createButton("Remove GreenHouse", new ImageIcon(getClass().getResource("/delete.png")));
         final JButton openGreenhouseButton = factory.createButton("Open GreenHouse", new ImageIcon(getClass().getResource("/open.png")));
@@ -37,17 +33,6 @@ public class ToolBar implements GUIComponent {
         bar.add(openGreenhouseButton);
         bar.add(saveGreenhouseButton);
         bar.add(removeGreenhouseButton);
-        bar.add(Box.createHorizontalGlue());
-        bar.add(new JLabel("GreenHouse:  "));
-        bar.add(this.label);
-    }
-
-    /**
-     * Set the greenhouse name in the label.
-     * @param name the nameto insert in the label
-     */
-    public void setGreenhouseName(final String name) {
-        this.label.setText(name);
     }
 
     @Override

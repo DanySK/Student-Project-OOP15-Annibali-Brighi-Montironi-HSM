@@ -37,13 +37,11 @@ public class MainFrame implements View {
                 exit();
             }
         });
-        //final GUIComponent lowPanel = new LowPanel(this.frame);
         final ToolBar toolbar = new ToolBar(this.frame);
         final MenuBar menuBar = new MenuBar(this);
         this.frame.setJMenuBar((JMenuBar) menuBar.getComponent());
         this.frame.getContentPane().add(this.tab.getComponent());
         this.frame.getContentPane().add(toolbar.getComponent(), BorderLayout.PAGE_START);
-        //this.frame.getContentPane().add(lowPanel.getComponent(), BorderLayout.PAGE_END);
     }
 
     /**

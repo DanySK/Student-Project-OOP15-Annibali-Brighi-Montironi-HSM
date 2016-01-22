@@ -29,9 +29,11 @@ public class Tabbed implements GUIComponent {
 
         final GUIComponent greenhouseTab = new GreenhouseTab();
         final GUIComponent plantsTab = new PlantsTab(frame);
+        final GUIComponent databaseTab = new DatabaseTab(frame);
 
         tab.add("Greenhouse", greenhouseTab.getComponent());
         tab.add("Plants", plantsTab.getComponent());
+        tab.add("Plants Database", databaseTab.getComponent());
         tab.add("Graphic", new JPanel());
         this.panel.add(tab, BorderLayout.CENTER);
     }
