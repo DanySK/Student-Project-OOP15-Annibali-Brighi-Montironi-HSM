@@ -21,6 +21,9 @@ import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
 
+import org.hsm.controller.ControllerImpl;
+import org.hsm.model.GreenHouseType;
+
 /**
  *This frame can be used to create a new greenhouse.
  *
@@ -79,17 +82,17 @@ public class GreenhouseCreateDialog extends AbstractAddDialog {
         panel.add(type, gbc);
         gbc.gridy++;
         gbc.gridx = 0;
-        final JRadioButton linearButton = new JRadioButton("linear");
+        final JRadioButton linearButton = new JRadioButton("Linear");
         linearButton.setActionCommand("linear");
         linearButton.setSelected(true);
         linearButton.addActionListener(new AdapterImageHandler());
-        final JRadioButton circularButton = new JRadioButton("circular");
+        final JRadioButton circularButton = new JRadioButton("Circular");
         circularButton.setActionCommand("circular");
         circularButton.addActionListener(new AdapterImageHandler());
-        final JRadioButton reticularButton = new JRadioButton("reticular");
+        final JRadioButton reticularButton = new JRadioButton("Reticular");
         reticularButton.setActionCommand("reticular");
         reticularButton.addActionListener(new AdapterImageHandler());
-        final JRadioButton pyramidalButton = new JRadioButton("pyramidal");
+        final JRadioButton pyramidalButton = new JRadioButton("Pyramidal");
         pyramidalButton.setActionCommand("pyramidal");
         pyramidalButton.addActionListener(new AdapterImageHandler());
         this.group = new ButtonGroup();
@@ -135,11 +138,28 @@ public class GreenhouseCreateDialog extends AbstractAddDialog {
 
     }
 
+    private GreenHouseType getGreenhouseType() {
+        switch(this.group.getSelection().getActionCommand()) {
+        case "linear" : 
+            return GreenHouseType.LINEAR;
+        case "reticular" : 
+            return GreenHouseType.GRID;
+        case "pyramidal" : 
+            return GreenHouseType.PYRAMIDAL;
+        case "circular" : 
+            return GreenHouseType.CIRCULAR;
+        default :
+            return GreenHouseType.LINEAR;
+        }
+    }
+
     @Override
     protected void addAction() {
-        System.out.println(this.nameField.getText());
-        System.out.println(this.spinner.getValue());
-        this.group.equals("a");
+        if (this.nameField.getText().isEmpty()) {
+            this.nameField.setText("NONE");
+        }
+        final SpinnerNumberModel model = (SpinnerNumberModel) this.spinner.getModel();
+        ControllerImpl.getController().crateGreenhouse(this.nameField.getText(), this.getGreenhouseType(), model.getNumber().doubleValue());
     }
 
 }

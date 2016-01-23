@@ -65,32 +65,38 @@ public class MainFrame implements View {
     }
 
     @Override
-    public void setGreenhouse() {
-        this.tab.activeTabbed();
+    public void setActive(final boolean status) {
+        this.tab.setEnable(status);
     }
 
-    /**
-     *The exit procedure.
-     */
-    protected void exit() {
-        if (JOptionPane.showConfirmDialog(frame, "Do you want to Exit?", "Exit", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-            System.exit(0);
-            //metodo del controller che salva il modello sul file
-        }
+    @Override
+    public void insertModelPlant(final Object... plant) {
+        this.tab.getDatabaseTab().insertPlant(plant);
+    }
+
+    @Override
+    public void removeSelectedModelPlant() {
+        this.tab.getDatabaseTab().removeSelectedPlant();
     }
 
     @Override
     public void insertPlant(final Object... plant) {
-        int i = 1 + 1;
-        i = i + 1;
+        System.out.println("DA IMPLEMENTARE");
     }
 
     @Override
     public void removeSelectedPlant() {
-        int i = 1 + 1;
-        i = i + 1;
+        System.out.println("DA IMPLEMENTARE");
     }
-    //CREARE UN METODO CHE INSERISCI LE PIANTE DELLA SERRA ATTRAVERSO LETTURA FILE UTILIZZANDO THREAD (SWINGUTILITIES. INVOKE-LATER)
+
+    /**
+     *The exit procedure whithout svaing.
+     */
+    public void exit() {
+        if (JOptionPane.showConfirmDialog(frame, "Do you want to Exit?", "Exit", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            System.exit(0);
+        }
+    }
 
     private void setSystemLook() {
         try {
@@ -102,11 +108,10 @@ public class MainFrame implements View {
     }
 
     /**
-     * Prova per la visualizzazione.
-     * @param args
-     * inutili argomenti
+     * MAIN di prova.
+     * @param strings eded
      */
-    public static void main(final String... args) {
+    public static void main(final String...strings) {
         new MainFrame().start();
     }
 

@@ -50,7 +50,9 @@ public class DatabaseTab implements GUIComponent {
         southPanel.setLayout(new BoxLayout(southPanel, BoxLayout.X_AXIS));
         final JButton createPlant = new JButton("Insert new type of plant");
         createPlant.addActionListener(e -> new PlantCreateDialog(frame).start());
+        final JButton removePlant = new JButton("Remove selected plant");
         southPanel.add(createPlant);
+        southPanel.add(removePlant);
         southPanel.setSize(southPanel.getPreferredSize());
 
         final JScrollPane scrollPane = new JScrollPane(this.table);
@@ -64,11 +66,20 @@ public class DatabaseTab implements GUIComponent {
     }
 
     /**
-     * dscc.
-     * @return dscds
+     *Insert the plant into tha table.
+     *@param params all the parameters of the plant
      */
-    public JTable getTable() {
-        return this.table;
+    public void insertPlant(final Object... params) {
+        final DefaultTableModel model = (DefaultTableModel) this.table.getModel();
+        model.addRow(params);
+    }
+
+    /**
+     *Remove the first selected row in the database table.
+     */
+    public void removeSelectedPlant() {
+        final DefaultTableModel model = (DefaultTableModel) this.table.getModel();
+        model.removeRow(this.table.getSelectedRow());
     }
 
 }

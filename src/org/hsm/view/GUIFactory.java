@@ -3,6 +3,8 @@ package org.hsm.view;
 import javax.swing.Icon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerModel;
 
 /**
  *The interface for GUI Factory.
@@ -24,5 +26,13 @@ public interface GUIFactory {
      * @return a new JLabel.
      */
     JLabel createLabel(final String text);
+
+    /**
+     * Create a new JSpinner with the specific size.
+     * @param size the size of the spinner.
+     * @param model the spinner model.
+     * @return a new JSpinner
+     */
+    JSpinner createSpinner(final int size, final SpinnerModel model);
 
 }
