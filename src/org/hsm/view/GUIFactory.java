@@ -4,6 +4,7 @@ import javax.swing.Icon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JSpinner;
+import javax.swing.JTextField;
 import javax.swing.SpinnerModel;
 
 /**
@@ -34,5 +35,12 @@ public interface GUIFactory {
      * @return a new JSpinner
      */
     JSpinner createSpinner(final int size, final SpinnerModel model);
+
+    /**
+     * Create a new JTextField with the specific font size.
+     * @param size the size of the font.
+     * @return a new JTextField
+     */
+    JTextField createTextField(final int size);
 
 }

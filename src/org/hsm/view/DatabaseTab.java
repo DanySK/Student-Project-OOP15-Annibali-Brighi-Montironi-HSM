@@ -51,6 +51,9 @@ public class DatabaseTab implements GUIComponent {
         final JButton createPlant = new JButton("Insert new type of plant");
         createPlant.addActionListener(e -> new PlantCreateDialog(frame).start());
         final JButton removePlant = new JButton("Remove selected plant");
+        removePlant.addActionListener(e -> {
+            /*ControllerImpl.removePlantFromDB(botanicalName) */
+        });
         southPanel.add(createPlant);
         southPanel.add(removePlant);
         southPanel.setSize(southPanel.getPreferredSize());

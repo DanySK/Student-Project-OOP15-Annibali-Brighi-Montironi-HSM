@@ -4,12 +4,13 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.util.ArrayList;
+import java.util.List;
 
-import javax.swing.ImageIcon;
 import javax.swing.JComponent;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
+import javax.swing.JTextField;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -22,77 +23,59 @@ import org.jfree.data.general.DefaultPieDataset;
  */
 public class GreenhouseTab implements GUIComponent {
 
-    private static final int INSET = 14;
-    private static final int MINIMUM_X_SIZE = 200;
-    private static final int MINIMUM_Y_SIZE = 50;
+    private static final int INSET_Y = 12;
+    private static final int INSET_X = 7;
+    private static final int TXT_FIELD_SIZE = 20;
+    private static final int MINIMUM_X_SIZE = 355;
+    private static final int MINIMUM_Y_SIZE = 300;
     private final JSplitPane split;
+    private final List<JTextField> fieldList;
 
     /**
      *Create the tab for the greenhouse.
      */
     public GreenhouseTab() {
         final GUIFactory factory = new MyGUIFactory();
-
+        this.fieldList = new ArrayList<>();
         //creazione pannello con info greenhouse (INFO PANEL)
-        final JPanel informationPanel = new JPanel(new GridBagLayout());
+        final JPanel detailsPanel = new JPanel(new GridBagLayout());
         final GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(INSET, INSET, INSET, INSET);
+        gbc.insets = new Insets(INSET_Y, 0, INSET_Y, INSET_X);
         gbc.gridx = 0;
         gbc.gridy = 0;
-        final JLabel nameLabel = factory.createLabel("Name : ");
-        informationPanel.add(nameLabel, gbc);
-        ++gbc.gridx;
-        final JLabel name = factory.createLabel("");
-        informationPanel.add(name, gbc);
-        gbc.gridx = 0;
-        ++gbc.gridy;
-        final JLabel dimensionLabel = factory.createLabel("Dimension : ");
-        informationPanel.add(dimensionLabel, gbc);
-        ++gbc.gridx;
-        final JLabel dimension = factory.createLabel("                     ");
-        informationPanel.add(dimension, gbc);
-        gbc.gridx = 0;
-        ++gbc.gridy;
-        final JLabel numPlantsLabel = factory.createLabel("Number of Plants : ");
-        informationPanel.add(numPlantsLabel, gbc);
-        ++gbc.gridx;
-        final JLabel plantsLabel = factory.createLabel("                     ");
-        informationPanel.add(plantsLabel, gbc);
-        gbc.gridx = 0;
-        ++gbc.gridy;
-        final JLabel spaceOccupiedLabel = factory.createLabel("Space Occupied : ");
-        informationPanel.add(spaceOccupiedLabel, gbc);
-        ++gbc.gridx;
-        final JLabel occupiedSpace = factory.createLabel("                     ");
-        informationPanel.add(occupiedSpace, gbc);
-        gbc.gridx = 0;
-        ++gbc.gridy;
-        final JLabel labelTypology = factory.createLabel("Typology : ");
-        informationPanel.add(labelTypology, gbc);
-        ++gbc.gridx;
-        final JLabel typology = new JLabel("", new ImageIcon("res/linear.jpg"), JLabel.CENTER);
-        informationPanel.add(typology, gbc);
-
+        for (final GreenhouseCharacteristics elem : GreenhouseCharacteristics.values()) {
+            gbc.anchor = GridBagConstraints.WEST;
+            detailsPanel.add(factory.createLabel(elem.getDescription()), gbc);
+            ++gbc.gridx;
+            final JTextField field = factory.createTextField(TXT_FIELD_SIZE);
+            field.setEditable(false);
+            this.fieldList.add(field);
+            gbc.anchor = GridBagConstraints.EAST;
+            detailsPanel.add(field, gbc);
+            gbc.gridx = 0;
+            ++gbc.gridy;
+        }
         //creazione pannello grafici
-        final JPanel graphicPanel = new JPanel();
         final DefaultPieDataset dataset = new DefaultPieDataset();
         dataset.setValue("Used Space", MINIMUM_Y_SIZE);
         dataset.setValue("Free Space", MINIMUM_Y_SIZE);
         final JFreeChart chart = ChartFactory.createPieChart("Greenhouse Space Chart", dataset, true, true, false);
-        final ChartPanel p = new ChartPanel(chart);
-        graphicPanel.add(p);
+        final ChartPanel graphicPanel = new ChartPanel(chart);
 
-        this.split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, informationPanel, graphicPanel);
-        final Dimension minimumSize = new Dimension(MINIMUM_X_SIZE, MINIMUM_Y_SIZE);
-        informationPanel.setMinimumSize(minimumSize);
+        this.split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, detailsPanel, graphicPanel);
+        final Dimension minimumSize = new Dimension(MINIMUM_X_SIZE, 0);
+        detailsPanel.setMinimumSize(minimumSize);
         graphicPanel.setMinimumSize(minimumSize);
         split.setOneTouchExpandable(true);
         split.setContinuousLayout(true);
-
     }
 
     @Override
     public JComponent getComponent() {
+        //inserisco dati a caso
+        for (final JTextField elem: this.fieldList) {
+            elem.setText("dati a caso");
+        }
         return this.split;
     }
 

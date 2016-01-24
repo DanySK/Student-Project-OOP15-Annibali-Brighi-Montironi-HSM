@@ -42,8 +42,8 @@ public enum PlantCharacteristics {
     }
 
     /**
-     *Get the name of the characteristic.
-     * @return the name of the characteristic.
+     * Get a description of the specific characteristic.
+     * @return the string represents the characteristic
      */
     public String getDescriprion() {
         return this.name;

@@ -54,8 +54,8 @@ public enum PlantModelCharacteristics {
     }
 
     /**
-     * Get a description of the specific enum.
-     * @return the string represents the enum
+     * Get a description of the specific characteristic.
+     * @return the string represents the characteristic
      */
     public String getDescription() {
         return this.name;

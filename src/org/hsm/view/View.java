@@ -7,6 +7,11 @@ package org.hsm.view;
 public interface View {
 
     /**
+     *Set the GUI status.
+     *@param status the status of thr GUI
+     */
+    void setActive(final boolean status);
+    /**
      * Insert a plant into greenhouse.
      * @param plant
      * The plant to insert
@@ -29,11 +34,5 @@ public interface View {
      *Remove the selected model plant into the database table.
      */
     void removeSelectedModelPlant();
-
-    /**
-     *Set the GUI status.
-     *@param status the status of thr GUI
-     */
-    void setActive(final boolean status);
 
 }
