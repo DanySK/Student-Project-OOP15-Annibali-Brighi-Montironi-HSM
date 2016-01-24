@@ -6,6 +6,7 @@ import org.hsm.model.GreenhouseImp;
 import org.hsm.model.PlantModel;
 import org.hsm.model.DBplants;
 import org.hsm.model.Database;
+
 /**
  * Implementation of Controller Interface.
  *
@@ -37,6 +38,16 @@ public class ControllerImpl implements Controller {
     }
 
     @Override
+    public GreenHouse getGreenhouse() {
+        return this.greenhouse;
+    }
+
+    @Override
+    public Database getDatabase() {
+        return this.database;
+    }
+
+    @Override
     public void deleteGreenhouse() {
         // TODO Auto-generated method stub
     }
@@ -57,9 +68,11 @@ public class ControllerImpl implements Controller {
     }
 
     @Override
-    public void createNewPlant(final String name, final String botanicalName, final double ph, final double brightness, final double conductivity,
-            final int optimalGrowthTime, final double temperature, final int life, final double size) {
-        database.addPlantModel(name, botanicalName, ph, brightness, optimalGrowthTime, life, size, conductivity, temperature);
+    public void createNewPlant(final String name, final String botanicalName, final double ph, final double brightness,
+            final double conductivity, final int optimalGrowthTime, final double temperature, final int life,
+            final double size) {
+        database.addPlantModel(name, botanicalName, ph, brightness, optimalGrowthTime, life, size, conductivity,
+                temperature);
     }
 
     @Override

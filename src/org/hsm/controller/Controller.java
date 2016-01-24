@@ -1,5 +1,7 @@
 package org.hsm.controller;
 
+import org.hsm.model.Database;
+import org.hsm.model.GreenHouse;
 import org.hsm.model.GreenHouseType;
 import org.hsm.model.PlantModel;
 
@@ -20,6 +22,20 @@ public interface Controller {
      *            the type of greenhouse you want (watch enumeration)
      */
     void crateGreenhouse(String name, GreenHouseType greenhouseType, double size);
+
+    /**
+     *Get the atcually load Greenhouse.
+     *
+     * @return the actual Greenhouse
+     */
+    GreenHouse getGreenhouse();
+
+    /**
+     * Get the Database.
+     *
+     * @return the Plants Database
+     */
+    Database getDatabase();
 
     /**
      * Delete the Greenhouse actually loaded.
