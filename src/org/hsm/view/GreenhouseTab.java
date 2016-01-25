@@ -4,8 +4,8 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.JComponent;
 import javax.swing.JPanel;
@@ -29,14 +29,14 @@ public class GreenhouseTab implements GUIComponent {
     private static final int MINIMUM_X_SIZE = 355;
     private static final int MINIMUM_Y_SIZE = 300;
     private final JSplitPane split;
-    private final List<JTextField> fieldList;
+    private final Map<GreenhouseCharacteristics, JTextField> fieldMap;
 
     /**
      *Create the tab for the greenhouse.
      */
     public GreenhouseTab() {
         final GUIFactory factory = new MyGUIFactory();
-        this.fieldList = new ArrayList<>();
+        this.fieldMap = new HashMap<>();
         //creazione pannello con info greenhouse (INFO PANEL)
         final JPanel detailsPanel = new JPanel(new GridBagLayout());
         final GridBagConstraints gbc = new GridBagConstraints();
@@ -49,7 +49,7 @@ public class GreenhouseTab implements GUIComponent {
             ++gbc.gridx;
             final JTextField field = factory.createTextField(TXT_FIELD_SIZE);
             field.setEditable(false);
-            this.fieldList.add(field);
+            this.fieldMap.put(elem, field);
             gbc.anchor = GridBagConstraints.EAST;
             detailsPanel.add(field, gbc);
             gbc.gridx = 0;
@@ -73,7 +73,7 @@ public class GreenhouseTab implements GUIComponent {
     @Override
     public JComponent getComponent() {
         //inserisco dati a caso
-        for (final JTextField elem: this.fieldList) {
+        for (final JTextField elem: this.fieldMap.values()) {
             elem.setText("dati a caso");
         }
         return this.split;
