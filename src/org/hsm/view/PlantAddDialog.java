@@ -2,7 +2,6 @@ package org.hsm.view;
 
 import java.awt.BorderLayout;
 import java.awt.Dialog;
-import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -26,7 +25,6 @@ public class PlantAddDialog extends AbstractAddDialog {
 
     private static final String DIALOG_TITLE = "Add a plant";
     private static final String START_LABEL = "Chose the plant";
-    private static final int MIN_X_DIMENSION = 300;
     private static final int MAX_COST = 1000000;
     private static final int MAX_CENT = 99;
     private static final int CENT_FACTOR = 100;
@@ -41,7 +39,6 @@ public class PlantAddDialog extends AbstractAddDialog {
      */
     public PlantAddDialog(final JFrame frame) {
         super(frame, DIALOG_TITLE, Dialog.ModalityType.APPLICATION_MODAL);
-        this.getJDialog().setMinimumSize(new Dimension(MIN_X_DIMENSION, 0));
         Set<String> set = null;
         try {
             set = ControllerImpl.getController().getDatabase().getDb().keySet();

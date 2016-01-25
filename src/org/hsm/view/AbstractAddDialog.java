@@ -2,6 +2,7 @@ package org.hsm.view;
 
 import java.awt.BorderLayout;
 import java.awt.Dialog;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 
 import javax.swing.JButton;
@@ -16,6 +17,7 @@ import javax.swing.JPanel;
 
 public abstract class AbstractAddDialog {
 
+    private static final double DIM_FACTOR = 1.1;
     private final JDialog dialog;
 
     /**
@@ -48,6 +50,8 @@ public abstract class AbstractAddDialog {
      */
     public void start() {
         this.dialog.pack();
+        final Dimension dimensione = new Dimension((int) (this.dialog.getWidth() * DIM_FACTOR), (int) (this.dialog.getHeight() * DIM_FACTOR));
+        this.dialog.setSize(dimensione);
         this.dialog.setLocationByPlatform(true);
         this.dialog.setVisible(true);
     }

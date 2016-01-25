@@ -55,7 +55,7 @@ public class GreenhouseCreateDialog extends AbstractAddDialog {
         this.pictureLabel = new JLabel("", new ImageIcon(this.getClass().getResource("/linear.jpg")), JLabel.CENTER);
         this.nameField = new JTextField(TXT_DIM);
         final JPanel panelUp = new JPanel();
-        panelUp.add(new JLabel(LABEL_INIT));
+        panelUp.add(new MyGUIFactory().createLabel(LABEL_INIT));
         final JLabel name = new JLabel(LABEL_NAME);
         final JLabel type = new JLabel(LABEL_TYPE);
         final JLabel size = new JLabel(LABEL_SIZE);
