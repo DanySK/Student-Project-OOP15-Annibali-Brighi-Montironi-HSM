@@ -1,17 +1,21 @@
 package org.hsm.view;
 
 import java.awt.Component;
+import java.awt.Dimension;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
@@ -21,6 +25,7 @@ import javax.swing.table.TableModel;
  */
 public class PlantsTab implements GUIComponent {
 
+    private static final int FILTER_TXT_SIZE = 50;
     private final JTable table;
     private final JPanel panel;
 
@@ -38,6 +43,17 @@ public class PlantsTab implements GUIComponent {
             public boolean isCellEditable(final int rowIndex, final int mColIndex) {
                 return false;
             }
+            //FILTER
+            @Override
+            public Class<?> getColumnClass(final int column) {
+                Class<?> returnValue;
+                if (column >= 0 && column < getColumnCount()) {
+                  returnValue = getValueAt(0, column).getClass();
+                } else {
+                  returnValue = Object.class;
+                }
+                return returnValue;
+              }
         };
         this.table = new JTable(model);
         table.setAutoCreateRowSorter(true);
@@ -49,8 +65,18 @@ public class PlantsTab implements GUIComponent {
         southPanel.setLayout(new BoxLayout(southPanel, BoxLayout.X_AXIS));
         final JButton add = new JButton("Add Plant");
         add.addActionListener(e -> {
-            new PlantAddDialog(frame).start();
+            new PlantAddDialog(frame);
         });
+        final JLabel filterLabel = new JLabel("Find:");
+        final JTextField filterField = new JTextField(FILTER_TXT_SIZE);
+        final JButton findButton = new JButton("Filter");
+        final JButton exitFilter = new JButton("Exit");
+        filterField.setMaximumSize(new Dimension(filterField.getPreferredSize().width, filterField.getPreferredSize().height));
+        southPanel.add(filterLabel);
+        southPanel.add(filterField);
+        southPanel.add(findButton);
+        southPanel.add(exitFilter);
+        southPanel.add(Box.createHorizontalGlue());
         final JButton remove = new JButton("Remove Plant");
         final JButton updateValues = new JButton("Update Plant Values");
         final JButton addPlants = new JButton("Add Plants");
@@ -58,12 +84,12 @@ public class PlantsTab implements GUIComponent {
         southPanel.add(addPlants);
         southPanel.add(remove);
         southPanel.add(updateValues);
-        southPanel.setSize(southPanel.getPreferredSize());
         southPanel.setAlignmentX(Component.RIGHT_ALIGNMENT);
 
         this.panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         final JScrollPane scrollPane = new JScrollPane(table);
+
         panel.add(scrollPane);
         panel.add(southPanel);
     }
