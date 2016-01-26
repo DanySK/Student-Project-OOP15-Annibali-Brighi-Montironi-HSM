@@ -1,5 +1,8 @@
 package org.hsm.view;
 
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  *The enum represents all the optimal characteristics of the plant.
  *
@@ -59,6 +62,18 @@ public enum PlantModelCharacteristics {
      */
     public String getDescription() {
         return this.name;
+    }
+
+    /**
+     * Get a list with the names of all the features.
+     * @return a list with the names of all the features
+     */
+    public static List<String> getNameList() {
+        final List<String> list = new LinkedList<>();
+        for (final PlantModelCharacteristics elem: PlantModelCharacteristics.values()) {
+            list.add(elem.getDescription());
+        }
+        return list;
     }
 
 }

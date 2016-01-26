@@ -4,6 +4,7 @@ import javax.swing.Icon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JSpinner;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SpinnerModel;
 
@@ -42,5 +43,12 @@ public interface GUIFactory {
      * @return a new JTextField
      */
     JTextField createTextField(final int size);
+
+    /**
+     * Create a new JTable with the specified columns and ready to be filtered.
+     * @param columns the columns of the table
+     * @return a new JTable with the specified columns
+     */
+    JTable createTable(final Object... columns);
 
 }

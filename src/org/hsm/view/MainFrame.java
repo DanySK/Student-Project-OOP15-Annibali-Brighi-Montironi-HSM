@@ -70,6 +70,11 @@ public class MainFrame implements View {
     }
 
     @Override
+    public void insertGreenhouse() {
+        this.tab.getGreenhouseTab().add();
+    }
+
+    @Override
     public void insertModelPlant(final Object... plant) {
         this.tab.getDatabaseTab().insertPlant(plant);
     }
@@ -81,12 +86,13 @@ public class MainFrame implements View {
 
     @Override
     public void insertPlant(final Object... plant) {
-        System.out.println("DA IMPLEMENTARE");
+        this.tab.getPlantsTab().insertRow(plant);
+        //u
     }
 
     @Override
     public void removeSelectedPlant() {
-        System.out.println("DA IMPLEMENTARE");
+        this.tab.getPlantsTab().removeSelectedRow();
     }
 
     /**
