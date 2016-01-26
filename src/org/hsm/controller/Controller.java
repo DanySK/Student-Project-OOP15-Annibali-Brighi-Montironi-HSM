@@ -25,7 +25,7 @@ public interface Controller {
      * @param size
      *            the size of Greenhouse
      */
-    void crateGreenhouse(String name, GreenHouseType greenhouseType, double cost, double size);
+    void crateGreenhouse(String name, GreenHouseType greenhouseType, int cost, double size);
 
     /**
      * Get the atcually load Greenhouse.

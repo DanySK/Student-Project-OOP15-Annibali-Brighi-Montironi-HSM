@@ -2,7 +2,12 @@ package org.hsm.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
+
+import org.hsm.model.Database;
+import org.hsm.model.PlantModel;
+
 
 /**
  *
@@ -11,16 +16,18 @@ import java.util.Random;
  */
 public class SimulatorImpl implements Simulator {
 
-    private Random random = new Random();
-    private static int maxrand = 2;
-    private Controller controller = ControllerImpl.getController();
+    private final Random random = new Random();
+    private static final int MAXRAND = 2;
+    private final Database db = ControllerImpl.getController().getDatabase();
+
+    private final Map<String, PlantModel> dbMap = db.getDb();
 
     @Override
-    public int getSimulatedPh(final String botanicalName) {
-        //int j = controller.getPH(botanicalName) - maxrand;
-       // int n = PlantImp.getPH(botanicalName) + maxrand - j;
-       // return random.nextInt(n) + j;
-        return 0;
+    public double getSimulatedPh(final String botanicalName) {
+        double j = dbMap.get(botanicalName).getPH() - MAXRAND;
+        double n = dbMap.get(botanicalName).getPH() + MAXRAND - j;
+        return random.nextDouble() + n;
+        //return 0;
     }
 
     @Override
