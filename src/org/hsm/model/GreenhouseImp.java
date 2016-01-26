@@ -13,6 +13,7 @@ public class GreenhouseImp implements GreenHouse {
     private final Map<Integer, Plant > plantMap = new HashMap<>();
     private final IDmanager productID = new IDmanager();
     private  String name;
+    private double size;
 
     /**
      * This method add some plants to the Greenhouse.
@@ -71,6 +72,21 @@ public class GreenhouseImp implements GreenHouse {
     @Override
     public void setName(final String n) {
         this.name = n;
+    }
+
+    @Override
+    public double getSize() {
+        return size;
+    }
+
+    @Override
+    public void setSize(final double s) {
+        this.size = s;
+    }
+    
+    @Override
+    public double getFreeSize() {
+        return size;
     }
 
 
