@@ -17,7 +17,7 @@ public class ControllerTest {
         ControllerImpl controller = ControllerImpl.getController();
         Path path = Paths.get(System.getProperty("user.home"),"test.hsm");
         File filename = path.toFile();
-        controller.crateGreenhouse("Test", GreenHouseType.GRID, 450);
+        controller.crateGreenhouse("Test", GreenHouseType.GRID, 450, 1500);
         controller.createNewPlant("test12", "test botanical", 25, 550, 340, 30, 27, 365, 25);
         controller.addPlants(1, controller.getDatabase().getPlantModel("test12"), 12);
 

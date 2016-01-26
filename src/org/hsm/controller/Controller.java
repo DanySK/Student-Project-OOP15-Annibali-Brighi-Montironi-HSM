@@ -18,12 +18,14 @@ public interface Controller {
      *
      * @param name
      *            the name for Greenhouse
+     * @param greenhouseType
+     *            the type of Greenhouse you want (watch enumeration)
+     * @param cost
+     *            the cost of Greenhouse
      * @param size
      *            the size of Greenhouse
-     * @param greenhouseType
-     *            the type of greenhouse you want (watch enumeration)
      */
-    void crateGreenhouse(String name, GreenHouseType greenhouseType, double size);
+    void crateGreenhouse(String name, GreenHouseType greenhouseType, double cost, double size);
 
     /**
      * Get the atcually load Greenhouse.
@@ -103,7 +105,7 @@ public interface Controller {
     /**
      * Check the currently state of greenhouse.
      *
-     * @return  true if a greenhouse is load
+     * @return true if a greenhouse is load
      */
     boolean getLoadState();
 

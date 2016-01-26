@@ -51,7 +51,7 @@ public class ControllerImpl implements Controller, Serializable {
     }
 
     @Override
-    public void crateGreenhouse(final String name, final GreenHouseType greenhouseType, final double cost) {
+    public void crateGreenhouse(final String name, final GreenHouseType greenhouseType, final double cost, final double size) {
         this.greenhouse = new GreenhouseImp();
         this.database = new DBplants();
         greenhouse.setName(name);
@@ -76,6 +76,7 @@ public class ControllerImpl implements Controller, Serializable {
             this.load = false;
         } else {
             // TODO richiesta di salvataggio
+
         }
     }
 
