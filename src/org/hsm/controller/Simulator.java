@@ -15,7 +15,7 @@ public interface Simulator {
      *            the name of the plant
      * @return the simulated Ph
      */
-    int getSimulatedPh(String botanicalName);
+    double getSimulatedPh(String botanicalName);
 
     /**
      *
