@@ -8,8 +8,11 @@ import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JSpinner;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SpinnerModel;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *My GUI Factory implementation for Hsm.
@@ -54,6 +57,22 @@ public class MyGUIFactory implements GUIFactory {
         final Font newFont = new Font("newFont", font.getStyle(), (int) (font.getSize() * SIZE_FIELD_FACTOR));
         field.setFont(newFont);
         return field;
+    }
+
+    @Override
+    public JTable createTable(final Object... columns) {
+        final TableModel model = new DefaultTableModel(columns, 0) {
+            private static final long serialVersionUID = 8517517831747874057L;
+            @Override
+            public boolean isCellEditable(final int rowIndex, final int mColIndex) {
+                return false;
+            }
+        };
+        final JTable table = new JTable(model);
+        table.setAutoCreateRowSorter(true);
+        table.setAutoscrolls(true);
+        table.setFillsViewportHeight(true);
+        return table;
     }
 
 }

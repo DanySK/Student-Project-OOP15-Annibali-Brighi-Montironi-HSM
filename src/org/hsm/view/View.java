@@ -35,4 +35,10 @@ public interface View {
      */
     void removeSelectedModelPlant();
 
+    /**
+     * Insert a greenhouse in the view.
+     *
+     */
+    void insertGreenhouse();
+
 }

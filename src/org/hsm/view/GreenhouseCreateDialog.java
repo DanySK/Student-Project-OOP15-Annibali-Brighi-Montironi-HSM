@@ -3,6 +3,7 @@ package org.hsm.view;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dialog;
+import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -40,10 +41,15 @@ public class GreenhouseCreateDialog extends AbstractAddDialog {
     private static final int INSET = 5;
     private static final int TXT_DIM = 20;
     private static final int SPINNER_TXT_DIM = 18;
+    private static final int MAX_COST = 1000000;
+    private static final int MAX_CENT = 99;
+    private static final int CENT_FACTOR = 100;
     private final JLabel pictureLabel;
     private final JTextField nameField; 
     private final JSpinner spinner;
     private final ButtonGroup group;
+    private final JSpinner euroSpinner;
+    private final JSpinner centSpinner;
 
     /**
      *Create the dialog to make a new Greenhouse.
@@ -79,9 +85,25 @@ public class GreenhouseCreateDialog extends AbstractAddDialog {
         panel.add(spinner, gbc);
         gbc.gridx = 0;
         ++gbc.gridy;
+
+        final JLabel costLabel = new JLabel("Cost:");
+        final JPanel euroPanel = new JPanel(new FlowLayout());
+        this.euroSpinner = new JSpinner(new SpinnerNumberModel(0, 0, MAX_COST, 1));
+        this.centSpinner = new JSpinner(new SpinnerNumberModel(0, 0, MAX_CENT, 1));
+        final JLabel virgola = new JLabel(", ");
+        euroPanel.add(this.euroSpinner);
+        euroPanel.add(virgola);
+        euroPanel.add(this.centSpinner);
+        panel.add(costLabel, gbc);
+        ++gbc.gridx;
+        panel.add(euroPanel, gbc);
+        gbc.gridy++;
+        gbc.gridx = 0;
+
         panel.add(type, gbc);
         gbc.gridy++;
         gbc.gridx = 0;
+
         final JRadioButton linearButton = new JRadioButton("Linear");
         linearButton.setActionCommand("linear");
         linearButton.setSelected(true);
@@ -158,8 +180,10 @@ public class GreenhouseCreateDialog extends AbstractAddDialog {
         if (this.nameField.getText().isEmpty()) {
             this.nameField.setText("NONE");
         }
+        final int euro = ((SpinnerNumberModel) this.euroSpinner.getModel()).getNumber().intValue() * CENT_FACTOR;
+        final int cent = ((SpinnerNumberModel) this.centSpinner.getModel()).getNumber().intValue();
         final SpinnerNumberModel model = (SpinnerNumberModel) this.spinner.getModel();
-        ControllerImpl.getController().crateGreenhouse(this.nameField.getText(), this.getGreenhouseType(), model.getNumber().doubleValue());
+        ControllerImpl.getController().crateGreenhouse(this.nameField.getText(), this.getGreenhouseType(), euro + cent, model.getNumber().doubleValue());
     }
 
 }

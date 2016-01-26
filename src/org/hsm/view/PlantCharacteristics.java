@@ -1,5 +1,8 @@
 package org.hsm.view;
 
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  *The enum represents all the current characteristics of a plant in a greenhouse.
  *
@@ -45,8 +48,20 @@ public enum PlantCharacteristics {
      * Get a description of the specific characteristic.
      * @return the string represents the characteristic
      */
-    public String getDescriprion() {
+    public String getDescription() {
         return this.name;
+    }
+
+    /**
+     * Get a list with the names of all the features.
+     * @return a list with the names of all the features
+     */
+    public static List<String> getNameList() {
+        final List<String> list = new LinkedList<>();
+        for (final PlantCharacteristics elem: PlantCharacteristics.values()) {
+            list.add(elem.getDescription());
+        }
+        return list;
     }
 
 }

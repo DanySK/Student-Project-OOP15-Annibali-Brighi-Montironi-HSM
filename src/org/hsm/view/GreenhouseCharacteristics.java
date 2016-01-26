@@ -27,6 +27,10 @@ public enum GreenhouseCharacteristics {
      */
     NUMBER_OF_PLANTS("Number of Plants"),
     /**
+     *The cost of the greenhouse.
+     */
+    COST("Cost (€)"),
+    /**
      *The typology of the greenhouse.
      */
     TYPOLOGY("Typology");

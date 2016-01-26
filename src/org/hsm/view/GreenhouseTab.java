@@ -12,6 +12,8 @@ import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.JTextField;
 
+import org.hsm.controller.ControllerImpl;
+import org.hsm.model.GreenHouse;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -68,6 +70,17 @@ public class GreenhouseTab implements GUIComponent {
         graphicPanel.setMinimumSize(minimumSize);
         split.setOneTouchExpandable(true);
         split.setContinuousLayout(true);
+    }
+
+    /**
+     *  set greenhouse view.
+     */
+    public void add() {
+        final GreenHouse green = ControllerImpl.getController().getGreenhouse();
+        this.fieldMap.get(GreenhouseCharacteristics.NAME).setText(green.getName());
+        this.fieldMap.get(GreenhouseCharacteristics.DIMENSION).setText(Double.toString(green.getSize()));
+        this.fieldMap.get(GreenhouseCharacteristics.FREE_SPACE).setText(Double.toString(green.getFreeSize()));
+        this.fieldMap.get(GreenhouseCharacteristics.COST).setText(Double.toString(green.getCost()));
     }
 
     @Override
