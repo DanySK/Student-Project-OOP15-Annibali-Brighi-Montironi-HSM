@@ -10,6 +10,8 @@ import java.util.Set;
  */
 public class GreenhouseImp implements GreenHouse {
 
+    private static final int CMC_TO_MC = 1000000;
+    
     private final Map<Integer, Plant > plantMap = new HashMap<>();
     private final IDmanager productID = new IDmanager();
     private  String name;
@@ -86,7 +88,11 @@ public class GreenhouseImp implements GreenHouse {
     
     @Override
     public double getFreeSize() {
-        return size;
+        double tmp = 0.0;
+        for (Map.Entry<Integer, Plant> elem : this.plantMap.entrySet()) {
+            tmp += elem.getValue().getModel().getSize();
+        }
+        return size - (tmp / CMC_TO_MC); // cm³ to m³
     }
 
 
