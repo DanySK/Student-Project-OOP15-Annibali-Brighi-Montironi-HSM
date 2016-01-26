@@ -34,6 +34,9 @@ public class DatabaseTab implements GUIComponent {
         removePlant.addActionListener(e -> {
             if (this.table.getSelectedRow() == -1) {
                 Messages.errorMessage(frame, "No plant is selected!");
+            } else {
+                System.out.println("Implenta nel controller");
+                //Controller delete model from database
             }
         });
         southPanel.add(createPlant);

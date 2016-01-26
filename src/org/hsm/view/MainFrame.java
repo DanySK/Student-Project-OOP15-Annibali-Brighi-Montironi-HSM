@@ -87,7 +87,6 @@ public class MainFrame implements View {
     @Override
     public void insertPlant(final Object... plant) {
         this.tab.getPlantsTab().insertRow(plant);
-        //u
     }
 
     @Override
@@ -116,9 +115,9 @@ public class MainFrame implements View {
     /**
      * MAIN di prova.
      * @param strings eded
-     */
+
     public static void main(final String...strings) {
         new MainFrame().start();
     }
-
+    */
 }

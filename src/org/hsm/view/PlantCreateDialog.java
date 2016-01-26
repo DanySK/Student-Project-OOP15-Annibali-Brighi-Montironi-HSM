@@ -85,4 +85,5 @@ public class PlantCreateDialog extends AbstractAddDialog {
                 ((SpinnerNumberModel) this.spinnerList.get(i++).getModel()).getNumber().doubleValue());
     }
 
+
 }

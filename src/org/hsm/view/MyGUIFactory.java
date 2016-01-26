@@ -74,5 +74,4 @@ public class MyGUIFactory implements GUIFactory {
         table.setFillsViewportHeight(true);
         return table;
     }
-
 }

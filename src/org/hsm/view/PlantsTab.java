@@ -18,6 +18,8 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
+import org.hsm.controller.ControllerImpl;
+
 /**
  *This tab contains all the information about the plants inside the current greenhouse.
  *
@@ -72,6 +74,10 @@ public class PlantsTab implements GUIComponent {
         remove.addActionListener(e -> {
             if (this.table.getSelectedRow() == -1) {
                 Messages.errorMessage(frame, "No plant is selected");
+            } else {
+                final int selectedRowIndex = this.table.getSelectedRow();
+                final int idPlant = (int) this.table.getModel().getValueAt(selectedRowIndex, PlantCharacteristics.ID.ordinal());
+                ControllerImpl.getController().delPlant(idPlant);
             }
         });
         final JButton updateValues = new JButton("Update Plant Values");

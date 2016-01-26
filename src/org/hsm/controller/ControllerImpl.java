@@ -52,7 +52,7 @@ public class ControllerImpl implements Controller, Serializable {
 
     @Override
     public void crateGreenhouse(final String name, final GreenHouseType greenhouseType, final int cost, final double size) {
-        this.greenhouse = new GreenhouseImp(name, size, cost);
+        //this.greenhouse = new GreenhouseImp(name, size, cost);
         this.database = new DBplants();
         this.load = true;
     }
