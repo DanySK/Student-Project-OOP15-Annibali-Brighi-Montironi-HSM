@@ -1,5 +1,7 @@
 package org.hsm.controller;
 
+import java.io.File;
+
 import org.hsm.model.Database;
 import org.hsm.model.GreenHouse;
 import org.hsm.model.GreenHouseType;
@@ -24,7 +26,7 @@ public interface Controller {
     void crateGreenhouse(String name, GreenHouseType greenhouseType, double size);
 
     /**
-     *Get the atcually load Greenhouse.
+     * Get the atcually load Greenhouse.
      *
      * @return the actual Greenhouse
      */
@@ -50,7 +52,7 @@ public interface Controller {
      * @param plant
      *            the type of plant to insert
      * @param cost
-     *             the cont in euro of the plant
+     *            the cont in euro of the plant
      *
      * @throws IllegalArgumentException
      *             in case of the plant doesn't exist
@@ -99,12 +101,25 @@ public interface Controller {
             int optimalGrowthTime, double temperature, int life, double size);
 
     /**
-     * Save the current Greenhouse opened in the program.
+     * Check the currently state of greenhouse.
+     *
+     * @return  true if a greenhouse is load
      */
-    void saveGreenhouse();
+    boolean getLoadState();
+
+    /**
+     * Save the current Greenhouse opened in the program.
+     *
+     * @param filename
+     *            the path of shm file
+     */
+    void saveGreenhouse(File filename);
 
     /**
      * Load a saved Greenhouse in the program.
+     *
+     * @param filename
+     *            the path of shm file
      */
-    void loadGreenhouse();
+    void loadGreenhouse(File filename);
 }
