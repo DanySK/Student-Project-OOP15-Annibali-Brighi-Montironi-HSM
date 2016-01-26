@@ -68,5 +68,17 @@ public interface GreenHouse {
      *      Free space of the greenhouse
      */
     double getFreeSize();
+    
+    /**
+     * @return 
+     *      return the costGreenhouse field
+     */
+    double getCost();
+    
+    /**
+     * @param cost
+     *      cost of the greenhouse
+     */
+    void setCost(double cost);
 
 }
