@@ -81,4 +81,12 @@ public interface GreenHouse {
      */
     void setCost(double cost);
 
+    /**
+     *@return 
+     *      return the type of the greenhouse
+     */
+    GreenHouseType getType();
+    
+    
+
 }

@@ -11,6 +11,11 @@ import java.util.Set;
  */
 public class GreenhouseImp implements GreenHouse, Serializable {
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1132454764370517715L;
+
     private static final int CMC_TO_MC = 1000000; // cm³ to m³
     
     private final Map<Integer, Plant > plantMap = new HashMap<>();
@@ -18,6 +23,7 @@ public class GreenhouseImp implements GreenHouse, Serializable {
     private  String name;
     private double size;
     private double costGreenhouse;
+    private GreenHouseType type;
     
     /**
      * @param name
@@ -27,11 +33,12 @@ public class GreenhouseImp implements GreenHouse, Serializable {
      * @param cost
      *         cost of the greenhouse
      */
-    public GreenhouseImp(final String name, final double size, final double cost) {
+    public GreenhouseImp(final String name, final double size, final int cost, final GreenHouseType t) {
         super();
         this.name = name;
         this.size = size;
         this.setCost(cost);
+        this.type = t;
     }
 
     /**
@@ -125,6 +132,11 @@ public class GreenhouseImp implements GreenHouse, Serializable {
     public void setCost(final double cost) {
         this.costGreenhouse = cost;
     }
+
+   @Override
+   public GreenHouseType getType() {
+       return this.type;
+   }
 
 
 }
