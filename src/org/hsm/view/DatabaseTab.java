@@ -33,9 +33,9 @@ public class DatabaseTab implements GUIComponent {
         final JButton removePlant = new JButton("Remove selected plant");
         removePlant.addActionListener(e -> {
             if (this.table.getSelectedRow() == -1) {
-                Messages.errorMessage(frame, "No plant is selected!");
+                Utilities.errorMessage(frame, "No plant is selected!");
             } else {
-                System.out.println("Implenta nel controller");
+                System.out.println("Implementa nel controller");
                 //Controller delete model from database
             }
         });

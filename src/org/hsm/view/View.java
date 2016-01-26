@@ -7,10 +7,16 @@ package org.hsm.view;
 public interface View {
 
     /**
+     *Set the View visible.
+     */
+    void start();
+
+    /**
      *Set the GUI status.
-     *@param status the status of thr GUI
+     *@param status the status of the GUI
      */
     void setActive(final boolean status);
+
     /**
      * Insert a plant into greenhouse.
      * @param plant

@@ -129,22 +129,7 @@ public class GreenhouseCreateDialog extends AbstractAddDialog {
         @Override
         public void actionPerformed(final ActionEvent e) {
             final JRadioButton button = (JRadioButton) e.getSource();
-            switch (button.getActionCommand()) {
-            case "linear" : 
-                pictureLabel.setIcon(new ImageIcon(this.getClass().getResource("/linear.jpg")));
-                return;
-            case "reticular" : 
-                pictureLabel.setIcon(new ImageIcon(this.getClass().getResource("/reticular.jpg")));
-                return;
-            case "pyramidal" : 
-                pictureLabel.setIcon(new ImageIcon(this.getClass().getResource("/pyramidal.jpg")));
-                return; 
-            case "circular" : 
-                pictureLabel.setIcon(new ImageIcon(this.getClass().getResource("/circular.jpg")));
-                return; 
-            default :
-                pictureLabel.setIcon(new ImageIcon(this.getClass().getResource("/linear.jpg")));
-            }
+            pictureLabel.setIcon(Utilities.getStructIcon(button.getActionCommand()));
         }
 
     }

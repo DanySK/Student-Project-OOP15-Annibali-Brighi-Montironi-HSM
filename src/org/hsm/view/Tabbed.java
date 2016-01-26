@@ -10,7 +10,7 @@ import javax.swing.JTabbedPane;
 import javax.swing.border.EtchedBorder;
 
 /**
- *The class which create and use the Tabel.
+ *The class which create and use the Tabbes.
  *
  */
 public class Tabbed implements GUIComponent {
@@ -22,7 +22,7 @@ public class Tabbed implements GUIComponent {
     private final GUIComponent greenhouseTab;
 
     /**
-     *Create the Tabel.
+     *Create the Tabbes.
      *@param frame the main frame of the app
      */
     public Tabbed(final JFrame frame) {

@@ -73,7 +73,7 @@ public class PlantsTab implements GUIComponent {
         final JButton remove = new JButton("Remove Plant");
         remove.addActionListener(e -> {
             if (this.table.getSelectedRow() == -1) {
-                Messages.errorMessage(frame, "No plant is selected");
+                Utilities.errorMessage(frame, "No plant is selected");
             } else {
                 final int selectedRowIndex = this.table.getSelectedRow();
                 final int idPlant = (int) this.table.getModel().getValueAt(selectedRowIndex, PlantCharacteristics.ID.ordinal());

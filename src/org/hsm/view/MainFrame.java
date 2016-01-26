@@ -44,9 +44,7 @@ public class MainFrame implements View {
         this.frame.getContentPane().add(toolbar.getComponent(), BorderLayout.PAGE_START);
     }
 
-    /**
-     * Set the main frame visible.
-     */
+    @Override
     public void start() {
         final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
         final int sw = (int) (screen.getWidth() / PROPORTION);
@@ -71,7 +69,7 @@ public class MainFrame implements View {
 
     @Override
     public void insertGreenhouse() {
-        this.tab.getGreenhouseTab().add();
+        this.tab.getGreenhouseTab().setGreenhouse();
     }
 
     @Override
@@ -115,9 +113,11 @@ public class MainFrame implements View {
     /**
      * MAIN di prova.
      * @param strings eded
-
-    public static void main(final String...strings) {
-        new MainFrame().start();
-    }
     */
+    public static void main(final String...strings) {
+        final View view = new MainFrame();
+        view.setActive(true);
+        view.start();
+    }
+
 }

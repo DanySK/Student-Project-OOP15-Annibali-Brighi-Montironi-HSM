@@ -57,6 +57,7 @@ public class GreenhouseTab implements GUIComponent {
             gbc.gridx = 0;
             ++gbc.gridy;
         }
+
         //creazione pannello grafici
         final DefaultPieDataset dataset = new DefaultPieDataset();
         dataset.setValue("Used Space", MINIMUM_Y_SIZE);
@@ -73,9 +74,9 @@ public class GreenhouseTab implements GUIComponent {
     }
 
     /**
-     *  set greenhouse view.
+     *  Set greenhouse view.
      */
-    public void add() {
+    public void setGreenhouse() {
         final GreenHouse green = ControllerImpl.getController().getGreenhouse();
         this.fieldMap.get(GreenhouseCharacteristics.NAME).setText(green.getName());
         this.fieldMap.get(GreenhouseCharacteristics.DIMENSION).setText(Double.toString(green.getSize()));
