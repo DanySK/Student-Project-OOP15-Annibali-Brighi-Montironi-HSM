@@ -50,5 +50,35 @@ public interface GreenHouse {
      *          new name of the greenhouse
      */
     void setName(final String n);
+    
+    /**
+     *@return 
+     *      total size of the greenhouse in m³
+     */
+    double getSize(); 
+
+    /**
+     * @param s
+     *         the size of the greenhouse in m³
+     */
+    void setSize(double s); 
+    
+    /**
+     * @return
+     *      Free space of the greenhouse
+     */
+    double getFreeSize();
+    
+    /**
+     * @return 
+     *      return the costGreenhouse field
+     */
+    double getCost();
+    
+    /**
+     * @param cost
+     *      cost of the greenhouse
+     */
+    void setCost(double cost);
 
 }
