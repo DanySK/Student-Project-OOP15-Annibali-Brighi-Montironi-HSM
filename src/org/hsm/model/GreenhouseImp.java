@@ -1,5 +1,6 @@
 package org.hsm.model;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -8,7 +9,7 @@ import java.util.Set;
 /**
  *implementation of the Greenhouse interface.
  */
-public class GreenhouseImp implements GreenHouse {
+public class GreenhouseImp implements GreenHouse, Serializable {
 
     private static final int CMC_TO_MC = 1000000; // cm³ to m³
     
