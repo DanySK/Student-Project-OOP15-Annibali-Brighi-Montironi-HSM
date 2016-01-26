@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.JTextField;
 
+import org.hsm.controller.ControllerImpl;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -68,6 +69,13 @@ public class GreenhouseTab implements GUIComponent {
         graphicPanel.setMinimumSize(minimumSize);
         split.setOneTouchExpandable(true);
         split.setContinuousLayout(true);
+    }
+
+    /**
+     *  set greenhouse view.
+     */
+    public void add() {
+        ControllerImpl.getController().getGreenhouse();
     }
 
     @Override

@@ -1,5 +1,6 @@
 package org.hsm.view;
 
+import java.awt.BorderLayout;
 import java.awt.Dialog;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -40,6 +41,7 @@ public class PlantCreateDialog extends AbstractAddDialog {
         super(frame, DIALOG_TITLE, Dialog.ModalityType.APPLICATION_MODAL);
         this.spinnerList = new ArrayList<>();
         final GUIFactory factory = new MyGUIFactory();
+        final JPanel superPanel = new JPanel();
         final JPanel panel = new JPanel(new GridBagLayout());
         final GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(INSET, INSET, INSET, INSET);
@@ -64,6 +66,8 @@ public class PlantCreateDialog extends AbstractAddDialog {
             panel.add(spinner, gbc);
             ++gbc.gridy;
         }
+        superPanel.add(factory.createLabel("Insert the optimal values of the plant"));
+        this.getJDialog().getContentPane().add(superPanel, BorderLayout.NORTH);
         this.getJDialog().getContentPane().add(panel);
     }
 

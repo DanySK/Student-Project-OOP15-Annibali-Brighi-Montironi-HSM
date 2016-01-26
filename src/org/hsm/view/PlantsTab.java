@@ -2,9 +2,6 @@ package org.hsm.view;
 
 import java.awt.Component;
 import java.awt.Dimension;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -16,8 +13,10 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *This tab contains all the information about the plants inside the current greenhouse.
@@ -34,32 +33,8 @@ public class PlantsTab implements GUIComponent {
      * @param frame the main frame of the app
      */
     public PlantsTab(final JFrame frame) {
-        final List<String> columns = IntStream.range(0, PlantCharacteristics.values().length)
-                                     .mapToObj(i -> PlantCharacteristics.values()[i].getDescriprion())
-                                     .collect(Collectors.toList());
-        final TableModel model = new DefaultTableModel(columns.toArray(), 0) {
-            private static final long serialVersionUID = 8517517831747874057L;
-            @Override
-            public boolean isCellEditable(final int rowIndex, final int mColIndex) {
-                return false;
-            }
-            //FILTER
-            @Override
-            public Class<?> getColumnClass(final int column) {
-                Class<?> returnValue;
-                if (column >= 0 && column < getColumnCount()) {
-                  returnValue = getValueAt(0, column).getClass();
-                } else {
-                  returnValue = Object.class;
-                }
-                return returnValue;
-              }
-        };
-        this.table = new JTable(model);
-        table.setAutoCreateRowSorter(true);
-        table.setAutoscrolls(true);
-        table.setFillsViewportHeight(true);
 
+        this.table = new MyGUIFactory().createTable(PlantCharacteristics.getNameList().toArray());
         //pannello con buttoni per azioni su piante
         final JPanel southPanel = new JPanel();
         southPanel.setLayout(new BoxLayout(southPanel, BoxLayout.X_AXIS));
@@ -72,12 +47,33 @@ public class PlantsTab implements GUIComponent {
         final JButton findButton = new JButton("Filter");
         final JButton exitFilter = new JButton("Exit");
         filterField.setMaximumSize(new Dimension(filterField.getPreferredSize().width, filterField.getPreferredSize().height));
+
+        /*set filter option*/
+        final TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(this.table.getModel());
+        table.setRowSorter(sorter);
+        findButton.addActionListener(e -> {
+            final String text = filterField.getText();
+            if (text.length() == 0) {
+                sorter.setRowFilter(null);
+              } else {
+                sorter.setRowFilter(RowFilter.regexFilter(text));
+              }
+        });
+        exitFilter.addActionListener(e -> {
+            sorter.setRowFilter(null);
+        });
+
         southPanel.add(filterLabel);
         southPanel.add(filterField);
         southPanel.add(findButton);
         southPanel.add(exitFilter);
         southPanel.add(Box.createHorizontalGlue());
         final JButton remove = new JButton("Remove Plant");
+        remove.addActionListener(e -> {
+            if (this.table.getSelectedRow() == -1) {
+                Messages.errorMessage(frame, "No plant is selected");
+            }
+        });
         final JButton updateValues = new JButton("Update Plant Values");
         final JButton addPlants = new JButton("Add Plants");
         southPanel.add(add);
