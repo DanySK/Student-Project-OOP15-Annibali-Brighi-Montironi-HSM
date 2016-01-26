@@ -37,5 +37,18 @@ public interface GreenHouse {
      *      return a Map. The key is ID plant. The value is Plant
      */
     Map<Integer, Plant> getPlants();
+    
+    /**
+     * @return 
+     *      return name of the greenhouse
+     */
+    String getName();
+    
+    /**
+     * 
+     * @param n
+     *          new name of the greenhouse
+     */
+    void setName(final String n);
 
 }
