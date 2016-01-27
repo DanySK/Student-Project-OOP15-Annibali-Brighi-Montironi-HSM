@@ -17,14 +17,14 @@ public class GreenhouseImp implements GreenHouse, Serializable {
     private static final long serialVersionUID = 1132454764370517715L;
 
     private static final int CMC_TO_MC = 1000000; // cm³ to m³
-    
+
     private final Map<Integer, Plant > plantMap = new HashMap<>();
     private final IDmanager productID = new IDmanager();
     private  String name;
     private double size;
     private double costGreenhouse;
     private GreenHouseType type;
-    
+
     /**
      * @param name
      *          name of the greenhouse
@@ -79,14 +79,14 @@ public class GreenhouseImp implements GreenHouse, Serializable {
     @Override
     public void delPlants(final PlantModel plant) {
         final Set<Integer> set = new HashSet<>();
-       for (Map.Entry<Integer, Plant> elem : this.plantMap.entrySet()) {
-           if (elem.getValue().getModel().equals(plant)) {
-              set.add(elem.getKey());
-           }
-       }
-       set.stream().forEach(i -> {
-           this.plantMap.remove(i);
-       });
+        for (Map.Entry<Integer, Plant> elem : this.plantMap.entrySet()) {
+            if (elem.getValue().getModel().equals(plant)) {
+                set.add(elem.getKey());
+            }
+        }
+        set.stream().forEach(i -> {
+            this.plantMap.remove(i);
+        });
     }
 
     @Override
@@ -113,7 +113,7 @@ public class GreenhouseImp implements GreenHouse, Serializable {
     public void setSize(final double s) {
         this.size = s;
     }
-    
+
     @Override
     public double getFreeSize() {
         double tmp = 0.0;
@@ -133,10 +133,15 @@ public class GreenhouseImp implements GreenHouse, Serializable {
         this.costGreenhouse = cost;
     }
 
-   @Override
-   public GreenHouseType getType() {
-       return this.type;
-   }
+    @Override
+    public GreenHouseType getType() {
+        return this.type;
+    }
+
+    @Override
+    public double getOccSize() {
+        return size - getFreeSize();
+    }
 
 
 }

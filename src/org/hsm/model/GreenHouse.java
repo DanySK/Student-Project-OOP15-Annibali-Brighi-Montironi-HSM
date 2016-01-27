@@ -70,6 +70,12 @@ public interface GreenHouse {
     double getFreeSize();
     
     /**
+     *@return 
+     *      Return the space occupied by plants in m³ 
+     */
+    double getOccSize();
+    
+    /**
      * @return 
      *      return the costGreenhouse field
      */
