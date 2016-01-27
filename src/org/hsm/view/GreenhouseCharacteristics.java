@@ -41,11 +41,8 @@ public enum GreenhouseCharacteristics {
         this.name = name;
     }
 
-    /**
-     * Get a description of the specific characteristic.
-     * @return the string represents the characteristic
-     */
-    public String getDescription() {
+    @Override
+    public String toString() {
         return this.name;
     }
 }

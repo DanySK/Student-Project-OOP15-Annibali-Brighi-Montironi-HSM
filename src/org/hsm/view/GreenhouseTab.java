@@ -47,7 +47,7 @@ public class GreenhouseTab implements GUIComponent {
         gbc.gridy = 0;
         for (final GreenhouseCharacteristics elem : GreenhouseCharacteristics.values()) {
             gbc.anchor = GridBagConstraints.WEST;
-            detailsPanel.add(factory.createLabel(elem.getDescription()), gbc);
+            detailsPanel.add(factory.createLabel(elem.toString()), gbc);
             ++gbc.gridx;
             final JTextField field = factory.createTextField(TXT_FIELD_SIZE);
             field.setEditable(false);
@@ -82,6 +82,9 @@ public class GreenhouseTab implements GUIComponent {
         this.fieldMap.get(GreenhouseCharacteristics.DIMENSION).setText(Double.toString(green.getSize()));
         this.fieldMap.get(GreenhouseCharacteristics.FREE_SPACE).setText(Double.toString(green.getFreeSize()));
         this.fieldMap.get(GreenhouseCharacteristics.COST).setText(Double.toString(green.getCost()));
+        this.fieldMap.get(GreenhouseCharacteristics.NUMBER_OF_PLANTS).setText(Integer.toString(green.getNumberOfPlants()));
+        this.fieldMap.get(GreenhouseCharacteristics.USED_SPACE).setText(Double.toString(green.getOccSize()));
+        this.fieldMap.get(GreenhouseCharacteristics.TYPOLOGY).setText(green.getType().toString());
     }
 
     @Override

@@ -44,11 +44,8 @@ public enum PlantCharacteristics {
         this.name = name;
     }
 
-    /**
-     * Get a description of the specific characteristic.
-     * @return the string represents the characteristic
-     */
-    public String getDescription() {
+    @Override
+    public String toString() {
         return this.name;
     }
 
@@ -59,7 +56,7 @@ public enum PlantCharacteristics {
     public static List<String> getNameList() {
         final List<String> list = new LinkedList<>();
         for (final PlantCharacteristics elem: PlantCharacteristics.values()) {
-            list.add(elem.getDescription());
+            list.add(elem.toString());
         }
         return list;
     }

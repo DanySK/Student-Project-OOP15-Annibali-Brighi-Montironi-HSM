@@ -69,7 +69,7 @@ public class PlantCreateDialog extends AbstractAddDialog {
         this.map.put(TEMPERATURE, factory.createSpinner(NUM_CHAR, new SpinnerNumberModel(0, 0, 100, DELTA)));
 
         for (final PlantModelCharacteristics elem: PlantModelCharacteristics.values()) {
-            panel.add(new JLabel(elem.getDescription()), gbc);
+            panel.add(new JLabel(elem.toString()), gbc);
             ++gbc.gridx;
             panel.add(this.map.get(elem), gbc);
             ++gbc.gridy;
