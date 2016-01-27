@@ -82,6 +82,12 @@ public interface GreenHouse {
     double getCost();
     
     /**
+     *@return 
+     *      Number of plants in the greenhouse 
+     */
+    int getNumberOfPlants();
+    
+    /**
      * @param cost
      *      cost of the greenhouse
      */

@@ -143,5 +143,10 @@ public class GreenhouseImp implements GreenHouse, Serializable {
         return size - getFreeSize();
     }
 
+    @Override
+    public int getNumberOfPlants() {
+        return plantMap.size();
+    }
+
 
 }
