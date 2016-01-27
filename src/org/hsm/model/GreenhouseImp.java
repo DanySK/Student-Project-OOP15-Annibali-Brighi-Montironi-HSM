@@ -55,7 +55,7 @@ public class GreenhouseImp implements GreenHouse, Serializable {
                 this.plantMap.put(productID.getID(), new PlantImpl(model, cost));
             }
         } else {
-            //throw IllegalStateException;
+            throw new IllegalStateException();
         }
     }
 
