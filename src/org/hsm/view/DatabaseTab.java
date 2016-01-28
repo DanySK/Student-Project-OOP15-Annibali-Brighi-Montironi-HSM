@@ -13,7 +13,7 @@ import javax.swing.table.DefaultTableModel;
  *This tab contains all the information about the database of plants.
  *
  */
-public class DatabaseTab implements GUIComponent {
+public class DatabaseTab implements GUIComponent, Table {
 
     private final JTable table;
     private final JPanel panel;
@@ -53,19 +53,14 @@ public class DatabaseTab implements GUIComponent {
         return this.panel;
     }
 
-    /**
-     *Insert the plant into tha table.
-     *@param params all the parameters of the plant
-     */
-    public void insertPlant(final Object... params) {
+    @Override
+    public void insertRow(final Object... row) {
         final DefaultTableModel model = (DefaultTableModel) this.table.getModel();
-        model.addRow(params);
+        model.addRow(row);
     }
 
-    /**
-     *Remove the first selected row in the database table.
-     */
-    public void removeSelectedPlant() {
+    @Override
+    public void removeSelectedRow() {
         final DefaultTableModel model = (DefaultTableModel) this.table.getModel();
         model.removeRow(this.table.getSelectedRow());
     }

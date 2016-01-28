@@ -51,19 +51,19 @@ public class Tabbed implements GUIComponent {
     }
 
     /**
-     * Get the Database tab.
-     * @return the database tab
+     * Get the Database table.
+     * @return the database table
      */
-    public DatabaseTab getDatabaseTab() {
-        return (DatabaseTab) this.databaseTab;
+    public Table getDatabaseTab() {
+        return (Table) this.databaseTab;
     }
 
     /**
-     * Get the Plants tab.
-     * @return the plants tab
+     * Get the Plants table.
+     * @return the plants table
      */
-    public PlantsTab getPlantsTab() {
-        return (PlantsTab) this.plantsTab;
+    public Table getPlantsTab() {
+        return (Table) this.plantsTab;
     }
 
     /**

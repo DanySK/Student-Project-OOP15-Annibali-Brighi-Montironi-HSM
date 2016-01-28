@@ -74,12 +74,12 @@ public class MainFrame implements View {
 
     @Override
     public void insertModelPlant(final Object... plant) {
-        this.tab.getDatabaseTab().insertPlant(plant);
+        this.tab.getDatabaseTab().insertRow(plant);
     }
 
     @Override
     public void removeSelectedModelPlant() {
-        this.tab.getDatabaseTab().removeSelectedPlant();
+        this.tab.getDatabaseTab().removeSelectedRow();
     }
 
     @Override

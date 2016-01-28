@@ -24,7 +24,7 @@ import org.hsm.controller.ControllerImpl;
  *This tab contains all the information about the plants inside the current greenhouse.
  *
  */
-public class PlantsTab implements GUIComponent {
+public class PlantsTab implements GUIComponent, Table {
 
     private static final int FILTER_TXT_SIZE = 50;
     private final JTable table;
@@ -35,7 +35,6 @@ public class PlantsTab implements GUIComponent {
      * @param frame the main frame of the app
      */
     public PlantsTab(final JFrame frame) {
-
         this.table = new MyGUIFactory().createTable(PlantCharacteristics.getNameList().toArray());
         //pannello con buttoni per azioni su piante
         final JPanel southPanel = new JPanel();
@@ -96,19 +95,13 @@ public class PlantsTab implements GUIComponent {
         panel.add(southPanel);
     }
 
-    /**
-     * Insert row in the table.
-     * @param row
-     * The row to insert.
-     */
+    @Override
     public void insertRow(final Object... row) {
         final DefaultTableModel model = (DefaultTableModel) this.table.getModel();
         model.addRow(row);
     }
 
-    /**
-     *Remove the selected row into the table.
-     */
+    @Override
     public void removeSelectedRow() {
         final DefaultTableModel model = (DefaultTableModel) this.table.getModel();
         model.removeRow(this.table.getSelectedRow());

@@ -6,6 +6,8 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.JComponent;
 import javax.swing.JPanel;
@@ -23,7 +25,7 @@ import org.jfree.data.general.DefaultPieDataset;
  *This tab contains all the information about the current greenhouse.
  *
  */
-public class GreenhouseTab implements GUIComponent{
+public class GreenhouseTab implements GUIComponent, Observer {
 
     private static final int INSET_Y = 12;
     private static final int INSET_X = 7;
@@ -88,6 +90,14 @@ public class GreenhouseTab implements GUIComponent{
     }
 
     @Override
+    public void update(final Observable arg0, final Object arg1) {
+        final GreenHouse green = ControllerImpl.getController().getGreenhouse();
+        this.fieldMap.get(GreenhouseCharacteristics.FREE_SPACE).setText(Double.toString(green.getFreeSize()));
+        this.fieldMap.get(GreenhouseCharacteristics.USED_SPACE).setText(Double.toString(green.getOccSize()));
+        this.fieldMap.get(GreenhouseCharacteristics.NUMBER_OF_PLANTS).setText(Integer.toString(green.getNumberOfPlants()));
+    }
+
+    @Override
     public JComponent getComponent() {
         //inserisco dati a caso
         for (final JTextField elem: this.fieldMap.values()) {
@@ -95,6 +105,5 @@ public class GreenhouseTab implements GUIComponent{
         }
         return this.split;
     }
-
 
 }
