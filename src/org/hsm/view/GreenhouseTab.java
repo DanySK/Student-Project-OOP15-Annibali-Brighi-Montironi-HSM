@@ -23,7 +23,7 @@ import org.jfree.data.general.DefaultPieDataset;
  *This tab contains all the information about the current greenhouse.
  *
  */
-public class GreenhouseTab implements GUIComponent {
+public class GreenhouseTab implements GUIComponent{
 
     private static final int INSET_Y = 12;
     private static final int INSET_X = 7;
@@ -95,5 +95,6 @@ public class GreenhouseTab implements GUIComponent {
         }
         return this.split;
     }
+
 
 }
