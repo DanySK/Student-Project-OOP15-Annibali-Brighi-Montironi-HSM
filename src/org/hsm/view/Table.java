@@ -18,4 +18,9 @@ public interface Table {
      */
     void removeSelectedRow();
 
+    /**
+     *Clean the table.
+     */
+    void clean();
+
 }

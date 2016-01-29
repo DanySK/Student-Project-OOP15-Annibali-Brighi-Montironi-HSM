@@ -112,4 +112,10 @@ public class PlantsTab implements GUIComponent, Table {
         return this.panel;
     }
 
+    @Override
+    public void clean() {
+        final DefaultTableModel model = (DefaultTableModel) this.table.getModel();
+        model.setRowCount(0);
+    }
+
 }

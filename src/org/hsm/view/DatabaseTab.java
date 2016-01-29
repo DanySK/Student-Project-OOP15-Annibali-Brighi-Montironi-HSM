@@ -65,4 +65,10 @@ public class DatabaseTab implements GUIComponent, Table {
         model.removeRow(this.table.getSelectedRow());
     }
 
+    @Override
+    public void clean() {
+        final DefaultTableModel model = (DefaultTableModel) this.table.getModel();
+        model.setRowCount(0);
+    }
+
 }
