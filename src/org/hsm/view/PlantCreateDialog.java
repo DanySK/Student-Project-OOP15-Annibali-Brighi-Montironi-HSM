@@ -92,6 +92,7 @@ public class PlantCreateDialog extends AbstractAddDialog {
                                                      ((SpinnerNumberModel) ((JSpinner) this.map.get(TEMPERATURE)).getModel()).getNumber().doubleValue(),
                                                      ((SpinnerNumberModel) ((JSpinner) this.map.get(LIFE)).getModel()).getNumber().intValue(),
                                                      ((SpinnerNumberModel) ((JSpinner) this.map.get(SIZE)).getModel()).getNumber().doubleValue());
+        getJDialog().dispose();
     }
 
 
