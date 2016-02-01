@@ -1,13 +1,18 @@
 package org.hsm.model;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
  * Database of the plants that the user can add to his Greenhouse.
  */
-public class DBplants implements Database {
+public class DBplants implements Database, Serializable {
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
     private Map<String, PlantModel> db = new HashMap<>();
 
     /**
