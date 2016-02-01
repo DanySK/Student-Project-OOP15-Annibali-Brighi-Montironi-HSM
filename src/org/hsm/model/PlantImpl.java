@@ -1,9 +1,10 @@
 package org.hsm.model;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 
-public class PlantImpl implements Plant {
+public class PlantImpl implements Plant, Serializable {
     private final PlantModel model;
     private final int cost;
     private final List<Double> phList;
