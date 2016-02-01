@@ -17,9 +17,9 @@ public class Tabbed implements GUIComponent {
 
     private final JPanel panel;
     private final JTabbedPane tab;
-    private final GUIComponent databaseTab;
-    private final GUIComponent plantsTab;
-    private final GUIComponent greenhouseTab;
+    private final DatabaseTab databaseTab;
+    private final PlantsTab plantsTab;
+    private final GreenhouseTab greenhouseTab;
 
     /**
      *Create the Tabbes.
@@ -39,6 +39,8 @@ public class Tabbed implements GUIComponent {
         tab.add("Plants Database", this.databaseTab.getComponent());
         tab.add("Graphic", new JPanel());
 
+        this.plantsTab.addObserver(this.greenhouseTab);
+
         this.panel.add(tab, BorderLayout.CENTER);
     }
 
@@ -51,19 +53,19 @@ public class Tabbed implements GUIComponent {
     }
 
     /**
-     * Get the Database table.
-     * @return the database table
+     * Get the Database tab.
+     * @return the database tab
      */
-    public Table getDatabaseTab() {
-        return (Table) this.databaseTab;
+    public DatabaseTab getDatabaseTab() {
+        return this.databaseTab;
     }
 
     /**
-     * Get the Plants table.
-     * @return the plants table
+     * Get the Plants tab.
+     * @return the plants tab
      */
-    public Table getPlantsTab() {
-        return (Table) this.plantsTab;
+    public PlantsTab getPlantsTab() {
+        return this.plantsTab;
     }
 
     /**
@@ -71,7 +73,7 @@ public class Tabbed implements GUIComponent {
      * @return the greenhouse tab
      */
     public GreenhouseTab getGreenhouseTab() {
-        return (GreenhouseTab) this.greenhouseTab;
+        return this.greenhouseTab;
     }
 
     @Override

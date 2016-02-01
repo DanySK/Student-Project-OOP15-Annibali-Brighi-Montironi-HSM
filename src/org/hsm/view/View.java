@@ -4,11 +4,9 @@ package org.hsm.view;
  *This interface contains all the most important action that an user
  *can do with this application. 
  */
-public interface View {
+public interface View extends VisibleComponent {
 
-    /**
-     *Set the View visible.
-     */
+    @Override
     void start();
 
     /**

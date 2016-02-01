@@ -15,7 +15,7 @@ import javax.swing.JPanel;
  *
  */
 
-public abstract class AbstractAddDialog {
+public abstract class AbstractAddDialog implements VisibleComponent {
 
     private static final double DIM_FACTOR = 1.1;
     private final JDialog dialog;
@@ -45,9 +45,7 @@ public abstract class AbstractAddDialog {
         return this.dialog;
     }
 
-    /**
-     *Set the dialog visible.
-     */
+    @Override
     public void start() {
         this.dialog.pack();
         final Dimension dimensione = new Dimension((int) (this.dialog.getWidth() * DIM_FACTOR), (int) (this.dialog.getHeight() * DIM_FACTOR));
