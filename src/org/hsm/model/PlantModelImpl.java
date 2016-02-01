@@ -1,10 +1,12 @@
 package org.hsm.model;
 
+import java.io.Serializable;
+
 /**
  *
  */
 
-public class PlantModelImpl implements PlantModel {
+public class PlantModelImpl implements PlantModel, Serializable {
 
 
     private final String name;
