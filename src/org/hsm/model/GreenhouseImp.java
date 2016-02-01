@@ -118,7 +118,7 @@ public class GreenhouseImp implements GreenHouse, Serializable {
     public double getFreeSize() {
         double tmp = 0.0;
         if (!this.plantMap.isEmpty()) {
-            for (Map.Entry<Integer, Plant> elem : this.plantMap.entrySet()) {
+            for (final Map.Entry<Integer, Plant> elem : this.plantMap.entrySet()) {
                 tmp += elem.getValue().getModel().getSize();
             }
             return this.size - (tmp / CMC_TO_MC);
