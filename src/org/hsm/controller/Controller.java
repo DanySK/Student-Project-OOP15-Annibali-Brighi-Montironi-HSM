@@ -6,6 +6,7 @@ import org.hsm.model.Database;
 import org.hsm.model.GreenHouse;
 import org.hsm.model.GreenHouseType;
 import org.hsm.model.PlantModel;
+import org.jfree.data.contour.ContourDataset;
 
 /**
  * Interface for controller operations.
@@ -123,5 +124,5 @@ public interface Controller {
      * @param filename
      *            the path of shm file
      */
-    void loadGreenhouse(File filename);
+    ControllerImpl loadGreenhouse(File filename);
 }

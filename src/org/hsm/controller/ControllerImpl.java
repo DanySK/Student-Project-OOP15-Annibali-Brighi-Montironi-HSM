@@ -112,6 +112,7 @@ public class ControllerImpl implements Controller, Serializable {
         try {
             ObjectOutput shm = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(filename)));
             shm.writeObject(CONTROLLER_IMPL);
+            shm.close();
         } catch (FileNotFoundException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -123,11 +124,13 @@ public class ControllerImpl implements Controller, Serializable {
     }
 
     @Override
-    public void loadGreenhouse(final File filename) {
+    public ControllerImpl loadGreenhouse(final File filename) {
+        ControllerImpl greenhouse = null;
         try {
             ObjectInput shm = new ObjectInputStream(new BufferedInputStream(new FileInputStream(filename)));
             try {
-                shm.readObject();
+               greenhouse = (ControllerImpl) shm.readObject();
+                shm.close();
             } catch (ClassNotFoundException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
@@ -139,6 +142,7 @@ public class ControllerImpl implements Controller, Serializable {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+        return greenhouse;
     }
 
 }
