@@ -4,6 +4,8 @@ import org.hsm.model.GreenHouse;
 import org.hsm.model.GreenHouseType;
 import org.hsm.model.GreenhouseImp;
 import org.hsm.model.PlantModel;
+import org.hsm.view.MainFrame;
+import org.hsm.view.View;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -39,6 +41,7 @@ public class ControllerImpl implements Controller, Serializable {
 
     private Database database;
     private GreenHouse greenhouse;
+    private final View view = new MainFrame();
 
     private boolean load;
 
@@ -51,11 +54,12 @@ public class ControllerImpl implements Controller, Serializable {
     }
 
     @Override
-    public void crateGreenhouse(final String name, final GreenHouseType greenhouseType, final int cost,
+    public void createGreenhouse(final String name, final GreenHouseType greenhouseType, final int cost,
             final double size) {
         this.greenhouse = new GreenhouseImp(name, size, cost, greenhouseType);
         this.database = new DBplants();
         this.load = true;
+        this.view.insertGreenhouse();
     }
 
     @Override
@@ -100,6 +104,7 @@ public class ControllerImpl implements Controller, Serializable {
             final double size) {
         database.addPlantModel(name, botanicalName, ph, brightness, optimalGrowthTime, life, size, conductivity,
                 temperature);
+        this.view.insertModelPlant(name, botanicalName, ph, brightness, optimalGrowthTime, life, size, conductivity, temperature);
     }
 
     @Override
@@ -147,6 +152,14 @@ public class ControllerImpl implements Controller, Serializable {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Entry Point.
+     * @param args arguments from command line
+     */
+    public static void main(final String... args) {
+        ControllerImpl.getController().view.start();
     }
 
 }
