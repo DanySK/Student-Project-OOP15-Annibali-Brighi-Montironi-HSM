@@ -6,7 +6,6 @@ import org.hsm.model.Database;
 import org.hsm.model.GreenHouse;
 import org.hsm.model.GreenHouseType;
 import org.hsm.model.PlantModel;
-import org.jfree.data.contour.ContourDataset;
 
 /**
  * Interface for controller operations.
@@ -113,16 +112,20 @@ public interface Controller {
     /**
      * Save the current Greenhouse opened in the program.
      *
-     * @param filename
-     *            the path of shm file
+     * @param filenameDb
+     *            the path of Database file
+     * @param filenameGh
+     *            the path of Greenhouse file
      */
-    void saveGreenhouse(File filename);
+    void saveGreenhouse(File filenameDb, File filenameGh);
 
     /**
      * Load a saved Greenhouse in the program.
      *
-     * @param filename
-     *            the path of shm file
+     * @param filenameDb
+     *            the path of Database file
+     * @param filenameGh
+     *            the path of Greenhouse file
      */
-    ControllerImpl loadGreenhouse(File filename);
+    void loadGreenhouse(File filenameDb, File filenameGh);
 }

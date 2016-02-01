@@ -51,7 +51,8 @@ public class ControllerImpl implements Controller, Serializable {
     }
 
     @Override
-    public void crateGreenhouse(final String name, final GreenHouseType greenhouseType, final int cost, final double size) {
+    public void crateGreenhouse(final String name, final GreenHouseType greenhouseType, final int cost,
+            final double size) {
         this.greenhouse = new GreenhouseImp(name, size, cost, greenhouseType);
         this.database = new DBplants();
         this.load = true;
@@ -75,7 +76,6 @@ public class ControllerImpl implements Controller, Serializable {
             this.load = false;
         } else {
             // TODO richiesta di salvataggio
-
         }
     }
 
@@ -108,11 +108,14 @@ public class ControllerImpl implements Controller, Serializable {
     }
 
     @Override
-    public void saveGreenhouse(final File filename) {
+    public void saveGreenhouse(final File filenameDb, final File filenameGh) {
         try {
-            ObjectOutput shm = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(filename)));
-            shm.writeObject(CONTROLLER_IMPL);
-            shm.close();
+            ObjectOutput shmDb = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(filenameDb)));
+            ObjectOutput shmGh = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(filenameGh)));
+            shmDb.writeObject(database);
+            shmDb.close();
+            shmGh.writeObject(greenhouse);
+            shmGh.close();
         } catch (FileNotFoundException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -124,13 +127,15 @@ public class ControllerImpl implements Controller, Serializable {
     }
 
     @Override
-    public ControllerImpl loadGreenhouse(final File filename) {
-        ControllerImpl greenhouse = null;
+    public void loadGreenhouse(final File filenameDb, final File filenameGh) {
         try {
-            ObjectInput shm = new ObjectInputStream(new BufferedInputStream(new FileInputStream(filename)));
+            ObjectInput shmDb = new ObjectInputStream(new BufferedInputStream(new FileInputStream(filenameDb)));
+            ObjectInput shmGh = new ObjectInputStream(new BufferedInputStream(new FileInputStream(filenameGh)));
             try {
-               greenhouse = (ControllerImpl) shm.readObject();
-                shm.close();
+                database = (Database) shmDb.readObject();
+                shmDb.close();
+                greenhouse = (GreenHouse) shmGh.readObject();
+                shmGh.close();
             } catch (ClassNotFoundException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
@@ -142,7 +147,6 @@ public class ControllerImpl implements Controller, Serializable {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        return greenhouse;
     }
 
 }
