@@ -84,27 +84,35 @@ public class ControllerImpl implements Controller, Serializable {
     }
 
     @Override
-    public void addPlants(final int nPlants, final PlantModel plant, final int cost) {
-        greenhouse.addPlants(nPlants, plant, cost);
+    public int addPlants(final int nPlants, final PlantModel plant, final int cost) {
+        this.greenhouse.addPlants(nPlants, plant, cost);
+        return 0; //TODO
     }
 
     @Override
     public void delPlant(final int id) {
-        greenhouse.delPlant(id);
+        this.greenhouse.delPlant(id);
     }
 
     @Override
     public void delPLants(final PlantModel plant) {
-        greenhouse.delPlants(plant);
+        this.greenhouse.delPlants(plant);
     }
 
     @Override
     public void createNewPlant(final String name, final String botanicalName, final double ph, final double brightness,
             final double conductivity, final int optimalGrowthTime, final double temperature, final int life,
             final double size) {
-        database.addPlantModel(name, botanicalName, ph, brightness, optimalGrowthTime, life, size, conductivity,
+        this.database.addPlantModel(name, botanicalName, ph, brightness, optimalGrowthTime, life, size, conductivity,
                 temperature);
-        this.view.insertModelPlant(name, botanicalName, ph, brightness, optimalGrowthTime, life, size, conductivity, temperature);
+        this.view.insertModelPlant(name, botanicalName, ph, brightness, optimalGrowthTime, life, size, conductivity,
+                temperature);
+    }
+
+    @Override
+    public void deleteDbPlant(final String botanicalName) {
+        this.database.removePlantModel(botanicalName);
+        this.view.removeSelectedModelPlant();
     }
 
     @Override
@@ -117,9 +125,9 @@ public class ControllerImpl implements Controller, Serializable {
         try {
             ObjectOutput shmDb = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(filenameDb)));
             ObjectOutput shmGh = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(filenameGh)));
-            shmDb.writeObject(database);
+            shmDb.writeObject(this.database);
             shmDb.close();
-            shmGh.writeObject(greenhouse);
+            shmGh.writeObject(this.greenhouse);
             shmGh.close();
         } catch (FileNotFoundException e) {
             // TODO Auto-generated catch block
@@ -137,9 +145,9 @@ public class ControllerImpl implements Controller, Serializable {
             ObjectInput shmDb = new ObjectInputStream(new BufferedInputStream(new FileInputStream(filenameDb)));
             ObjectInput shmGh = new ObjectInputStream(new BufferedInputStream(new FileInputStream(filenameGh)));
             try {
-                database = (Database) shmDb.readObject();
+                this.database = (Database) shmDb.readObject();
                 shmDb.close();
-                greenhouse = (GreenHouse) shmGh.readObject();
+                this.greenhouse = (GreenHouse) shmGh.readObject();
                 shmGh.close();
             } catch (ClassNotFoundException e) {
                 // TODO Auto-generated catch block
@@ -156,7 +164,9 @@ public class ControllerImpl implements Controller, Serializable {
 
     /**
      * Entry Point.
-     * @param args arguments from command line
+     *
+     * @param args
+     *            arguments from command line
      */
     public static void main(final String... args) {
         ControllerImpl.getController().view.start();

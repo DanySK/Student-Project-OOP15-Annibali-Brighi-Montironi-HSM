@@ -56,10 +56,10 @@ public interface Controller {
      * @param cost
      *            the cont in euro of the plant
      *
-     * @throws IllegalArgumentException
-     *             in case of the plant doesn't exist
+     * @return the id of the plant insered
+     *
      */
-    void addPlants(int nPlants, PlantModel plant, int cost);
+    int addPlants(int nPlants, PlantModel plant, int cost);
 
     /**
      * Delete plant with the ID provided in input.
@@ -101,6 +101,13 @@ public interface Controller {
      */
     void createNewPlant(String name, String botanicalName, double ph, double brightness, double conductivity,
             int optimalGrowthTime, double temperature, int life, double size);
+
+    /**
+     *
+     * @param botanicalName
+     *            the botanical name of the plant to delete
+     */
+    void deleteDbPlant(String botanicalName);
 
     /**
      * Check the currently state of greenhouse.
