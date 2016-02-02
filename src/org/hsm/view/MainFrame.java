@@ -29,6 +29,7 @@ public class MainFrame implements View {
     public MainFrame() {
         this.setSystemLook();
         this.tab = new Tabbed(this.frame);
+        this.tab.setEnable(false);
         this.frame = new JFrame(FRAME_TITLE);
         this.frame.setLayout(new BorderLayout());
         this.frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);

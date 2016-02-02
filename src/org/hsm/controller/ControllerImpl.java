@@ -44,7 +44,7 @@ public class ControllerImpl implements Controller, Serializable {
     private final View view = new MainFrame();
 
     private boolean load;
-
+    
     /**
      *
      * @return the istance of controller
@@ -59,6 +59,7 @@ public class ControllerImpl implements Controller, Serializable {
         this.greenhouse = new GreenhouseImp(name, size, cost, greenhouseType);
         this.database = new DBplants();
         this.load = true;
+        this.view.setActive(true);
         this.view.insertGreenhouse();
     }
 
