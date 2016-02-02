@@ -47,13 +47,16 @@ public class GreenhouseImp implements GreenHouse, Serializable {
      *      number of plants
      * @param plant
      *      an object of type Plant
+     * @return
+     *         return id plant
+     *
      */
     @Override
-    public void addPlants(final int n, final PlantModel model, final int cost) {
-        if (n * model.getSize() < getFreeSize()) {
-            for (int i = 0; i < n; i++) {
-                this.plantMap.put(productID.getID(), new PlantImpl(model, cost));
-            }
+    public int addPlant(final PlantModel model, final int cost) {
+        if (model.getSize() < getFreeSize()) {
+            int tmp = productID.getID();
+            this.plantMap.put(tmp, new PlantImpl(model, cost));
+            return tmp;
         } else {
             throw new IllegalStateException();
         }
