@@ -87,8 +87,6 @@ public class GreenhouseTab implements GUIComponent, Observer {
         this.fieldMap.get(GreenhouseCharacteristics.FREE_SPACE).setText(Double.toString(green.getFreeSize()));
         this.fieldMap.get(GreenhouseCharacteristics.USED_SPACE).setText(Double.toString(green.getOccSize()));
         this.fieldMap.get(GreenhouseCharacteristics.NUMBER_OF_PLANTS).setText(Integer.toString(green.getNumberOfPlants()));
-        this.dataSet.setValue(OCCUPIED_SPACE, green.getOccSize());
-        this.dataSet.setValue(FREE_SPACE, green.getFreeSize());
     }
 
     @Override

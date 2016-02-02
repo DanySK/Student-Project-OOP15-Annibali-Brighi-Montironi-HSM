@@ -54,10 +54,8 @@ public interface Controller {
      * @param cost
      *            the cont in euro of the plant
      *
-     * @return the id of the plant insered
-     *
      */
-    int addPlant(PlantModel plant, int cost);
+    void addPlant(PlantModel plant, int cost);
 
     /**
      * Delete plant with the ID provided in input.

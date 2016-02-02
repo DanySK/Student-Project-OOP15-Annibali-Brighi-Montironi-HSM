@@ -24,7 +24,7 @@ public enum PlantModelCharacteristics {
     /**
      *The optimal brightness for the plant.
      */
-    BRIGHTNESS("Brigtness"),
+    BRIGHTNESS("Brightness"),
     /**
      *The optimal growth time for the plant.
      */
@@ -37,10 +37,6 @@ public enum PlantModelCharacteristics {
      *The plant size.
      */
     SIZE("Size (cm3)"),
-    /**
-     *The plant cost.
-     */
-    COST("Cost (€)"),
     /**
      *The conductivity optimal level for the plant.
      */

@@ -84,13 +84,15 @@ public class ControllerImpl implements Controller, Serializable {
     }
 
     @Override
-    public int addPlant(final PlantModel plant, final int cost) {
-        return this.greenhouse.addPlant(plant, cost);
+    public void addPlant(final PlantModel plant, final int cost) {
+        final int id = this.greenhouse.addPlant(plant, cost);
+        this.view.insertPlant(id, plant.getName(), cost, 0, 0, 0, 0);
     }
 
     @Override
     public void delPlant(final int id) {
         this.greenhouse.delPlant(id);
+        this.view.removeSelectedPlant();
     }
 
     @Override

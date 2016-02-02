@@ -11,7 +11,6 @@ import java.util.Map;
 import static org.hsm.view.PlantModelCharacteristics.BOTANICAL_NAME;
 import static org.hsm.view.PlantModelCharacteristics.BRIGHTNESS;
 import static org.hsm.view.PlantModelCharacteristics.CONDUCTIVITY;
-import static org.hsm.view.PlantModelCharacteristics.COST;
 import static org.hsm.view.PlantModelCharacteristics.GROWTH_TIME;
 import static org.hsm.view.PlantModelCharacteristics.LIFE;
 import static org.hsm.view.PlantModelCharacteristics.NAME;
@@ -61,7 +60,6 @@ public class PlantCreateDialog extends AbstractAddDialog {
         this.map.put(BOTANICAL_NAME, new JTextField(NUM_CHAR));
         this.map.put(BRIGHTNESS, factory.createSpinner(NUM_CHAR, new SpinnerNumberModel(0, 0, 100, DELTA)));
         this.map.put(CONDUCTIVITY, factory.createSpinner(NUM_CHAR, new SpinnerNumberModel(0, 0, 100, DELTA)));
-        this.map.put(COST, factory.createSpinner(NUM_CHAR, new SpinnerNumberModel(0, 0, 100, DELTA)));
         this.map.put(GROWTH_TIME, factory.createSpinner(NUM_CHAR, new SpinnerNumberModel(0, 0, 100, DELTA)));
         this.map.put(LIFE, factory.createSpinner(NUM_CHAR, new SpinnerNumberModel(0, 0, 100, DELTA)));
         this.map.put(PH, factory.createSpinner(NUM_CHAR, new SpinnerNumberModel(0, 0, 100, DELTA)));
