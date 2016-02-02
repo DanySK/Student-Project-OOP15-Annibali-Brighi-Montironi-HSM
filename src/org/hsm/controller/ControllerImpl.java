@@ -84,9 +84,8 @@ public class ControllerImpl implements Controller, Serializable {
     }
 
     @Override
-    public int addPlants(final int nPlants, final PlantModel plant, final int cost) {
-        this.greenhouse.addPlants(nPlants, plant, cost);
-        return 0; //TODO
+    public int addPlant(final PlantModel plant, final int cost) {
+        return this.greenhouse.addPlant(plant, cost);
     }
 
     @Override

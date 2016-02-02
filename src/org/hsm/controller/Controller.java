@@ -49,8 +49,6 @@ public interface Controller {
     /**
      * Add n plants to Greenhouse loaded.
      *
-     * @param nPlants
-     *            number of plants to insert in the Greenhouse
      * @param plant
      *            the type of plant to insert
      * @param cost
@@ -59,7 +57,7 @@ public interface Controller {
      * @return the id of the plant insered
      *
      */
-    int addPlants(int nPlants, PlantModel plant, int cost);
+    int addPlant(PlantModel plant, int cost);
 
     /**
      * Delete plant with the ID provided in input.
