@@ -15,17 +15,21 @@ public class ControllerTest {
      */
     public static void main(final String[] args) {
         ControllerImpl controller = ControllerImpl.getController();
-        Path path = Paths.get(System.getProperty("user.home"), "test.hsm");
-        File filename = path.toFile();
-       // controller.crateGreenhouse("Test", GreenHouseType.GRID, 450, 1500);
-        //controller.createNewPlant("test12", "test botanical", 25, 550, 340, 30, 27, 365, 25);
-       // controller.addPlants(1, controller.getDatabase().getPlantModel("test botanical"), 12);
 
-        //controller.saveGreenhouse(filename);
+        Path pathDb = Paths.get(System.getProperty("user.home"), "Db.hsm");
+        File filenameDb = pathDb.toFile();
+        Path pathGh = Paths.get(System.getProperty("user.home"), "Gh.hsm");
+        File filenameGh = pathGh.toFile();
 
-        ControllerImpl controller1 = controller.loadGreenhouse(filename);
+        controller.createGreenhouse("Test", GreenHouseType.GRID, 450, 1500);
+        controller.createNewPlant("test12", "test botanical", 25, 550, 340, 30, 27, 365, 25);
+        controller.addPlants(1, controller.getDatabase().getPlantModel("test botanical"), 12);
 
-        System.out.println(controller1.getDatabase().getPlantModel("test botanical").getName());
+        controller.saveGreenhouse(filenameDb, filenameGh);
+
+        controller.loadGreenhouse(filenameDb, filenameGh);
+
+        System.out.println(controller.getDatabase().getPlantModel("test botanical").getName());
     }
 
 }

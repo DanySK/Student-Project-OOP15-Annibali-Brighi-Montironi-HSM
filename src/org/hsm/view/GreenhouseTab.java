@@ -31,9 +31,12 @@ public class GreenhouseTab implements GUIComponent, Observer {
     private static final int INSET_X = 7;
     private static final int TXT_FIELD_SIZE = 20;
     private static final int MINIMUM_X_SIZE = 355;
-    private static final int MINIMUM_Y_SIZE = 300;
+    private static final String OCCUPIED_SPACE = "Occupied Space";
+    private static final String FREE_SPACE = "Free Space";
+    private static final String CHART_TITLE = "Greenhouse Space Chart";
     private final JSplitPane split;
     private final Map<GreenhouseCharacteristics, JTextField> fieldMap;
+    private final DefaultPieDataset dataSet;
 
     /**
      *Create the tab for the greenhouse.
@@ -41,7 +44,7 @@ public class GreenhouseTab implements GUIComponent, Observer {
     public GreenhouseTab() {
         final GUIFactory factory = new MyGUIFactory();
         this.fieldMap = new HashMap<>();
-        //creazione pannello con info greenhouse (INFO PANEL)
+
         final JPanel detailsPanel = new JPanel(new GridBagLayout());
         final GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(INSET_Y, 0, INSET_Y, INSET_X);
@@ -60,17 +63,14 @@ public class GreenhouseTab implements GUIComponent, Observer {
             ++gbc.gridy;
         }
 
-        //creazione pannello grafici
-        final DefaultPieDataset dataset = new DefaultPieDataset();
-        dataset.setValue("Used Space", MINIMUM_Y_SIZE);
-        dataset.setValue("Free Space", MINIMUM_Y_SIZE);
-        final JFreeChart chart = ChartFactory.createPieChart("Greenhouse Space Chart", dataset, true, true, false);
-        final ChartPanel graphicPanel = new ChartPanel(chart);
+        this.dataSet = new DefaultPieDataset();
+        final JFreeChart chart =  ChartFactory.createPieChart(CHART_TITLE, this.dataSet, true, true, false);
+        final ChartPanel chartPanel = new ChartPanel(chart);
 
-        this.split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, detailsPanel, graphicPanel);
+        this.split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, detailsPanel, chartPanel);
         final Dimension minimumSize = new Dimension(MINIMUM_X_SIZE, 0);
         detailsPanel.setMinimumSize(minimumSize);
-        graphicPanel.setMinimumSize(minimumSize);
+        chartPanel.setMinimumSize(minimumSize);
         split.setOneTouchExpandable(true);
         split.setContinuousLayout(true);
     }
@@ -82,11 +82,13 @@ public class GreenhouseTab implements GUIComponent, Observer {
         final GreenHouse green = ControllerImpl.getController().getGreenhouse();
         this.fieldMap.get(GreenhouseCharacteristics.NAME).setText(green.getName());
         this.fieldMap.get(GreenhouseCharacteristics.DIMENSION).setText(Double.toString(green.getSize()));
-        this.fieldMap.get(GreenhouseCharacteristics.FREE_SPACE).setText(Double.toString(green.getFreeSize()));
         this.fieldMap.get(GreenhouseCharacteristics.COST).setText(Double.toString(green.getCost()));
-        this.fieldMap.get(GreenhouseCharacteristics.NUMBER_OF_PLANTS).setText(Integer.toString(green.getNumberOfPlants()));
-        this.fieldMap.get(GreenhouseCharacteristics.USED_SPACE).setText(Double.toString(green.getOccSize()));
         this.fieldMap.get(GreenhouseCharacteristics.TYPOLOGY).setText(green.getType().toString());
+        this.fieldMap.get(GreenhouseCharacteristics.FREE_SPACE).setText(Double.toString(green.getFreeSize()));
+        this.fieldMap.get(GreenhouseCharacteristics.USED_SPACE).setText(Double.toString(green.getOccSize()));
+        this.fieldMap.get(GreenhouseCharacteristics.NUMBER_OF_PLANTS).setText(Integer.toString(green.getNumberOfPlants()));
+        this.dataSet.setValue(OCCUPIED_SPACE, green.getOccSize());
+        this.dataSet.setValue(FREE_SPACE, green.getFreeSize());
     }
 
     @Override
@@ -95,14 +97,12 @@ public class GreenhouseTab implements GUIComponent, Observer {
         this.fieldMap.get(GreenhouseCharacteristics.FREE_SPACE).setText(Double.toString(green.getFreeSize()));
         this.fieldMap.get(GreenhouseCharacteristics.USED_SPACE).setText(Double.toString(green.getOccSize()));
         this.fieldMap.get(GreenhouseCharacteristics.NUMBER_OF_PLANTS).setText(Integer.toString(green.getNumberOfPlants()));
+        this.dataSet.setValue(OCCUPIED_SPACE, green.getOccSize());
+        this.dataSet.setValue(FREE_SPACE, green.getFreeSize());
     }
 
     @Override
     public JComponent getComponent() {
-        //inserisco dati a caso
-        for (final JTextField elem: this.fieldMap.values()) {
-            elem.setText("dati a caso");
-        }
         return this.split;
     }
 

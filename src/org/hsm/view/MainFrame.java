@@ -110,14 +110,4 @@ public class MainFrame implements View {
         }
     }
 
-    /**
-     * MAIN di prova.
-     * @param strings eded
-    */
-    public static void main(final String...strings) {
-        final View view = new MainFrame();
-        view.setActive(true);
-        view.start();
-    }
-
 }

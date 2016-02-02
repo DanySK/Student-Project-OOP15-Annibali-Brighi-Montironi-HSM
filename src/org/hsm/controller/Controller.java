@@ -6,7 +6,6 @@ import org.hsm.model.Database;
 import org.hsm.model.GreenHouse;
 import org.hsm.model.GreenHouseType;
 import org.hsm.model.PlantModel;
-import org.jfree.data.contour.ContourDataset;
 
 /**
  * Interface for controller operations.
@@ -26,7 +25,7 @@ public interface Controller {
      * @param size
      *            the size of Greenhouse
      */
-    void crateGreenhouse(String name, GreenHouseType greenhouseType, int cost, double size);
+    void createGreenhouse(String name, GreenHouseType greenhouseType, int cost, double size);
 
     /**
      * Get the atcually load Greenhouse.
@@ -57,10 +56,10 @@ public interface Controller {
      * @param cost
      *            the cont in euro of the plant
      *
-     * @throws IllegalArgumentException
-     *             in case of the plant doesn't exist
+     * @return the id of the plant insered
+     *
      */
-    void addPlants(int nPlants, PlantModel plant, int cost);
+    int addPlants(int nPlants, PlantModel plant, int cost);
 
     /**
      * Delete plant with the ID provided in input.
@@ -104,6 +103,13 @@ public interface Controller {
             int optimalGrowthTime, double temperature, int life, double size);
 
     /**
+     *
+     * @param botanicalName
+     *            the botanical name of the plant to delete
+     */
+    void deleteDbPlant(String botanicalName);
+
+    /**
      * Check the currently state of greenhouse.
      *
      * @return true if a greenhouse is load
@@ -113,16 +119,20 @@ public interface Controller {
     /**
      * Save the current Greenhouse opened in the program.
      *
-     * @param filename
-     *            the path of shm file
+     * @param filenameDb
+     *            the path of Database file
+     * @param filenameGh
+     *            the path of Greenhouse file
      */
-    void saveGreenhouse(File filename);
+    void saveGreenhouse(File filenameDb, File filenameGh);
 
     /**
      * Load a saved Greenhouse in the program.
      *
-     * @param filename
-     *            the path of shm file
+     * @param filenameDb
+     *            the path of Database file
+     * @param filenameGh
+     *            the path of Greenhouse file
      */
-    ControllerImpl loadGreenhouse(File filename);
+    void loadGreenhouse(File filenameDb, File filenameGh);
 }

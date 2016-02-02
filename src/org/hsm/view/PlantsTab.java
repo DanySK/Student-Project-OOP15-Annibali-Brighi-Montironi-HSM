@@ -2,6 +2,7 @@ package org.hsm.view;
 
 import java.awt.Component;
 import java.awt.Dimension;
+import java.util.Observable;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -24,7 +25,7 @@ import org.hsm.controller.ControllerImpl;
  *This tab contains all the information about the plants inside the current greenhouse.
  *
  */
-public class PlantsTab implements GUIComponent, Table {
+public class PlantsTab extends Observable implements GUIComponent, Table {
 
     private static final int FILTER_TXT_SIZE = 50;
     private final JTable table;
@@ -99,12 +100,16 @@ public class PlantsTab implements GUIComponent, Table {
     public void insertRow(final Object... row) {
         final DefaultTableModel model = (DefaultTableModel) this.table.getModel();
         model.addRow(row);
+        this.setChanged();
+        this.notifyObservers();
     }
 
     @Override
     public void removeSelectedRow() {
         final DefaultTableModel model = (DefaultTableModel) this.table.getModel();
         model.removeRow(this.table.getSelectedRow());
+        this.setChanged();
+        this.notifyObservers();
     }
 
     @Override
