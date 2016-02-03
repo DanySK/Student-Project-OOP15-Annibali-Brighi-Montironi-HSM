@@ -134,8 +134,7 @@ public class ControllerImpl implements Controller, Serializable {
             this.view.setActive(false);
 
         } else {
-            Utilities.errorMessage(this.view.getFrame(),
-                    "Niente da cancellare (nessun Greenhouse caricato)");
+            Utilities.errorMessage(this.view.getFrame(), "Niente da cancellare (nessun Greenhouse caricato)");
         }
     }
 
@@ -184,8 +183,7 @@ public class ControllerImpl implements Controller, Serializable {
 
     @Override
     public boolean isDbEmpty() {
-        return this.database == null ? true : false; // TODO modello
-                                                     // database.isempty
+        return this.database.get().isEmpty();
     }
 
     @Override
