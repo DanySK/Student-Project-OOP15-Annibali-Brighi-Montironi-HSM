@@ -36,6 +36,7 @@ public class ToolBar implements GUIComponent {
         openGreenhouseButton.addActionListener(e -> ControllerImpl.getController().loadGreenhouse());
         importDatabaseButton.addActionListener(e -> ControllerImpl.getController().loadDatabase());
         exportDatabaseButton.addActionListener(e -> ControllerImpl.getController().saveDatabase());
+        removeGreenhouseButton.addActionListener(e -> ControllerImpl.getController().deleteGreenhouse());
         bar.add(createGreenhouseButton);
         bar.add(openGreenhouseButton);
         bar.add(saveGreenhouseButton);

@@ -84,10 +84,12 @@ public class ControllerImpl implements Controller, Serializable {
         if (this.loadDb && !this.dbMod) {
             this.database = null;
             this.loadDb = false;
+            this.view.clean();
         } else if (this.loadDb && !this.dbMod) {
             // TODO richiesta di salvataggio
             this.database = null;
             this.loadDb = false;
+            this.view.clean();
         } else {
             Utilities.errorMessage(((MainFrame) this.view).getFrame(),
                     "Niente da cancellare (nessun Database caricato)");
@@ -113,7 +115,7 @@ public class ControllerImpl implements Controller, Serializable {
     public void addPlant(final PlantModel plant, final int cost) {
         this.ghMod = true;
         final int id = this.greenhouse.addPlant(plant, cost);
-        this.view.insertPlant(id, plant.getName(), cost, 0, 0, 0, 0);
+        this.view.insertPlant(id, plant.getName(), cost / 100.0, 0, 0, 0, 0);
     }
 
     @Override

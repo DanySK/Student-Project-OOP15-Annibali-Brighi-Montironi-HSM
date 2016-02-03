@@ -38,7 +38,7 @@ public interface View extends VisibleComponent {
      * @param conductivity the conductivity of the plant
      * @param temperature the temperature of the plant
      */
-    void insertPlant(final int id, final String name, final int cost, final int ph, final double brightness,
+    void insertPlant(final int id, final String name, final double cost, final int ph, final double brightness,
              final double conductivity, final double temperature);
 
      /**
