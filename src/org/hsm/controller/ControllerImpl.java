@@ -84,7 +84,6 @@ public class ControllerImpl implements Controller, Serializable {
                 this.saveDatabase();
             }
         }
-        this.database = null;
         this.database = Optional.of(new DBplants());
         this.view.cleanDatabase();
     }
@@ -215,7 +214,7 @@ public class ControllerImpl implements Controller, Serializable {
 
     @Override
     public void loadGreenhouse() {
-        final Optional<String> filenameGh = this.view.saveGreenhouseDialog();
+        final Optional<String> filenameGh = this.view.loadGreenhouseDialog();
         if (!filenameGh.isPresent()) {
             return;
         }
@@ -240,7 +239,6 @@ public class ControllerImpl implements Controller, Serializable {
         }
         this.view.setActive(true);
         this.view.insertGreenhouse();
-
     }
 
     @Override
@@ -265,7 +263,7 @@ public class ControllerImpl implements Controller, Serializable {
 
     @Override
     public void loadDatabase() {
-        final Optional<String> filenameDb = this.view.exportDatabaseDialog();
+        final Optional<String> filenameDb = this.view.importDatabaseDialog();
         if (!filenameDb.isPresent()) {
             return;
         }
