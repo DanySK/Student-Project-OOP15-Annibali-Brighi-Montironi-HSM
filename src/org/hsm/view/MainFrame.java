@@ -74,6 +74,11 @@ public class MainFrame implements View {
     }
 
     @Override
+    public void insertDatabase() {
+        this.tab.getDatabaseTab().setDatabase();
+    }
+
+    @Override
     public void insertModelPlant(final String name, final String botanicalName, final double ph, final double brightness,
             final int optimalGrowthTime, final int life, final double size, final double conductivity,
             final double temperature) {
@@ -136,8 +141,13 @@ public class MainFrame implements View {
     }
 
     @Override
-    public void clean() {
+    public void cleanGreenhouse() {
         this.tab.getPlantsTab().clean();
+    }
+
+    @Override
+    public void cleanDatabase() {
+        this.tab.getDatabaseTab().clean();
     }
 
 }
