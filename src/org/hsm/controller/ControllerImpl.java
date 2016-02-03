@@ -43,11 +43,15 @@ public class ControllerImpl implements Controller, Serializable {
     private GreenHouse greenhouse;
     private final View view = new MainFrame();
 
+<<<<<<< local
     private boolean ghMod;
     private boolean loadGh;
     private boolean dbMod;
     private boolean loadDb;
 
+=======
+    private boolean load;
+>>>>>>> other
     /**
      *
      * @return the istance of controller
@@ -135,8 +139,7 @@ public class ControllerImpl implements Controller, Serializable {
             final int size) {
         this.database.addPlantModel(name, botanicalName, ph, brightness, optimalGrowthTime, life, size, conductivity,
                 temperature);
-        this.view.insertModelPlant(name, botanicalName, ph, brightness, optimalGrowthTime, life, size, conductivity,
-                temperature);
+        this.view.insertModelPlant(name, botanicalName, ph, brightness, optimalGrowthTime, life, size, conductivity,  temperature);
     }
 
     @Override

@@ -74,8 +74,11 @@ public class MainFrame implements View {
     }
 
     @Override
-    public void insertModelPlant(final Object... plant) {
-        this.tab.getDatabaseTab().insertRow(plant);
+    public void insertModelPlant(final String name, final String botanicalName, final double ph, final double brightness,
+            final int optimalGrowthTime, final int life, final double size, final double conductivity,
+            final double temperature) {
+        this.tab.getDatabaseTab().insertRow(name, botanicalName, ph, brightness, optimalGrowthTime, life, size,
+                conductivity, temperature);
     }
 
     @Override
@@ -84,8 +87,9 @@ public class MainFrame implements View {
     }
 
     @Override
-    public void insertPlant(final Object... plant) {
-        this.tab.getPlantsTab().insertRow(plant);
+    public void insertPlant(final int id, final String name, final int cost, final int ph, final double brightness,
+                final double conductivity, final double temperature) {
+        this.tab.getPlantsTab().insertRow(id, name, cost, ph, brightness, conductivity, temperature);
     }
 
     @Override

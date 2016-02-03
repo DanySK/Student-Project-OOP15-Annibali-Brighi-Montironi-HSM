@@ -63,7 +63,7 @@ public class PlantCreateDialog extends AbstractAddDialog {
         this.map.put(GROWTH_TIME, factory.createSpinner(NUM_CHAR, new SpinnerNumberModel(0, 0, 100, DELTA)));
         this.map.put(LIFE, factory.createSpinner(NUM_CHAR, new SpinnerNumberModel(0, 0, 100, DELTA)));
         this.map.put(PH, factory.createSpinner(NUM_CHAR, new SpinnerNumberModel(0, 0, 100, DELTA)));
-        this.map.put(SIZE, factory.createSpinner(NUM_CHAR, new SpinnerNumberModel(0, 0, 100, DELTA)));
+        this.map.put(SIZE, factory.createSpinner(NUM_CHAR, new SpinnerNumberModel(0, 0, 1000000, DELTA)));
         this.map.put(TEMPERATURE, factory.createSpinner(NUM_CHAR, new SpinnerNumberModel(0, 0, 100, DELTA)));
 
         for (final PlantModelCharacteristics elem: PlantModelCharacteristics.values()) {
