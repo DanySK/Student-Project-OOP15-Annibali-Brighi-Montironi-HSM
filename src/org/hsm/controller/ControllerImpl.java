@@ -58,11 +58,6 @@ public class ControllerImpl implements Controller, Serializable {
     @Override
     public void createGreenhouse(final String name, final GreenHouseType greenhouseType, final int cost,
             final double size) {
-        if (this.loadGh && this.ghMod) {
-            if (Utilities.saveGreenhouseMessage(this.view.getFrame())) {
-                this.saveGreenhouse();
-            }
-        }
         this.ghMod = true;
         this.loadGh = true;
         this.dbMod = true;
