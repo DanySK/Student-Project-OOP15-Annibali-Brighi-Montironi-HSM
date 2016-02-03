@@ -43,15 +43,11 @@ public class ControllerImpl implements Controller, Serializable {
     private GreenHouse greenhouse;
     private final View view = new MainFrame();
 
-<<<<<<< local
     private boolean ghMod;
     private boolean loadGh;
     private boolean dbMod;
     private boolean loadDb;
 
-=======
-    private boolean load;
->>>>>>> other
     /**
      *
      * @return the istance of controller
