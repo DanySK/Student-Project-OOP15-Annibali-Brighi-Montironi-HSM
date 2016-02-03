@@ -1,5 +1,9 @@
 package org.hsm.view;
 
+import java.util.Optional;
+
+import javax.swing.JFrame;
+
 /**
  *This interface contains all the most important action that an user
  *can do with this application. 
@@ -7,11 +11,22 @@ package org.hsm.view;
 public interface View extends VisibleComponent {
 
     /**
+     * Get the JFrame of the MainFrame.
+     * @return the JFrame
+     */
+    JFrame getFrame();
+
+    /**
      *Set the GUI status.
      *@param status the status of the GUI
      */
     void setActive(final boolean status);
 
+    /**
+     * Insert a greenhouse in the view.
+     *
+     */
+    void insertGreenhouse();
 
      /**
       * Insert a plant into Greenhouse View.
@@ -30,7 +45,6 @@ public interface View extends VisibleComponent {
      *Remove the selected plant into the table.
      */
     void removeSelectedPlant();
-
 
      /**
       * Insert a model plant into Database View.
@@ -54,9 +68,27 @@ public interface View extends VisibleComponent {
     void removeSelectedModelPlant();
 
     /**
-     * Insert a greenhouse in the view.
-     *
+     * Show the dialog to save the Greenhouse into a file.
+     * @return the path
      */
-    void insertGreenhouse();
+    Optional<String> saveGreenhouseDialog();
+
+    /**
+     * Show the dialog to load the Greenhouse from a file.
+     * @return the path
+     */
+    Optional<String> loadGreenhouseDialog();
+
+    /**
+     * Show the dialog to save the Database into a file.
+     * @return the path
+     */
+    Optional<String> exportDatabaseDialog();
+
+    /**
+     * Show the dialog to load the Database from a file.
+     * @return the path
+     */
+    Optional<String> importDatabaseDialog();
 
 }

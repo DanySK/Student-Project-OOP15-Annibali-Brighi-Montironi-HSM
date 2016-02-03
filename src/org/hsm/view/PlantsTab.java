@@ -42,7 +42,11 @@ public class PlantsTab extends Observable implements GUIComponent, Table {
         southPanel.setLayout(new BoxLayout(southPanel, BoxLayout.X_AXIS));
         final JButton add = new JButton("Add Plant");
         add.addActionListener(e -> {
-            new PlantAddDialog(frame);
+            if (ControllerImpl.getController().isDbEmpty()) {
+                Utilities.errorMessage(frame, "The Database is empty or not loaded");
+            } else {
+                new PlantAddDialog(frame);
+            }
         });
         final JLabel filterLabel = new JLabel("Find:");
         final JTextField filterField = new JTextField(FILTER_TXT_SIZE);

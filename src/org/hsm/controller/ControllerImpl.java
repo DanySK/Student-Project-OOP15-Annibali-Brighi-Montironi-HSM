@@ -155,24 +155,26 @@ public class ControllerImpl implements Controller, Serializable {
     }
 
     @Override
-    public void saveGreenhouse(final String filenameGh) {
+    public void saveGreenhouse() {
+        final String filenameGh = this.view.saveGreenhouseDialog().get();
         this.ghMod = false;
         try {
             ObjectOutput shmGh = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(filenameGh)));
             shmGh.writeObject(this.greenhouse);
             shmGh.close();
         } catch (FileNotFoundException e) {
-            Utilities.errorMessage(((MainFrame) this.view).getFrame(), e.toString());
+            Utilities.errorMessage(this.view.getFrame(), e.toString());
             e.printStackTrace();
         } catch (IOException e) {
-            Utilities.errorMessage(((MainFrame) this.view).getFrame(), e.toString());
+            Utilities.errorMessage(this.view.getFrame(), e.toString());
             e.printStackTrace();
         }
 
     }
 
     @Override
-    public void loadGreenhouse(final String filenameGh) {
+    public void loadGreenhouse() {
+        final String filenameGh = this.view.loadGreenhouseDialog().get();
         this.ghMod = false;
         try {
             ObjectInput shmGh = new ObjectInputStream(new BufferedInputStream(new FileInputStream(filenameGh)));
@@ -180,37 +182,39 @@ public class ControllerImpl implements Controller, Serializable {
                 this.greenhouse = (GreenHouse) shmGh.readObject();
                 shmGh.close();
             } catch (ClassNotFoundException e) {
-                Utilities.errorMessage(((MainFrame) this.view).getFrame(), e.toString());
+                Utilities.errorMessage(this.view.getFrame(), e.toString());
                 e.printStackTrace();
             }
         } catch (FileNotFoundException e) {
-            Utilities.errorMessage(((MainFrame) this.view).getFrame(), e.toString());
+            Utilities.errorMessage(this.view.getFrame(), e.toString());
             e.printStackTrace();
         } catch (IOException e) {
-            Utilities.errorMessage(((MainFrame) this.view).getFrame(), e.toString());
+            Utilities.errorMessage(this.view.getFrame(), e.toString());
             e.printStackTrace();
         }
 
     }
 
     @Override
-    public void saveDatabase(final String filenameDb) {
+    public void saveDatabase() {
+        final String filenameDb = this.view.exportDatabaseDialog().get();
         try (final ObjectOutput shmDb = new ObjectOutputStream(
                 new BufferedOutputStream(new FileOutputStream(filenameDb)))) {
             shmDb.writeObject(this.database);
             shmDb.close();
         } catch (FileNotFoundException e) {
-            Utilities.errorMessage(((MainFrame) this.view).getFrame(), e.toString());
+            Utilities.errorMessage(this.view.getFrame(), e.toString());
             e.printStackTrace();
         } catch (IOException e) {
-            Utilities.errorMessage(((MainFrame) this.view).getFrame(), e.toString());
+            Utilities.errorMessage(this.view.getFrame(), e.toString());
             e.printStackTrace();
         }
 
     }
 
     @Override
-    public void loadDatabase(final String filenameDb) {
+    public void loadDatabase() {
+        final String filenameDb = this.view.importDatabaseDialog().get();
         this.loadDb = true;
         try (final ObjectInput shmDb = new ObjectInputStream(
                 new BufferedInputStream(new FileInputStream(filenameDb)))) {
@@ -218,14 +222,14 @@ public class ControllerImpl implements Controller, Serializable {
                 this.database = (Database) shmDb.readObject();
                 shmDb.close();
             } catch (ClassNotFoundException e) {
-                Utilities.errorMessage(((MainFrame) this.view).getFrame(), e.toString());
+                Utilities.errorMessage(this.view.getFrame(), e.toString());
                 e.printStackTrace();
             }
         } catch (FileNotFoundException e) {
-            Utilities.errorMessage(((MainFrame) this.view).getFrame(), e.toString());
+            Utilities.errorMessage(this.view.getFrame(), e.toString());
             e.printStackTrace();
         } catch (IOException e) {
-            Utilities.errorMessage(((MainFrame) this.view).getFrame(), e.toString());
+            Utilities.errorMessage(this.view.getFrame(), e.toString());
             e.printStackTrace();
         }
     }

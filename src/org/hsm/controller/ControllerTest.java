@@ -23,11 +23,11 @@ public class ControllerTest {
         controller.createNewPlant("test12", "test botanical", 25, 550, 340, 30, 27, 365, 25);
         controller.addPlant(controller.getDatabase().getPlantModel("test botanical"), 12);
 
-        controller.saveGreenhouse(filenameGh);
-        controller.saveDatabase(filenameDb);
+        controller.saveGreenhouse();
+        controller.saveDatabase();
 
-        controller.loadGreenhouse(filenameGh);
-        controller.loadDatabase(filenameDb);
+        controller.loadGreenhouse();
+        controller.loadDatabase();
 
         System.out.println(controller.getDatabase().getPlantModel("test botanical").getName());
     }

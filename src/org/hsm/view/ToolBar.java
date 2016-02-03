@@ -6,6 +6,8 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JToolBar;
 
+import org.hsm.controller.ControllerImpl;
+
 /**
  *The class which create the toolbar for main frame.
  *
@@ -29,6 +31,10 @@ public class ToolBar implements GUIComponent {
         final JButton importDatabaseButton = factory.createButton("Import Database", new ImageIcon(getClass().getResource("/import.png")));
         final JButton exportDatabaseButton = factory.createButton("Export Database", new ImageIcon(getClass().getResource("/export.png")));
         createGreenhouseButton.addActionListener(e -> new GreenhouseCreateDialog(frame).start());
+        saveGreenhouseButton.addActionListener(e -> ControllerImpl.getController().saveGreenhouse());
+        openGreenhouseButton.addActionListener(e -> ControllerImpl.getController().loadGreenhouse());
+        importDatabaseButton.addActionListener(e -> ControllerImpl.getController().loadDatabase());
+        exportDatabaseButton.addActionListener(e -> ControllerImpl.getController().saveDatabase());
         bar.add(createGreenhouseButton);
         bar.add(openGreenhouseButton);
         bar.add(saveGreenhouseButton);

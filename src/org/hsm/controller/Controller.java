@@ -124,33 +124,25 @@ public interface Controller {
     /**
      * Save the current Greenhouse opened in the program.
      *
-     * @param filenameGh
-     *            the path of Greenhouse file
      */
-    void saveGreenhouse(String filenameGh);
+    void saveGreenhouse();
 
     /**
      * Load a saved Greenhouse in the program.
      *
-     * @param filenameGh
-     *            the path of Greenhouse file
      */
-    void loadGreenhouse(String filenameGh);
+    void loadGreenhouse();
 
     /**
      * Save the current Database.
      *
-     * @param filenameDb
-     *            the path of Database file
      */
-    void saveDatabase(String filenameDb);
+    void saveDatabase();
 
     /**
      * Load a saved Database.
      *
-     * @param filenameDb
-     *            the path of Database file
      */
-    void loadDatabase(String filenameDb);
+    void loadDatabase();
 
 }

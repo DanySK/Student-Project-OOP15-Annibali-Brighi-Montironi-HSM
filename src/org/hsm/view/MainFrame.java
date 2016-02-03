@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.Optional;
 
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
@@ -55,10 +56,7 @@ public class MainFrame implements View {
         this.frame.setVisible(true);
     }
 
-    /**
-     * Get the JFrame of the MainFrame.
-     * @return the JFrame
-     */
+    @Override
     public JFrame getFrame() {
         return this.frame;
     }
@@ -113,6 +111,26 @@ public class MainFrame implements View {
                 | IllegalAccessException | UnsupportedLookAndFeelException e) {
             System.out.println("errore visualizzazione gui");
         }
+    }
+
+    @Override
+    public Optional<String> saveGreenhouseDialog() {
+        return new SaveFileDialog(this.frame, "HSM Document", "hsm").getPath();
+    }
+
+    @Override
+    public Optional<String> loadGreenhouseDialog() {
+        return new OpenFileDialog(this.frame, "HSM Document", "hsm").getPath();
+    }
+
+    @Override
+    public Optional<String> exportDatabaseDialog() {
+        return new SaveFileDialog(this.frame, "DHSM Document", "dat").getPath();
+    }
+
+    @Override
+    public Optional<String> importDatabaseDialog() {
+        return new OpenFileDialog(this.frame, "DHSM Document", "dat").getPath();
     }
 
 }
