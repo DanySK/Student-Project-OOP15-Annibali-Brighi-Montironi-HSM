@@ -122,6 +122,12 @@ public interface Controller {
     boolean isDbEmpty();
 
     /**
+     *
+     * @return true if a Greenhouse is currently load.
+     */
+    boolean isGhLoad();
+
+    /**
      * Save the current Greenhouse opened in the program.
      *
      */

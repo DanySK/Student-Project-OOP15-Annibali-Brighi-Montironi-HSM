@@ -97,8 +97,8 @@ public class ControllerImpl implements Controller, Serializable {
     @Override
     public void deleteGreenhouse() {
         if (this.loadGh && !this.ghMod && !this.dbMod) {
-            this.greenhouse = Optional.ofNullable(null);
-            this.database = Optional.ofNullable(null);
+            this.greenhouse = Optional.empty();
+            this.database = Optional.empty();
             this.loadGh = false;
             this.view.clean();
             this.view.setActive(false);
@@ -106,8 +106,8 @@ public class ControllerImpl implements Controller, Serializable {
             if (Utilities.saveGreenhouseMessage(((MainFrame) this.view).getFrame())) {
                 this.saveGreenhouse();
             }
-            this.greenhouse = Optional.ofNullable(null);
-            this.database = Optional.ofNullable(null);
+            this.greenhouse = Optional.empty();
+            this.database = Optional.empty();
             this.loadGh = false;
             this.view.clean();
             this.view.setActive(false);
@@ -115,8 +115,8 @@ public class ControllerImpl implements Controller, Serializable {
             if (Utilities.saveDatabaseMessage(((MainFrame) this.view).getFrame())) {
                 this.saveDatabase();
             }
-            this.greenhouse = Optional.ofNullable(null);
-            this.database = Optional.ofNullable(null);
+            this.greenhouse = Optional.empty();
+            this.database = Optional.empty();
             this.loadGh = false;
             this.view.clean();
             this.view.setActive(false);
@@ -126,8 +126,8 @@ public class ControllerImpl implements Controller, Serializable {
                 this.saveDatabase();
                 this.saveGreenhouse();
             }
-            this.greenhouse = Optional.ofNullable(null);
-            this.database = Optional.ofNullable(null);
+            this.greenhouse = Optional.empty();
+            this.database = Optional.empty();
             this.loadGh = false;
             this.view.clean();
             this.view.setActive(false);
@@ -185,6 +185,11 @@ public class ControllerImpl implements Controller, Serializable {
     public boolean isDbEmpty() {
         return this.database == null ? true : false; // TODO modello
                                                      // database.isempty
+    }
+
+    @Override
+    public boolean isGhLoad() {
+        return this.loadGh;
     }
 
     @Override
