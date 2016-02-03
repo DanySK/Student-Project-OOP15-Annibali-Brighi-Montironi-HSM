@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 public final class Utilities {
 
     private static final String ERROR = "Error";
+    private static final String SAVE = "Save";
 
     private Utilities() { }
 
@@ -22,6 +23,36 @@ public final class Utilities {
      */
     public static void errorMessage(final Component component, final String text) {
         JOptionPane.showMessageDialog(component, text, ERROR, JOptionPane.ERROR_MESSAGE);
+    }
+
+    /**
+     * Show the message for saving greenhouse.
+     * @param component the component covered by the message
+     * @return true if the user wants to save otherwise false
+     */
+    public static boolean saveGreenhouseMessage(final Component component) {
+        return JOptionPane.showConfirmDialog(component, "Do you want to save the Greenhouse?", 
+           SAVE, JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION;
+    }
+
+    /**
+     * Show the message for saving database.
+     * @param component the component covered by the message
+     * @return true if the user wants to save otherwise false
+     */
+    public static boolean saveDatabaseMessage(final Component component) {
+        return JOptionPane.showConfirmDialog(component, "Do you want to save the Database?", 
+           SAVE, JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION;
+    }
+
+    /**
+     * Show the message for saving the database and the greenhouse.
+     * @param component the component covered by the message
+     * @return true if the user wants to save otherwise false
+     */
+    public static boolean saveGreenhouseAndDBMessage(final Component component) {
+        return JOptionPane.showConfirmDialog(component, "Do you want to save the Grenhouse and the Database?", 
+           SAVE, JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION;
     }
 
     /**
