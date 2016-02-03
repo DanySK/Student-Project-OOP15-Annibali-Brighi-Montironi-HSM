@@ -100,7 +100,7 @@ public class ControllerImpl implements Controller, Serializable {
             this.greenhouse = Optional.ofNullable(null);
             this.database = Optional.ofNullable(null);
             this.loadGh = false;
-            this.view.clean();
+            this.view.cleanGreenhouse();
             this.view.setActive(false);
         } else if (this.loadGh && this.ghMod) {
             if (Utilities.saveGreenhouseMessage(((MainFrame) this.view).getFrame())) {
@@ -109,7 +109,7 @@ public class ControllerImpl implements Controller, Serializable {
             this.greenhouse = Optional.ofNullable(null);
             this.database = Optional.ofNullable(null);
             this.loadGh = false;
-            this.view.clean();
+            this.view.cleanGreenhouse();
             this.view.setActive(false);
         } else if (this.loadGh && this.dbMod) {
             if (Utilities.saveDatabaseMessage(((MainFrame) this.view).getFrame())) {
