@@ -21,6 +21,8 @@ public class MenuBar implements GUIComponent {
     private static final String MENU_ITEM_ADD_PLANT = "Add Plant";
     private static final String MENU_ITEM_REMOVE_GREENHOUSE = "Remove Greenhouse";
     private static final String MENU_ITEM_LOAD_GREENHOUSE = "Open Greenhouse";
+    private static final String MENU_ITEM_IMPORT_DATABASE = "Import Database";
+    private static final String MENU_ITEM_EXPORT_DATABASE = "Export Database";
     private static final String MENU_ITEM_EXIT = "Exit";
     private static final String MENU_ITEM_ABOUT = "About Hydroponic System Manager";
     private final JMenuBar bar = new JMenuBar();
@@ -40,12 +42,17 @@ public class MenuBar implements GUIComponent {
         final JMenuItem newGreenhouse = new JMenuItem(MENU_ITEM_CREATE_GREENHOUSE);
         final JMenuItem loadGreenhouse = new JMenuItem(MENU_ITEM_LOAD_GREENHOUSE);
         final JMenuItem removeGreenhouse = new JMenuItem(MENU_ITEM_REMOVE_GREENHOUSE);
+        final JMenuItem importDatabase = new JMenuItem(MENU_ITEM_IMPORT_DATABASE);
+        final JMenuItem exportDatabase = new JMenuItem(MENU_ITEM_EXPORT_DATABASE);
         final JMenuItem exit = new JMenuItem(MENU_ITEM_EXIT);
         final JMenuItem about = new JMenuItem(MENU_ITEM_ABOUT);
         //Insert item in Menu
         file.add(newGreenhouse);
         file.add(loadGreenhouse);
         file.add(removeGreenhouse);
+        file.addSeparator();
+        file.add(importDatabase);
+        file.add(exportDatabase);
         edit.add(addPlant);
         file.addSeparator();
         file.add(exit);

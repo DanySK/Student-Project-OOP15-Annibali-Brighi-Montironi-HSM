@@ -24,15 +24,15 @@ public enum PlantModelCharacteristics {
     /**
      *The optimal brightness for the plant.
      */
-    BRIGHTNESS("Brightness"),
+    BRIGHTNESS("Brightness (lm)"),
     /**
      *The optimal growth time for the plant.
      */
-    GROWTH_TIME("Growth Time"),
+    GROWTH_TIME("Growth Time (days)"),
     /**
      *The days of life of the plant.
      */
-    LIFE("Life (Days)"),
+    LIFE("Life (days)"),
     /**
      *The plant size.
      */
@@ -40,11 +40,11 @@ public enum PlantModelCharacteristics {
     /**
      *The conductivity optimal level for the plant.
      */
-    CONDUCTIVITY("Conductivity"),
+    CONDUCTIVITY("Conductivity (cf)"),
     /**
      *The temperature of the plant.
      */
-    TEMPERATURE("Temperature");
+    TEMPERATURE("Temperature (°C)");
 
     private final String name;
 

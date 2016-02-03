@@ -6,9 +6,6 @@ package org.hsm.view;
  */
 public interface View extends VisibleComponent {
 
-    @Override
-    void start();
-
     /**
      *Set the GUI status.
      *@param status the status of the GUI

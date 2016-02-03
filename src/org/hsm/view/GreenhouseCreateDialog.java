@@ -88,7 +88,6 @@ public class GreenhouseCreateDialog extends AbstractAddDialog {
         panel.add((JPanel) this.euroPanel, gbc);
         gbc.gridy++;
         gbc.gridx = 0;
-
         panel.add(type, gbc);
         gbc.gridy++;
         gbc.gridx = 0;
