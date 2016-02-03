@@ -28,6 +28,12 @@ public interface View extends VisibleComponent {
      */
     void insertGreenhouse();
 
+    /**
+     * Insert a database in the view.
+     *
+     */
+    void insertDatabase();
+
      /**
       * Insert a plant into Greenhouse View.
      * @param id the id of the plant
@@ -68,9 +74,14 @@ public interface View extends VisibleComponent {
     void removeSelectedModelPlant();
 
     /**
-     *Clean all the data in the View.
+     *Clean all the data in the View about Greenhouse.
      */
-    void clean();
+    void cleanGreenhouse();
+
+    /**
+     *Clean all the data in the View about Database.
+     */
+    void cleanDatabase();
 
     /**
      * Show the dialog to save the Greenhouse into a file.
