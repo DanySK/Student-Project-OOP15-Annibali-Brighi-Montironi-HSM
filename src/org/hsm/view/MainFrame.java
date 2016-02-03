@@ -133,4 +133,9 @@ public class MainFrame implements View {
         return new OpenFileDialog(this.frame, "DHSM Document", "dat").getPath();
     }
 
+    @Override
+    public void clean() {
+        this.tab.getPlantsTab().clean();
+    }
+
 }

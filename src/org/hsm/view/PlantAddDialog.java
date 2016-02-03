@@ -5,7 +5,6 @@ import java.awt.Dialog;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.util.Collections;
 import java.util.Set;
 
 import javax.swing.JComboBox;
@@ -24,7 +23,7 @@ public class PlantAddDialog extends AbstractAddDialog {
 
     private static final String DIALOG_TITLE = "Add a plant";
     private static final String START_LABEL = "Chose the plant";
-    private JComboBox<Object> plantsList;
+    private final JComboBox<Object> plantsList;
     private final EuroPanel euroPanel;
 
     /**
@@ -34,15 +33,9 @@ public class PlantAddDialog extends AbstractAddDialog {
      */
     public PlantAddDialog(final JFrame frame) {
         super(frame, DIALOG_TITLE, Dialog.ModalityType.APPLICATION_MODAL);
-        Set<String> set = null;
-        try {
-            set = ControllerImpl.getController().getDatabase().getDb().keySet();
-            this.plantsList = new JComboBox<>(set.toArray());
-            plantsList.setSelectedIndex(0);
-        } catch (Exception e) {
-            set = Collections.emptySet();
-            this.plantsList = new JComboBox<>(set.toArray());
-        }
+        final Set<String> set = ControllerImpl.getController().getDatabase().getDb().keySet();
+        this.plantsList = new JComboBox<>(set.toArray());
+        plantsList.setSelectedIndex(0);
         final JPanel northPanel = new JPanel(new FlowLayout());
         final JPanel centerPanel = new JPanel();
         centerPanel.setLayout(new GridBagLayout());

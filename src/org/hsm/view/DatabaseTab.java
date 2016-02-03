@@ -9,6 +9,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import org.hsm.controller.ControllerImpl;
+
 /**
  *This tab contains all the information about the database of plants.
  *
@@ -35,8 +37,9 @@ public class DatabaseTab implements GUIComponent, Table {
             if (this.table.getSelectedRow() == -1) {
                 Utilities.errorMessage(frame, "No plant is selected!");
             } else {
-                System.out.println("Implementa nel controller");
-                //Controller delete model from database
+                final int selectedRowIndex = this.table.getSelectedRow();
+                final String botanicalName = (String) this.table.getModel().getValueAt(selectedRowIndex, PlantModelCharacteristics.BOTANICAL_NAME.ordinal());
+                ControllerImpl.getController().deleteDbPlant(botanicalName);
             }
         });
         southPanel.add(createPlant);

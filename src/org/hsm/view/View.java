@@ -68,6 +68,11 @@ public interface View extends VisibleComponent {
     void removeSelectedModelPlant();
 
     /**
+     *Clean all the data in the View.
+     */
+    void clean();
+
+    /**
      * Show the dialog to save the Greenhouse into a file.
      * @return the path
      */
