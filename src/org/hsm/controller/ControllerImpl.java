@@ -19,6 +19,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.Optional;
 
 import org.hsm.model.DBplants;
 import org.hsm.model.Database;
@@ -46,7 +47,6 @@ public class ControllerImpl implements Controller, Serializable {
     private boolean ghMod;
     private boolean loadGh;
     private boolean dbMod;
-    private boolean loadDb;
 
     /**
      *
@@ -62,7 +62,6 @@ public class ControllerImpl implements Controller, Serializable {
         this.ghMod = true;
         this.loadGh = true;
         this.dbMod = true;
-        this.loadDb = true;
         this.greenhouse = new GreenhouseImp(name, size, cost, greenhouseType);
         this.database = new DBplants();
         this.view.setActive(true);
@@ -80,21 +79,14 @@ public class ControllerImpl implements Controller, Serializable {
     }
 
     @Override
-    public void deleteDatabase() {
-        if (this.loadDb && !this.dbMod) {
-            this.database = null;
-            this.loadDb = false;
-            this.view.clean();
-            this.view.setActive(false);
-        } else if (this.loadDb && !this.dbMod) {
+    public void newDatabase() {
+        this.database = null;
+        this.database = new DBplants();
+        this.view.clean();
+        if (this.dbMod) {
+
             // TODO richiesta di salvataggio
-            this.database = null;
-            this.loadDb = false;
-            this.view.clean();
-            this.view.setActive(false);
-        } else {
-            Utilities.errorMessage(((MainFrame) this.view).getFrame(),
-                    "Niente da cancellare (nessun Database caricato)");
+
         }
     }
 
@@ -143,7 +135,8 @@ public class ControllerImpl implements Controller, Serializable {
             final int size) {
         this.database.addPlantModel(name, botanicalName, ph, brightness, optimalGrowthTime, life, size, conductivity,
                 temperature);
-        this.view.insertModelPlant(name, botanicalName, ph, brightness, optimalGrowthTime, life, size, conductivity,  temperature);
+        this.view.insertModelPlant(name, botanicalName, ph, brightness, optimalGrowthTime, life, size, conductivity,
+                temperature);
     }
 
     @Override
@@ -159,15 +152,20 @@ public class ControllerImpl implements Controller, Serializable {
 
     @Override
     public boolean isDbEmpty() {
-        return this.database == null ? true : false;
+        return this.database == null ? true : false; // TODO modello
+                                                     // database.isempty
     }
 
     @Override
     public void saveGreenhouse() {
-        final String filenameGh = this.view.saveGreenhouseDialog().get();
+        final Optional<String> filenameGh = this.view.saveGreenhouseDialog();
+        if (!filenameGh.isPresent()) {
+            return;
+        }
         this.ghMod = false;
         try {
-            ObjectOutput shmGh = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(filenameGh)));
+            ObjectOutput shmGh = new ObjectOutputStream(
+                    new BufferedOutputStream(new FileOutputStream(filenameGh.get())));
             shmGh.writeObject(this.greenhouse);
             shmGh.close();
         } catch (FileNotFoundException e) {
@@ -182,10 +180,13 @@ public class ControllerImpl implements Controller, Serializable {
 
     @Override
     public void loadGreenhouse() {
-        final String filenameGh = this.view.loadGreenhouseDialog().get();
+        final Optional<String> filenameGh = this.view.saveGreenhouseDialog();
+        if (!filenameGh.isPresent()) {
+            return;
+        }
         this.ghMod = false;
         try {
-            ObjectInput shmGh = new ObjectInputStream(new BufferedInputStream(new FileInputStream(filenameGh)));
+            ObjectInput shmGh = new ObjectInputStream(new BufferedInputStream(new FileInputStream(filenameGh.get())));
             try {
                 this.greenhouse = (GreenHouse) shmGh.readObject();
                 shmGh.close();
@@ -207,9 +208,12 @@ public class ControllerImpl implements Controller, Serializable {
 
     @Override
     public void saveDatabase() {
-        final String filenameDb = this.view.exportDatabaseDialog().get();
+        final Optional<String> filenameDb = this.view.exportDatabaseDialog();
+        if (!filenameDb.isPresent()) {
+            return;
+        }
         try (final ObjectOutput shmDb = new ObjectOutputStream(
-                new BufferedOutputStream(new FileOutputStream(filenameDb)))) {
+                new BufferedOutputStream(new FileOutputStream(filenameDb.get())))) {
             shmDb.writeObject(this.database);
             shmDb.close();
         } catch (FileNotFoundException e) {
@@ -224,10 +228,12 @@ public class ControllerImpl implements Controller, Serializable {
 
     @Override
     public void loadDatabase() {
-        final String filenameDb = this.view.importDatabaseDialog().get();
-        this.loadDb = true;
+        final Optional<String> filenameDb = this.view.exportDatabaseDialog();
+        if (!filenameDb.isPresent()) {
+            return;
+        }
         try (final ObjectInput shmDb = new ObjectInputStream(
-                new BufferedInputStream(new FileInputStream(filenameDb)))) {
+                new BufferedInputStream(new FileInputStream(filenameDb.get())))) {
             try {
                 this.database = (Database) shmDb.readObject();
                 shmDb.close();

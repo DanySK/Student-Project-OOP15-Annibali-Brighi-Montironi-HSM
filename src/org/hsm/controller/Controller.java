@@ -47,7 +47,7 @@ public interface Controller {
     /**
      * Delete the Greenhouse actually loaded.
      */
-    void deleteDatabase();
+    void newDatabase();
 
     /**
      * Add n plants to Greenhouse loaded.
