@@ -45,7 +45,7 @@ public class PlantsTab extends Observable implements GUIComponent, Table {
             if (ControllerImpl.getController().isDbEmpty()) {
                 Utilities.errorMessage(frame, "The Database is empty or not loaded");
             } else {
-                new PlantAddDialog(frame);
+                new PlantAddDialog(frame).start();
             }
         });
         final JLabel filterLabel = new JLabel("Find:");

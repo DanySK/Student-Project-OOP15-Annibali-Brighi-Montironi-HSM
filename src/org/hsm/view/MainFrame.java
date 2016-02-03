@@ -23,6 +23,7 @@ public class MainFrame implements View {
     private static final double PROPORTION = 1.3;
     private final JFrame frame;
     private final Tabbed tab;
+    private final MenuBar menubar;
 
     /**
      * Create the main frame.
@@ -40,8 +41,8 @@ public class MainFrame implements View {
             }
         });
         final ToolBar toolbar = new ToolBar(this.frame);
-        final MenuBar menuBar = new MenuBar(this);
-        this.frame.setJMenuBar((JMenuBar) menuBar.getComponent());
+        this.menubar = new MenuBar(this);
+        this.frame.setJMenuBar((JMenuBar) this.menubar.getComponent());
         this.frame.getContentPane().add(this.tab.getComponent());
         this.frame.getContentPane().add(toolbar.getComponent(), BorderLayout.PAGE_START);
     }
@@ -64,6 +65,7 @@ public class MainFrame implements View {
     @Override
     public void setActive(final boolean status) {
         this.tab.setEnable(status);
+        this.menubar.setEditEnable(status);
     }
 
     @Override

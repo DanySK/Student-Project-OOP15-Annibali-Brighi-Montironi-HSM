@@ -57,7 +57,6 @@ public class PlantAddDialog extends AbstractAddDialog {
         northPanel.add(label);
         this.getJDialog().add(northPanel, BorderLayout.NORTH);
         this.getJDialog().add(centerPanel);
-        this.start();
     }
 
     @Override

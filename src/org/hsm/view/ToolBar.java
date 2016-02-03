@@ -30,6 +30,7 @@ public class ToolBar implements GUIComponent {
         final JButton saveGreenhouseButton = factory.createButton("Save Greenhouse", new ImageIcon(getClass().getResource("/save.png")));
         final JButton importDatabaseButton = factory.createButton("Import Database", new ImageIcon(getClass().getResource("/import.png")));
         final JButton exportDatabaseButton = factory.createButton("Export Database", new ImageIcon(getClass().getResource("/export.png")));
+        final JButton newDatabaseButton = factory.createButton("New Database", new ImageIcon(getClass().getResource("/newDatabase.png")));
         createGreenhouseButton.addActionListener(e -> new GreenhouseCreateDialog(frame).start());
         saveGreenhouseButton.addActionListener(e -> ControllerImpl.getController().saveGreenhouse());
         openGreenhouseButton.addActionListener(e -> ControllerImpl.getController().loadGreenhouse());
@@ -40,6 +41,7 @@ public class ToolBar implements GUIComponent {
         bar.add(saveGreenhouseButton);
         bar.add(removeGreenhouseButton);
         bar.addSeparator();
+        bar.add(newDatabaseButton);
         bar.add(importDatabaseButton);
         bar.add(exportDatabaseButton);
     }
