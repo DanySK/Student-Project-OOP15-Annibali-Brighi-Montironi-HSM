@@ -5,11 +5,11 @@ import org.hsm.model.GreenHouseType;
 import org.hsm.model.GreenhouseImp;
 import org.hsm.model.PlantModel;
 import org.hsm.view.MainFrame;
+import org.hsm.view.Utilities;
 import org.hsm.view.View;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -43,8 +43,11 @@ public class ControllerImpl implements Controller, Serializable {
     private GreenHouse greenhouse;
     private final View view = new MainFrame();
 
-    private boolean load;
-    
+    private boolean ghMod;
+    private boolean loadGh;
+    private boolean dbMod;
+    private boolean loadDb;
+
     /**
      *
      * @return the istance of controller
@@ -56,9 +59,12 @@ public class ControllerImpl implements Controller, Serializable {
     @Override
     public void createGreenhouse(final String name, final GreenHouseType greenhouseType, final int cost,
             final double size) {
+        this.ghMod = true;
+        this.loadGh = true;
+        this.dbMod = true;
+        this.loadDb = true;
         this.greenhouse = new GreenhouseImp(name, size, cost, greenhouseType);
         this.database = new DBplants();
-        this.load = true;
         this.view.setActive(true);
         this.view.insertGreenhouse();
     }
@@ -74,37 +80,59 @@ public class ControllerImpl implements Controller, Serializable {
     }
 
     @Override
-    public void deleteGreenhouse() {
-        if (this.load) {
+    public void deleteDatabase() {
+        if (this.loadDb && !this.dbMod) {
             this.database = null;
-            this.greenhouse = null;
-            this.load = false;
-        } else {
+            this.loadDb = false;
+        } else if (this.loadDb && !this.dbMod) {
             // TODO richiesta di salvataggio
+            this.database = null;
+            this.loadDb = false;
+        } else {
+            Utilities.errorMessage(((MainFrame) this.view).getFrame(),
+                    "Niente da cancellare (nessun Database caricato)");
+        }
+    }
+
+    @Override
+    public void deleteGreenhouse() {
+        if (this.loadGh && !this.ghMod) {
+            this.greenhouse = null;
+            this.loadGh = false;
+        } else if (this.loadGh && !this.ghMod) {
+            // TODO richiesta di salvataggio
+            this.greenhouse = null;
+            this.loadGh = false;
+        } else {
+            Utilities.errorMessage(((MainFrame) this.view).getFrame(),
+                    "Niente da cancellare (nessun Greenhouse caricato)");
         }
     }
 
     @Override
     public void addPlant(final PlantModel plant, final int cost) {
+        this.ghMod = true;
         final int id = this.greenhouse.addPlant(plant, cost);
         this.view.insertPlant(id, plant.getName(), cost, 0, 0, 0, 0);
     }
 
     @Override
     public void delPlant(final int id) {
+        this.ghMod = true;
         this.greenhouse.delPlant(id);
         this.view.removeSelectedPlant();
     }
 
     @Override
     public void delPLants(final PlantModel plant) {
+        this.ghMod = true;
         this.greenhouse.delPlants(plant);
     }
 
     @Override
-    public void createNewPlant(final String name, final String botanicalName, final double ph, final double brightness,
-            final double conductivity, final int optimalGrowthTime, final double temperature, final int life,
-            final double size) {
+    public void createNewPlant(final String name, final String botanicalName, final int ph, final int brightness,
+            final int conductivity, final int optimalGrowthTime, final int temperature, final int life,
+            final int size) {
         this.database.addPlantModel(name, botanicalName, ph, brightness, optimalGrowthTime, life, size, conductivity,
                 temperature);
         this.view.insertModelPlant(name, botanicalName, ph, brightness, optimalGrowthTime, life, size, conductivity,
@@ -119,47 +147,86 @@ public class ControllerImpl implements Controller, Serializable {
 
     @Override
     public boolean getLoadState() {
-        return this.load;
+        return this.loadGh;
     }
 
     @Override
-    public void saveGreenhouse(final File filenameDb, final File filenameGh) {
+    public boolean isDbEmpty() {
+        return this.database == null ? true : false;
+    }
+
+    @Override
+    public void saveGreenhouse(final String filenameGh) {
+        this.ghMod = false;
         try {
-            ObjectOutput shmDb = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(filenameDb)));
             ObjectOutput shmGh = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(filenameGh)));
-            shmDb.writeObject(this.database);
-            shmDb.close();
             shmGh.writeObject(this.greenhouse);
             shmGh.close();
         } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
+            Utilities.errorMessage(((MainFrame) this.view).getFrame(), e.toString());
             e.printStackTrace();
         } catch (IOException e) {
-            // TODO Auto-generated catch block
+            Utilities.errorMessage(((MainFrame) this.view).getFrame(), e.toString());
             e.printStackTrace();
         }
 
     }
 
     @Override
-    public void loadGreenhouse(final File filenameDb, final File filenameGh) {
+    public void loadGreenhouse(final String filenameGh) {
+        this.ghMod = false;
         try {
-            ObjectInput shmDb = new ObjectInputStream(new BufferedInputStream(new FileInputStream(filenameDb)));
             ObjectInput shmGh = new ObjectInputStream(new BufferedInputStream(new FileInputStream(filenameGh)));
             try {
-                this.database = (Database) shmDb.readObject();
-                shmDb.close();
                 this.greenhouse = (GreenHouse) shmGh.readObject();
                 shmGh.close();
             } catch (ClassNotFoundException e) {
-                // TODO Auto-generated catch block
+                Utilities.errorMessage(((MainFrame) this.view).getFrame(), e.toString());
                 e.printStackTrace();
             }
         } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
+            Utilities.errorMessage(((MainFrame) this.view).getFrame(), e.toString());
             e.printStackTrace();
         } catch (IOException e) {
-            // TODO Auto-generated catch block
+            Utilities.errorMessage(((MainFrame) this.view).getFrame(), e.toString());
+            e.printStackTrace();
+        }
+
+    }
+
+    @Override
+    public void saveDatabase(final String filenameDb) {
+        try (final ObjectOutput shmDb = new ObjectOutputStream(
+                new BufferedOutputStream(new FileOutputStream(filenameDb)))) {
+            shmDb.writeObject(this.database);
+            shmDb.close();
+        } catch (FileNotFoundException e) {
+            Utilities.errorMessage(((MainFrame) this.view).getFrame(), e.toString());
+            e.printStackTrace();
+        } catch (IOException e) {
+            Utilities.errorMessage(((MainFrame) this.view).getFrame(), e.toString());
+            e.printStackTrace();
+        }
+
+    }
+
+    @Override
+    public void loadDatabase(final String filenameDb) {
+        this.loadDb = true;
+        try (final ObjectInput shmDb = new ObjectInputStream(
+                new BufferedInputStream(new FileInputStream(filenameDb)))) {
+            try {
+                this.database = (Database) shmDb.readObject();
+                shmDb.close();
+            } catch (ClassNotFoundException e) {
+                Utilities.errorMessage(((MainFrame) this.view).getFrame(), e.toString());
+                e.printStackTrace();
+            }
+        } catch (FileNotFoundException e) {
+            Utilities.errorMessage(((MainFrame) this.view).getFrame(), e.toString());
+            e.printStackTrace();
+        } catch (IOException e) {
+            Utilities.errorMessage(((MainFrame) this.view).getFrame(), e.toString());
             e.printStackTrace();
         }
     }

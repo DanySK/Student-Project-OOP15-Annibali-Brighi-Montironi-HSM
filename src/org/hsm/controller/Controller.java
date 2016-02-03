@@ -1,7 +1,5 @@
 package org.hsm.controller;
 
-import java.io.File;
-
 import org.hsm.model.Database;
 import org.hsm.model.GreenHouse;
 import org.hsm.model.GreenHouseType;
@@ -45,6 +43,11 @@ public interface Controller {
      * Delete the Greenhouse actually loaded.
      */
     void deleteGreenhouse();
+
+    /**
+     * Delete the Greenhouse actually loaded.
+     */
+    void deleteDatabase();
 
     /**
      * Add n plants to Greenhouse loaded.
@@ -95,8 +98,8 @@ public interface Controller {
      * @param size
      *            the space occupied from the plant in the greenhouse
      */
-    void createNewPlant(String name, String botanicalName, double ph, double brightness, double conductivity,
-            int optimalGrowthTime, double temperature, int life, double size);
+    void createNewPlant(String name, String botanicalName, int ph, int brightness, int conductivity,
+            int optimalGrowthTime, int temperature, int life, int size);
 
     /**
      *
@@ -113,22 +116,41 @@ public interface Controller {
     boolean getLoadState();
 
     /**
+     *
+     * @return true if Database is empty
+     */
+    boolean isDbEmpty();
+
+    /**
      * Save the current Greenhouse opened in the program.
      *
-     * @param filenameDb
-     *            the path of Database file
      * @param filenameGh
      *            the path of Greenhouse file
      */
-    void saveGreenhouse(File filenameDb, File filenameGh);
+    void saveGreenhouse(String filenameGh);
 
     /**
      * Load a saved Greenhouse in the program.
      *
-     * @param filenameDb
-     *            the path of Database file
      * @param filenameGh
      *            the path of Greenhouse file
      */
-    void loadGreenhouse(File filenameDb, File filenameGh);
+    void loadGreenhouse(String filenameGh);
+
+    /**
+     * Save the current Database.
+     *
+     * @param filenameDb
+     *            the path of Database file
+     */
+    void saveDatabase(String filenameDb);
+
+    /**
+     * Load a saved Database.
+     *
+     * @param filenameDb
+     *            the path of Database file
+     */
+    void loadDatabase(String filenameDb);
+
 }

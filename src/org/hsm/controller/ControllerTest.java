@@ -16,18 +16,18 @@ public class ControllerTest {
     public static void main(final String[] args) {
         ControllerImpl controller = ControllerImpl.getController();
 
-        Path pathDb = Paths.get(System.getProperty("user.home"), "Db.hsm");
-        File filenameDb = pathDb.toFile();
-        Path pathGh = Paths.get(System.getProperty("user.home"), "Gh.hsm");
-        File filenameGh = pathGh.toFile();
+        String filenameGh = System.getProperty("user.home") + "Gh.hsm";
+        String filenameDb = System.getProperty("user.home") + "Db.dat";
 
         controller.createGreenhouse("Test", GreenHouseType.GRID, 450, 1500);
         controller.createNewPlant("test12", "test botanical", 25, 550, 340, 30, 27, 365, 25);
         controller.addPlant(controller.getDatabase().getPlantModel("test botanical"), 12);
 
-        controller.saveGreenhouse(filenameDb, filenameGh);
+        controller.saveGreenhouse(filenameGh);
+        controller.saveDatabase(filenameDb);
 
-        controller.loadGreenhouse(filenameDb, filenameGh);
+        controller.loadGreenhouse(filenameGh);
+        controller.loadDatabase(filenameDb);
 
         System.out.println(controller.getDatabase().getPlantModel("test botanical").getName());
     }
