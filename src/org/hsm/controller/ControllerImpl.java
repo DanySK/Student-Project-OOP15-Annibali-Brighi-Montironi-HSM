@@ -44,7 +44,6 @@ public class ControllerImpl implements Controller, Serializable {
     private final View view = new MainFrame();
 
     private boolean load;
-    
     /**
      *
      * @return the istance of controller
@@ -107,8 +106,7 @@ public class ControllerImpl implements Controller, Serializable {
             final double size) {
         this.database.addPlantModel(name, botanicalName, ph, brightness, optimalGrowthTime, life, size, conductivity,
                 temperature);
-        this.view.insertModelPlant(name, botanicalName, ph, brightness, optimalGrowthTime, life, size, conductivity,
-                temperature);
+        this.view.insertModelPlant(name, botanicalName, ph, brightness, optimalGrowthTime, life, size, conductivity,  temperature);
     }
 
     @Override

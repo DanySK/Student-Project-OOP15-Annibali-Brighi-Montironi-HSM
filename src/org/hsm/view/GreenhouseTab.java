@@ -31,6 +31,7 @@ public class GreenhouseTab implements GUIComponent, Observer {
     private static final int INSET_X = 7;
     private static final int TXT_FIELD_SIZE = 20;
     private static final int MINIMUM_X_SIZE = 355;
+    private static final int CENT_FACTOR = 100;
     private static final String OCCUPIED_SPACE = "Occupied Space";
     private static final String FREE_SPACE = "Free Space";
     private static final String CHART_TITLE = "Greenhouse Space Chart";
@@ -82,7 +83,7 @@ public class GreenhouseTab implements GUIComponent, Observer {
         final GreenHouse green = ControllerImpl.getController().getGreenhouse();
         this.fieldMap.get(GreenhouseCharacteristics.NAME).setText(green.getName());
         this.fieldMap.get(GreenhouseCharacteristics.DIMENSION).setText(Double.toString(green.getSize()));
-        this.fieldMap.get(GreenhouseCharacteristics.COST).setText(Double.toString(green.getCost()));
+        this.fieldMap.get(GreenhouseCharacteristics.COST).setText(Double.toString(green.getCost() / CENT_FACTOR));
         this.fieldMap.get(GreenhouseCharacteristics.TYPOLOGY).setText(green.getType().toString());
         this.fieldMap.get(GreenhouseCharacteristics.FREE_SPACE).setText(Double.toString(green.getFreeSize()));
         this.fieldMap.get(GreenhouseCharacteristics.USED_SPACE).setText(Double.toString(green.getOccSize()));
