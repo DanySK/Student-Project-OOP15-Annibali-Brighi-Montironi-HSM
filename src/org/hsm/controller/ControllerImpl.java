@@ -58,6 +58,11 @@ public class ControllerImpl implements Controller, Serializable {
     @Override
     public void createGreenhouse(final String name, final GreenHouseType greenhouseType, final int cost,
             final double size) {
+        if (this.loadGh && this.ghMod) {
+            if (Utilities.saveGreenhouseMessage(((MainFrame) this.view).getFrame())) {
+                this.saveGreenhouse();
+            }
+        }
         this.ghMod = true;
         this.loadGh = true;
         this.dbMod = true;
@@ -79,29 +84,54 @@ public class ControllerImpl implements Controller, Serializable {
 
     @Override
     public void newDatabase() {
+        if (this.dbMod) {
+            if (Utilities.saveGreenhouseMessage(((MainFrame) this.view).getFrame())) {
+                this.saveGreenhouse();
+            }
+        }
         this.database = null;
         this.database = new DBplants();
         this.view.clean();
-        if (this.dbMod) {
-
-            // TODO richiesta di salvataggio
-
-        }
     }
 
     @Override
     public void deleteGreenhouse() {
-        if (this.loadGh && !this.ghMod) {
+        if (this.loadGh && !this.ghMod && !this.dbMod) {
             this.greenhouse = null;
+            this.database = null;
             this.loadGh = false;
             this.view.clean();
             this.view.setActive(false);
         } else if (this.loadGh && this.ghMod) {
-            // TODO richiesta di salvataggio
+            if (Utilities.saveGreenhouseMessage(((MainFrame) this.view).getFrame())) {
+                this.saveGreenhouse();
+            }
             this.greenhouse = null;
+            this.database = null;
             this.loadGh = false;
             this.view.clean();
             this.view.setActive(false);
+        } else if (this.loadGh && this.dbMod) {
+            if (Utilities.saveGreenhouseMessage(((MainFrame) this.view).getFrame())) {
+                this.saveDatabase();
+            }
+            this.greenhouse = null;
+            this.database = null;
+            this.loadGh = false;
+            this.view.clean();
+            this.view.setActive(false);
+
+        } else if (this.loadGh && this.dbMod && this.ghMod) {
+            if (Utilities.saveGreenhouseMessage(((MainFrame) this.view).getFrame())) {
+                this.saveDatabase();
+                this.saveGreenhouse();
+            }
+            this.greenhouse = null;
+            this.database = null;
+            this.loadGh = false;
+            this.view.clean();
+            this.view.setActive(false);
+
         } else {
             Utilities.errorMessage(((MainFrame) this.view).getFrame(),
                     "Niente da cancellare (nessun Greenhouse caricato)");
