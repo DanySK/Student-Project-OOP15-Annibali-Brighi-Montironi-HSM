@@ -162,14 +162,16 @@ public class ControllerImpl implements Controller, Serializable {
     public void createNewPlant(final String name, final String botanicalName, final int ph, final int brightness,
             final int conductivity, final int optimalGrowthTime, final int temperature, final int life,
             final int size) {
-        this.database.get().addPlantModel(name, botanicalName, ph, brightness, optimalGrowthTime, life, size, conductivity,
-                temperature);
+        this.dbMod = true;
+        this.database.get().addPlantModel(name, botanicalName, ph, brightness, optimalGrowthTime, life, size,
+                conductivity, temperature);
         this.view.insertModelPlant(name, botanicalName, ph, brightness, optimalGrowthTime, life, size, conductivity,
                 temperature);
     }
 
     @Override
     public void deleteDbPlant(final String botanicalName) {
+        this.dbMod = true;
         this.database.get().removePlantModel(botanicalName);
         this.view.removeSelectedModelPlant();
     }
@@ -213,7 +215,9 @@ public class ControllerImpl implements Controller, Serializable {
         if (!filenameGh.isPresent()) {
             return;
         }
+        this.database = Optional.of(new DBplants());
         this.ghMod = false;
+        this.loadGh = true;
         try {
             ObjectInput shmGh = new ObjectInputStream(new BufferedInputStream(new FileInputStream(filenameGh.get())));
             try {
