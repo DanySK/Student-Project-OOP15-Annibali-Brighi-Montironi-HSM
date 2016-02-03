@@ -1,9 +1,5 @@
 package org.hsm.controller;
 
-import java.io.File;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-
 import org.hsm.model.GreenHouseType;
 
 public class ControllerTest {
@@ -16,8 +12,8 @@ public class ControllerTest {
     public static void main(final String[] args) {
         ControllerImpl controller = ControllerImpl.getController();
 
-        String filenameGh = System.getProperty("user.home") + "Gh.hsm";
-        String filenameDb = System.getProperty("user.home") + "Db.dat";
+        //String filenameGh = System.getProperty("user.home") + "Gh.hsm";
+        //String filenameDb = System.getProperty("user.home") + "Db.dat";
 
         controller.createGreenhouse("Test", GreenHouseType.GRID, 450, 1500);
         controller.createNewPlant("test12", "test botanical", 25, 550, 340, 30, 27, 365, 25);

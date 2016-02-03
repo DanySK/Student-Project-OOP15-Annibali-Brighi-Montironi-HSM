@@ -81,7 +81,7 @@ public class ControllerImpl implements Controller, Serializable {
     public void newDatabase() {
         if (this.dbMod) {
             if (Utilities.saveDatabaseMessage(this.view.getFrame())) {
-                this.saveGreenhouse();
+                this.saveDatabase();
             }
         }
         this.database = null;
@@ -96,8 +96,10 @@ public class ControllerImpl implements Controller, Serializable {
             this.database = Optional.empty();
             this.loadGh = false;
             this.view.cleanGreenhouse();
+            this.view.cleanDatabase();
             this.view.setActive(false);
-        } else if (this.loadGh && this.ghMod) {
+
+        } else if (this.loadGh && this.ghMod && !this.dbMod) {
             if (Utilities.saveGreenhouseMessage(this.view.getFrame())) {
                 this.saveGreenhouse();
             }
@@ -105,8 +107,10 @@ public class ControllerImpl implements Controller, Serializable {
             this.database = Optional.empty();
             this.loadGh = false;
             this.view.cleanGreenhouse();
+            this.view.cleanDatabase();
             this.view.setActive(false);
-        } else if (this.loadGh && this.dbMod) {
+
+        } else if (this.loadGh && this.dbMod && !this.ghMod) {
             if (Utilities.saveDatabaseMessage(this.view.getFrame())) {
                 this.saveDatabase();
             }
@@ -114,6 +118,7 @@ public class ControllerImpl implements Controller, Serializable {
             this.database = Optional.empty();
             this.loadGh = false;
             this.view.cleanGreenhouse();
+            this.view.cleanDatabase();
             this.view.setActive(false);
 
         } else if (this.loadGh && this.dbMod && this.ghMod) {
@@ -125,6 +130,7 @@ public class ControllerImpl implements Controller, Serializable {
             this.database = Optional.empty();
             this.loadGh = false;
             this.view.cleanGreenhouse();
+            this.view.cleanDatabase();
             this.view.setActive(false);
 
         } else {
@@ -281,6 +287,7 @@ public class ControllerImpl implements Controller, Serializable {
             Utilities.errorMessage(this.view.getFrame(), e.toString());
             e.printStackTrace();
         }
+        this.view.insertDatabase();
     }
 
     /**
