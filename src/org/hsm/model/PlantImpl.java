@@ -37,7 +37,7 @@ public class PlantImpl implements Plant, Serializable {
     public int getCost() {
         return cost;
     }
-    
+
     @Override
     public List<Double> getPhList() {
         return phList;
