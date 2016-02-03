@@ -85,11 +85,13 @@ public class ControllerImpl implements Controller, Serializable {
             this.database = null;
             this.loadDb = false;
             this.view.clean();
+            this.view.setActive(false);
         } else if (this.loadDb && !this.dbMod) {
             // TODO richiesta di salvataggio
             this.database = null;
             this.loadDb = false;
             this.view.clean();
+            this.view.setActive(false);
         } else {
             Utilities.errorMessage(((MainFrame) this.view).getFrame(),
                     "Niente da cancellare (nessun Database caricato)");
@@ -101,10 +103,14 @@ public class ControllerImpl implements Controller, Serializable {
         if (this.loadGh && !this.ghMod) {
             this.greenhouse = null;
             this.loadGh = false;
-        } else if (this.loadGh && !this.ghMod) {
+            this.view.clean();
+            this.view.setActive(false);
+        } else if (this.loadGh && this.ghMod) {
             // TODO richiesta di salvataggio
             this.greenhouse = null;
             this.loadGh = false;
+            this.view.clean();
+            this.view.setActive(false);
         } else {
             Utilities.errorMessage(((MainFrame) this.view).getFrame(),
                     "Niente da cancellare (nessun Greenhouse caricato)");
@@ -194,6 +200,8 @@ public class ControllerImpl implements Controller, Serializable {
             Utilities.errorMessage(this.view.getFrame(), e.toString());
             e.printStackTrace();
         }
+        this.view.setActive(true);
+        this.view.insertGreenhouse();
 
     }
 
