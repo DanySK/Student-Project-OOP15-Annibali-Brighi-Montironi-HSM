@@ -13,6 +13,11 @@ public final class Utilities {
 
     private static final String ERROR = "Error";
     private static final String SAVE = "Save";
+    private static final String EXIT = "Exit";
+    private static final String EXIT_MESSAGE = "Do you really want to Exit?";
+    private static final String SAVE_GH_MESSAGE = "Do you want to save the Greenhouse?";
+    private static final String SAVE_DB_MESSAGE = "Do you want to save the Database?";
+    private static final String SAVE_ALL_MESSAGE = "Do you want to save the Grenhouse and the Database?";
 
     private Utilities() { }
 
@@ -26,13 +31,23 @@ public final class Utilities {
     }
 
     /**
+     * Show the exit message.
+     * @param component the component covered by the message
+     * @return true if the user wants to exit otherwise false
+     */
+    public static boolean exitMessage(final Component component) {
+        return JOptionPane.showConfirmDialog(component, EXIT_MESSAGE, 
+               EXIT, JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION;
+    }
+
+    /**
      * Show the message for saving greenhouse.
      * @param component the component covered by the message
      * @return true if the user wants to save otherwise false
      */
     public static boolean saveGreenhouseMessage(final Component component) {
-        return JOptionPane.showConfirmDialog(component, "Do you want to save the Greenhouse?", 
-           SAVE, JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION;
+        return JOptionPane.showConfirmDialog(component, SAVE_GH_MESSAGE, 
+               SAVE, JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION;
     }
 
     /**
@@ -41,8 +56,8 @@ public final class Utilities {
      * @return true if the user wants to save otherwise false
      */
     public static boolean saveDatabaseMessage(final Component component) {
-        return JOptionPane.showConfirmDialog(component, "Do you want to save the Database?", 
-           SAVE, JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION;
+        return JOptionPane.showConfirmDialog(component, SAVE_DB_MESSAGE, 
+               SAVE, JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION;
     }
 
     /**
@@ -51,8 +66,8 @@ public final class Utilities {
      * @return true if the user wants to save otherwise false
      */
     public static boolean saveGreenhouseAndDBMessage(final Component component) {
-        return JOptionPane.showConfirmDialog(component, "Do you want to save the Grenhouse and the Database?", 
-           SAVE, JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION;
+        return JOptionPane.showConfirmDialog(component, SAVE_ALL_MESSAGE, 
+               SAVE, JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION;
     }
 
     /**

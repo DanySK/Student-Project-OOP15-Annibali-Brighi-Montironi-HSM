@@ -46,10 +46,10 @@ public class Tabbed implements GUIComponent {
 
     /**
      *Set the tabbed visible and usable.
-     *@param bol the visibility status.
+     *@param state the visibility state.
      */
-    public void setEnable(final boolean bol) {
-        this.tab.setVisible(bol);
+    public void setVisible(final boolean state) {
+        this.tab.setVisible(state);
     }
 
     /**

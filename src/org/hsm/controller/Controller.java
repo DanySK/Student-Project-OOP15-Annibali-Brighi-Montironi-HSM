@@ -151,4 +151,9 @@ public interface Controller {
      */
     void loadDatabase();
 
+    /**
+     * Close the App.
+     */
+    void exit();
+
 }

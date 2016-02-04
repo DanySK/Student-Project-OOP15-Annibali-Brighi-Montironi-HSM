@@ -9,9 +9,10 @@ import java.util.Optional;
 
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
-import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+
+import org.hsm.controller.ControllerImpl;
 
 /**
  * The main frame of the application.
@@ -32,18 +33,19 @@ public class MainFrame implements View {
     public MainFrame() {
         this.setSystemLook();
         this.tab = new Tabbed(this.frame);
-        this.tab.setEnable(false);
+        this.tab.setVisible(false);
         this.frame = new JFrame(FRAME_TITLE);
         this.frame.setLayout(new BorderLayout());
         this.frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         this.frame.addWindowListener(new WindowAdapter() {
             public void windowClosing(final WindowEvent windowEvent) {
-                exit();
+                ControllerImpl.getController().exit();
             }
         });
         this.toolbar = new ToolBar(this.frame);
-        this.toolbar.setEnable(false);
-        this.menubar = new MenuBar(this);
+        this.toolbar.setEditCommands(false);
+        this.menubar = new MenuBar(this.frame);
+        this.menubar.setEditCommands(false);
         this.frame.setJMenuBar((JMenuBar) this.menubar.getComponent());
         this.frame.getContentPane().add(this.tab.getComponent());
         this.frame.getContentPane().add(toolbar.getComponent(), BorderLayout.PAGE_START);
@@ -66,9 +68,9 @@ public class MainFrame implements View {
 
     @Override
     public void setActive(final boolean status) {
-        this.tab.setEnable(status);
-        this.toolbar.setEnable(status);
-        this.menubar.setEditEnable(status);
+        this.tab.setVisible(status);
+        this.toolbar.setEditCommands(status);
+        this.menubar.setEditCommands(status);
     }
 
     @Override
@@ -103,15 +105,6 @@ public class MainFrame implements View {
     @Override
     public void removeSelectedPlant() {
         this.tab.getPlantsTab().removeSelectedRow();
-    }
-
-    /**
-     *The exit procedure whithout svaing.
-     */
-    public void exit() {
-        if (JOptionPane.showConfirmDialog(frame, "Do you want to Exit?", "Exit", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-            System.exit(0);
-        }
     }
 
     private void setSystemLook() {

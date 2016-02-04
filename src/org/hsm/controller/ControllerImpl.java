@@ -286,6 +286,13 @@ public class ControllerImpl implements Controller, Serializable {
         this.view.insertDatabase();
     }
 
+    @Override
+    public void exit() {
+        if (Utilities.exitMessage(this.view.getFrame())) {
+            System.exit(0);
+        }
+    }
+
     /**
      * Entry Point.
      *

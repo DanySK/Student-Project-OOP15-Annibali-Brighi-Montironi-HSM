@@ -54,10 +54,10 @@ public class ToolBar implements GUIComponent {
     }
 
     /**
-     * Set the state of the commands in the Toolbar.
+     * Set the state of edit commands in the Toolbar.
      * @param state the state of the commands
      */
-    public void setEnable(final boolean state) {
+    public void setEditCommands(final boolean state) {
         this.exportDatabaseButton.setEnabled(state);
         this.importDatabaseButton.setEnabled(state);
         this.newDatabaseButton.setEnabled(state);
