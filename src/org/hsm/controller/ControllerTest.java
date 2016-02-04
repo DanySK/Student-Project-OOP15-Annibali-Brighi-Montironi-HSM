@@ -1,15 +1,22 @@
 package org.hsm.controller;
 
 import org.hsm.model.GreenHouseType;
-
+import org.junit.Test;
+/**
+ *
+ * Test class for Controller.
+ *
+ */
 public class ControllerTest {
 
     /**
      *
-     * @param args
-     *            null
+     * Test method.
+     *
      */
-    public static void main(final String[] args) {
+    //CHECKSTYLE:OFF: checkstyle:magicnumber
+    @Test
+    public void controllerTeset() {
         ControllerImpl controller = ControllerImpl.getController();
 
         //String filenameGh = System.getProperty("user.home") + "Gh.hsm";

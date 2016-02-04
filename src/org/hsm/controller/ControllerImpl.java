@@ -188,7 +188,6 @@ public class ControllerImpl implements Controller, Serializable {
             return;
         }
         this.database = Optional.of(new DBplants());
-        this.ghMod = false;
         this.loadGh = true;
         try {
             ObjectInput shmGh = new ObjectInputStream(new BufferedInputStream(new FileInputStream(filenameGh.get())));
@@ -216,6 +215,7 @@ public class ControllerImpl implements Controller, Serializable {
         if (!filenameDb.isPresent()) {
             return;
         }
+        this.dbMod = false;
         try (final ObjectOutput shmDb = new ObjectOutputStream(
                 new BufferedOutputStream(new FileOutputStream(filenameDb.get())))) {
             shmDb.writeObject(this.database.get());

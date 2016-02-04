@@ -13,7 +13,7 @@ public interface Simulator {
      *
      * @param botanicalName
      *            the name of the plant
-     * @return the simulated Ph
+     * @return the simulated Ph (pH)
      */
     double getSimulatedPh(String botanicalName);
 
@@ -21,25 +21,25 @@ public interface Simulator {
      *
      * @param botanicalName
      *            the name of the plant
-     * @return the simulated Brightness
+     * @return the simulated Brightness (lumen)
      */
-    int getSimulatedBrightness(String botanicalName);
+    double getSimulatedBrightness(String botanicalName);
 
     /**
      *
      * @param botanicalName
      *            the name of the plant
-     * @return the simulated Conductibility
+     * @return the simulated Conductibility (cF)
      */
-    int getSimulatedConductibility(String botanicalName);
+    double getSimulatedConductibility(String botanicalName);
 
     /**
      *
      * @param botanicalName
      *            the name of the plant
-     * @return the simulated Temperature
+     * @return the simulated Temperature (°C)
      */
-    int getSimulatedTemperature(String botanicalName);
+    double getSimulatedTemperature(String botanicalName);
 
     /**
      *
@@ -49,7 +49,7 @@ public interface Simulator {
      *            the dimension of array data in days
      * @return the List of simulated values of Ph
      */
-    List<Integer> getPhDays(String botanicalName, int days);
+    List<Double> getPhDays(String botanicalName, int days);
 
     /**
      *
@@ -59,7 +59,7 @@ public interface Simulator {
      *            the dimension of array data in days
      * @return the List of simulated values of Brightness
      */
-    List<Integer> getBrightnessDays(String botanicalName, int days);
+    List<Double> getBrightnessDays(String botanicalName, int days);
 
     /**
      *
@@ -69,7 +69,7 @@ public interface Simulator {
      *            the dimension of array data in days
      * @return the List of simulated values of Conducibility
      */
-    List<Integer> getConductibilityDays(String botanicalName, int days);
+    List<Double> getConductibilityDays(String botanicalName, int days);
 
     /**
      *
@@ -79,6 +79,6 @@ public interface Simulator {
      *            the dimension of array data in days
      * @return the List of simulated values of Temperature
      */
-    List<Integer> getTemperatureDays(String botanicalName, int days);
+    List<Double> getTemperatureDays(String botanicalName, int days);
 
 }
