@@ -90,51 +90,16 @@ public class ControllerImpl implements Controller, Serializable {
 
     @Override
     public void deleteGreenhouse() {
-        if (this.loadGh && !this.ghMod && !this.dbMod) {
-            this.greenhouse = Optional.empty();
-            this.database = Optional.empty();
-            this.loadGh = false;
-            this.view.cleanGreenhouse();
-            this.view.cleanDatabase();
-            this.view.setActive(false);
-
-        } else if (this.loadGh && this.ghMod && !this.dbMod) {
-            if (Utilities.saveGreenhouseMessage(this.view.getFrame())) {
-                this.saveGreenhouse();
-            }
-            this.greenhouse = Optional.empty();
-            this.database = Optional.empty();
-            this.loadGh = false;
-            this.view.cleanGreenhouse();
-            this.view.cleanDatabase();
-            this.view.setActive(false);
-
-        } else if (this.loadGh && this.dbMod && !this.ghMod) {
-            if (Utilities.saveDatabaseMessage(this.view.getFrame())) {
-                this.saveDatabase();
-            }
-            this.greenhouse = Optional.empty();
-            this.database = Optional.empty();
-            this.loadGh = false;
-            this.view.cleanGreenhouse();
-            this.view.cleanDatabase();
-            this.view.setActive(false);
-
-        } else if (this.loadGh && this.dbMod && this.ghMod) {
-            if (Utilities.saveGreenhouseAndDBMessage(this.view.getFrame())) {
-                this.saveDatabase();
-                this.saveGreenhouse();
-            }
-            this.greenhouse = Optional.empty();
-            this.database = Optional.empty();
-            this.loadGh = false;
-            this.view.cleanGreenhouse();
-            this.view.cleanDatabase();
-            this.view.setActive(false);
-
-        } else {
+        this.checkSave();
+        if (!this.ghMod && !this.dbMod || this.loadGh) {
             Utilities.errorMessage(this.view.getFrame(), "Niente da cancellare (nessun Greenhouse caricato)");
         }
+        this.greenhouse = Optional.empty();
+        this.database = Optional.empty();
+        this.loadGh = false;
+        this.view.cleanGreenhouse();
+        this.view.cleanDatabase();
+        this.view.setActive(false);
     }
 
     @Override
@@ -182,7 +147,11 @@ public class ControllerImpl implements Controller, Serializable {
 
     @Override
     public boolean isDbEmpty() {
-        return this.database.get().isEmpty();
+        if (this.loadGh) {
+            return this.database.get().isEmpty();
+        } else {
+            return false;
+        }
     }
 
     @Override
@@ -288,8 +257,37 @@ public class ControllerImpl implements Controller, Serializable {
 
     @Override
     public void exit() {
+        if (this.isDbEmpty()) {
+            this.dbMod = false;
+        }
+
+        this.checkSave();
+
         if (Utilities.exitMessage(this.view.getFrame())) {
             System.exit(0);
+        }
+    }
+
+    /**
+     * Check if a save is necessary.
+     */
+    private void checkSave() {
+
+        if (this.loadGh && this.ghMod && !this.dbMod) {
+            if (Utilities.saveGreenhouseMessage(this.view.getFrame())) {
+                this.saveGreenhouse();
+            }
+
+        } else if (this.loadGh && this.dbMod && !this.ghMod) {
+            if (Utilities.saveDatabaseMessage(this.view.getFrame())) {
+                this.saveDatabase();
+            }
+
+        } else if (this.loadGh && this.dbMod && this.ghMod) {
+            if (Utilities.saveGreenhouseAndDBMessage(this.view.getFrame())) {
+                this.saveDatabase();
+                this.saveGreenhouse();
+            }
         }
     }
 
