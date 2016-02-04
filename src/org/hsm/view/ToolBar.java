@@ -15,6 +15,11 @@ import org.hsm.controller.ControllerImpl;
 public class ToolBar implements GUIComponent {
 
     private final JToolBar bar;
+    private final JButton removeGreenhouseButton;
+    private final JButton importDatabaseButton;
+    private final JButton exportDatabaseButton;
+    private final JButton newDatabaseButton;
+    private final JButton saveGreenhouseButton;
 
     /**
      *Create a toolbar.
@@ -25,27 +30,39 @@ public class ToolBar implements GUIComponent {
         final GUIFactory factory = new MyGUIFactory();
         this.bar = new JToolBar("Toolbar");
         final JButton createGreenhouseButton = factory.createButton("Create Greenhouse", new ImageIcon(getClass().getResource("/new.png"))); 
-        final JButton removeGreenhouseButton = factory.createButton("Remove Greenhouse", new ImageIcon(getClass().getResource("/delete.png")));
+        this.removeGreenhouseButton  = factory.createButton("Remove Greenhouse", new ImageIcon(getClass().getResource("/delete.png")));
         final JButton openGreenhouseButton = factory.createButton("Open Greenhouse", new ImageIcon(getClass().getResource("/open.png")));
-        final JButton saveGreenhouseButton = factory.createButton("Save Greenhouse", new ImageIcon(getClass().getResource("/save.png")));
-        final JButton importDatabaseButton = factory.createButton("Import Database", new ImageIcon(getClass().getResource("/import.png")));
-        final JButton exportDatabaseButton = factory.createButton("Export Database", new ImageIcon(getClass().getResource("/export.png")));
-        final JButton newDatabaseButton = factory.createButton("New Database", new ImageIcon(getClass().getResource("/newDatabase.png")));
+        this.saveGreenhouseButton = factory.createButton("Save Greenhouse", new ImageIcon(getClass().getResource("/save.png")));
+        this.importDatabaseButton = factory.createButton("Import Database", new ImageIcon(getClass().getResource("/import.png")));
+        this.exportDatabaseButton = factory.createButton("Export Database", new ImageIcon(getClass().getResource("/export.png")));
+        this.newDatabaseButton = factory.createButton("New Database", new ImageIcon(getClass().getResource("/newDatabase.png")));
         createGreenhouseButton.addActionListener(e -> new GreenhouseCreateDialog(frame).start());
-        saveGreenhouseButton.addActionListener(e -> ControllerImpl.getController().saveGreenhouse());
+        this.saveGreenhouseButton.addActionListener(e -> ControllerImpl.getController().saveGreenhouse());
         openGreenhouseButton.addActionListener(e -> ControllerImpl.getController().loadGreenhouse());
-        importDatabaseButton.addActionListener(e -> ControllerImpl.getController().loadDatabase());
-        exportDatabaseButton.addActionListener(e -> ControllerImpl.getController().saveDatabase());
-        removeGreenhouseButton.addActionListener(e -> ControllerImpl.getController().deleteGreenhouse());
-        newDatabaseButton.addActionListener(e -> ControllerImpl.getController().newDatabase());
+        this.importDatabaseButton.addActionListener(e -> ControllerImpl.getController().loadDatabase());
+        this.exportDatabaseButton.addActionListener(e -> ControllerImpl.getController().saveDatabase());
+        this.removeGreenhouseButton.addActionListener(e -> ControllerImpl.getController().deleteGreenhouse());
+        this.newDatabaseButton.addActionListener(e -> ControllerImpl.getController().newDatabase());
         bar.add(createGreenhouseButton);
         bar.add(openGreenhouseButton);
-        bar.add(saveGreenhouseButton);
-        bar.add(removeGreenhouseButton);
+        bar.add(this.saveGreenhouseButton);
+        bar.add(this.removeGreenhouseButton);
         bar.addSeparator();
-        bar.add(newDatabaseButton);
-        bar.add(importDatabaseButton);
-        bar.add(exportDatabaseButton);
+        bar.add(this.newDatabaseButton);
+        bar.add(this.importDatabaseButton);
+        bar.add(this.exportDatabaseButton);
+    }
+
+    /**
+     * Set the state of the commands in the Toolbar.
+     * @param state the state of the commands
+     */
+    public void setEnable(final boolean state) {
+        this.exportDatabaseButton.setEnabled(state);
+        this.importDatabaseButton.setEnabled(state);
+        this.newDatabaseButton.setEnabled(state);
+        this.removeGreenhouseButton.setEnabled(state);
+        this.saveGreenhouseButton.setEnabled(state);
     }
 
     @Override

@@ -24,6 +24,7 @@ public class MainFrame implements View {
     private final JFrame frame;
     private final Tabbed tab;
     private final MenuBar menubar;
+    private final ToolBar toolbar;
 
     /**
      * Create the main frame.
@@ -40,7 +41,8 @@ public class MainFrame implements View {
                 exit();
             }
         });
-        final ToolBar toolbar = new ToolBar(this.frame);
+        this.toolbar = new ToolBar(this.frame);
+        this.toolbar.setEnable(false);
         this.menubar = new MenuBar(this);
         this.frame.setJMenuBar((JMenuBar) this.menubar.getComponent());
         this.frame.getContentPane().add(this.tab.getComponent());
@@ -65,6 +67,7 @@ public class MainFrame implements View {
     @Override
     public void setActive(final boolean status) {
         this.tab.setEnable(status);
+        this.toolbar.setEnable(status);
         this.menubar.setEditEnable(status);
     }
 

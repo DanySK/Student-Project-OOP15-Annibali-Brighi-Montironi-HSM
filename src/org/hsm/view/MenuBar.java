@@ -29,7 +29,7 @@ public class MenuBar implements GUIComponent {
     private static final String MENU_ITEM_EXPORT_DATABASE = "Export Database";
     private static final String MENU_ITEM_EXIT = "Exit";
     private static final String MENU_ITEM_ABOUT = "About Hydroponic System Manager";
-    private final JMenuBar bar = new JMenuBar();
+    private final JMenuBar bar;
 
     /**
      * Create the MenuBar.
@@ -37,6 +37,7 @@ public class MenuBar implements GUIComponent {
      */
     public MenuBar(final MainFrame frame) {
         //Menù list
+        this.bar = new JMenuBar();
         final JMenu file = new JMenu(MENU_FILE);
         final JMenu edit = new JMenu(MENU_EDIT);
         final JMenu information = new JMenu(MENU_INFORMATION);
