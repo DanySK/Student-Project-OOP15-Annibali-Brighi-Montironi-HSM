@@ -91,7 +91,7 @@ public class ControllerImpl implements Controller, Serializable {
     @Override
     public void deleteGreenhouse() {
         this.checkSave();
-        if (!this.ghMod && !this.dbMod || this.loadGh) {
+        if (!this.loadGh) {
             Utilities.errorMessage(this.view.getFrame(), "Niente da cancellare (nessun Greenhouse caricato)");
         }
         this.greenhouse = Optional.empty();
