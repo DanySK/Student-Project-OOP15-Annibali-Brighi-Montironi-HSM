@@ -107,4 +107,18 @@ public interface View extends VisibleComponent {
      */
     Optional<String> importDatabaseDialog();
 
+    /**
+     * Get the botanical name of the raw selected.
+     * @return the botanical name selected
+     * @throws IllegalStateException no row is selected
+     */
+    String getSelectedBotanicalName() throws IllegalStateException;
+
+    /**
+     * Get the ID of the raw selected.
+     * @return the ID of the plant
+     * @throws IllegalStateException no row is selected
+     */
+    int getSelectedIDPlant() throws IllegalStateException;
+
 }

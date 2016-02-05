@@ -75,15 +75,7 @@ public class PlantsTab extends Observable implements GUIComponent, Table {
         southPanel.add(exitFilter);
         southPanel.add(Box.createHorizontalGlue());
         final JButton remove = new JButton("Remove Plant");
-        remove.addActionListener(e -> {
-            if (this.table.getSelectedRow() == -1) {
-                Utilities.errorMessage(frame, "No plant is selected");
-            } else {
-                final int selectedRowIndex = this.table.getSelectedRow();
-                final int idPlant = (int) this.table.getModel().getValueAt(selectedRowIndex, PlantCharacteristics.ID.ordinal());
-                ControllerImpl.getController().delPlant(idPlant);
-            }
-        });
+        remove.addActionListener(e -> ControllerImpl.getController().delPlant());
         final JButton updateValues = new JButton("Update Plant Values");
         final JButton addPlants = new JButton("Add Plants");
         southPanel.add(add);
@@ -98,6 +90,19 @@ public class PlantsTab extends Observable implements GUIComponent, Table {
 
         panel.add(scrollPane);
         panel.add(southPanel);
+    }
+
+    /**
+     * Get the ID of the raw selected.
+     * @return the ID of the plant
+     * @throws IllegalStateException no row is selected
+     */
+    public int getSelectedIDPlant() throws IllegalStateException {
+        if (this.table.getSelectedRow() == -1) {
+            throw new IllegalStateException();
+        }
+        final int selectedRowIndex = this.table.getSelectedRow();
+        return (int) this.table.getModel().getValueAt(selectedRowIndex, PlantCharacteristics.ID.ordinal());
     }
 
     @Override

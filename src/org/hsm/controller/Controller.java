@@ -61,12 +61,10 @@ public interface Controller {
     void addPlant(PlantModel plant, int cost);
 
     /**
-     * Delete plant with the ID provided in input.
+     * Delete the selected plant in the greenhouse.
      *
-     * @param id
-     *            Identifier for the plant
      */
-    void delPlant(int id);
+    void delPlant();
 
     /**
      * Delete all plants of the same type of plant provided in input.
@@ -103,10 +101,9 @@ public interface Controller {
 
     /**
      *
-     * @param botanicalName
-     *            the botanical name of the plant to delete
+     * Delete the selected plant id database.
      */
-    void deleteDbPlant(String botanicalName);
+    void deleteDbPlant();
 
     /**
      * Check the currently state of greenhouse.

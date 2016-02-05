@@ -146,4 +146,14 @@ public class MainFrame implements View {
         this.tab.getDatabaseTab().clean();
     }
 
+    @Override
+    public String getSelectedBotanicalName() throws IllegalStateException {
+        return this.tab.getDatabaseTab().getSelectedBotanicalName();
+    }
+
+    @Override
+    public int getSelectedIDPlant() throws IllegalStateException {
+        return this.tab.getPlantsTab().getSelectedIDPlant();
+    }
+
 }

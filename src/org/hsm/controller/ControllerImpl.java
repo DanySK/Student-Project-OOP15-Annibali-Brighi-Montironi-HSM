@@ -110,10 +110,15 @@ public class ControllerImpl implements Controller, Serializable {
     }
 
     @Override
-    public void delPlant(final int id) {
-        this.ghMod = true;
-        this.greenhouse.get().delPlant(id);
-        this.view.removeSelectedPlant();
+    public void delPlant() {
+        try {
+            final int id = this.view.getSelectedIDPlant();
+            this.ghMod = true;
+            this.greenhouse.get().delPlant(id);
+            this.view.removeSelectedPlant();
+        } catch (IllegalStateException e) {
+            Utilities.errorMessage(this.view.getFrame(), "No plant is selected!");
+        }
     }
 
     @Override
@@ -134,10 +139,15 @@ public class ControllerImpl implements Controller, Serializable {
     }
 
     @Override
-    public void deleteDbPlant(final String botanicalName) {
-        this.dbMod = true;
-        this.database.get().removePlantModel(botanicalName);
-        this.view.removeSelectedModelPlant();
+    public void deleteDbPlant() {
+        try {
+            final String botanicalName = this.view.getSelectedBotanicalName();
+            this.dbMod = true;
+            this.database.get().removePlantModel(botanicalName);
+            this.view.removeSelectedModelPlant();
+        } catch (IllegalStateException e) {
+            Utilities.errorMessage(this.view.getFrame(), "No plant is selected!");
+        }
     }
 
     @Override

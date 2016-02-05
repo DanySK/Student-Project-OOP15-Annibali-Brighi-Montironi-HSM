@@ -34,15 +34,7 @@ public class DatabaseTab implements GUIComponent, Table {
         final JButton createPlant = new JButton("Insert new type of plant");
         createPlant.addActionListener(e -> new PlantCreateDialog(frame).start());
         final JButton removePlant = new JButton("Remove selected plant");
-        removePlant.addActionListener(e -> {
-            if (this.table.getSelectedRow() == -1) {
-                Utilities.errorMessage(frame, "No plant is selected!");
-            } else {
-                final int selectedRowIndex = this.table.getSelectedRow();
-                final String botanicalName = (String) this.table.getModel().getValueAt(selectedRowIndex, PlantModelCharacteristics.BOTANICAL_NAME.ordinal());
-                ControllerImpl.getController().deleteDbPlant(botanicalName);
-            }
-        });
+        removePlant.addActionListener(e -> ControllerImpl.getController().deleteDbPlant());
         southPanel.add(createPlant);
         southPanel.add(removePlant);
         southPanel.setSize(southPanel.getPreferredSize());
@@ -66,6 +58,21 @@ public class DatabaseTab implements GUIComponent, Table {
                            elem.getOptimalGrowthTime(), elem.getLife(), elem.getSize(), elem.getConductivity(),
                            elem.getOptimalTemperature());
         }
+    }
+
+    /**
+     * Get the botanical name of the raw selected.
+     * @return the botanical name selected
+     * @throws IllegalStateException no row is selected
+     */
+    public String getSelectedBotanicalName() throws IllegalStateException {
+        if (this.table.getSelectedRow() == -1) {
+            throw new IllegalStateException();
+        }
+        final int selectedRowIndex = this.table.getSelectedRow();
+        final String botanicalName = (String) this.table.getModel().getValueAt(selectedRowIndex, 
+                                     PlantModelCharacteristics.BOTANICAL_NAME.ordinal());
+        return botanicalName;
     }
 
     @Override

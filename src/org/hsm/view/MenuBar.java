@@ -16,20 +16,6 @@ import org.hsm.controller.ControllerImpl;
  */
 public class MenuBar implements GUIComponent {
 
-    private static final String MENU_FILE = "File";
-    private static final String MENU_INFORMATION = "Information";
-    private static final String MENU_EDIT = "Edit";
-    private static final String MENU_HELP = "Help";
-    private static final String MENU_ITEM_CREATE_GREENHOUSE = "New Greenhouse";
-    private static final String MENU_ITEM_SAVE_GREENHOUSE = "Save Greenhouse";
-    private static final String MENU_ITEM_ADD_PLANT = "Add Plant";
-    private static final String MENU_ITEM_REMOVE_GREENHOUSE = "Remove Greenhouse";
-    private static final String MENU_ITEM_LOAD_GREENHOUSE = "Open Greenhouse";
-    private static final String MENU_ITEM_NEW_DATABASE = "New Database";
-    private static final String MENU_ITEM_IMPORT_DATABASE = "Import Database";
-    private static final String MENU_ITEM_EXPORT_DATABASE = "Export Database";
-    private static final String MENU_ITEM_EXIT = "Exit";
-    private static final String MENU_ITEM_ABOUT = "About Hydroponic System Manager";
     private final JMenuBar bar;
     private final JMenu edit;
     private final JMenuItem saveGreenhouse;
@@ -43,49 +29,68 @@ public class MenuBar implements GUIComponent {
      * @param frame the MainFrame for the MenuBar
      */
     public MenuBar(final JFrame frame) {
-        //Menù list
+        //Initialization
         this.bar = new JMenuBar();
-        final JMenu file = new JMenu(MENU_FILE);
-        this.edit = new JMenu(MENU_EDIT);
-        final JMenu information = new JMenu(MENU_INFORMATION);
-        final JMenu help = new JMenu(MENU_HELP);
-        //Menù Item list
-        final JMenuItem addPlant = new JMenuItem(MENU_ITEM_ADD_PLANT);
-        final JMenuItem newGreenhouse = new JMenuItem(MENU_ITEM_CREATE_GREENHOUSE);
-        this.saveGreenhouse = new JMenuItem(MENU_ITEM_SAVE_GREENHOUSE);
-        final JMenuItem loadGreenhouse = new JMenuItem(MENU_ITEM_LOAD_GREENHOUSE);
-        this.removeGreenhouse = new JMenuItem(MENU_ITEM_REMOVE_GREENHOUSE);
-        this.newDatabase = new JMenuItem(MENU_ITEM_NEW_DATABASE);
-        this.importDatabase = new JMenuItem(MENU_ITEM_IMPORT_DATABASE);
-        this.exportDatabase = new JMenuItem(MENU_ITEM_EXPORT_DATABASE);
-        final JMenuItem exit = new JMenuItem(MENU_ITEM_EXIT);
-        final JMenuItem about = new JMenuItem(MENU_ITEM_ABOUT);
-        //Insert item in Menu
-        file.add(newGreenhouse);
-        file.add(loadGreenhouse);
-        file.add(saveGreenhouse);
-        file.add(removeGreenhouse);
-        file.addSeparator();
-        file.add(newDatabase);
-        file.add(importDatabase);
-        file.add(exportDatabase);
-        edit.add(addPlant);
-        file.addSeparator();
-        file.add(exit);
+        //Menu creation
+        final JMenu file = new JMenu("File");
+        this.edit = new JMenu("Edit");
+        final JMenu information = new JMenu("Information");
+        final JMenu help = new JMenu("Help");
         file.setMnemonic(KeyEvent.VK_F);
         edit.setMnemonic(KeyEvent.VK_E);
         information.setMnemonic(KeyEvent.VK_I);
         help.setMnemonic(KeyEvent.VK_H);
-        help.add(about);
-        //Add listeners at items
+        //Menù File Item
+        final JMenuItem newGreenhouse = new JMenuItem("New Greenhouse");
         newGreenhouse.addActionListener(e -> new GreenhouseCreateDialog(frame).start());
+        file.add(newGreenhouse);
+        final JMenuItem loadGreenhouse = new JMenuItem("Open Greenhouse");
         loadGreenhouse.addActionListener(e -> ControllerImpl.getController().loadGreenhouse());
+        file.add(loadGreenhouse);
+        this.saveGreenhouse = new JMenuItem("Save Greenhouse");
         saveGreenhouse.addActionListener(e -> ControllerImpl.getController().saveGreenhouse());
-        importDatabase.addActionListener(e -> ControllerImpl.getController().loadDatabase());
-        exportDatabase.addActionListener(e -> ControllerImpl.getController().saveDatabase());
+        file.add(saveGreenhouse);
+        this.removeGreenhouse = new JMenuItem("Remove Greenhouse");
         removeGreenhouse.addActionListener(e -> ControllerImpl.getController().deleteGreenhouse());
-        addPlant.addActionListener(e -> new PlantAddDialog(frame).start());
+        file.add(removeGreenhouse);
+        file.addSeparator();
+        this.newDatabase = new JMenuItem("New Database");
+        this.newDatabase.addActionListener(e -> ControllerImpl.getController().newDatabase());
+        file.add(newDatabase);
+        this.importDatabase = new JMenuItem("Import Database");
+        importDatabase.addActionListener(e -> ControllerImpl.getController().loadDatabase());
+        file.add(importDatabase);
+        this.exportDatabase = new JMenuItem("Export Database");
+        exportDatabase.addActionListener(e -> ControllerImpl.getController().saveDatabase());
+        file.add(exportDatabase);
+        final JMenuItem exit = new JMenuItem("Exit");
         exit.addActionListener(e -> ControllerImpl.getController().exit());
+        file.addSeparator();
+        file.add(exit);
+        //Menu Edit Item
+        final JMenuItem addPlant = new JMenuItem("Add Plant");
+        addPlant.addActionListener(e -> {
+            if (ControllerImpl.getController().isDbEmpty()) {
+                Utilities.errorMessage(frame, "The Database is empty or not loaded");
+            } else {
+                new PlantAddDialog(frame).start();
+            }
+        });
+        edit.add(addPlant);
+        final JMenuItem removePlant = new JMenuItem("Remove plant from Greenhouse");
+        removePlant.addActionListener(e -> ControllerImpl.getController().delPlant());
+        edit.add(removePlant);
+        edit.addSeparator();
+        final JMenuItem addModel = new JMenuItem("Create Plant");
+        addModel.addActionListener(e -> new PlantCreateDialog(frame).start());
+        edit.add(addModel);
+        final JMenuItem removeDBPlant = new JMenuItem("Remove plant from Database");
+        removeDBPlant.addActionListener(e -> ControllerImpl.getController().deleteDbPlant());
+        edit.add(removeDBPlant);
+        //Menu Help Item
+        final JMenuItem about = new JMenuItem("About Hydroponic System Manager");
+        help.add(about);
+        //Add menus in MenuBar
         bar.add(file);
         bar.add(edit);
         bar.add(information);
