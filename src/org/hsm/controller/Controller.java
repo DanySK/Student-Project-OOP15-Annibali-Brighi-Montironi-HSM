@@ -153,5 +153,9 @@ public interface Controller {
      */
     void exit();
 
+    /**
+     * Show Bar Chart to compare values of the selected plant.
+     */
+    void showBarChart();
 
 }
