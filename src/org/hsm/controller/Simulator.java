@@ -9,6 +9,39 @@ import java.util.List;
  */
 
 public interface Simulator {
+
+    /**
+    *
+    * @param botanicalName
+    *            the name of the plant
+    * @return the Optimal Ph (pH)
+    */
+    Double getOptimalPh(String botanicalName);
+
+   /**
+    *
+    * @param botanicalName
+    *            the name of the plant
+    * @return the Optimal Brightness (lumen)
+    */
+    Double getOptimalBrightness(String botanicalName);
+
+   /**
+    *
+    * @param botanicalName
+    *            the name of the plant
+    * @return the Optimal Conductibility (cF)
+    */
+    Double getOptimalConductibility(String botanicalName);
+
+   /**
+    *
+    * @param botanicalName
+    *            the name of the plant
+    * @return the Optimal Temperature (°C)
+    */
+    Double getOptimalTemperature(String botanicalName);
+
     /**
      *
      * @param botanicalName

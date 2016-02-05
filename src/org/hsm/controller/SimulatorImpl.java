@@ -28,9 +28,29 @@ public class SimulatorImpl implements Simulator {
     private final Map<String, PlantModel> dbMap = db.getDb();
 
     @Override
+    public Double getOptimalPh(final String botanicalName) {
+        return dbMap.get(botanicalName).getPH();
+    }
+
+    @Override
+    public Double getOptimalBrightness(final String botanicalName) {
+        return dbMap.get(botanicalName).getBrightness();
+    }
+
+    @Override
+    public Double getOptimalConductibility(final String botanicalName) {
+        return dbMap.get(botanicalName).getConductivity();
+    }
+
+    @Override
+    public Double getOptimalTemperature(final String botanicalName) {
+        return dbMap.get(botanicalName).getOptimalTemperature();
+    }
+
+    @Override
     public double getSimulatedPh(final String botanicalName) {
-        double min = dbMap.get(botanicalName).getPH() - MAXRAND_PH;
-        double max = dbMap.get(botanicalName).getPH() + MAXRAND_PH;
+        double min = getOptimalPh(botanicalName) - MAXRAND_PH;
+        double max = getOptimalPh(botanicalName) + MAXRAND_PH;
 
         return this.roundTo(min + (max - min) * random.nextDouble());
 
@@ -38,24 +58,24 @@ public class SimulatorImpl implements Simulator {
 
     @Override
     public double getSimulatedBrightness(final String botanicalName) {
-        double min = dbMap.get(botanicalName).getBrightness() - MAXRAND_BRIGHT;
-        double max = dbMap.get(botanicalName).getBrightness() + MAXRAND_BRIGHT;
+        double min = getOptimalBrightness(botanicalName) - MAXRAND_BRIGHT;
+        double max = getOptimalBrightness(botanicalName) + MAXRAND_BRIGHT;
 
         return this.roundTo(min + (max - min) * random.nextDouble());
     }
 
     @Override
     public double getSimulatedConductibility(final String botanicalName) {
-        double min = dbMap.get(botanicalName).getConductivity() - MAXRAND_COND;
-        double max = dbMap.get(botanicalName).getConductivity() + MAXRAND_COND;
+        double min = getOptimalConductibility(botanicalName) - MAXRAND_COND;
+        double max = getOptimalConductibility(botanicalName) + MAXRAND_COND;
 
         return this.roundTo(min + (max - min) * random.nextDouble());
     }
 
     @Override
     public double getSimulatedTemperature(final String botanicalName) {
-        double min = dbMap.get(botanicalName).getOptimalTemperature() - MAXRAND_TEMP;
-        double max = dbMap.get(botanicalName).getOptimalTemperature() + MAXRAND_TEMP;
+        double min = getOptimalTemperature(botanicalName) - MAXRAND_TEMP;
+        double max = getOptimalTemperature(botanicalName) + MAXRAND_TEMP;
 
         return this.roundTo(min + (max - min) * random.nextDouble());
     }
