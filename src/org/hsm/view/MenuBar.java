@@ -34,10 +34,12 @@ public class MenuBar implements GUIComponent {
         //Menu creation
         final JMenu file = new JMenu("File");
         this.edit = new JMenu("Edit");
+        final JMenu chart = new JMenu("Charts");
         final JMenu information = new JMenu("Information");
         final JMenu help = new JMenu("Help");
         file.setMnemonic(KeyEvent.VK_F);
         edit.setMnemonic(KeyEvent.VK_E);
+        chart.setMnemonic(KeyEvent.VK_C);
         information.setMnemonic(KeyEvent.VK_I);
         help.setMnemonic(KeyEvent.VK_H);
         //Menù File Item
@@ -87,12 +89,17 @@ public class MenuBar implements GUIComponent {
         final JMenuItem removeDBPlant = new JMenuItem("Remove plant from Database");
         removeDBPlant.addActionListener(e -> ControllerImpl.getController().deleteDbPlant());
         edit.add(removeDBPlant);
+        //Menu Chart Item
+        final JMenuItem barChart = new JMenuItem("Show Bar Chart");
+        chart.add(barChart);
+        barChart.addActionListener(e -> ControllerImpl.getController().showBarChart());
         //Menu Help Item
         final JMenuItem about = new JMenuItem("About Hydroponic System Manager");
         help.add(about);
         //Add menus in MenuBar
         bar.add(file);
         bar.add(edit);
+        bar.add(chart);
         bar.add(information);
         bar.add(help);
     }

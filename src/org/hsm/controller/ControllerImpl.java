@@ -19,6 +19,7 @@ import org.hsm.model.GreenHouse;
 import org.hsm.model.GreenHouseType;
 import org.hsm.model.GreenhouseImp;
 import org.hsm.model.PlantModel;
+import org.hsm.view.BarChartDialog;
 import org.hsm.view.MainFrame;
 import org.hsm.view.Utilities;
 import org.hsm.view.View;
@@ -298,6 +299,16 @@ public class ControllerImpl implements Controller, Serializable {
                 this.saveDatabase();
                 this.saveGreenhouse();
             }
+        }
+    }
+
+    @Override
+    public void showBarChart() {
+        try {
+            final int id = this.view.getSelectedIDPlant();
+            new BarChartDialog(this.view.getFrame(), id).start();
+        } catch (IllegalStateException e) {
+            Utilities.errorMessage(this.view.getFrame(), "No plant is selected!");
         }
     }
 
