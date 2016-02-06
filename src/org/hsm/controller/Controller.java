@@ -154,8 +154,23 @@ public interface Controller {
     void exit();
 
     /**
-     * Show Bar Chart to compare values of the selected plant.
+     * Show Brightness Bar Chart to compare values of the selected plant.
      */
-    void showBarChart();
+    void showBrightnessBarChart();
+
+    /**
+     * Show Ph Bar Chart to compare values of the selected plant.
+     */
+    void showPhBarChart();
+
+    /**
+     * Show Temperature Bar Chart to compare values of the selected plant.
+     */
+    void showTemperatureBarChart();
+
+    /**
+     * Show Conductivity Bar Chart to compare values of the selected plant.
+     */
+    void showConductivityBarChart();
 
 }

@@ -18,6 +18,7 @@ public class MenuBar implements GUIComponent {
 
     private final JMenuBar bar;
     private final JMenu edit;
+    private final JMenu chart;
     private final JMenuItem saveGreenhouse;
     private final JMenuItem removeGreenhouse;
     private final JMenuItem newDatabase;
@@ -34,7 +35,7 @@ public class MenuBar implements GUIComponent {
         //Menu creation
         final JMenu file = new JMenu("File");
         this.edit = new JMenu("Edit");
-        final JMenu chart = new JMenu("Charts");
+        this.chart = new JMenu("Charts");
         final JMenu information = new JMenu("Information");
         final JMenu help = new JMenu("Help");
         file.setMnemonic(KeyEvent.VK_F);
@@ -90,9 +91,18 @@ public class MenuBar implements GUIComponent {
         removeDBPlant.addActionListener(e -> ControllerImpl.getController().deleteDbPlant());
         edit.add(removeDBPlant);
         //Menu Chart Item
-        final JMenuItem barChart = new JMenuItem("Show Bar Chart");
-        chart.add(barChart);
-        barChart.addActionListener(e -> ControllerImpl.getController().showBarChart());
+        final JMenuItem brightnessBarChart = new JMenuItem("Show Brightness Bar Chart");
+        chart.add(brightnessBarChart);
+        brightnessBarChart.addActionListener(e -> ControllerImpl.getController().showBrightnessBarChart());
+        final JMenuItem phBarChart = new JMenuItem("Show Basicity Bar Chart");
+        chart.add(phBarChart);
+        phBarChart.addActionListener(e -> ControllerImpl.getController().showPhBarChart());
+        final JMenuItem temperatureBarChart = new JMenuItem("Show Temperature Bar Chart");
+        chart.add(temperatureBarChart);
+        temperatureBarChart.addActionListener(e -> ControllerImpl.getController().showTemperatureBarChart());
+        final JMenuItem conductivityBarChart = new JMenuItem("Show Conductivity Bar Chart");
+        chart.add(conductivityBarChart);
+        conductivityBarChart.addActionListener(e -> ControllerImpl.getController().showConductivityBarChart());
         //Menu Help Item
         final JMenuItem about = new JMenuItem("About Hydroponic System Manager");
         help.add(about);
@@ -115,6 +125,7 @@ public class MenuBar implements GUIComponent {
         this.saveGreenhouse.setEnabled(state);
         this.newDatabase.setEnabled(state);
         this.removeGreenhouse.setEnabled(state);
+        this.chart.setEnabled(state);
     }
 
     @Override

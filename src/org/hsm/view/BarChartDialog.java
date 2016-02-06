@@ -1,17 +1,16 @@
 package org.hsm.view;
 
 import java.awt.BorderLayout;
-import java.awt.Dialog;
 
+import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 
-import org.hsm.controller.ControllerImpl;
-import org.hsm.model.PlantModel;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.renderer.category.BarRenderer;
 import org.jfree.data.category.DefaultCategoryDataset;
 
 /**
@@ -20,38 +19,42 @@ import org.jfree.data.category.DefaultCategoryDataset;
  */
 public class BarChartDialog implements VisibleComponent {
 
-    private static final String DIALOG_TITLE = "Bar Chart";
     private static final String OPTIMAL = "Optimal Value";
     private static final String CURRENT = "Current Value";
+    private static final double BAR_WIDTH_FACTOR = 0.1;
     private final JDialog dialog;
 
+
     /**
-     * Create the chart.
-     * @param frame the frame covered by the chart
-     * @param id the id of the plant
+     * Create the bar chart for comparing values.
+     * @param characteristic the name of the characteristic to compare
+     * @param unitsOfMeasure the unit of measure to use
+     * @param optimalValue the optimal value
+     * @param currentValue the current value
      */
-    public BarChartDialog(final JFrame frame, final int id) {
-        this.dialog = new JDialog(frame, DIALOG_TITLE, Dialog.ModalityType.APPLICATION_MODAL);
+    public BarChartDialog(final String characteristic, final String unitsOfMeasure, final double optimalValue, final double currentValue) {
+        this.dialog = new JDialog();
+        this.dialog.setTitle(characteristic + " Chart");
         this.dialog.setLayout(new BorderLayout());
         final DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-        final PlantModel plant = ControllerImpl.getController().getGreenhouse().getPlants().get(id).getModel();
-        dataset.addValue(plant.getBrightness(), OPTIMAL, "Brightness");
-        dataset.addValue(2, CURRENT, "Brightness");
-        dataset.addValue(plant.getConductivity(), OPTIMAL, "Conductivity");
-        dataset.addValue(3, CURRENT, "Conductivity");
-        dataset.addValue(plant.getOptimalTemperature(), OPTIMAL, "Temperature");
-        dataset.addValue(4, CURRENT, "Temperature");
-        dataset.addValue(plant.getPH(), OPTIMAL, "PH");
-        dataset.addValue(2, CURRENT, "PH");
-        final JFreeChart chart = ChartFactory.createBarChart("Comparing Chart", "Characteristic", "Value", dataset, PlotOrientation.VERTICAL, 
+        dataset.addValue(optimalValue, OPTIMAL, characteristic);
+        dataset.addValue(currentValue, CURRENT, characteristic);
+        final JFreeChart chart = ChartFactory.createBarChart(characteristic + " Comparing Chart", "", unitsOfMeasure, dataset, PlotOrientation.VERTICAL, 
                                  true, true, false);
         final ChartPanel panel = new ChartPanel(chart, false);
-        this.dialog.add(panel);
+        final CategoryPlot categoryPlot = chart.getCategoryPlot();
+        final BarRenderer br = (BarRenderer) categoryPlot.getRenderer();
+        br.setMaxBarWidth(BAR_WIDTH_FACTOR);
+        final JButton exit = new JButton("Exit");
+        exit.addActionListener(e -> this.dialog.dispose());
+        this.dialog.add(panel, BorderLayout.CENTER);
+        this.dialog.add(exit, BorderLayout.SOUTH);
     }
 
     @Override
     public void start() {
         this.dialog.pack();
+        this.dialog.setLocationByPlatform(true);
         this.dialog.setVisible(true); 
     }
 

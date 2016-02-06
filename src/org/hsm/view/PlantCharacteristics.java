@@ -28,15 +28,15 @@ public enum PlantCharacteristics {
     /**
      *The current value of brightness of the plant.
      */
-    BRIGHTNESS("Brightness"),
+    BRIGHTNESS("Brightness (lm)"),
     /**
      *The current value of conductivity of the plant. 
      */
-    CONDUCTIVITY("Conductivity"),
+    CONDUCTIVITY("Conductivity (cf)"),
     /**
      *The current temperature of the plant.
      */
-    TEMPERATURE("Temperature");
+    TEMPERATURE("Temperature (°C)");
 
     private final String name;
 
