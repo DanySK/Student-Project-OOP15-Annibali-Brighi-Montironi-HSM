@@ -5,12 +5,16 @@ import java.awt.Dialog;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.util.Set;
 
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerModel;
+import javax.swing.SpinnerNumberModel;
 
 import org.hsm.controller.ControllerImpl;
 import org.hsm.model.PlantModel;
@@ -22,9 +26,12 @@ import org.hsm.model.PlantModel;
 public class PlantAddDialog extends AbstractAddDialog {
 
     private static final String DIALOG_TITLE = "Add a plant";
-    private static final String START_LABEL = "Chose the plant";
+    private static final String START_LABEL = "Choose the plant";
+    private static final int NUM_MAX_PLANT = 100;
+    private static final int INSET = 3;
     private final JComboBox<Object> plantsList;
     private final EuroPanel euroPanel;
+    private final JSpinner numberSpinner;
 
     /**
      *Create the dialog to add new plants.
@@ -42,17 +49,29 @@ public class PlantAddDialog extends AbstractAddDialog {
         final GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
+        gbc.insets = new Insets(INSET, INSET, INSET, INSET);
+        gbc.anchor = GridBagConstraints.LINE_START;
+
         final JLabel typeLabel = new JLabel("Type:");
         centerPanel.add(typeLabel, gbc);
-        ++gbc.gridx;
-        centerPanel.add(this.plantsList, gbc);
         ++gbc.gridy;
-        gbc.gridx = 0;
+        final JLabel numLabel = new JLabel("Number:");
+        centerPanel.add(numLabel, gbc);
+        ++gbc.gridy;
         final JLabel costLabel = new JLabel("Cost:");
         centerPanel.add(costLabel, gbc);
+        gbc.gridy = 0;
         ++gbc.gridx;
+        gbc.anchor = GridBagConstraints.LINE_END;
+        centerPanel.add(this.plantsList, gbc);
+        ++gbc.gridy;
+        final SpinnerModel model = new SpinnerNumberModel(1, 1, NUM_MAX_PLANT, 1);
+        this.numberSpinner = new JSpinner(model);
+        centerPanel.add(this.numberSpinner, gbc);
+        ++gbc.gridy;
         this.euroPanel = new EuroPanelImpl();
-        centerPanel.add((JPanel) this.euroPanel, gbc);
+        centerPanel.add(this.euroPanel.getComponent(), gbc);
+
         final JLabel label = new MyGUIFactory().createLabel(START_LABEL);
         northPanel.add(label);
         this.getJDialog().add(northPanel, BorderLayout.NORTH);
@@ -64,6 +83,7 @@ public class PlantAddDialog extends AbstractAddDialog {
         final String choice = (String) this.plantsList.getSelectedItem();
         final PlantModel model = ControllerImpl.getController().getDatabase().getDb().get(choice);
         ControllerImpl.getController().addPlant(model, this.euroPanel.getValue());
+        this.numberSpinner.getModel();
         getJDialog().dispose();
     }
 
