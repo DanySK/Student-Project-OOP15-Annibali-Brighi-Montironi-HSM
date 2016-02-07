@@ -82,8 +82,8 @@ public class PlantAddDialog extends AbstractAddDialog {
     protected void addAction() {
         final String choice = (String) this.plantsList.getSelectedItem();
         final PlantModel model = ControllerImpl.getController().getDatabase().getDb().get(choice);
-        ControllerImpl.getController().addPlant(model, this.euroPanel.getValue());
-        this.numberSpinner.getModel();
+        ControllerImpl.getController().addPlants(model, this.euroPanel.getValue(),
+                                      ((SpinnerNumberModel) this.numberSpinner.getModel()).getNumber().intValue());
         getJDialog().dispose();
     }
 
