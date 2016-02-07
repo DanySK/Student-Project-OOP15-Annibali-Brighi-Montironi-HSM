@@ -50,17 +50,6 @@ public interface Controller {
     void newDatabase();
 
     /**
-     * Add plant to Greenhouse loaded.
-     *
-     * @param plant
-     *            the type of plant to insert
-     * @param cost
-     *            the cont in euro of the plant
-     *
-     */
-    void addPlant(PlantModel plant, int cost);
-
-    /**
      * Add n plants to Greenhouse loaded.
      *
      * @param plant
