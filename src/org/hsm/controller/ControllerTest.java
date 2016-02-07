@@ -25,7 +25,7 @@ public class ControllerTest {
 
         controller.createGreenhouse("Test", GreenHouseType.GRID, 450, 1500);
         controller.createNewPlant("name", "botanical name", 25, 550, 340, 30, 27, 365, 25);
-        controller.addPlant(controller.getDatabase().getPlantModel("botanical name"), 12);
+        controller.addPlants(controller.getDatabase().getPlantModel("botanical name"), 12, 2);
 
         controller.saveGreenhouse();
         controller.saveDatabase();
