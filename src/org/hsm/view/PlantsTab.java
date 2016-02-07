@@ -2,6 +2,7 @@ package org.hsm.view;
 
 import java.awt.Component;
 import java.awt.Dimension;
+import java.util.Map;
 import java.util.Observable;
 
 import javax.swing.Box;
@@ -20,6 +21,8 @@ import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
 import org.hsm.controller.ControllerImpl;
+import org.hsm.model.GreenHouse;
+import org.hsm.model.Plant;
 
 /**
  *This tab contains all the information about the plants inside the current greenhouse.
@@ -88,6 +91,22 @@ public class PlantsTab extends Observable implements GUIComponent, Table {
 
         panel.add(scrollPane);
         panel.add(southPanel);
+    }
+
+    /**
+     *  Set plants of the greenhouse.
+     */
+    public void setPlants() {
+        final GreenHouse green = ControllerImpl.getController().getGreenhouse();
+        for (final Map.Entry<Integer, Plant> elem : green.getPlants().entrySet()) {
+            this.insertRow(elem.getKey(),
+                           elem.getValue().getModel().getName(),
+                           elem.getValue().getCost(),
+                           0,
+                           0,
+                           0,
+                           0);
+        }
     }
 
     /**

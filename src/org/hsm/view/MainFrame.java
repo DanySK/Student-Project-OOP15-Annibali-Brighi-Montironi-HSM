@@ -76,6 +76,7 @@ public class MainFrame implements View {
     @Override
     public void insertGreenhouse() {
         this.tab.getGreenhouseTab().setGreenhouse();
+        this.tab.getPlantsTab().setPlants();
     }
 
     @Override
