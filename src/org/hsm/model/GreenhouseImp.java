@@ -7,31 +7,33 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- *implementation of the Greenhouse interface.
+ * implementation of the Greenhouse interface.
  */
 public class GreenhouseImp implements GreenHouse, Serializable {
 
     /**
-     * 
+     *
      */
     private static final long serialVersionUID = 1132454764370517715L;
 
     private static final int CMC_TO_MC = 1000000; // cm³ to m³
 
-    private final Map<Integer, Plant > plantMap = new HashMap<>();
+    private final Map<Integer, Plant> plantMap = new HashMap<>();
     private final IDmanager productID = new IDmanager();
-    private  String name;
+    private String name;
     private double size;
     private double costGreenhouse;
     private GreenHouseType type;
 
     /**
      * @param name
-     *          name of the greenhouse
+     *            name of the greenhouse
      * @param size
-     *          size of the greenhouse in m³
+     *            size of the greenhouse in m³
      * @param cost
-     *         cost of the greenhouse
+     *            cost of the greenhouse
+     * @param t
+     *            Type of greenhouse
      */
     public GreenhouseImp(final String name, final double size, final int cost, final GreenHouseType t) {
         super();
@@ -43,12 +45,12 @@ public class GreenhouseImp implements GreenHouse, Serializable {
 
     /**
      * This method add some plants to the Greenhouse.
+     *
      * @param n
-     *      number of plants
+     *            number of plants
      * @param plant
-     *      an object of type Plant
-     * @return
-     *         return id plant
+     *            an object of type Plant
+     * @return return id plant
      *
      */
     @Override
@@ -154,6 +156,5 @@ public class GreenhouseImp implements GreenHouse, Serializable {
     public int getNumberOfPlants() {
         return plantMap.size();
     }
-
 
 }
