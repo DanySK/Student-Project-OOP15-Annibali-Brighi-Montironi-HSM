@@ -4,7 +4,15 @@ import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ *
+ *
+ *
+ */
 public class PlantImpl implements Plant, Serializable {
+
+    private static final long serialVersionUID = 1101353617623045838L;
+
     private final PlantModel model;
     private final int cost;
     private final List<Double> phList;
@@ -12,7 +20,14 @@ public class PlantImpl implements Plant, Serializable {
     private final List<Double> conductList;
     private final List<Double> tempList;
 
-    public PlantImpl(final PlantModel model,final int cost) {
+    /**
+     *
+     * @param model
+     *            PlantModel
+     * @param cost
+     *            Cost in euro
+     */
+    public PlantImpl(final PlantModel model, final int cost) {
         super();
         this.model = model;
         this.cost = cost;
@@ -73,14 +88,10 @@ public class PlantImpl implements Plant, Serializable {
         this.tempList.add(0, value);
     }
 
-
     @Override
     public String toString() {
         return "PlantImpl [model=" + model + ", cost=" + cost + ", phList=" + phList + ", brightList=" + brightList
                 + ", conductList=" + conductList + ", tempList=" + tempList + "]";
     }
-
-
-
 
 }

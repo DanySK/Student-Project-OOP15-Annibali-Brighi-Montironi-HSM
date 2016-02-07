@@ -8,9 +8,10 @@ import java.io.Serializable;
 
 public class PlantModelImpl implements PlantModel, Serializable {
 
+    private static final long serialVersionUID = -4471371902186918643L;
 
     private final String name;
-    private final  String botanicalName;
+    private final String botanicalName;
     private final double ph;
     private final double brightness;
     private final int optimalGrowthTime;
@@ -20,21 +21,34 @@ public class PlantModelImpl implements PlantModel, Serializable {
     private final double conductivity;
     private final double optimalTemperature;
 
-    /**Constructor used by a Builder.
-     * @param name name plant
-     * @param botanicalName botanical name plant
-     * @param ph optimal ph value for the plant
-     * @param brightness light needed by the plant
-     * @param optimalGrowthTime time growth
-     * @param life time life
-     * @param size max size for the plant expressed in cm³
-     * @param cost cost
-     * @param conductivity conductivity
-     * @param optimalTemperature optimal temperature for the plant
+    /**
+     * Constructor used by a Builder.
+     *
+     * @param name
+     *            name plant
+     * @param botanicalName
+     *            botanical name plant
+     * @param ph
+     *            optimal ph value for the plant
+     * @param brightness
+     *            light needed by the plant
+     * @param optimalGrowthTime
+     *            time growth
+     * @param life
+     *            time life
+     * @param size
+     *            max size for the plant expressed in cm³
+     * @param cost
+     *            cost
+     * @param conductivity
+     *            conductivity
+     * @param optimalTemperature
+     *            optimal temperature for the plant
      *
      */
-    protected PlantModelImpl(final  String name, final String botanicalName, final double ph, final double brightness,
-            final int optimalGrowthTime, final int life, final double size, final int cost, final double conductivity, final double optimalTemperature) {
+    protected PlantModelImpl(final String name, final String botanicalName, final double ph, final double brightness,
+            final int optimalGrowthTime, final int life, final double size, final int cost, final double conductivity,
+            final double optimalTemperature) {
         super();
         this.name = name;
         this.botanicalName = botanicalName;
@@ -164,7 +178,5 @@ public class PlantModelImpl implements PlantModel, Serializable {
         }
         return true;
     }
-
-
 
 }

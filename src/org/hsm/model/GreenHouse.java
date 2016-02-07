@@ -9,98 +9,89 @@ public interface GreenHouse {
 
     /**
      * Add n plant in the Greenhouse.
-     * @param n
-     *      number of plants to add
+     *
      * @param plant
-     *      type of plant to add
+     *            type of plant to add
      * @param cost
-     *      cost of the single plant
-     * @return
-     *      id plant
+     *            cost of the single plant
+     * @return id plant
      */
     int addPlant(final PlantModel plant, final int cost);
 
     /**
      * Remove a single plant from the Greenhouse.
+     *
      * @param id
-     *      id plant to remove
+     *            id plant to remove
      */
     void delPlant(final int id);
 
     /**
      * Remove a kind of plant from the Greenhouse.
+     *
      * @param plant
-     *      type of plant to remove
+     *            type of plant to remove
      */
     void delPlants(final PlantModel plant);
-    
+
     /**
-     * @return Map<Integer, Plant>
-     *      return a Map. The key is ID plant. The value is Plant
+     * @return Map<Integer, Plant> return a Map. The key is ID plant. The value
+     *         is Plant
      */
     Map<Integer, Plant> getPlants();
-    
+
     /**
-     * @return 
-     *      return name of the greenhouse
+     * @return return name of the greenhouse
      */
     String getName();
-    
+
     /**
-     * 
+     *
      * @param n
-     *          new name of the greenhouse
+     *            new name of the greenhouse
      */
     void setName(final String n);
-    
+
     /**
-     *@return 
-     *      total size of the greenhouse in m³
+     * @return total size of the greenhouse in m³
      */
-    double getSize(); 
+    double getSize();
 
     /**
      * @param s
-     *         the size of the greenhouse in m³
+     *            the size of the greenhouse in m³
      */
-    void setSize(double s); 
-    
+    void setSize(double s);
+
     /**
-     * @return
-     *      Free space of the greenhouse
+     * @return Free space of the greenhouse
      */
     double getFreeSize();
-    
+
     /**
-     *@return 
-     *      Return the space occupied by plants in m³ 
+     * @return Return the space occupied by plants in m³
      */
     double getOccSize();
-    
+
     /**
-     * @return 
-     *      return the costGreenhouse field
+     * @return return the costGreenhouse field
      */
     double getCost();
-    
+
     /**
-     *@return 
-     *      Number of plants in the greenhouse 
+     * @return Number of plants in the greenhouse
      */
     int getNumberOfPlants();
-    
+
     /**
      * @param cost
-     *      cost of the greenhouse
+     *            cost of the greenhouse
      */
     void setCost(double cost);
 
     /**
-     *@return 
-     *      return the type of the greenhouse
+     * @return return the type of the greenhouse
      */
     GreenHouseType getType();
-    
-    
 
 }

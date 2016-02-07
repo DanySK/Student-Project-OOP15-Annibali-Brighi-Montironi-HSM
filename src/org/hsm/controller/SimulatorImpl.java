@@ -10,7 +10,7 @@ import org.hsm.model.PlantModel;
 
 /**
  *
- * Simulator class: provide a simulates paramters for a Hydroponic Greenhouse.
+ * Simulator class: provide a simulates paramters for an Hydroponic Greenhouse.
  *
  */
 public class SimulatorImpl implements Simulator {
