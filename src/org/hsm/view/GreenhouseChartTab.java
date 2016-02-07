@@ -6,6 +6,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 /**
  *This tab is used to show charts about the greenhouse. 
@@ -28,10 +29,11 @@ public class GreenhouseChartTab implements GUIComponent {
         buttonPanel.add(spacePlantChart);
 
         final JPanel chartPanel = new JPanel();
-        chartPanel.setBorder(BorderFactory.createEtchedBorder());
+        final JScrollPane scrollPane = new JScrollPane(chartPanel);
+        scrollPane.setBorder(BorderFactory.createEtchedBorder());
 
         this.panel.add(buttonPanel, BorderLayout.NORTH);
-        this.panel.add(chartPanel, BorderLayout.CENTER);
+        this.panel.add(scrollPane, BorderLayout.CENTER);
 
     }
 
