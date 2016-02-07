@@ -4,7 +4,7 @@ package org.hsm.view;
  *This interface contains methods to use a specific panel for managing euros.
  *
  */
-public interface EuroPanel {
+public interface EuroPanel extends GUIComponent {
 
     /**
      * Get the values expressed in cents.

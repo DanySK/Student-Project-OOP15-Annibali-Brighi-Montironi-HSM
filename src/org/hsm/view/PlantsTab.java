@@ -77,9 +77,7 @@ public class PlantsTab extends Observable implements GUIComponent, Table {
         final JButton remove = new JButton("Remove Plant");
         remove.addActionListener(e -> ControllerImpl.getController().delPlant());
         final JButton updateValues = new JButton("Update Plant Values");
-        final JButton addPlants = new JButton("Add Plants");
         southPanel.add(add);
-        southPanel.add(addPlants);
         southPanel.add(remove);
         southPanel.add(updateValues);
         southPanel.setAlignmentX(Component.RIGHT_ALIGNMENT);
