@@ -111,6 +111,15 @@ public class ControllerImpl implements Controller, Serializable {
     }
 
     @Override
+    public void addPlants(final PlantModel plant, final int cost, final int n) {
+        this.ghMod = true;
+        for (int i = 0; i < n; i++) {
+            final int id = this.greenhouse.get().addPlant(plant, cost);
+            this.view.insertPlant(id, plant.getName(), cost / 100.0, 0, 0, 0, 0);
+        }
+    }
+
+    @Override
     public void delPlant() {
         try {
             final int id = this.view.getSelectedIDPlant();
@@ -306,7 +315,8 @@ public class ControllerImpl implements Controller, Serializable {
     public void showBrightnessBarChart() {
         try {
             final int id = this.view.getSelectedIDPlant();
-            new BarChartDialog("Brightness", "lumen", this.greenhouse.get().getPlants().get(id).getModel().getBrightness(), 0).start();
+            new BarChartDialog("Brightness", "lumen",
+                    this.greenhouse.get().getPlants().get(id).getModel().getBrightness(), 0).start();
         } catch (IllegalStateException e) {
             Utilities.errorMessage(this.view.getFrame(), "No plant is selected!");
         }
@@ -316,7 +326,8 @@ public class ControllerImpl implements Controller, Serializable {
     public void showPhBarChart() {
         try {
             final int id = this.view.getSelectedIDPlant();
-            new BarChartDialog("Basicity", "pg", this.greenhouse.get().getPlants().get(id).getModel().getPH(), 0).start();
+            new BarChartDialog("Basicity", "pg", this.greenhouse.get().getPlants().get(id).getModel().getPH(), 0)
+                    .start();
         } catch (IllegalStateException e) {
             Utilities.errorMessage(this.view.getFrame(), "No plant is selected!");
         }
@@ -326,7 +337,8 @@ public class ControllerImpl implements Controller, Serializable {
     public void showTemperatureBarChart() {
         try {
             final int id = this.view.getSelectedIDPlant();
-            new BarChartDialog("Temperature", "°C", this.greenhouse.get().getPlants().get(id).getModel().getOptimalTemperature(), 0).start();
+            new BarChartDialog("Temperature", "°C",
+                    this.greenhouse.get().getPlants().get(id).getModel().getOptimalTemperature(), 0).start();
         } catch (IllegalStateException e) {
             Utilities.errorMessage(this.view.getFrame(), "No plant is selected!");
         }
@@ -336,7 +348,8 @@ public class ControllerImpl implements Controller, Serializable {
     public void showConductivityBarChart() {
         try {
             final int id = this.view.getSelectedIDPlant();
-            new BarChartDialog("Conductivity", "cf", this.greenhouse.get().getPlants().get(id).getModel().getConductivity(), 0).start();
+            new BarChartDialog("Conductivity", "cf",
+                    this.greenhouse.get().getPlants().get(id).getModel().getConductivity(), 0).start();
         } catch (IllegalStateException e) {
             Utilities.errorMessage(this.view.getFrame(), "No plant is selected!");
         }

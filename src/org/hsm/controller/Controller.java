@@ -50,7 +50,7 @@ public interface Controller {
     void newDatabase();
 
     /**
-     * Add n plants to Greenhouse loaded.
+     * Add plant to Greenhouse loaded.
      *
      * @param plant
      *            the type of plant to insert
@@ -59,6 +59,19 @@ public interface Controller {
      *
      */
     void addPlant(PlantModel plant, int cost);
+
+    /**
+     * Add n plants to Greenhouse loaded.
+     *
+     * @param plant
+     *            the type of plant to insert
+     * @param cost
+     *            the cont in euro of the plant
+     * @param n
+     *            number of platns to add
+     *
+     */
+    void addPlants(PlantModel plant, int cost, int n);
 
     /**
      * Delete the selected plant in the greenhouse.
