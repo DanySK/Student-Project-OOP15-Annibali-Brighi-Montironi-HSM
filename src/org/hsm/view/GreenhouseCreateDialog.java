@@ -53,9 +53,7 @@ public class GreenhouseCreateDialog extends AbstractAddDialog {
      */
     public GreenhouseCreateDialog(final JFrame frame) {
         super(frame, DIALOG_TITLE, Dialog.ModalityType.APPLICATION_MODAL);
-        if (ControllerImpl.getController().isGhLoad() && Utilities.saveGreenhouseMessage(frame)) {
-            ControllerImpl.getController().saveGreenhouse();
-        }
+        //check save greenhouse
         this.pictureLabel = new JLabel("", new ImageIcon(this.getClass().getResource("/linear.jpg")), JLabel.CENTER);
         this.nameField = new JTextField(TXT_DIM);
         final JPanel panelUp = new JPanel();
