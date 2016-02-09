@@ -45,8 +45,21 @@ public interface View extends VisibleComponent {
      * @param conductivity the conductivity of the plant
      * @param temperature the temperature of the plant
      */
-    void insertPlant(final int id, final String name, final double cost, final int ph, final double brightness,
+    void insertNewPlant(final int id, final String name, final double cost, final int ph, final double brightness,
              final double conductivity, final double temperature);
+
+    /**
+     * Insert a plant into Greenhouse View.
+    * @param id the id of the plant
+    * @param name the name of the plant
+    * @param cost the cost of the plant
+    * @param ph the ph of the plant
+    * @param brightness the brightness of the plant
+    * @param conductivity the conductivity of the plant
+    * @param temperature the temperature of the plant
+    */
+   void insertPlant(final int id, final String name, final double cost, final int ph, final double brightness,
+            final double conductivity, final double temperature);
 
      /**
      *Remove the selected plant into the table.

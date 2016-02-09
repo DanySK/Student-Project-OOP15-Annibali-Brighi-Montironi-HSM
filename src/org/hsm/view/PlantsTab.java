@@ -119,15 +119,24 @@ public class PlantsTab extends Observable implements GUIComponent, Table {
         this.notifyObservers();
     }
 
-    @Override
-    public JComponent getComponent() {
-        return this.panel;
+    /**
+     * Insert the row in the table without advise observers.
+     * @param row the row to insert
+     */
+    public void updateRow(final Object... row) {
+        final DefaultTableModel model = (DefaultTableModel) this.table.getModel();
+        model.addRow(row);
     }
 
     @Override
     public void clean() {
         final DefaultTableModel model = (DefaultTableModel) this.table.getModel();
         model.setRowCount(0);
+    }
+
+    @Override
+    public JComponent getComponent() {
+        return this.panel;
     }
 
 }

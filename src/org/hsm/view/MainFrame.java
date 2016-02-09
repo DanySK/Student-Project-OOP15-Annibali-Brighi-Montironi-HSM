@@ -93,9 +93,15 @@ public class MainFrame implements View {
     }
 
     @Override
-    public void insertPlant(final int id, final String name, final double cost, final int ph, final double brightness,
+    public void insertNewPlant(final int id, final String name, final double cost, final int ph, final double brightness,
                 final double conductivity, final double temperature) {
         this.tab.getPlantsTab().insertRow(id, name, cost, ph, brightness, conductivity, temperature);
+    }
+
+    @Override
+    public void insertPlant(final int id, final String name, final double cost, final int ph, final double brightness, 
+            final double conductivity, final double temperature) {
+        this.tab.getPlantsTab().updateRow(id, name, cost, ph, brightness, conductivity, temperature);
     }
 
     @Override

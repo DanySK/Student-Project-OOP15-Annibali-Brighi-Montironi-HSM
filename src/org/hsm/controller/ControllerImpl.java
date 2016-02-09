@@ -116,7 +116,7 @@ public class ControllerImpl implements Controller, Serializable {
         this.ghMod = true;
         for (int i = 0; i < n; i++) {
             final int id = this.greenhouse.get().addPlant(plant, cost);
-            this.view.insertPlant(id, plant.getName(), cost / 100.0, 0, 0, 0, 0);
+            this.view.insertNewPlant(id, plant.getName(), cost / 100.0, 0, 0, 0, 0);
         }
     }
 
