@@ -238,10 +238,10 @@ public class ControllerImpl implements Controller, Serializable {
             this.view.insertPlant(elem.getKey(), 
                                   elem.getValue().getModel().getName(), 
                                   elem.getValue().getCost(), 
-                                  0, //creare getter per ultimo valore in lista
-                                  0, 
-                                  0, 
-                                  0);
+                                  elem.getValue().getLastPhValue(), 
+                                  elem.getValue().getLastBrightValue(), 
+                                  elem.getValue().getLastConductValue(), 
+                                  elem.getValue().getLastTempValue());
         }
     }
 
