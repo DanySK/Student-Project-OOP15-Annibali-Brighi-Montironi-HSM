@@ -10,7 +10,6 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import org.hsm.controller.ControllerImpl;
-import org.hsm.model.PlantModel;
 
 /**
  *This tab contains all the information about the database of plants.
@@ -47,17 +46,6 @@ public class DatabaseTab implements GUIComponent, Table {
     @Override
     public JComponent getComponent() {
         return this.panel;
-    }
-
-    /**
-     *  Set database view.
-     */
-    public void setDatabase() {
-        for (final PlantModel elem: ControllerImpl.getController().getDatabase().getDb().values()) {
-            this.insertRow(elem.getName(), elem.getBotanicalName(), elem.getPH(), elem.getBrightness(),
-                           elem.getOptimalGrowthTime(), elem.getLife(), elem.getSize(), elem.getConductivity(),
-                           elem.getOptimalTemperature());
-        }
     }
 
     /**

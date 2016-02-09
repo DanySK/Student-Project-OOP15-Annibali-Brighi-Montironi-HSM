@@ -20,7 +20,6 @@ import org.hsm.controller.ControllerImpl;
  */
 public class MainFrame implements View {
 
-    private static final String FRAME_TITLE = "Hydroponic System Manager";
     private static final double PROPORTION = 1.3;
     private final JFrame frame;
     private final Tabbed tab;
@@ -34,7 +33,7 @@ public class MainFrame implements View {
         this.setSystemLook();
         this.tab = new Tabbed(this.frame);
         this.tab.setVisible(false);
-        this.frame = new JFrame(FRAME_TITLE);
+        this.frame = new JFrame("Hydroponic System Manager");
         this.frame.setLayout(new BorderLayout());
         this.frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         this.frame.addWindowListener(new WindowAdapter() {
@@ -74,16 +73,10 @@ public class MainFrame implements View {
     }
 
     @Override
-    public void insertGreenhouse() {
-        this.tab.getGreenhouseTab().setGreenhouse();
+    public void insertGreenhouse(final String name, final double size, final double cost, final String typology, 
+            final double freeSpace, final double occupiedSpace, final int numberOfPlants) {
+        this.tab.getGreenhouseTab().setGreenhouse(name, size, cost, typology, freeSpace, occupiedSpace, numberOfPlants);
         this.tab.getPlantsTab().clean();
-        this.tab.getPlantsTab().setPlants();
-    }
-
-    @Override
-    public void insertDatabase() {
-        this.tab.getDatabaseTab().clean();
-        this.tab.getDatabaseTab().setDatabase();
     }
 
     @Override
@@ -110,15 +103,6 @@ public class MainFrame implements View {
         this.tab.getPlantsTab().removeSelectedRow();
     }
 
-    private void setSystemLook() {
-        try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (ClassNotFoundException | InstantiationException
-                | IllegalAccessException | UnsupportedLookAndFeelException e) {
-            System.out.println("errore visualizzazione gui");
-        }
-    }
-
     @Override
     public Optional<String> saveGreenhouseDialog() {
         return new SaveFileDialog(this.frame, "HSM Document", "hsm").getPath();
@@ -131,12 +115,12 @@ public class MainFrame implements View {
 
     @Override
     public Optional<String> exportDatabaseDialog() {
-        return new SaveFileDialog(this.frame, "DHSM Document", "dat").getPath();
+        return new SaveFileDialog(this.frame, "DHSM Document", "dhsm").getPath();
     }
 
     @Override
     public Optional<String> importDatabaseDialog() {
-        return new OpenFileDialog(this.frame, "DHSM Document", "dat").getPath();
+        return new OpenFileDialog(this.frame, "DHSM Document", "dhsm").getPath();
     }
 
     @Override
@@ -157,6 +141,15 @@ public class MainFrame implements View {
     @Override
     public int getSelectedIDPlant() throws IllegalStateException {
         return this.tab.getPlantsTab().getSelectedIDPlant();
+    }
+
+    private void setSystemLook() {
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (ClassNotFoundException | InstantiationException
+                | IllegalAccessException | UnsupportedLookAndFeelException e) {
+            System.out.println("errore visualizzazione gui");
+        }
     }
 
 }

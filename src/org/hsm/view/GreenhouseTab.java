@@ -78,16 +78,23 @@ public class GreenhouseTab implements GUIComponent, Observer {
 
     /**
      *  Set greenhouse view.
+     * @param name the greenhouse name
+     * @param size the greenhouse size
+     * @param cost the greenhouse cost
+     * @param typology the greenhouse typology
+     * @param freeSpace the greenhouse free space
+     * @param occupiedSpace the greenhouse occupied space
+     * @param numberOfPlants the number of plants of the greenhouse
      */
-    public void setGreenhouse() {
-        final GreenHouse green = ControllerImpl.getController().getGreenhouse();
-        this.fieldMap.get(GreenhouseCharacteristics.NAME).setText(green.getName());
-        this.fieldMap.get(GreenhouseCharacteristics.DIMENSION).setText(Double.toString(green.getSize()));
-        this.fieldMap.get(GreenhouseCharacteristics.COST).setText(Double.toString(green.getCost() / CENT_FACTOR));
-        this.fieldMap.get(GreenhouseCharacteristics.TYPOLOGY).setText(green.getType().toString());
-        this.fieldMap.get(GreenhouseCharacteristics.FREE_SPACE).setText(Double.toString(green.getFreeSize()));
-        this.fieldMap.get(GreenhouseCharacteristics.USED_SPACE).setText(Double.toString(green.getOccSize()));
-        this.fieldMap.get(GreenhouseCharacteristics.NUMBER_OF_PLANTS).setText(Integer.toString(green.getNumberOfPlants()));
+    public void setGreenhouse(final String name, final double size, final double cost, final String typology, 
+            final double freeSpace, final double occupiedSpace, final int numberOfPlants) {
+        this.fieldMap.get(GreenhouseCharacteristics.NAME).setText(name);
+        this.fieldMap.get(GreenhouseCharacteristics.DIMENSION).setText(Double.toString(size));
+        this.fieldMap.get(GreenhouseCharacteristics.COST).setText(Double.toString(cost / CENT_FACTOR));
+        this.fieldMap.get(GreenhouseCharacteristics.TYPOLOGY).setText(typology);
+        this.fieldMap.get(GreenhouseCharacteristics.FREE_SPACE).setText(Double.toString(freeSpace));
+        this.fieldMap.get(GreenhouseCharacteristics.USED_SPACE).setText(Double.toString(occupiedSpace));
+        this.fieldMap.get(GreenhouseCharacteristics.NUMBER_OF_PLANTS).setText(Integer.toString(numberOfPlants));
     }
 
     @Override

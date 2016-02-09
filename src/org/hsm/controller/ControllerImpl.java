@@ -11,6 +11,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.Map;
 import java.util.Optional;
 
 import org.hsm.model.DBplants;
@@ -18,6 +19,7 @@ import org.hsm.model.Database;
 import org.hsm.model.GreenHouse;
 import org.hsm.model.GreenHouseType;
 import org.hsm.model.GreenhouseImp;
+import org.hsm.model.Plant;
 import org.hsm.model.PlantModel;
 import org.hsm.view.BarChartDialog;
 import org.hsm.view.MainFrame;
@@ -65,7 +67,13 @@ public class ControllerImpl implements Controller, Serializable {
         this.greenhouse = Optional.of(new GreenhouseImp(name, size, cost, greenhouseType));
         this.database = Optional.of(new DBplants());
         this.view.setActive(true);
-        this.view.insertGreenhouse();
+        this.view.insertGreenhouse(name, 
+                                   size, 
+                                   cost, 
+                                   greenhouseType.toString(), 
+                                   size, 
+                                   0, 
+                                   0);
     }
 
     @Override
@@ -219,7 +227,22 @@ public class ControllerImpl implements Controller, Serializable {
             e.printStackTrace();
         }
         this.view.setActive(true);
-        this.view.insertGreenhouse();
+        this.view.insertGreenhouse(this.greenhouse.get().getName(), 
+                                   this.greenhouse.get().getSize(), 
+                                   this.greenhouse.get().getCost(), 
+                                   this.greenhouse.get().getType().toString(), 
+                                   this.greenhouse.get().getFreeSize(), 
+                                   this.greenhouse.get().getOccSize(), 
+                                   this.greenhouse.get().getNumberOfPlants());
+        for (final Map.Entry<Integer, Plant> elem: this.greenhouse.get().getPlants().entrySet()) {
+            this.view.insertPlant(elem.getKey(), 
+                                  elem.getValue().getModel().getName(), 
+                                  elem.getValue().getCost(), 
+                                  0, //creare getter per ultimo valore in lista
+                                  0, 
+                                  0, 
+                                  0);
+        }
     }
 
     @Override
@@ -265,7 +288,12 @@ public class ControllerImpl implements Controller, Serializable {
             Utilities.errorMessage(this.view.getFrame(), e.toString());
             e.printStackTrace();
         }
-        this.view.insertDatabase();
+        this.view.cleanDatabase();
+        for (final PlantModel elem: this.database.get().getDb().values()) {
+            this.view.insertModelPlant(elem.getName(), elem.getBotanicalName(), elem.getPH(), elem.getBrightness(),
+                           elem.getOptimalGrowthTime(), elem.getLife(), elem.getSize(), elem.getConductivity(),
+                           elem.getOptimalTemperature());
+        }
     }
 
     @Override
