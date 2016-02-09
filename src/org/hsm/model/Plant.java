@@ -70,22 +70,22 @@ public interface Plant {
     void addPhValue(final double value);
     
     /**
-     * @return the last bright value from brightList
+     * @return the last bright value added in brightList
      */
     double getLastBrightValue();
     
     /**
-    * @return the last conduct value from conductList
+    * @return the last conduct value added in conductList
     */
     double getLastConductValue();
     
     /**
-    * @return the last temperature value from tempList
+    * @return the last temperature value added in tempList
     */
     double getLastTempValue();
     
     /**
-    * @return the last PH value from phList
+    * @return the last PH value added in phList
     */
     double getLastPhValue();
 }
