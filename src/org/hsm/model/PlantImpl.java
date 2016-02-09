@@ -94,4 +94,24 @@ public class PlantImpl implements Plant, Serializable {
                 + ", conductList=" + conductList + ", tempList=" + tempList + "]";
     }
 
+    @Override
+    public double getLastBrightValue() {
+        return this.brightList.get(this.brightList.size() -1);
+    }
+
+    @Override
+    public double getLastConductValue() {
+        return this.conductList.get(this.conductList.size() -1);
+    }
+
+    @Override
+    public double getLastTempValue() {
+        return this.tempList.get(this.tempList.size() -1);
+    }
+
+    @Override
+    public double getLastPhValue() {
+        return this.phList.get(this.phList.size() -1);
+    }
+
 }

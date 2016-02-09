@@ -59,7 +59,7 @@ public interface Plant {
 
     /**
      *
-     * @param value Temperatur value (°C)
+     * @param value Temperatur value (ï¿½C)
      */
     void addTempValue(final double value);
 
@@ -68,4 +68,24 @@ public interface Plant {
      * @param value pH value (pH)
      */
     void addPhValue(final double value);
+    
+    /**
+     * @return the last bright value from brightList
+     */
+    double getLastBrightValue();
+    
+    /**
+    * @return the last conduct value from conductList
+    */
+    double getLastConductValue();
+    
+    /**
+    * @return the last temperature value from tempList
+    */
+    double getLastTempValue();
+    
+    /**
+    * @return the last PH value from phList
+    */
+    double getLastPhValue();
 }
