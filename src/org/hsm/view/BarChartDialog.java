@@ -39,8 +39,14 @@ public class BarChartDialog implements VisibleComponent {
         final DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         dataset.addValue(optimalValue, OPTIMAL, characteristic);
         dataset.addValue(currentValue, CURRENT, characteristic);
-        final JFreeChart chart = ChartFactory.createBarChart(characteristic + " Comparing Chart", "", unitsOfMeasure, dataset, PlotOrientation.VERTICAL, 
-                                 true, true, false);
+        final JFreeChart chart = ChartFactory.createBarChart(characteristic + " Comparing Chart", 
+                                                             "", 
+                                                             unitsOfMeasure, 
+                                                             dataset, 
+                                                             PlotOrientation.VERTICAL, 
+                                                             true, 
+                                                             true, 
+                                                             false);
         final ChartPanel panel = new ChartPanel(chart, false);
         final CategoryPlot categoryPlot = chart.getCategoryPlot();
         final BarRenderer br = (BarRenderer) categoryPlot.getRenderer();
