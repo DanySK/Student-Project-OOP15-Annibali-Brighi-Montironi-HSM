@@ -3,9 +3,6 @@ package org.hsm.view;
 import java.awt.BorderLayout;
 import java.util.List;
 
-import javax.swing.JButton;
-import javax.swing.JDialog;
-
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -16,9 +13,7 @@ import org.jfree.data.category.DefaultCategoryDataset;
  * The dialog that contains the line chart to see the trend of values.
  *
  */
-public class LineChartDialog implements VisibleComponent {
-
-    private final JDialog dialog;
+public class LineChartDialog extends AbstractChartDialog {
 
     /**
      * Create the line chart to see the value trend.
@@ -27,9 +22,7 @@ public class LineChartDialog implements VisibleComponent {
      * @param valueList the list of values
      */
     public LineChartDialog(final String characteristic, final String unitsOfMeasure, final List<Number> valueList) {
-        this.dialog = new JDialog();
-        this.dialog.setTitle(characteristic + " Chart");
-        this.dialog.setLayout(new BorderLayout());
+        super(characteristic);
         final DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         for (int i = 0; i < valueList.size(); ++i) {
             dataset.addValue(valueList.get(i), "Value", i);
@@ -43,17 +36,7 @@ public class LineChartDialog implements VisibleComponent {
                                                               true, 
                                                               false);
         final ChartPanel panel = new ChartPanel(chart, false);
-        final JButton exit = new JButton("Exit");
-        exit.addActionListener(e -> this.dialog.dispose());
-        this.dialog.add(panel, BorderLayout.CENTER);
-        this.dialog.add(exit, BorderLayout.SOUTH);
-    }
-
-    @Override
-    public void start() {
-        this.dialog.pack();
-        this.dialog.setLocationByPlatform(true);
-        this.dialog.setVisible(true); 
+        super.getJDialog().add(panel, BorderLayout.CENTER);
     }
 
 }

@@ -330,7 +330,7 @@ public class ControllerImpl implements Controller, Serializable {
     public void showTemperatureBarChart() {
         try {
             final int id = this.view.getSelectedIDPlant();
-            new BarChartDialog("Temperature", "°C",
+            new BarChartDialog("Temperature", "Celsius degrees",
                     this.greenhouse.get().getPlants().get(id).getModel().getOptimalTemperature(), 0).start();
         } catch (IllegalStateException e) {
             Utilities.errorMessage(this.view.getFrame(), "No plant is selected!");
