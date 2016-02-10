@@ -21,10 +21,10 @@ import org.hsm.model.GreenHouseType;
 import org.hsm.model.GreenhouseImp;
 import org.hsm.model.Plant;
 import org.hsm.model.PlantModel;
-import org.hsm.view.BarChartDialog;
-import org.hsm.view.MainFrame;
-import org.hsm.view.Utilities;
-import org.hsm.view.View;
+import org.hsm.view.chart.BarChartDialog;
+import org.hsm.view.gui.MainFrame;
+import org.hsm.view.gui.View;
+import org.hsm.view.utility.Utilities;
 
 /**
  * Implementation of Controller Interface.
