@@ -1,6 +1,8 @@
 package org.hsm.view.gui;
 
+import java.awt.Desktop;
 import java.awt.event.KeyEvent;
+import java.net.URI;
 
 import javax.swing.JComponent;
 import javax.swing.JFrame;
@@ -116,6 +118,20 @@ public class MenuBar implements GUIComponent {
         chart.add(temperatureLineChart);
         final JMenuItem conductivityLineChart = new JMenuItem("Show Conductivity Line Chart");
         chart.add(conductivityLineChart);
+        //Menu Information Item
+        final JMenuItem whatsHydroponic = new JMenuItem("What is Hydroponic? (Wiki)");
+        information.add(whatsHydroponic);
+        whatsHydroponic.addActionListener(e -> {
+            if (Desktop.isDesktopSupported()) {
+                final Desktop desktop = Desktop.getDesktop();
+                try {
+                    final URI uri = new URI("https://en.wikipedia.org/wiki/Hydroponics");
+                    desktop.browse(uri);
+                } catch (final Exception ex) {
+                    Utilities.errorMessage(frame, "An error has occured!");
+                }
+             }
+        });
         //Menu Help Item
         final JMenuItem about = new JMenuItem("About Hydroponic System Manager");
         help.add(about);
