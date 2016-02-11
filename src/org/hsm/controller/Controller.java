@@ -1,7 +1,7 @@
 package org.hsm.controller;
 
 import org.hsm.model.Database;
-import org.hsm.model.GreenHouse;
+import org.hsm.model.Greenhouse;
 import org.hsm.model.GreenHouseType;
 import org.hsm.model.PlantModel;
 
@@ -30,7 +30,7 @@ public interface Controller {
      *
      * @return the actual Greenhouse
      */
-    GreenHouse getGreenhouse();
+    Greenhouse getGreenhouse();
 
     /**
      * Get the Database.

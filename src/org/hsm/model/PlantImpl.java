@@ -40,7 +40,7 @@ public class PlantImpl implements Plant, Serializable {
 
     @Override
     public void addPhValue(final double value) {
-        this.phList.add(0, value);
+        this.phList.add(value);
     }
 
     @Override
@@ -75,17 +75,17 @@ public class PlantImpl implements Plant, Serializable {
 
     @Override
     public void addBrightValue(final double value) {
-        this.brightList.add(0, value);
+        this.brightList.add(value);
     }
 
     @Override
     public void addConductValue(final double value) {
-        this.conductList.add(0, value);
+        this.conductList.add(value);
     }
 
     @Override
     public void addTempValue(final double value) {
-        this.tempList.add(0, value);
+        this.tempList.add(value);
     }
 
     @Override
@@ -96,22 +96,34 @@ public class PlantImpl implements Plant, Serializable {
 
     @Override
     public double getLastBrightValue() {
-        return this.brightList.get(0);
+        if (this.brightList.isEmpty()){
+            return 0;
+        }
+        return this.brightList.get(this.brightList.size() -1);
     }
 
     @Override
     public double getLastConductValue() {
-        return this.conductList.get(0);
+        if (this.brightList.isEmpty()){
+            return 0;
+        }
+        return this.conductList.get(this.conductList.size() -1);
     }
 
     @Override
     public double getLastTempValue() {
-        return this.tempList.get(0);
+        if (this.tempList.isEmpty()){
+            return 0;
+        }
+        return this.tempList.get(this.tempList.size() -1);
     }
 
     @Override
     public double getLastPhValue() {
-        return this.phList.get(0);
+        if (this.phList.isEmpty()){
+            return 0;
+        }
+        return this.phList.get(this.phList.size() -1);
     }
 
 }

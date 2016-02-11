@@ -5,11 +5,12 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * implementation of the Greenhouse interface.
  */
-public class GreenhouseImp implements GreenHouse, Serializable {
+public class GreenhouseImp implements Greenhouse, Serializable {
 
     /**
      *
@@ -156,5 +157,20 @@ public class GreenhouseImp implements GreenHouse, Serializable {
     public int getNumberOfPlants() {
         return plantMap.size();
     }
+    
+    public Map<String, Integer> getCompositionByNumber(){
+        final Map<String,Integer> tmpMap = new HashMap<>();
+        this.plantMap.values().stream().forEach(i -> {
+            if (tmpMap.containsKey(i.getModel().getBotanicalName())){
+               tmpMap.put(i.getModel().getBotanicalName(),tmpMap.get(i.getModel().getBotanicalName())+1 );
+            } else {
+                tmpMap.put(i.getModel().getBotanicalName(), 1);
+            }
+        
+        });
+        
+        return tmpMap;
+    }
+    
 
 }

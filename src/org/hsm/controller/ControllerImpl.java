@@ -16,7 +16,7 @@ import java.util.Optional;
 
 import org.hsm.model.DatabaseImpl;
 import org.hsm.model.Database;
-import org.hsm.model.GreenHouse;
+import org.hsm.model.Greenhouse;
 import org.hsm.model.GreenHouseType;
 import org.hsm.model.GreenhouseImp;
 import org.hsm.model.Plant;
@@ -43,7 +43,7 @@ public class ControllerImpl implements Controller, Serializable {
     private static final ControllerImpl CONTROLLER_IMPL = new ControllerImpl();
 
     private Optional<Database> database;
-    private Optional<GreenHouse> greenhouse;
+    private Optional<Greenhouse> greenhouse;
     private final View view = new MainFrame();
 
     private boolean ghMod;
@@ -77,7 +77,7 @@ public class ControllerImpl implements Controller, Serializable {
     }
 
     @Override
-    public GreenHouse getGreenhouse() {
+    public Greenhouse getGreenhouse() {
         return this.greenhouse.get();
     }
 
@@ -213,7 +213,7 @@ public class ControllerImpl implements Controller, Serializable {
         try {
             ObjectInput shmGh = new ObjectInputStream(new BufferedInputStream(new FileInputStream(filenameGh.get())));
             try {
-                this.greenhouse = Optional.of((GreenHouse) shmGh.readObject());
+                this.greenhouse = Optional.of((Greenhouse) shmGh.readObject());
                 shmGh.close();
             } catch (ClassNotFoundException e) {
                 Utilities.errorMessage(this.view.getFrame(), e.toString());

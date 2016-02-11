@@ -5,7 +5,7 @@ import java.util.Map;
 /**
  * interface for the communication between the model and the controller.
  */
-public interface GreenHouse {
+public interface Greenhouse {
 
     /**
      * Add n plant in the Greenhouse.

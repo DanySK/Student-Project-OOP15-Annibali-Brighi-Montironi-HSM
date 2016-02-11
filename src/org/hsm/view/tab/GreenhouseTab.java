@@ -15,7 +15,7 @@ import javax.swing.JSplitPane;
 import javax.swing.JTextField;
 
 import org.hsm.controller.ControllerImpl;
-import org.hsm.model.GreenHouse;
+import org.hsm.model.Greenhouse;
 import org.hsm.view.enumeration.GreenhouseCharacteristics;
 import org.hsm.view.gui.GUIComponent;
 import org.hsm.view.utility.GUIFactory;
@@ -104,7 +104,7 @@ public class GreenhouseTab implements GUIComponent, Observer {
 
     @Override
     public void update(final Observable arg0, final Object arg1) {
-        final GreenHouse green = ControllerImpl.getController().getGreenhouse();
+        final Greenhouse green = ControllerImpl.getController().getGreenhouse();
         this.fieldMap.get(GreenhouseCharacteristics.FREE_SPACE).setText(Double.toString(green.getFreeSize()));
         this.fieldMap.get(GreenhouseCharacteristics.USED_SPACE).setText(Double.toString(green.getOccSize()));
         this.fieldMap.get(GreenhouseCharacteristics.NUMBER_OF_PLANTS).setText(Integer.toString(green.getNumberOfPlants()));
