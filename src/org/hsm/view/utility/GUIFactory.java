@@ -8,6 +8,9 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SpinnerModel;
 
+import org.jfree.chart.JFreeChart;
+import org.jfree.data.general.DefaultPieDataset;
+
 /**
  *The interface for GUI Factory.
  *
@@ -50,5 +53,12 @@ public interface GUIFactory {
      * @return a new JTable with the specified columns
      */
     JTable createTable(final Object... columns);
+
+    /**
+     * Create a bar chart with the legend placed on the left.
+     * @param dataset the dataset for the chart
+     * @return a new chart with the specific dataset
+     */
+    JFreeChart createPieChart(final DefaultPieDataset dataset);
 
 }
