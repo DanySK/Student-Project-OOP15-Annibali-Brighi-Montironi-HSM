@@ -93,5 +93,15 @@ public interface Greenhouse {
      * @return return the type of the greenhouse
      */
     GreenHouseType getType();
+    
+    /**
+     * @return a map: keys are botanical names, values are quantity
+     */
+    Map<String, Integer> getCompositionByNumber();
+    
+    /**
+     *@return a map: Keys are botanical names, values are occupied space by plants 
+     */
+    Map<String, Double> getCompositionByOccupiedSpace();
 
 }

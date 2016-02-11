@@ -158,6 +158,7 @@ public class GreenhouseImp implements Greenhouse, Serializable {
         return plantMap.size();
     }
     
+    @Override
     public Map<String, Integer> getCompositionByNumber(){
         final Map<String,Integer> tmpMap = new HashMap<>();
         this.plantMap.values().stream().forEach(i -> {
@@ -165,6 +166,21 @@ public class GreenhouseImp implements Greenhouse, Serializable {
                tmpMap.put(i.getModel().getBotanicalName(),tmpMap.get(i.getModel().getBotanicalName())+1 );
             } else {
                 tmpMap.put(i.getModel().getBotanicalName(), 1);
+            }
+        
+        });
+        
+        return tmpMap;
+    }
+    
+    @Override
+    public Map<String, Double> getCompositionByOccupiedSpace(){
+        final Map<String, Double> tmpMap = new HashMap<>();
+        this.plantMap.values().stream().forEach(i -> {
+            if (tmpMap.containsKey(i.getModel().getBotanicalName())){
+               tmpMap.put(i.getModel().getBotanicalName(),tmpMap.get(i.getModel().getBotanicalName()) + i.getModel().getSize());
+            } else {
+                tmpMap.put(i.getModel().getBotanicalName(), i.getModel().getSize());
             }
         
         });
