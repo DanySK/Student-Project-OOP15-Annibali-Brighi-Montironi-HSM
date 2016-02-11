@@ -10,6 +10,19 @@ public enum GreenHouseType {
      * Type of disposition of the plants in the greenhouse.
      *
      */
-    GRID, LINEAR, CIRCULAR, PYRAMIDAL;
+    GRID("Grid"),
+    LINEAR("Linear"),
+    CIRCULAR("Circular"),
+    PYRAMIDAL("Pyramidal");
+    
+    private final String name;
+    
+    private GreenHouseType(final String n){
+        this.name= n;
+    }
+    
+    public String toString(){
+        return this.name();
+    }
 
 }
