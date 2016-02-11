@@ -18,7 +18,7 @@ public final class TestModel {
     // CHECKSTYLE:OFF: checkstyle:magicnumber
     public static void main(final String[] args) {
 
-        final Database db = new DBplants();
+        final Database db = new DatabaseImpl();
         db.addPlantModel("ciccio", "pasticcio", 1, 2, 3, 4, 5, 6, 7);
 
         final GreenHouse gn = new GreenhouseImp("serra_uno ", 40, 10, GreenHouseType.GRID);

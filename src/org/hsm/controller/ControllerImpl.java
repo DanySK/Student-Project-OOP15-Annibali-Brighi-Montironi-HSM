@@ -14,7 +14,7 @@ import java.io.Serializable;
 import java.util.Map;
 import java.util.Optional;
 
-import org.hsm.model.DBplants;
+import org.hsm.model.DatabaseImpl;
 import org.hsm.model.Database;
 import org.hsm.model.GreenHouse;
 import org.hsm.model.GreenHouseType;
@@ -65,7 +65,7 @@ public class ControllerImpl implements Controller, Serializable {
         this.loadGh = true;
         this.dbMod = true;
         this.greenhouse = Optional.of(new GreenhouseImp(name, size, cost, greenhouseType));
-        this.database = Optional.of(new DBplants());
+        this.database = Optional.of(new DatabaseImpl());
         this.view.setActive(true);
         this.view.insertGreenhouse(name, 
                                    size, 
@@ -93,7 +93,7 @@ public class ControllerImpl implements Controller, Serializable {
                 this.saveDatabase();
             }
         }
-        this.database = Optional.of(new DBplants());
+        this.database = Optional.of(new DatabaseImpl());
         this.view.cleanDatabase();
     }
 
@@ -208,7 +208,7 @@ public class ControllerImpl implements Controller, Serializable {
         if (!filenameGh.isPresent()) {
             return;
         }
-        this.database = Optional.of(new DBplants());
+        this.database = Optional.of(new DatabaseImpl());
         this.loadGh = true;
         try {
             ObjectInput shmGh = new ObjectInputStream(new BufferedInputStream(new FileInputStream(filenameGh.get())));
@@ -304,9 +304,9 @@ public class ControllerImpl implements Controller, Serializable {
 
         this.checkSave();
 
-        if (Utilities.exitMessage(this.view.getFrame())) {
+       // if (Utilities.exitMessage(this.view.getFrame())) {
             System.exit(0);
-        }
+        //}
     }
 
     /**

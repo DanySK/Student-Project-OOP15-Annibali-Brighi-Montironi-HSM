@@ -7,7 +7,7 @@ import java.util.Map;
 /**
  * Database of the plants that the user can add to his Greenhouse.
  */
-public class DBplants implements Database, Serializable {
+public class DatabaseImpl implements Database, Serializable {
 
     /**
      *
@@ -42,14 +42,16 @@ public class DBplants implements Database, Serializable {
     @Override
     public void addPlantModel(final String name, final String botanicalName, final int ph, final int brightness,
             final int optimalGrowthTime, final int life, final int size, final int conductivity,
-            final int optimalTemperature) {
+            final int optimalTemperature) throws IllegalArgumentException {
 
         final PlantModel p = new BuilderPlant().name(name).botanicalName(botanicalName).ph(ph).brightness(brightness)
                 .optimalGrowthTime(optimalGrowthTime).life(life).size(size).conductivity(conductivity)
                 .optimalTemperature(optimalTemperature).build();
-
-        db.put(botanicalName, p);
-
+        if(!this.db.containsKey(botanicalName)){
+            this.db.put(botanicalName, p);
+        } else {
+            throw new IllegalArgumentException();
+        }
     }
 
     @Override

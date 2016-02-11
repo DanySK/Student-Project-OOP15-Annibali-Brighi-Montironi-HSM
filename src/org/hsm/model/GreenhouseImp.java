@@ -54,7 +54,7 @@ public class GreenhouseImp implements GreenHouse, Serializable {
      *
      */
     @Override
-    public int addPlant(final PlantModel model, final int cost) {
+    public int addPlant(final PlantModel model, final int cost) throws IllegalStateException {
         if (model.getSize() < getFreeSize()) {
             int tmp = productID.getID();
             this.plantMap.put(tmp, new PlantImpl(model, cost));
@@ -126,7 +126,7 @@ public class GreenhouseImp implements GreenHouse, Serializable {
             for (final Map.Entry<Integer, Plant> elem : this.plantMap.entrySet()) {
                 tmp += elem.getValue().getModel().getSize();
             }
-            return this.size - (tmp / CMC_TO_MC);
+            return (this.size / CMC_TO_MC) - (tmp / CMC_TO_MC);
         } else {
             return this.size;
         }
@@ -134,7 +134,7 @@ public class GreenhouseImp implements GreenHouse, Serializable {
 
     @Override
     public double getCost() {
-        return costGreenhouse;
+        return (costGreenhouse / 100);
     }
 
     @Override
