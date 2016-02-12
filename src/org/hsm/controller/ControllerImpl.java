@@ -72,43 +72,28 @@ public final class ControllerImpl implements Controller, Serializable {
     }
 
     @Override
-    public void createGreenhouse(final String name, final String greenhouseType, final int cost,
-            final int size) {
+    public void createGreenhouse(final String name, final String greenhouseType, final int cost, final int size) {
         this.ghMod = true;
         this.loadGh = true;
-<<<<<<< local
-        this.greenhouse = Optional.of(new GreenhouseImp(name, size, cost, greenhouseType));
-=======
-        this.dbMod = true;
         this.greenhouse = Optional.of(new GreenhouseImp(name, size, cost, this.getGreenhouseType(greenhouseType)));
->>>>>>> other
         this.database = Optional.of(new DatabaseImpl());
         this.view.setActive(true);
-<<<<<<< local
-        this.view.insertGreenhouse(name, size, cost, greenhouseType.toString(), size, 0, 0);
-=======
-        this.view.insertGreenhouse(name, 
-                                   size, 
-                                   cost, 
-                                   greenhouseType, 
-                                   size, 
-                                   0, 
-                                   0);
->>>>>>> other
+        this.view.insertGreenhouse(name, size, cost, greenhouseType, size, 0, 0);
+
     }
 
     private GreenHouseType getGreenhouseType(final String type) {
-        switch(type) {
-        case "Linear" : 
-            return GreenHouseType.LINEAR;
-        case "Grid" : 
-            return GreenHouseType.GRID;
-        case "Pyramidal" : 
-            return GreenHouseType.PYRAMIDAL;
-        case "Circular" : 
-            return GreenHouseType.CIRCULAR;
-        default :
-            return GreenHouseType.LINEAR;
+        switch (type) {
+            case "Linear":
+                return GreenHouseType.LINEAR;
+            case "Grid":
+                return GreenHouseType.GRID;
+            case "Pyramidal":
+                return GreenHouseType.PYRAMIDAL;
+            case "Circular":
+                return GreenHouseType.CIRCULAR;
+            default:
+                return GreenHouseType.LINEAR;
         }
     }
 
@@ -422,7 +407,7 @@ public final class ControllerImpl implements Controller, Serializable {
     @Override
     public List<String> getGreenhouseTypes() {
         final List<String> list = new ArrayList<>();
-        for (final GreenHouseType elem: GreenHouseType.values()) {
+        for (final GreenHouseType elem : GreenHouseType.values()) {
             list.add(elem.toString());
         }
         return list;
@@ -437,7 +422,5 @@ public final class ControllerImpl implements Controller, Serializable {
     public static void main(final String... args) {
         ControllerImpl.getController().view.start();
     }
-
-
 
 }
