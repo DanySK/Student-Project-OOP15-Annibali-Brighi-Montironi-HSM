@@ -11,17 +11,17 @@ public enum GreenhouseCharacteristics {
      */
     NAME("Name"),
     /**
-     *The greenhouse dimension (m3).
+     *The greenhouse dimension (m2).
      */
-    DIMENSION("Dimension (m3)"),
+    DIMENSION("Dimension (m2)"),
     /**
-     *The greenhouse used space (m3).
+     *The greenhouse used space (m2).
      */
-    USED_SPACE("Used Space (m3)"),
+    USED_SPACE("Used Space (m2)"),
     /**
-     *The greenhouse free space (m3).
+     *The greenhouse free space (m2).
      */
-    FREE_SPACE("Free Space (m3)"),
+    FREE_SPACE("Free Space (m2)"),
     /**
      *The number of plants inside the greenhouse.
      */

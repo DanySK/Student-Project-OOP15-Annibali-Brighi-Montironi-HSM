@@ -58,7 +58,7 @@ public class GreenhouseCreateDialog extends AbstractAddDialog {
         panelUp.add(new MyGUIFactory().createLabel("Insert information about the new Greenhouse"));
         final JLabel name = new JLabel("Greenhouse name : ");
         final JLabel type = new JLabel("Greenhouse type : ");
-        final JLabel size = new JLabel("Greenhouse size (m3) : ");
+        final JLabel size = new JLabel("Greenhouse size (m2) : ");
         final JPanel panel = new JPanel(new GridBagLayout());
         final GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;

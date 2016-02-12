@@ -36,6 +36,7 @@ public class GreenhouseTab implements GUIComponent, Observer {
     private static final int TXT_FIELD_SIZE = 20;
     private static final int MINIMUM_X_SIZE = 355;
     private static final int CENT_FACTOR = 100;
+    private static final String DOUBLE_FORMAT = "%.2f";
     private static final String OCCUPIED_SPACE = "Occupied Space";
     private static final String FREE_SPACE = "Free Space";
     private static final String CHART_TITLE = "Greenhouse Space Chart";
@@ -96,16 +97,19 @@ public class GreenhouseTab implements GUIComponent, Observer {
         this.fieldMap.get(GreenhouseCharacteristics.DIMENSION).setText(Double.toString(size));
         this.fieldMap.get(GreenhouseCharacteristics.COST).setText(Double.toString(cost / CENT_FACTOR));
         this.fieldMap.get(GreenhouseCharacteristics.TYPOLOGY).setText(typology);
-        this.fieldMap.get(GreenhouseCharacteristics.FREE_SPACE).setText(Double.toString(freeSpace));
-        this.fieldMap.get(GreenhouseCharacteristics.USED_SPACE).setText(Double.toString(occupiedSpace));
+        this.fieldMap.get(GreenhouseCharacteristics.FREE_SPACE).setText(String.format(DOUBLE_FORMAT, freeSpace));
+        this.fieldMap.get(GreenhouseCharacteristics.USED_SPACE).setText(String.format(DOUBLE_FORMAT, occupiedSpace));
         this.fieldMap.get(GreenhouseCharacteristics.NUMBER_OF_PLANTS).setText(Integer.toString(numberOfPlants));
     }
 
     @Override
     public void update(final Observable arg0, final Object arg1) {
-        this.fieldMap.get(GreenhouseCharacteristics.FREE_SPACE).setText(Double.toString(ControllerImpl.getController().getGreenhouse().getFreeSize()));
-        this.fieldMap.get(GreenhouseCharacteristics.USED_SPACE).setText(Double.toString(ControllerImpl.getController().getGreenhouse().getOccSize()));
-        this.fieldMap.get(GreenhouseCharacteristics.NUMBER_OF_PLANTS).setText(Integer.toString(ControllerImpl.getController().getGreenhouse().getNumberOfPlants()));
+        this.fieldMap.get(GreenhouseCharacteristics.FREE_SPACE).
+            setText(String.format(DOUBLE_FORMAT, ControllerImpl.getController().getGreenhouse().getFreeSize()));
+        this.fieldMap.get(GreenhouseCharacteristics.USED_SPACE).
+            setText(String.format(DOUBLE_FORMAT, ControllerImpl.getController().getGreenhouse().getOccSize()));
+        this.fieldMap.get(GreenhouseCharacteristics.NUMBER_OF_PLANTS)
+            .setText(Integer.toString(ControllerImpl.getController().getGreenhouse().getNumberOfPlants()));
         this.dataSet.setValue(OCCUPIED_SPACE, ControllerImpl.getController().getGreenhouse().getOccSize());
         this.dataSet.setValue(FREE_SPACE, ControllerImpl.getController().getGreenhouse().getFreeSize());
     }
