@@ -1,6 +1,5 @@
 package org.hsm.controller;
 
-import org.hsm.model.GreenHouseType;
 import org.junit.Test;
 
 import static org.junit.Assert.assertFalse;
@@ -23,7 +22,7 @@ public class ControllerTest {
     public void controllerTeset() {
         ControllerImpl controller = ControllerImpl.getController();
 
-        controller.createGreenhouse("Test", GreenHouseType.GRID, 450, 1500);
+        controller.createGreenhouse("Test", "Grid", 450, 1500);
         controller.createNewPlant("name", "botanical name", 25, 550, 340, 30, 27, 365, 25);
         controller.addPlants(controller.getDatabase().getPlantModel("botanical name"), 12, 2);
 

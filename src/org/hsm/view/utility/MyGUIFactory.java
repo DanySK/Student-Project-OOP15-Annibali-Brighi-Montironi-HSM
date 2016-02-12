@@ -14,6 +14,12 @@ import javax.swing.SpinnerModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.title.LegendTitle;
+import org.jfree.data.general.DefaultPieDataset;
+import org.jfree.ui.RectangleEdge;
+
 /**
  *My GUI Factory implementation for Hsm.
  *
@@ -73,5 +79,13 @@ public class MyGUIFactory implements GUIFactory {
         table.setAutoscrolls(true);
         table.setFillsViewportHeight(true);
         return table;
+    }
+
+    @Override
+    public JFreeChart createPieChart(final DefaultPieDataset dataset) {
+        final JFreeChart chart = ChartFactory.createPieChart("", dataset, true, true, false);
+        final LegendTitle legend = (LegendTitle) chart.getSubtitle(0);
+        legend.setPosition(RectangleEdge.LEFT);
+        return chart;
     }
 }
