@@ -23,6 +23,7 @@ public class LineChartDialog extends AbstractChartDialog {
      */
     public LineChartDialog(final String characteristic, final String unitsOfMeasure, final List<Number> valueList) {
         super(characteristic);
+        //chart
         final DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         for (int i = 0; i < valueList.size(); ++i) {
             dataset.addValue(valueList.get(i), "Value", i);

@@ -46,14 +46,14 @@ public class ToolBar implements GUIComponent {
         this.exportDatabaseButton.addActionListener(e -> ControllerImpl.getController().saveDatabase());
         this.removeGreenhouseButton.addActionListener(e -> ControllerImpl.getController().deleteGreenhouse());
         this.newDatabaseButton.addActionListener(e -> ControllerImpl.getController().newDatabase());
-        bar.add(createGreenhouseButton);
-        bar.add(openGreenhouseButton);
-        bar.add(this.saveGreenhouseButton);
-        bar.add(this.removeGreenhouseButton);
-        bar.addSeparator();
-        bar.add(this.newDatabaseButton);
-        bar.add(this.importDatabaseButton);
-        bar.add(this.exportDatabaseButton);
+        this.bar.add(createGreenhouseButton);
+        this.bar.add(openGreenhouseButton);
+        this.bar.add(this.saveGreenhouseButton);
+        this.bar.add(this.removeGreenhouseButton);
+        this.bar.addSeparator();
+        this.bar.add(this.newDatabaseButton);
+        this.bar.add(this.importDatabaseButton);
+        this.bar.add(this.exportDatabaseButton);
     }
 
     /**

@@ -25,7 +25,7 @@ public class MainFrame implements View {
 
     private static final double PROPORTION = 1.3;
     private final JFrame frame;
-    private final Tabbed tab;
+    private final Tabs tab;
     private final MenuBar menubar;
     private final ToolBar toolbar;
 
@@ -34,7 +34,7 @@ public class MainFrame implements View {
      */
     public MainFrame() {
         this.setSystemLook();
-        this.tab = new Tabbed(this.frame);
+        this.tab = new Tabs(this.frame);
         this.tab.setVisible(false);
         this.frame = new JFrame("Hydroponic System Manager");
         this.frame.setLayout(new BorderLayout());

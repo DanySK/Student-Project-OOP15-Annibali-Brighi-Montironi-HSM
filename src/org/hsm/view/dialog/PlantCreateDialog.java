@@ -63,7 +63,7 @@ public class PlantCreateDialog extends AbstractAddDialog {
         gbc.insets = new Insets(INSET, INSET, INSET, INSET);
         gbc.gridx = 0;
         gbc.gridy = 0;
-
+        //map
         this.map.put(NAME, new JTextField(NUM_CHAR));
         this.map.put(BOTANICAL_NAME, new JTextField(NUM_CHAR));
         this.map.put(BRIGHTNESS, factory.createSpinner(NUM_CHAR, new SpinnerNumberModel(0, 0, MAX_BRIGHTNESS, DELTA)));
@@ -73,7 +73,7 @@ public class PlantCreateDialog extends AbstractAddDialog {
         this.map.put(PH, factory.createSpinner(NUM_CHAR, new SpinnerNumberModel(0, 0, MAX_PH, DELTA)));
         this.map.put(SIZE, factory.createSpinner(NUM_CHAR, new SpinnerNumberModel(0, 0, MAX_SIZE, DELTA)));
         this.map.put(TEMPERATURE, factory.createSpinner(NUM_CHAR, new SpinnerNumberModel(0, 0, MAX_TEMPERATURE, DELTA)));
-
+        //labels
         for (final PlantModelCharacteristics elem: PlantModelCharacteristics.values()) {
             panel.add(new JLabel(elem.toString()), gbc);
             ++gbc.gridx;
@@ -81,7 +81,6 @@ public class PlantCreateDialog extends AbstractAddDialog {
             ++gbc.gridy;
             gbc.gridx = 0;
         }
-
         superPanel.add(factory.createLabel("Insert the optimal values of the plant"));
         this.getJDialog().getContentPane().add(superPanel, BorderLayout.NORTH);
         this.getJDialog().getContentPane().add(panel);

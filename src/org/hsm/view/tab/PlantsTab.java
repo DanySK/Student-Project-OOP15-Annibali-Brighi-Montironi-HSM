@@ -41,14 +41,18 @@ public class PlantsTab extends Observable implements GUIComponent, Table {
      * @param frame the main frame of the app
      */
     public PlantsTab(final JFrame frame) {
+        //table
         this.table = new MyGUIFactory().createTable(PlantCharacteristics.getNameList().toArray());
-        //pannello con buttoni per azioni su piante
         final JPanel southPanel = new JPanel();
         southPanel.setLayout(new BoxLayout(southPanel, BoxLayout.X_AXIS));
+        //buttons
+        final JButton remove = new JButton("Remove Plant");
+        remove.addActionListener(e -> ControllerImpl.getController().delPlant());
+        final JButton updateValues = new JButton("Update Plant Values");
         final JButton add = new JButton("Add Plant");
         add.addActionListener(e -> {
             if (ControllerImpl.getController().isDbEmpty()) {
-                Utilities.errorMessage(frame, "The Database is empty or not loaded");
+                Utilities.errorMessage(frame, "The Database is empty");
             } else {
                 new PlantAddDialog(frame).start();
             }
@@ -58,10 +62,9 @@ public class PlantsTab extends Observable implements GUIComponent, Table {
         final JButton findButton = new JButton("Filter");
         final JButton exitFilter = new JButton("Exit");
         filterField.setMaximumSize(new Dimension(filterField.getPreferredSize().width, filterField.getPreferredSize().height));
-
-        /*set filter option*/
+        //filter
         final TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(this.table.getModel());
-        table.setRowSorter(sorter);
+        this.table.setRowSorter(sorter);
         findButton.addActionListener(e -> {
             final String text = filterField.getText();
             if (text.length() == 0) {
@@ -73,26 +76,20 @@ public class PlantsTab extends Observable implements GUIComponent, Table {
         exitFilter.addActionListener(e -> {
             sorter.setRowFilter(null);
         });
-
         southPanel.add(filterLabel);
         southPanel.add(filterField);
         southPanel.add(findButton);
         southPanel.add(exitFilter);
         southPanel.add(Box.createHorizontalGlue());
-        final JButton remove = new JButton("Remove Plant");
-        remove.addActionListener(e -> ControllerImpl.getController().delPlant());
-        final JButton updateValues = new JButton("Update Plant Values");
         southPanel.add(add);
         southPanel.add(remove);
         southPanel.add(updateValues);
         southPanel.setAlignmentX(Component.RIGHT_ALIGNMENT);
-
         this.panel = new JPanel();
-        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        this.panel.setLayout(new BoxLayout(this.panel, BoxLayout.Y_AXIS));
         final JScrollPane scrollPane = new JScrollPane(table);
-
-        panel.add(scrollPane);
-        panel.add(southPanel);
+        this.panel.add(scrollPane);
+        this.panel.add(southPanel);
     }
 
     /**
@@ -125,7 +122,7 @@ public class PlantsTab extends Observable implements GUIComponent, Table {
     }
 
     /**
-     * Insert the row in the table without advise observers.
+     * Insert the row in the table without change the Greenhouse state.
      * @param row the row to insert
      */
     public void updateRow(final Object... row) {

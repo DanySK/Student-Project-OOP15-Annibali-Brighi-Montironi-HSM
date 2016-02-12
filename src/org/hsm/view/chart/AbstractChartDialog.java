@@ -23,6 +23,7 @@ public abstract class AbstractChartDialog implements VisibleComponent {
         this.dialog = new JDialog();
         this.dialog.setTitle(characteristic + " Chart");
         this.dialog.setLayout(new BorderLayout());
+        //buttons
         final JButton exit = new JButton("Exit");
         exit.addActionListener(e -> this.dialog.dispose());
         this.dialog.add(exit, BorderLayout.SOUTH);

@@ -15,8 +15,6 @@ import org.jfree.data.category.DefaultCategoryDataset;
  */
 public class BarChartDialog extends AbstractChartDialog {
 
-    private static final String OPTIMAL = "Optimal Value";
-    private static final String CURRENT = "Current Value";
     private static final double BAR_WIDTH_FACTOR = 0.1;
 
     /**
@@ -28,9 +26,10 @@ public class BarChartDialog extends AbstractChartDialog {
      */
     public BarChartDialog(final String characteristic, final String unitsOfMeasure, final double optimalValue, final double currentValue) {
         super(characteristic);
+        //chart
         final DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-        dataset.addValue(optimalValue, OPTIMAL, characteristic);
-        dataset.addValue(currentValue, CURRENT, characteristic);
+        dataset.addValue(optimalValue, "Optimal Value", characteristic);
+        dataset.addValue(currentValue, "Current Value", characteristic);
         final JFreeChart chart = ChartFactory.createBarChart(characteristic + " Comparing Chart", 
                                                              "", 
                                                              unitsOfMeasure, 
