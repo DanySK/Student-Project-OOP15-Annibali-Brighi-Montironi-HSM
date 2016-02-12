@@ -17,7 +17,6 @@ import javax.swing.SpinnerModel;
 import javax.swing.SpinnerNumberModel;
 
 import org.hsm.controller.ControllerImpl;
-import org.hsm.model.PlantModel;
 import org.hsm.view.utility.EuroPanel;
 import org.hsm.view.utility.EuroPanelImpl;
 import org.hsm.view.utility.MyGUIFactory;
@@ -29,8 +28,6 @@ import org.hsm.view.utility.MyGUIFactory;
  */
 public class PlantAddDialog extends AbstractAddDialog {
 
-    private static final String DIALOG_TITLE = "Add a plant";
-    private static final String START_LABEL = "Choose the plant";
     private static final int NUM_MAX_PLANT = 100;
     private static final int INSET = 3;
     private final JComboBox<Object> plantsList;
@@ -43,7 +40,7 @@ public class PlantAddDialog extends AbstractAddDialog {
      *the main frame of the app
      */
     public PlantAddDialog(final JFrame frame) {
-        super(frame, DIALOG_TITLE, Dialog.ModalityType.APPLICATION_MODAL);
+        super(frame, "Add a plant", Dialog.ModalityType.APPLICATION_MODAL);
         final Set<String> set = ControllerImpl.getController().getDatabase().getDb().keySet();
         this.plantsList = new JComboBox<>(set.toArray());
         plantsList.setSelectedIndex(0);
@@ -76,7 +73,7 @@ public class PlantAddDialog extends AbstractAddDialog {
         this.euroPanel = new EuroPanelImpl();
         centerPanel.add(this.euroPanel.getComponent(), gbc);
 
-        final JLabel label = new MyGUIFactory().createLabel(START_LABEL);
+        final JLabel label = new MyGUIFactory().createLabel("Choose the plant");
         northPanel.add(label);
         this.getJDialog().add(northPanel, BorderLayout.NORTH);
         this.getJDialog().add(centerPanel);
@@ -85,8 +82,7 @@ public class PlantAddDialog extends AbstractAddDialog {
     @Override
     protected void addAction() {
         final String choice = (String) this.plantsList.getSelectedItem();
-        final PlantModel model = ControllerImpl.getController().getDatabase().getDb().get(choice);
-        ControllerImpl.getController().addPlants(model, this.euroPanel.getValue(),
+        ControllerImpl.getController().addPlants(ControllerImpl.getController().getDatabase().getDb().get(choice), this.euroPanel.getValue(),
                                       ((SpinnerNumberModel) this.numberSpinner.getModel()).getNumber().intValue());
         getJDialog().dispose();
     }
