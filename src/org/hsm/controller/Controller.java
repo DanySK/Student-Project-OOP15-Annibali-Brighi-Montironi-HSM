@@ -77,6 +77,15 @@ public interface Controller {
     void delPLants(PlantModel plant);
 
     /**
+     * Start the auto updater thread for update plants values evrey time.
+     * seconds;
+     *
+     * @param time
+     *            update rate in seconds
+     */
+    void autoUpdate(int time);
+
+    /**
      * Create a new type of plant for the database.
      *
      * @param name

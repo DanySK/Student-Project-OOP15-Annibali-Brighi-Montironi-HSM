@@ -30,7 +30,7 @@ import org.hsm.view.utility.Utilities;
  * Implementation of Controller Interface.
  *
  */
-public class ControllerImpl implements Controller, Serializable {
+public final class ControllerImpl implements Controller, Serializable {
 
     /**
      *
@@ -40,7 +40,11 @@ public class ControllerImpl implements Controller, Serializable {
     /**
      * Singleton istance of controller.
      */
-    private static final ControllerImpl CONTROLLER_IMPL = new ControllerImpl();
+    // CHECKSTYLE:OFF
+    private static ControllerImpl CONTROLLER_IMPL;
+
+    private ControllerImpl() {
+    };
 
     private Optional<Database> database;
     private Optional<Greenhouse> greenhouse;
@@ -55,6 +59,13 @@ public class ControllerImpl implements Controller, Serializable {
      * @return the istance of controller
      */
     public static ControllerImpl getController() {
+        if (CONTROLLER_IMPL == null) {
+            synchronized (ControllerImpl.class) {
+                if (CONTROLLER_IMPL == null) {
+                    CONTROLLER_IMPL = new ControllerImpl();
+                }
+            }
+        }
         return CONTROLLER_IMPL;
     }
 
@@ -63,17 +74,10 @@ public class ControllerImpl implements Controller, Serializable {
             final double size) {
         this.ghMod = true;
         this.loadGh = true;
-        this.dbMod = true;
         this.greenhouse = Optional.of(new GreenhouseImp(name, size, cost, greenhouseType));
         this.database = Optional.of(new DatabaseImpl());
         this.view.setActive(true);
-        this.view.insertGreenhouse(name, 
-                                   size, 
-                                   cost, 
-                                   greenhouseType.toString(), 
-                                   size, 
-                                   0, 
-                                   0);
+        this.view.insertGreenhouse(name, size, cost, greenhouseType.toString(), size, 0, 0);
     }
 
     @Override
@@ -115,9 +119,15 @@ public class ControllerImpl implements Controller, Serializable {
     public void addPlants(final PlantModel plant, final int cost, final int n) {
         this.ghMod = true;
         for (int i = 0; i < n; i++) {
-            final int id = this.greenhouse.get().addPlant(plant, cost);
-            this.view.insertNewPlant(id, plant.getName(), cost / 100.0, 0, 0, 0, 0);
+            int id;
+            try {
+                id = this.greenhouse.get().addPlant(plant, cost);
+                this.view.insertNewPlant(id, plant.getName(), cost / 100.0, 0, 0, 0, 0);
+            } catch (IllegalStateException e) {
+                Utilities.errorMessage(this.view.getFrame(), "Insufficient space in Greenhouse");
+            }
         }
+
     }
 
     @Override
@@ -139,14 +149,24 @@ public class ControllerImpl implements Controller, Serializable {
     }
 
     @Override
+    public void autoUpdate(final int time) {
+        new AutoUpdater(time).start();
+    }
+
+    @Override
     public void createNewPlant(final String name, final String botanicalName, final int ph, final int brightness,
             final int conductivity, final int optimalGrowthTime, final int temperature, final int life,
             final int size) {
         this.dbMod = true;
-        this.database.get().addPlantModel(name, botanicalName, ph, brightness, optimalGrowthTime, life, size,
-                conductivity, temperature);
-        this.view.insertModelPlant(name, botanicalName, ph, brightness, optimalGrowthTime, life, size, conductivity,
-                temperature);
+        try {
+            this.database.get().addPlantModel(name, botanicalName, ph, brightness, optimalGrowthTime, life, size,
+                    conductivity, temperature);
+            this.view.insertModelPlant(name, botanicalName, ph, brightness, optimalGrowthTime, life, size, conductivity,
+                    temperature);
+        } catch (IllegalArgumentException e) {
+            Utilities.errorMessage(this.view.getFrame(), "This plant is already in database");
+        }
+
     }
 
     @Override
@@ -194,16 +214,19 @@ public class ControllerImpl implements Controller, Serializable {
             shmGh.close();
         } catch (FileNotFoundException e) {
             Utilities.errorMessage(this.view.getFrame(), e.toString());
-            e.printStackTrace();
         } catch (IOException e) {
             Utilities.errorMessage(this.view.getFrame(), e.toString());
-            e.printStackTrace();
         }
 
     }
 
     @Override
     public void loadGreenhouse() {
+        if (this.ghMod) {
+            if (Utilities.saveGreenhouseMessage(this.view.getFrame())) {
+                this.saveGreenhouse();
+            }
+        }
         final Optional<String> filenameGh = this.view.loadGreenhouseDialog();
         if (!filenameGh.isPresent()) {
             return;
@@ -216,32 +239,22 @@ public class ControllerImpl implements Controller, Serializable {
                 this.greenhouse = Optional.of((Greenhouse) shmGh.readObject());
                 shmGh.close();
             } catch (ClassNotFoundException e) {
-                Utilities.errorMessage(this.view.getFrame(), e.toString());
-                e.printStackTrace();
+                Utilities.errorMessage(this.view.getFrame(), "Nothing to load");
             }
         } catch (FileNotFoundException e) {
-            Utilities.errorMessage(this.view.getFrame(), e.toString());
-            e.printStackTrace();
+            Utilities.errorMessage(this.view.getFrame(), "File not found");
         } catch (IOException e) {
             Utilities.errorMessage(this.view.getFrame(), e.toString());
-            e.printStackTrace();
         }
         this.view.setActive(true);
-        this.view.insertGreenhouse(this.greenhouse.get().getName(), 
-                                   this.greenhouse.get().getSize(), 
-                                   this.greenhouse.get().getCost(), 
-                                   this.greenhouse.get().getType().toString(), 
-                                   this.greenhouse.get().getFreeSize(), 
-                                   this.greenhouse.get().getOccSize(), 
-                                   this.greenhouse.get().getNumberOfPlants());
-        for (final Map.Entry<Integer, Plant> elem: this.greenhouse.get().getPlants().entrySet()) {
-            this.view.insertPlant(elem.getKey(), 
-                                  elem.getValue().getModel().getName(), 
-                                  elem.getValue().getCost(), 
-                                  elem.getValue().getLastPhValue(), 
-                                  elem.getValue().getLastBrightValue(), 
-                                  elem.getValue().getLastConductValue(), 
-                                  elem.getValue().getLastTempValue());
+        this.view.insertGreenhouse(this.greenhouse.get().getName(), this.greenhouse.get().getSize(),
+                this.greenhouse.get().getCost(), this.greenhouse.get().getType().toString(),
+                this.greenhouse.get().getFreeSize(), this.greenhouse.get().getOccSize(),
+                this.greenhouse.get().getNumberOfPlants());
+        for (final Map.Entry<Integer, Plant> elem : this.greenhouse.get().getPlants().entrySet()) {
+            this.view.insertPlant(elem.getKey(), elem.getValue().getModel().getName(), elem.getValue().getCost(),
+                    elem.getValue().getLastPhValue(), elem.getValue().getLastBrightValue(),
+                    elem.getValue().getLastConductValue(), elem.getValue().getLastTempValue());
         }
     }
 
@@ -258,16 +271,19 @@ public class ControllerImpl implements Controller, Serializable {
             shmDb.close();
         } catch (FileNotFoundException e) {
             Utilities.errorMessage(this.view.getFrame(), e.toString());
-            e.printStackTrace();
         } catch (IOException e) {
             Utilities.errorMessage(this.view.getFrame(), e.toString());
-            e.printStackTrace();
         }
 
     }
 
     @Override
     public void loadDatabase() {
+        if (this.dbMod) {
+            if (Utilities.saveDatabaseMessage(this.view.getFrame())) {
+                this.saveDatabase();
+            }
+        }
         final Optional<String> filenameDb = this.view.importDatabaseDialog();
         if (!filenameDb.isPresent()) {
             return;
@@ -278,21 +294,18 @@ public class ControllerImpl implements Controller, Serializable {
                 this.database = Optional.of((Database) shmDb.readObject());
                 shmDb.close();
             } catch (ClassNotFoundException e) {
-                Utilities.errorMessage(this.view.getFrame(), e.toString());
-                e.printStackTrace();
+                Utilities.errorMessage(this.view.getFrame(), "Nothing to load");
             }
         } catch (FileNotFoundException e) {
-            Utilities.errorMessage(this.view.getFrame(), e.toString());
-            e.printStackTrace();
+            Utilities.errorMessage(this.view.getFrame(), "File not found");
         } catch (IOException e) {
             Utilities.errorMessage(this.view.getFrame(), e.toString());
-            e.printStackTrace();
         }
         this.view.cleanDatabase();
-        for (final PlantModel elem: this.database.get().getDb().values()) {
+        for (final PlantModel elem : this.database.get().getDb().values()) {
             this.view.insertModelPlant(elem.getName(), elem.getBotanicalName(), elem.getPH(), elem.getBrightness(),
-                           elem.getOptimalGrowthTime(), elem.getLife(), elem.getSize(), elem.getConductivity(),
-                           elem.getOptimalTemperature());
+                    elem.getOptimalGrowthTime(), elem.getLife(), elem.getSize(), elem.getConductivity(),
+                    elem.getOptimalTemperature());
         }
     }
 
@@ -304,9 +317,7 @@ public class ControllerImpl implements Controller, Serializable {
 
         this.checkSave();
 
-       // if (Utilities.exitMessage(this.view.getFrame())) {
-            System.exit(0);
-        //}
+        System.exit(0);
     }
 
     /**
