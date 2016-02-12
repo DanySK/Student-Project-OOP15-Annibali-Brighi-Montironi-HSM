@@ -123,7 +123,7 @@ public class GreenhouseCreateDialog extends AbstractAddDialog {
     protected void addAction() {
         final SpinnerNumberModel model = (SpinnerNumberModel) this.spinnerSize.getModel();
         ControllerImpl.getController().createGreenhouse(this.nameField.getText(), this.group.getSelection().getActionCommand(), 
-                                                        this.euroPanel.getValue(), model.getNumber().doubleValue());
+                                                        this.euroPanel.getValue(), model.getNumber().intValue());
         getJDialog().dispose();
     }
 

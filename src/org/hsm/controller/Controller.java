@@ -24,7 +24,7 @@ public interface Controller {
      * @param size
      *            the size of Greenhouse
      */
-    void createGreenhouse(String name, String greenhouseType, int cost, double size);
+    void createGreenhouse(String name, String greenhouseType, int cost, int size);
 
     /**
      * Get the atcually load Greenhouse.

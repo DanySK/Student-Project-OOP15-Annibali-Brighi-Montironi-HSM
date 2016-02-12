@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 /**
  * implementation of the Greenhouse interface.
@@ -22,7 +21,7 @@ public class GreenhouseImp implements Greenhouse, Serializable {
     private final Map<Integer, Plant> plantMap = new HashMap<>();
     private final IDmanager productID = new IDmanager();
     private String name;
-    private double size;
+    private int size;
     private double costGreenhouse;
     private GreenHouseType type;
 
@@ -36,7 +35,7 @@ public class GreenhouseImp implements Greenhouse, Serializable {
      * @param t
      *            Type of greenhouse
      */
-    public GreenhouseImp(final String name, final double size, final int cost, final GreenHouseType t) {
+    public GreenhouseImp(final String name, final int size, final int cost, final GreenHouseType t) {
         super();
         this.name = name;
         this.size = size;
@@ -56,7 +55,7 @@ public class GreenhouseImp implements Greenhouse, Serializable {
      */
     @Override
     public int addPlant(final PlantModel model, final int cost) throws IllegalStateException {
-        if (model.getSize() < getFreeSize()) {
+        if ((model.getSize() / CMQ_TO_MQ) <= getFreeSize()) {
             int tmp = productID.getID();
             this.plantMap.put(tmp, new PlantImpl(model, cost));
             return tmp;
@@ -116,7 +115,7 @@ public class GreenhouseImp implements Greenhouse, Serializable {
     }
 
     @Override
-    public void setSize(final double s) {
+    public void setSize(final int s) {
         this.size = s;
     }
 

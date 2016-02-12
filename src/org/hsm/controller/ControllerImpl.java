@@ -62,7 +62,7 @@ public class ControllerImpl implements Controller, Serializable {
 
     @Override
     public void createGreenhouse(final String name, final String greenhouseType, final int cost,
-            final double size) {
+            final int size) {
         this.ghMod = true;
         this.loadGh = true;
         this.dbMod = true;
