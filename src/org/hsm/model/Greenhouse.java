@@ -61,7 +61,7 @@ public interface Greenhouse {
      * @param s
      *            the size of the greenhouse in m³
      */
-    void setSize(double s);
+    void setSize(int s);
 
     /**
      * @return Free space of the greenhouse

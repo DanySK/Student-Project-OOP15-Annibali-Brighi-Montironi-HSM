@@ -16,7 +16,7 @@ public class PlantModelImpl implements PlantModel, Serializable {
     private final double brightness;
     private final int optimalGrowthTime;
     private final int life;
-    private final double size;
+    private final int size;
     private final int cost;
     private final double conductivity;
     private final double optimalTemperature;
@@ -37,7 +37,7 @@ public class PlantModelImpl implements PlantModel, Serializable {
      * @param life
      *            time life
      * @param size
-     *            max size for the plant expressed in cm³
+     *            max size for the plant expressed in cm²
      * @param cost
      *            cost
      * @param conductivity
@@ -47,7 +47,7 @@ public class PlantModelImpl implements PlantModel, Serializable {
      *
      */
     protected PlantModelImpl(final String name, final String botanicalName, final double ph, final double brightness,
-            final int optimalGrowthTime, final int life, final double size, final int cost, final double conductivity,
+            final int optimalGrowthTime, final int life, final int size, final int cost, final double conductivity,
             final double optimalTemperature) {
         super();
         this.name = name;

@@ -11,13 +11,15 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import org.hsm.model.DatabaseImpl;
 import org.hsm.model.Database;
-import org.hsm.model.Greenhouse;
+import org.hsm.model.DatabaseImpl;
 import org.hsm.model.GreenHouseType;
+import org.hsm.model.Greenhouse;
 import org.hsm.model.GreenhouseImp;
 import org.hsm.model.Plant;
 import org.hsm.model.PlantModel;
@@ -70,14 +72,44 @@ public final class ControllerImpl implements Controller, Serializable {
     }
 
     @Override
-    public void createGreenhouse(final String name, final GreenHouseType greenhouseType, final int cost,
-            final double size) {
+    public void createGreenhouse(final String name, final String greenhouseType, final int cost,
+            final int size) {
         this.ghMod = true;
         this.loadGh = true;
+<<<<<<< local
         this.greenhouse = Optional.of(new GreenhouseImp(name, size, cost, greenhouseType));
+=======
+        this.dbMod = true;
+        this.greenhouse = Optional.of(new GreenhouseImp(name, size, cost, this.getGreenhouseType(greenhouseType)));
+>>>>>>> other
         this.database = Optional.of(new DatabaseImpl());
         this.view.setActive(true);
+<<<<<<< local
         this.view.insertGreenhouse(name, size, cost, greenhouseType.toString(), size, 0, 0);
+=======
+        this.view.insertGreenhouse(name, 
+                                   size, 
+                                   cost, 
+                                   greenhouseType, 
+                                   size, 
+                                   0, 
+                                   0);
+>>>>>>> other
+    }
+
+    private GreenHouseType getGreenhouseType(final String type) {
+        switch(type) {
+        case "Linear" : 
+            return GreenHouseType.LINEAR;
+        case "Grid" : 
+            return GreenHouseType.GRID;
+        case "Pyramidal" : 
+            return GreenHouseType.PYRAMIDAL;
+        case "Circular" : 
+            return GreenHouseType.CIRCULAR;
+        default :
+            return GreenHouseType.LINEAR;
+        }
     }
 
     @Override
@@ -358,7 +390,7 @@ public final class ControllerImpl implements Controller, Serializable {
     public void showPhBarChart() {
         try {
             final int id = this.view.getSelectedIDPlant();
-            new BarChartDialog("Basicity", "pg", this.greenhouse.get().getPlants().get(id).getModel().getPH(), 0)
+            new BarChartDialog("Basicity", "ph", this.greenhouse.get().getPlants().get(id).getModel().getPH(), 0)
                     .start();
         } catch (IllegalStateException e) {
             Utilities.errorMessage(this.view.getFrame(), "No plant is selected!");
@@ -387,6 +419,15 @@ public final class ControllerImpl implements Controller, Serializable {
         }
     }
 
+    @Override
+    public List<String> getGreenhouseTypes() {
+        final List<String> list = new ArrayList<>();
+        for (final GreenHouseType elem: GreenHouseType.values()) {
+            list.add(elem.toString());
+        }
+        return list;
+    }
+
     /**
      * Entry Point.
      *
@@ -396,5 +437,7 @@ public final class ControllerImpl implements Controller, Serializable {
     public static void main(final String... args) {
         ControllerImpl.getController().view.start();
     }
+
+
 
 }

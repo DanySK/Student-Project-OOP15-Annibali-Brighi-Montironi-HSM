@@ -37,7 +37,7 @@ public interface PlantModel {
     int getLife();
 
     /**
-     * @return return the maximum size of the plant expressed in cm³
+     * @return return the maximum size of the plant expressed in cm²
      */
     double getSize();
 

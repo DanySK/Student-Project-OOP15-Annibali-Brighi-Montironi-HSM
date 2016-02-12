@@ -46,7 +46,6 @@ public class PlantCreateDialog extends AbstractAddDialog {
     private static final int MAX_PH = 14;
     private static final int MAX_SIZE = 500000;
     private static final int MAX_TEMPERATURE = 50;
-    private static final String DIALOG_TITLE = "Create new Plant";
     private final Map<PlantModelCharacteristics, JComponent> map;
 
     /**
@@ -55,7 +54,7 @@ public class PlantCreateDialog extends AbstractAddDialog {
      * the main frame of the app
      */
     public PlantCreateDialog(final JFrame frame) {
-        super(frame, DIALOG_TITLE, Dialog.ModalityType.APPLICATION_MODAL);
+        super(frame, "Create new Plant", Dialog.ModalityType.APPLICATION_MODAL);
         this.map = new HashMap<>();
         final GUIFactory factory = new MyGUIFactory();
         final JPanel superPanel = new JPanel();
