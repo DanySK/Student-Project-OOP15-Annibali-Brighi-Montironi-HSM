@@ -37,7 +37,7 @@ public class PlantModelImpl implements PlantModel, Serializable {
      * @param life
      *            time life
      * @param size
-     *            max size for the plant expressed in cm³
+     *            max size for the plant expressed in cm²
      * @param cost
      *            cost
      * @param conductivity

@@ -17,7 +17,7 @@ public class GreenhouseImp implements Greenhouse, Serializable {
      */
     private static final long serialVersionUID = 1132454764370517715L;
 
-    private static final int CMC_TO_MC = 1000000; // cm³ to m³
+    private static final int CMQ_TO_MQ = 10000; // cm² to m²
 
     private final Map<Integer, Plant> plantMap = new HashMap<>();
     private final IDmanager productID = new IDmanager();
@@ -127,7 +127,7 @@ public class GreenhouseImp implements Greenhouse, Serializable {
             for (final Map.Entry<Integer, Plant> elem : this.plantMap.entrySet()) {
                 tmp += elem.getValue().getModel().getSize();
             }
-            return (this.size / CMC_TO_MC) - (tmp / CMC_TO_MC);
+            return this.size - (tmp / CMQ_TO_MQ);
         } else {
             return this.size;
         }
