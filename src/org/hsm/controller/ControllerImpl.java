@@ -364,7 +364,7 @@ public class ControllerImpl implements Controller, Serializable {
     public void showPhBarChart() {
         try {
             final int id = this.view.getSelectedIDPlant();
-            new BarChartDialog("Basicity", "pg", this.greenhouse.get().getPlants().get(id).getModel().getPH(), 0)
+            new BarChartDialog("Basicity", "ph", this.greenhouse.get().getPlants().get(id).getModel().getPH(), 0)
                     .start();
         } catch (IllegalStateException e) {
             Utilities.errorMessage(this.view.getFrame(), "No plant is selected!");

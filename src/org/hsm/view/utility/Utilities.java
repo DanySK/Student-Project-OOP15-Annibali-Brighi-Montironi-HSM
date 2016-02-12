@@ -1,6 +1,7 @@
 package org.hsm.view.utility;
 
 import java.awt.Component;
+import java.text.DecimalFormat;
 
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -72,6 +73,16 @@ public final class Utilities {
         default :
             return new ImageIcon(Utilities.class.getClass().getResource("/linear.jpg"));
         }
+    }
+
+    /**
+     * Get a string with a customized format.
+     * @param number the number to customize
+     * @return the string of the number
+     */
+    public static String customFormat(final double number) {
+        final DecimalFormat myFormatter = new DecimalFormat("###,###,##0.00");
+        return myFormatter.format(number);
     }
 
 

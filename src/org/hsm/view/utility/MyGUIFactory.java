@@ -16,6 +16,8 @@ import javax.swing.table.TableModel;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.labels.StandardPieItemLabelGenerator;
+import org.jfree.chart.plot.PiePlot;
 import org.jfree.chart.title.LegendTitle;
 import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.ui.RectangleEdge;
@@ -86,6 +88,8 @@ public class MyGUIFactory implements GUIFactory {
         final JFreeChart chart = ChartFactory.createPieChart("", dataset, true, true, false);
         final LegendTitle legend = (LegendTitle) chart.getSubtitle(0);
         legend.setPosition(RectangleEdge.LEFT);
+        final PiePlot plot = (PiePlot) chart.getPlot();
+        plot.setLabelGenerator(new StandardPieItemLabelGenerator("({0}) {2}")); 
         return chart;
     }
 }

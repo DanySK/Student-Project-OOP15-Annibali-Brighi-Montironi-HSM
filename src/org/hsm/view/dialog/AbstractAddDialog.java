@@ -37,6 +37,7 @@ public abstract class AbstractAddDialog implements VisibleComponent {
         final JPanel southPanel = new JPanel(new FlowLayout());
         southPanel.add(addButton);
         addButton.addActionListener(e -> addAction());
+        this.dialog.getRootPane().setDefaultButton(addButton);
         this.dialog.getContentPane().add(southPanel, BorderLayout.SOUTH);
     }
 
