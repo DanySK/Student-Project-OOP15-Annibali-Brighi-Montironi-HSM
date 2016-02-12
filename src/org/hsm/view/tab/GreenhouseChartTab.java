@@ -30,17 +30,17 @@ public class GreenhouseChartTab implements GUIComponent {
     public GreenhouseChartTab() {
         this.panel = new JPanel(new BorderLayout());
         final GUIFactory factory = new MyGUIFactory();
-
         final JPanel buttonPanel = new JPanel();
+        //buttons
         final JButton numPlantChart = new JButton("Show Greenhouse Composition by Number");
         final JButton spacePlantChart = new JButton("Show Greenhouse Composition by Occupied Space");
         buttonPanel.add(numPlantChart);
         buttonPanel.add(spacePlantChart);
-
+        //chart
         final ChartPanel chartPanel = new ChartPanel(null);
-
         final JScrollPane scrollPane = new JScrollPane(chartPanel);
         scrollPane.setBorder(BorderFactory.createEtchedBorder());
+        //button listeners
         numPlantChart.addActionListener(e -> {
             final DefaultPieDataset dataset = new DefaultPieDataset();
             for (final Map.Entry<String, Integer> elem: ControllerImpl.getController().getGreenhouse().getCompositionByNumber().entrySet()) {
@@ -55,7 +55,6 @@ public class GreenhouseChartTab implements GUIComponent {
             }
             chartPanel.setChart(factory.createPieChart(dataset));
         });
-
         this.panel.add(buttonPanel, BorderLayout.NORTH);
         this.panel.add(scrollPane, BorderLayout.CENTER);
     }

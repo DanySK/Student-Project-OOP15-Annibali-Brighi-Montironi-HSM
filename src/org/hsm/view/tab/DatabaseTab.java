@@ -31,9 +31,11 @@ public class DatabaseTab implements GUIComponent, Table {
     public DatabaseTab(final JFrame frame) {
         this.panel = new JPanel();
         this.panel.setLayout(new BoxLayout(this.panel, BoxLayout.Y_AXIS));
+        //insert columns in table
         this.table = new MyGUIFactory().createTable(PlantModelCharacteristics.getNameList().toArray());
         final JPanel southPanel = new JPanel();
         southPanel.setLayout(new BoxLayout(southPanel, BoxLayout.X_AXIS));
+        //buttons
         final JButton createPlant = new JButton("Insert new type of plant");
         createPlant.addActionListener(e -> new PlantCreateDialog(frame).start());
         final JButton removePlant = new JButton("Remove selected plant");
@@ -41,7 +43,6 @@ public class DatabaseTab implements GUIComponent, Table {
         southPanel.add(createPlant);
         southPanel.add(removePlant);
         southPanel.setSize(southPanel.getPreferredSize());
-
         final JScrollPane scrollPane = new JScrollPane(this.table);
         this.panel.add(scrollPane);
         this.panel.add(southPanel);

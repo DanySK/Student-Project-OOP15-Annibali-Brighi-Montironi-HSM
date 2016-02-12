@@ -36,17 +36,16 @@ public class MenuBar implements GUIComponent {
      * @param frame the MainFrame for the MenuBar
      */
     public MenuBar(final JFrame frame) {
-        //Initialization
         this.bar = new JMenuBar();
-        //Menu creation
+        //Menus
         final JMenu file = new JMenu("File");
         this.edit = new JMenu("Edit");
         this.chart = new JMenu("Charts");
         final JMenu information = new JMenu("Information");
         final JMenu help = new JMenu("Help");
         file.setMnemonic(KeyEvent.VK_F);
-        edit.setMnemonic(KeyEvent.VK_E);
-        chart.setMnemonic(KeyEvent.VK_C);
+        this.edit.setMnemonic(KeyEvent.VK_E);
+        this.chart.setMnemonic(KeyEvent.VK_C);
         information.setMnemonic(KeyEvent.VK_I);
         help.setMnemonic(KeyEvent.VK_H);
         //Menù File Item
@@ -57,21 +56,21 @@ public class MenuBar implements GUIComponent {
         loadGreenhouse.addActionListener(e -> ControllerImpl.getController().loadGreenhouse());
         file.add(loadGreenhouse);
         this.saveGreenhouse = new JMenuItem("Save Greenhouse");
-        saveGreenhouse.addActionListener(e -> ControllerImpl.getController().saveGreenhouse());
-        file.add(saveGreenhouse);
+        this.saveGreenhouse.addActionListener(e -> ControllerImpl.getController().saveGreenhouse());
+        file.add(this.saveGreenhouse);
         this.removeGreenhouse = new JMenuItem("Remove Greenhouse");
-        removeGreenhouse.addActionListener(e -> ControllerImpl.getController().deleteGreenhouse());
-        file.add(removeGreenhouse);
+        this.removeGreenhouse.addActionListener(e -> ControllerImpl.getController().deleteGreenhouse());
+        file.add(this.removeGreenhouse);
         file.addSeparator();
         this.newDatabase = new JMenuItem("New Database");
         this.newDatabase.addActionListener(e -> ControllerImpl.getController().newDatabase());
-        file.add(newDatabase);
+        file.add(this.newDatabase);
         this.importDatabase = new JMenuItem("Import Database");
-        importDatabase.addActionListener(e -> ControllerImpl.getController().loadDatabase());
-        file.add(importDatabase);
+        this.importDatabase.addActionListener(e -> ControllerImpl.getController().loadDatabase());
+        file.add(this.importDatabase);
         this.exportDatabase = new JMenuItem("Export Database");
-        exportDatabase.addActionListener(e -> ControllerImpl.getController().saveDatabase());
-        file.add(exportDatabase);
+        this.exportDatabase.addActionListener(e -> ControllerImpl.getController().saveDatabase());
+        file.add(this.exportDatabase);
         final JMenuItem exit = new JMenuItem("Exit");
         exit.addActionListener(e -> ControllerImpl.getController().exit());
         file.addSeparator();
@@ -85,39 +84,39 @@ public class MenuBar implements GUIComponent {
                 new PlantAddDialog(frame).start();
             }
         });
-        edit.add(addPlant);
+        this.edit.add(addPlant);
         final JMenuItem removePlant = new JMenuItem("Remove plant from Greenhouse");
         removePlant.addActionListener(e -> ControllerImpl.getController().delPlant());
-        edit.add(removePlant);
-        edit.addSeparator();
+        this.edit.add(removePlant);
+        this.edit.addSeparator();
         final JMenuItem addModel = new JMenuItem("Create Plant");
         addModel.addActionListener(e -> new PlantCreateDialog(frame).start());
-        edit.add(addModel);
+        this.edit.add(addModel);
         final JMenuItem removeDBPlant = new JMenuItem("Remove plant from Database");
         removeDBPlant.addActionListener(e -> ControllerImpl.getController().deleteDbPlant());
-        edit.add(removeDBPlant);
+        this.edit.add(removeDBPlant);
         //Menu Chart Item
         final JMenuItem brightnessBarChart = new JMenuItem("Show Brightness Bar Chart");
-        chart.add(brightnessBarChart);
+        this.chart.add(brightnessBarChart);
         brightnessBarChart.addActionListener(e -> ControllerImpl.getController().showBrightnessBarChart());
         final JMenuItem phBarChart = new JMenuItem("Show Basicity Bar Chart");
-        chart.add(phBarChart);
+        this.chart.add(phBarChart);
         phBarChart.addActionListener(e -> ControllerImpl.getController().showPhBarChart());
         final JMenuItem temperatureBarChart = new JMenuItem("Show Temperature Bar Chart");
-        chart.add(temperatureBarChart);
+        this.chart.add(temperatureBarChart);
         temperatureBarChart.addActionListener(e -> ControllerImpl.getController().showTemperatureBarChart());
         final JMenuItem conductivityBarChart = new JMenuItem("Show Conductivity Bar Chart");
-        chart.add(conductivityBarChart);
+        this.chart.add(conductivityBarChart);
         conductivityBarChart.addActionListener(e -> ControllerImpl.getController().showConductivityBarChart());
-        chart.addSeparator();
+        this.chart.addSeparator();
         final JMenuItem brightnessLineChart = new JMenuItem("Show Brightness Line Chart");
-        chart.add(brightnessLineChart);
+        this.chart.add(brightnessLineChart);
         final JMenuItem phLineChart = new JMenuItem("Show Basicity Line Chart");
-        chart.add(phLineChart);
+        this.chart.add(phLineChart);
         final JMenuItem temperatureLineChart = new JMenuItem("Show Temperature Line Chart");
-        chart.add(temperatureLineChart);
+        this.chart.add(temperatureLineChart);
         final JMenuItem conductivityLineChart = new JMenuItem("Show Conductivity Line Chart");
-        chart.add(conductivityLineChart);
+        this.chart.add(conductivityLineChart);
         //Menu Information Item
         final JMenuItem whatsHydroponic = new JMenuItem("What is Hydroponic? (Wiki)");
         information.add(whatsHydroponic);
@@ -136,11 +135,11 @@ public class MenuBar implements GUIComponent {
         final JMenuItem about = new JMenuItem("About Hydroponic System Manager");
         help.add(about);
         //Add menus in MenuBar
-        bar.add(file);
-        bar.add(edit);
-        bar.add(chart);
-        bar.add(information);
-        bar.add(help);
+        this.bar.add(file);
+        this.bar.add(edit);
+        this.bar.add(chart);
+        this.bar.add(information);
+        this.bar.add(help);
     }
 
     /**

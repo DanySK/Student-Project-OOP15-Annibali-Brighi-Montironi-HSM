@@ -41,6 +41,7 @@ public class PlantAddDialog extends AbstractAddDialog {
      */
     public PlantAddDialog(final JFrame frame) {
         super(frame, "Add a plant", Dialog.ModalityType.APPLICATION_MODAL);
+        //combo box
         final Set<String> set = ControllerImpl.getController().getDatabase().getDb().keySet();
         this.plantsList = new JComboBox<>(set.toArray());
         plantsList.setSelectedIndex(0);
@@ -52,7 +53,7 @@ public class PlantAddDialog extends AbstractAddDialog {
         gbc.gridy = 0;
         gbc.insets = new Insets(INSET, INSET, INSET, INSET);
         gbc.anchor = GridBagConstraints.LINE_START;
-
+        //labels
         final JLabel typeLabel = new JLabel("Type:");
         centerPanel.add(typeLabel, gbc);
         ++gbc.gridy;
@@ -66,13 +67,13 @@ public class PlantAddDialog extends AbstractAddDialog {
         gbc.anchor = GridBagConstraints.LINE_END;
         centerPanel.add(this.plantsList, gbc);
         ++gbc.gridy;
+        //spinner
         final SpinnerModel model = new SpinnerNumberModel(1, 1, NUM_MAX_PLANT, 1);
         this.numberSpinner = new JSpinner(model);
         centerPanel.add(this.numberSpinner, gbc);
         ++gbc.gridy;
         this.euroPanel = new EuroPanelImpl();
         centerPanel.add(this.euroPanel.getComponent(), gbc);
-
         final JLabel label = new MyGUIFactory().createLabel("Choose the plant");
         northPanel.add(label);
         this.getJDialog().add(northPanel, BorderLayout.NORTH);

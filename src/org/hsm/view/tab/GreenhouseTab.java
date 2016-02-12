@@ -39,9 +39,6 @@ public class GreenhouseTab implements GUIComponent, Observer {
     private static final int TXT_FIELD_SIZE = 20;
     private static final int MINIMUM_X_SIZE = 355;
     private static final int CENT_FACTOR = 100;
-    private static final String OCCUPIED_SPACE = "Occupied Space";
-    private static final String FREE_SPACE = "Free Space";
-    private static final String CHART_TITLE = "Greenhouse Space Chart";
     private final JSplitPane split;
     private final Map<GreenhouseCharacteristics, JTextField> fieldMap;
     private final DefaultPieDataset dataSet;
@@ -52,12 +49,12 @@ public class GreenhouseTab implements GUIComponent, Observer {
     public GreenhouseTab() {
         final GUIFactory factory = new MyGUIFactory();
         this.fieldMap = new HashMap<>();
-
         final JPanel detailsPanel = new JPanel(new GridBagLayout());
         final GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(INSET_Y, 0, INSET_Y, INSET_X);
         gbc.gridx = 0;
         gbc.gridy = 0;
+        //insert greenhouse characteristics
         for (final GreenhouseCharacteristics elem : GreenhouseCharacteristics.values()) {
             gbc.anchor = GridBagConstraints.WEST;
             detailsPanel.add(factory.createLabel(elem.toString()), gbc);
@@ -70,19 +67,18 @@ public class GreenhouseTab implements GUIComponent, Observer {
             gbc.gridx = 0;
             ++gbc.gridy;
         }
-
         this.dataSet = new DefaultPieDataset();
-        final JFreeChart chart =  ChartFactory.createPieChart(CHART_TITLE, this.dataSet, true, true, false);
+        //chart
+        final JFreeChart chart =  ChartFactory.createPieChart("Greenhouse Space Chart", this.dataSet, true, true, false);
         final PiePlot plot = (PiePlot) chart.getPlot();
         plot.setLabelGenerator(new StandardPieItemLabelGenerator("({0}) {2}")); 
         final ChartPanel chartPanel = new ChartPanel(chart);
-
         this.split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, detailsPanel, chartPanel);
         final Dimension minimumSize = new Dimension(MINIMUM_X_SIZE, 0);
         detailsPanel.setMinimumSize(minimumSize);
         chartPanel.setMinimumSize(minimumSize);
-        split.setOneTouchExpandable(true);
-        split.setContinuousLayout(true);
+        this.split.setOneTouchExpandable(true);
+        this.split.setContinuousLayout(true);
     }
 
     /**
@@ -114,8 +110,8 @@ public class GreenhouseTab implements GUIComponent, Observer {
             setText(Utilities.customFormat(ControllerImpl.getController().getGreenhouse().getOccSize()));
         this.fieldMap.get(GreenhouseCharacteristics.NUMBER_OF_PLANTS)
             .setText(Integer.toString(ControllerImpl.getController().getGreenhouse().getNumberOfPlants()));
-        this.dataSet.setValue(OCCUPIED_SPACE, ControllerImpl.getController().getGreenhouse().getOccSize());
-        this.dataSet.setValue(FREE_SPACE, ControllerImpl.getController().getGreenhouse().getFreeSize());
+        this.dataSet.setValue("Occupied Space", ControllerImpl.getController().getGreenhouse().getOccSize());
+        this.dataSet.setValue("Free Space", ControllerImpl.getController().getGreenhouse().getFreeSize());
     }
 
     @Override

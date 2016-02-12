@@ -9,12 +9,12 @@ import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 
 /**
- *A specific JPanel for euros.
+ *A specific Panel for euros.
  *
  */
 public class EuroPanelImpl implements EuroPanel {
 
-        private static final int MAX_COST = 1000000;
+        private static final int MAX_COST = 1000000000;
         private static final int MAX_CENT = 99;
         private static final int CENT_FACTOR = 100;
         private final JPanel panel;

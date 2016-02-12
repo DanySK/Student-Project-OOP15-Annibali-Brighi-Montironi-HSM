@@ -52,6 +52,7 @@ public class GreenhouseCreateDialog extends AbstractAddDialog {
     public GreenhouseCreateDialog(final JFrame frame) {
         super(frame, "Create new Greenhouse", Dialog.ModalityType.APPLICATION_MODAL);
         final GUIFactory factory = new MyGUIFactory();
+        //picture and labels
         this.pictureLabel = new JLabel("", new ImageIcon(this.getClass().getResource("/linear.jpg")), JLabel.CENTER);
         this.nameField = new JTextField(TXT_DIM);
         final JPanel panelUp = new JPanel();
@@ -76,7 +77,6 @@ public class GreenhouseCreateDialog extends AbstractAddDialog {
         panel.add(this.spinnerSize, gbc);
         gbc.gridx = 0;
         ++gbc.gridy;
-
         final JLabel costLabel = new JLabel("Cost:");
         this.euroPanel = new EuroPanelImpl();
         panel.add(costLabel, gbc);
@@ -87,7 +87,7 @@ public class GreenhouseCreateDialog extends AbstractAddDialog {
         panel.add(type, gbc);
         gbc.gridy++;
         gbc.gridx = 0;
-
+        //radio buttons
         final JPanel panelButtons = new JPanel();
         panelButtons.setLayout(new BoxLayout(panelButtons, BoxLayout.Y_AXIS));
         this.group = new ButtonGroup();
@@ -101,7 +101,6 @@ public class GreenhouseCreateDialog extends AbstractAddDialog {
             this.group.add(button);
             panelButtons.add(button);
         }
-
         panel.add(panelButtons, gbc);
         ++gbc.gridx;
         panel.add(this.pictureLabel, gbc);
@@ -110,13 +109,11 @@ public class GreenhouseCreateDialog extends AbstractAddDialog {
     }
 
     private class AdapterImageHandler implements ActionListener {
-
         @Override
         public void actionPerformed(final ActionEvent e) {
             final JRadioButton button = (JRadioButton) e.getSource();
             pictureLabel.setIcon(Utilities.getStructIcon(button.getActionCommand()));
         }
-
     }
 
     @Override

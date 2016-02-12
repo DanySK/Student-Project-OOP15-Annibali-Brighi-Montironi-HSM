@@ -18,7 +18,7 @@ import org.hsm.view.tab.PlantsTab;
  *The class which create and use the Tabbes.
  *
  */
-public class Tabbed implements GUIComponent {
+public class Tabs implements GUIComponent {
 
     private final JPanel panel;
     private final JTabbedPane tab;
@@ -30,23 +30,21 @@ public class Tabbed implements GUIComponent {
      *Create the Tabbes.
      *@param frame the main frame of the app
      */
-    public Tabbed(final JFrame frame) {
+    public Tabs(final JFrame frame) {
         this.tab = new JTabbedPane();
         this.panel = new JPanel(new BorderLayout());
-        panel.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED));
-
+        this.panel.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED));
+        //tabs
         this.greenhouseTab = new GreenhouseTab();
         this.plantsTab = new PlantsTab(frame);
         this.databaseTab = new DatabaseTab(frame);
         final GreenhouseChartTab chartTab = new GreenhouseChartTab();
-
-        tab.add("Greenhouse", this.greenhouseTab.getComponent());
-        tab.add("Greenhouse Composition", chartTab.getComponent());
-        tab.add("Plants", this.plantsTab.getComponent());
-        tab.add("Plants Database", this.databaseTab.getComponent());
-
+        this.tab.add("Greenhouse", this.greenhouseTab.getComponent());
+        this.tab.add("Greenhouse Composition", chartTab.getComponent());
+        this.tab.add("Plants", this.plantsTab.getComponent());
+        this.tab.add("Plants Database", this.databaseTab.getComponent());
+        //observer
         this.plantsTab.addObserver(this.greenhouseTab);
-
         this.panel.add(tab, BorderLayout.CENTER);
     }
 
