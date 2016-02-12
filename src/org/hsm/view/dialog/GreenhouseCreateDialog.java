@@ -36,8 +36,8 @@ public class GreenhouseCreateDialog extends AbstractAddDialog {
     private static final int START_VALUE = 100;
     private static final int MAX_VALUE = 10000;
     private static final int INSET = 5;
-    private static final int TXT_DIM = 20;
-    private static final int SPINNER_TXT_DIM = 18;
+    private static final int TXT_DIM = 21;
+    private static final int SPINNER_TXT_DIM = 19;
     private final JLabel pictureLabel;
     private final JTextField nameField; 
     private final JSpinner spinnerSize;
