@@ -49,7 +49,7 @@ public final class ControllerImpl implements Controller, Serializable {
     };
 
     private Optional<Database> database;
-    private Optional<Greenhouse> greenhouse;
+    private Optional<Greenhouse> greenhouse; 
     private final View view = new MainFrame();
 
     private boolean ghMod;
@@ -122,7 +122,7 @@ public final class ControllerImpl implements Controller, Serializable {
     public void deleteGreenhouse() {
         this.checkSave();
         if (!this.loadGh) {
-            Utilities.errorMessage(this.view.getFrame(), "Niente da cancellare (nessun Greenhouse caricato)");
+            Utilities.errorMessage(this.view.getFrame(), "No greenhouse is loaded");
         }
         this.greenhouse = Optional.empty();
         this.database = Optional.empty();
@@ -333,7 +333,6 @@ public final class ControllerImpl implements Controller, Serializable {
         }
 
         this.checkSave();
-
         System.exit(0);
     }
 
