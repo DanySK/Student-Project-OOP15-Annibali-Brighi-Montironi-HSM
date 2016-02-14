@@ -12,6 +12,7 @@ import javax.swing.JMenuItem;
 
 import org.hsm.controller.ControllerImpl;
 import org.hsm.view.dialog.GreenhouseCreateDialog;
+import org.hsm.view.dialog.InfoDialog;
 import org.hsm.view.dialog.PlantAddDialog;
 import org.hsm.view.dialog.PlantCreateDialog;
 import org.hsm.view.utility.Utilities;
@@ -133,6 +134,7 @@ public class MenuBar implements GUIComponent {
         });
         //Menu Help Item
         final JMenuItem about = new JMenuItem("About Hydroponic System Manager");
+        about.addActionListener(e -> new InfoDialog(frame).start());
         help.add(about);
         //Add menus in MenuBar
         this.bar.add(file);
