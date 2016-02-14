@@ -49,7 +49,7 @@ public final class ControllerImpl implements Controller, Serializable {
     };
 
     private Optional<Database> database;
-    private Optional<Greenhouse> greenhouse; 
+    private Optional<Greenhouse> greenhouse;
     private final View view = new MainFrame();
 
     private boolean ghMod;
@@ -75,10 +75,16 @@ public final class ControllerImpl implements Controller, Serializable {
     public void createGreenhouse(final String name, final String greenhouseType, final int cost, final int size) {
         this.ghMod = true;
         this.loadGh = true;
-        this.greenhouse = Optional.of(new GreenhouseImpl(name, size, cost, this.getGreenhouseType(greenhouseType)));
-        this.database = Optional.of(new DatabaseImpl());
-        this.view.setActive(true);
-        this.view.insertGreenhouse(name, size, cost, greenhouseType, size, 0, 0);
+        try {
+            this.greenhouse = Optional.of(new GreenhouseImpl(name, size, cost, this.getGreenhouseType(greenhouseType)));
+            this.database = Optional.of(new DatabaseImpl());
+            this.view.setActive(true);
+            this.view.insertGreenhouse(name, size, cost, greenhouseType, size, 0, 0);
+        } catch (IllegalArgumentException e) {
+            Utilities.errorMessage(this.view.getFrame(), "Greenhouse name can't be empty");
+            this.ghMod = false;
+            this.loadGh = false;
+        }
 
     }
 
@@ -155,7 +161,7 @@ public final class ControllerImpl implements Controller, Serializable {
             this.greenhouse.get().delPlant(id);
             this.view.removeSelectedPlant();
         } catch (IllegalStateException e) {
-            Utilities.errorMessage(this.view.getFrame(), "No plant is selected!");
+            Utilities.errorMessage(this.view.getFrame(), "No plant is selected");
         }
     }
 
@@ -180,8 +186,10 @@ public final class ControllerImpl implements Controller, Serializable {
                     conductivity, temperature);
             this.view.insertModelPlant(name, botanicalName, ph, brightness, optimalGrowthTime, life, size, conductivity,
                     temperature);
-        } catch (IllegalArgumentException e) {
+        } catch (IllegalStateException e) {
             Utilities.errorMessage(this.view.getFrame(), "This plant is already in database");
+        } catch (IllegalArgumentException e){
+            Utilities.errorMessage(this.view.getFrame(), "Pant name can't be empty");
         }
 
     }
@@ -194,7 +202,7 @@ public final class ControllerImpl implements Controller, Serializable {
             this.database.get().removePlantModel(botanicalName);
             this.view.removeSelectedModelPlant();
         } catch (IllegalStateException e) {
-            Utilities.errorMessage(this.view.getFrame(), "No plant is selected!");
+            Utilities.errorMessage(this.view.getFrame(), "No plant is selected");
         }
     }
 
