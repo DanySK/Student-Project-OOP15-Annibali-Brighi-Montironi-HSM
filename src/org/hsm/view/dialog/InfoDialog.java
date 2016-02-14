@@ -17,8 +17,8 @@ import org.hsm.view.utility.MyGUIFactory;
  */
 public class InfoDialog implements VisibleComponent {
 
-    private static final int X_SIZE = 400;
-    private static final int Y_SIZE = 200;
+    private static final int X_SIZE = 420;
+    private static final int Y_SIZE = 210;
     private final JDialog dialog;
 
     /**
@@ -34,7 +34,7 @@ public class InfoDialog implements VisibleComponent {
         title.setHorizontalAlignment(JLabel.CENTER);
         final String str = new StringBuffer().append("<html>An application designed to manage an hydroponic greenhouse ")
                                              .append("and a database of plants.<br>The software was developed ")
-                                             .append("by Silvio Annibali, Marco Brighi Andrea Montironi.")
+                                             .append("by Silvio Annibali, Marco Brighi and Andrea Montironi.")
                                              .append("<br>Version 1.0<html>").toString();
         final JLabel label = new JLabel(str);
         this.dialog.add(title, BorderLayout.NORTH);
