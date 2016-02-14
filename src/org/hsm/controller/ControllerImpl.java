@@ -20,7 +20,7 @@ import org.hsm.model.Database;
 import org.hsm.model.DatabaseImpl;
 import org.hsm.model.GreenHouseType;
 import org.hsm.model.Greenhouse;
-import org.hsm.model.GreenhouseImp;
+import org.hsm.model.GreenhouseImpl;
 import org.hsm.model.Plant;
 import org.hsm.model.PlantModel;
 import org.hsm.view.chart.BarChartDialog;
@@ -75,7 +75,7 @@ public final class ControllerImpl implements Controller, Serializable {
     public void createGreenhouse(final String name, final String greenhouseType, final int cost, final int size) {
         this.ghMod = true;
         this.loadGh = true;
-        this.greenhouse = Optional.of(new GreenhouseImp(name, size, cost, this.getGreenhouseType(greenhouseType)));
+        this.greenhouse = Optional.of(new GreenhouseImpl(name, size, cost, this.getGreenhouseType(greenhouseType)));
         this.database = Optional.of(new DatabaseImpl());
         this.view.setActive(true);
         this.view.insertGreenhouse(name, size, cost, greenhouseType, size, 0, 0);

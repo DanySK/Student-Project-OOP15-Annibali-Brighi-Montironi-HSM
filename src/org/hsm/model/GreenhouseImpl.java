@@ -9,7 +9,7 @@ import java.util.Set;
 /**
  * implementation of the Greenhouse interface.
  */
-public class GreenhouseImp implements Greenhouse, Serializable {
+public class GreenhouseImpl implements Greenhouse, Serializable {
 
     /**
      *
@@ -35,7 +35,7 @@ public class GreenhouseImp implements Greenhouse, Serializable {
      * @param t
      *            Type of greenhouse
      */
-    public GreenhouseImp(final String name, final int size, final int cost, final GreenHouseType t) throws IllegalArgumentException {
+    public GreenhouseImpl(final String name, final int size, final int cost, final GreenHouseType t) throws IllegalArgumentException {
         super();
         if(name.equals("")){
             throw new IllegalArgumentException();

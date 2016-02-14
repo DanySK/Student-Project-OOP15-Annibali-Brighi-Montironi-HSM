@@ -21,7 +21,7 @@ public final class TestModel {
         final Database db = new DatabaseImpl();
         db.addPlantModel("ciccio", "pasticcio", 1, 2, 3, 4, 5, 6, 7);
 
-        final Greenhouse gn = new GreenhouseImp("serra_uno ", 40, 10, GreenHouseType.GRID);
+        final Greenhouse gn = new GreenhouseImpl("serra_uno ", 40, 10, GreenHouseType.GRID);
 
         gn.addPlant(db.getPlantModel("pasticcio"), 12);
 
