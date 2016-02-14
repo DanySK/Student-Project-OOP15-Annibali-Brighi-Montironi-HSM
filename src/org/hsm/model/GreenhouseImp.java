@@ -35,8 +35,11 @@ public class GreenhouseImp implements Greenhouse, Serializable {
      * @param t
      *            Type of greenhouse
      */
-    public GreenhouseImp(final String name, final int size, final int cost, final GreenHouseType t) {
+    public GreenhouseImp(final String name, final int size, final int cost, final GreenHouseType t) throws IllegalArgumentException {
         super();
+        if(name.matches("")){
+            throw new IllegalArgumentException();
+        }
         this.name = name;
         this.size = size;
         this.setCost(cost);

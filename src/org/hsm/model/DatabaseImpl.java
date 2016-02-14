@@ -42,7 +42,7 @@ public class DatabaseImpl implements Database, Serializable {
     @Override
     public void addPlantModel(final String name, final String botanicalName, final int ph, final int brightness,
             final int optimalGrowthTime, final int life, final int size, final int conductivity,
-            final int optimalTemperature) throws IllegalArgumentException {
+            final int optimalTemperature) throws IllegalArgumentException, IllegalStateException {
 
         final PlantModel p = new BuilderPlant()
                 .name(name)
@@ -58,7 +58,7 @@ public class DatabaseImpl implements Database, Serializable {
         if(!this.db.containsKey(botanicalName)){
             this.db.put(botanicalName, p);
         } else {
-            throw new IllegalArgumentException();
+            throw new IllegalStateException();
         }
     }
 
