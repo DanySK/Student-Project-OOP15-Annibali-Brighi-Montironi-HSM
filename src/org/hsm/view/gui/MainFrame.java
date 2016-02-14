@@ -7,6 +7,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.Optional;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 import javax.swing.UIManager;
@@ -37,6 +38,7 @@ public class MainFrame implements View {
         this.tab = new Tabs(this.frame);
         this.tab.setVisible(false);
         this.frame = new JFrame("Hydroponic System Manager");
+        this.frame.setIconImage(new ImageIcon(this.getClass().getResource("/leaf.png")).getImage());
         this.frame.setLayout(new BorderLayout());
         this.frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         this.frame.addWindowListener(new WindowAdapter() {

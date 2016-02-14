@@ -32,7 +32,7 @@ public class InfoDialog implements VisibleComponent {
         final JLabel title = new MyGUIFactory().createLabel("Hydrophonic System Manager");
         title.setIcon(new ImageIcon(this.getClass().getResource("/plant.png")));
         title.setHorizontalAlignment(JLabel.CENTER);
-        final String str = new StringBuffer().append("<html>An application designed to manage a hydroponic greenhouse ")
+        final String str = new StringBuffer().append("<html>An application designed to manage an hydroponic greenhouse ")
                                              .append("and a database of plants.<br>The software was developed ")
                                              .append("by Silvio Annibali, Marco Brighi Andrea Montironi.")
                                              .append("<br>Version 1.0<html>").toString();

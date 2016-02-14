@@ -23,6 +23,7 @@ import org.hsm.view.utility.Utilities;
  */
 public class MenuBar implements GUIComponent {
 
+    private static final String ERROR_MSG = "An error has occured!";
     private final JMenuBar bar;
     private final JMenu edit;
     private final JMenu chart;
@@ -43,11 +44,13 @@ public class MenuBar implements GUIComponent {
         this.edit = new JMenu("Edit");
         this.chart = new JMenu("Charts");
         final JMenu information = new JMenu("Information");
+        final JMenu tools = new JMenu("Tools");
         final JMenu help = new JMenu("Help");
         file.setMnemonic(KeyEvent.VK_F);
         this.edit.setMnemonic(KeyEvent.VK_E);
         this.chart.setMnemonic(KeyEvent.VK_C);
         information.setMnemonic(KeyEvent.VK_I);
+        tools.setMnemonic(KeyEvent.VK_T);
         help.setMnemonic(KeyEvent.VK_H);
         //Menù File Item
         final JMenuItem newGreenhouse = new JMenuItem("New Greenhouse");
@@ -128,7 +131,60 @@ public class MenuBar implements GUIComponent {
                     final URI uri = new URI("https://en.wikipedia.org/wiki/Hydroponics");
                     desktop.browse(uri);
                 } catch (final Exception ex) {
-                    Utilities.errorMessage(frame, "An error has occured!");
+                    Utilities.errorMessage(frame, ERROR_MSG);
+                }
+             }
+        });
+        final JMenuItem growLight = new JMenuItem("Grow Light (Wiki)");
+        information.add(growLight);
+        growLight.addActionListener(e -> {
+            if (Desktop.isDesktopSupported()) {
+                final Desktop desktop = Desktop.getDesktop();
+                try {
+                    final URI uri = new URI("https://en.wikipedia.org/wiki/Grow_light");
+                    desktop.browse(uri);
+                } catch (final Exception ex) {
+                    Utilities.errorMessage(frame, ERROR_MSG);
+                }
+             }
+        });
+        final JMenuItem buildhydro = new JMenuItem("Build your Hydroponic System");
+        information.add(buildhydro);
+        buildhydro.addActionListener(e -> {
+            if (Desktop.isDesktopSupported()) {
+                final Desktop desktop = Desktop.getDesktop();
+                try {
+                    final URI uri = new URI("http://homehydrosystems.com/index.html");
+                    desktop.browse(uri);
+                } catch (final Exception ex) {
+                    Utilities.errorMessage(frame, ERROR_MSG);
+                }
+             }
+        });
+        final JMenuItem plantingGuide = new JMenuItem("Planting Guide");
+        information.add(plantingGuide);
+        plantingGuide.addActionListener(e -> {
+            if (Desktop.isDesktopSupported()) {
+                final Desktop desktop = Desktop.getDesktop();
+                try {
+                    final URI uri = new URI("http://www.ufseeds.com/Garden-Planting-Guide.html");
+                    desktop.browse(uri);
+                } catch (final Exception ex) {
+                    Utilities.errorMessage(frame, ERROR_MSG);
+                }
+             }
+        });
+        //Menu Tools Item
+        final JMenuItem nutrientSolutionCalc = new JMenuItem("Nutrient Solution Calculator");
+        tools.add(nutrientSolutionCalc);
+        nutrientSolutionCalc.addActionListener(e -> {
+            if (Desktop.isDesktopSupported()) {
+                final Desktop desktop = Desktop.getDesktop();
+                try {
+                    final URI uri = new URI("http://hydroponiacs.com/hydroponic-calculator/hydrocal.html");
+                    desktop.browse(uri);
+                } catch (final Exception ex) {
+                    Utilities.errorMessage(frame, ERROR_MSG);
                 }
              }
         });
@@ -141,6 +197,7 @@ public class MenuBar implements GUIComponent {
         this.bar.add(edit);
         this.bar.add(chart);
         this.bar.add(information);
+        this.bar.add(tools);
         this.bar.add(help);
     }
 
