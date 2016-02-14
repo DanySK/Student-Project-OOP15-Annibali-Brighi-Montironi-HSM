@@ -44,9 +44,17 @@ public class DatabaseImpl implements Database, Serializable {
             final int optimalGrowthTime, final int life, final int size, final int conductivity,
             final int optimalTemperature) throws IllegalArgumentException {
 
-        final PlantModel p = new BuilderPlant().name(name).botanicalName(botanicalName).ph(ph).brightness(brightness)
-                .optimalGrowthTime(optimalGrowthTime).life(life).size(size).conductivity(conductivity)
-                .optimalTemperature(optimalTemperature).build();
+        final PlantModel p = new BuilderPlant()
+                .name(name)
+                .botanicalName(botanicalName)
+                .ph(ph)
+                .brightness(brightness)
+                .optimalGrowthTime(optimalGrowthTime)
+                .life(life)
+                .size(size)
+                .conductivity(conductivity)
+                .optimalTemperature(optimalTemperature)
+                .build();
         if(!this.db.containsKey(botanicalName)){
             this.db.put(botanicalName, p);
         } else {

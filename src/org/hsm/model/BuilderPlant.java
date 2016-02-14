@@ -121,7 +121,10 @@ public class BuilderPlant {
      * @return a Plant
      * @throws IllegalArgumentException
      */
-    public PlantModel build() {
+    public PlantModel build() throws IllegalArgumentException {
+        if(this.name.matches("") || this.botanicalName.matches("")){
+            throw new IllegalArgumentException();
+        }
         return new PlantModelImpl(this.name, this.botanicalName, this.ph, this.brightness, this.optimalGrowthTime,
                 this.life, this.size, this.cost, this.conductivity, this.optimalTemperature);
     }
