@@ -36,7 +36,7 @@ public enum PlantModelCharacteristics {
     /**
      *The plant size.
      */
-    SIZE("Size (cm3)"),
+    SIZE("Size (cm2)"),
     /**
      *The conductivity optimal level for the plant.
      */

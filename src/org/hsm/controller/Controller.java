@@ -1,8 +1,9 @@
 package org.hsm.controller;
 
+import java.util.List;
+
 import org.hsm.model.Database;
 import org.hsm.model.Greenhouse;
-import org.hsm.model.GreenHouseType;
 import org.hsm.model.PlantModel;
 
 /**
@@ -23,7 +24,7 @@ public interface Controller {
      * @param size
      *            the size of Greenhouse
      */
-    void createGreenhouse(String name, GreenHouseType greenhouseType, int cost, double size);
+    void createGreenhouse(String name, String greenhouseType, int cost, int size);
 
     /**
      * Get the atcually load Greenhouse.
@@ -75,6 +76,15 @@ public interface Controller {
      *            type of plant to be delete
      */
     void delPLants(PlantModel plant);
+
+    /**
+     * Start the auto updater thread for update plants values evrey time.
+     * seconds;
+     *
+     * @param time
+     *            update rate in seconds
+     */
+    void autoUpdate(int time);
 
     /**
      * Create a new type of plant for the database.
@@ -174,5 +184,11 @@ public interface Controller {
      * Show Conductivity Bar Chart to compare values of the selected plant.
      */
     void showConductivityBarChart();
+
+    /**
+     * Get a set with all the greenhouse possible types.
+     * @return a set whith all the greenhouse possible types
+     */
+    List<String> getGreenhouseTypes();
 
 }

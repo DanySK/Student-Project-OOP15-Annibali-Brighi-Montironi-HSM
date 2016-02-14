@@ -15,6 +15,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 import org.hsm.controller.ControllerImpl;
 import org.hsm.view.dialog.OpenFileDialog;
 import org.hsm.view.dialog.SaveFileDialog;
+import org.hsm.view.utility.Utilities;
 
 /**
  * The main frame of the application.
@@ -24,7 +25,7 @@ public class MainFrame implements View {
 
     private static final double PROPORTION = 1.3;
     private final JFrame frame;
-    private final Tabbed tab;
+    private final Tabs tab;
     private final MenuBar menubar;
     private final ToolBar toolbar;
 
@@ -33,7 +34,7 @@ public class MainFrame implements View {
      */
     public MainFrame() {
         this.setSystemLook();
-        this.tab = new Tabbed(this.frame);
+        this.tab = new Tabs(this.frame);
         this.tab.setVisible(false);
         this.frame = new JFrame("Hydroponic System Manager");
         this.frame.setLayout(new BorderLayout());
@@ -95,9 +96,9 @@ public class MainFrame implements View {
     }
 
     @Override
-    public void insertNewPlant(final int id, final String name, final double cost, final int ph, final double brightness,
+    public void insertNewPlant(final int id, final String name, final double cost, final double ph, final double brightness,
                 final double conductivity, final double temperature) {
-        this.tab.getPlantsTab().insertRow(id, name, cost, ph, brightness, conductivity, temperature);
+        this.tab.getPlantsTab().insertRow(id, name, Utilities.customFormat(cost), ph, brightness, conductivity, temperature);
     }
 
     @Override

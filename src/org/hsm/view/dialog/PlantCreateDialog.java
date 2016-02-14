@@ -46,7 +46,6 @@ public class PlantCreateDialog extends AbstractAddDialog {
     private static final int MAX_PH = 14;
     private static final int MAX_SIZE = 500000;
     private static final int MAX_TEMPERATURE = 50;
-    private static final String DIALOG_TITLE = "Create new Plant";
     private final Map<PlantModelCharacteristics, JComponent> map;
 
     /**
@@ -55,7 +54,7 @@ public class PlantCreateDialog extends AbstractAddDialog {
      * the main frame of the app
      */
     public PlantCreateDialog(final JFrame frame) {
-        super(frame, DIALOG_TITLE, Dialog.ModalityType.APPLICATION_MODAL);
+        super(frame, "Create new Plant", Dialog.ModalityType.APPLICATION_MODAL);
         this.map = new HashMap<>();
         final GUIFactory factory = new MyGUIFactory();
         final JPanel superPanel = new JPanel();
@@ -64,7 +63,7 @@ public class PlantCreateDialog extends AbstractAddDialog {
         gbc.insets = new Insets(INSET, INSET, INSET, INSET);
         gbc.gridx = 0;
         gbc.gridy = 0;
-
+        //map
         this.map.put(NAME, new JTextField(NUM_CHAR));
         this.map.put(BOTANICAL_NAME, new JTextField(NUM_CHAR));
         this.map.put(BRIGHTNESS, factory.createSpinner(NUM_CHAR, new SpinnerNumberModel(0, 0, MAX_BRIGHTNESS, DELTA)));
@@ -74,7 +73,7 @@ public class PlantCreateDialog extends AbstractAddDialog {
         this.map.put(PH, factory.createSpinner(NUM_CHAR, new SpinnerNumberModel(0, 0, MAX_PH, DELTA)));
         this.map.put(SIZE, factory.createSpinner(NUM_CHAR, new SpinnerNumberModel(0, 0, MAX_SIZE, DELTA)));
         this.map.put(TEMPERATURE, factory.createSpinner(NUM_CHAR, new SpinnerNumberModel(0, 0, MAX_TEMPERATURE, DELTA)));
-
+        //labels
         for (final PlantModelCharacteristics elem: PlantModelCharacteristics.values()) {
             panel.add(new JLabel(elem.toString()), gbc);
             ++gbc.gridx;
@@ -82,7 +81,6 @@ public class PlantCreateDialog extends AbstractAddDialog {
             ++gbc.gridy;
             gbc.gridx = 0;
         }
-
         superPanel.add(factory.createLabel("Insert the optimal values of the plant"));
         this.getJDialog().getContentPane().add(superPanel, BorderLayout.NORTH);
         this.getJDialog().getContentPane().add(panel);

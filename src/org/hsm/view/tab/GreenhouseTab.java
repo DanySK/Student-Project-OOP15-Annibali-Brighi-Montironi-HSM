@@ -15,14 +15,16 @@ import javax.swing.JSplitPane;
 import javax.swing.JTextField;
 
 import org.hsm.controller.ControllerImpl;
-import org.hsm.model.Greenhouse;
 import org.hsm.view.enumeration.GreenhouseCharacteristics;
 import org.hsm.view.gui.GUIComponent;
 import org.hsm.view.utility.GUIFactory;
 import org.hsm.view.utility.MyGUIFactory;
+import org.hsm.view.utility.Utilities;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.labels.StandardPieItemLabelGenerator;
+import org.jfree.chart.plot.PiePlot;
 import org.jfree.data.general.DefaultPieDataset;
 
 
@@ -37,9 +39,6 @@ public class GreenhouseTab implements GUIComponent, Observer {
     private static final int TXT_FIELD_SIZE = 20;
     private static final int MINIMUM_X_SIZE = 355;
     private static final int CENT_FACTOR = 100;
-    private static final String OCCUPIED_SPACE = "Occupied Space";
-    private static final String FREE_SPACE = "Free Space";
-    private static final String CHART_TITLE = "Greenhouse Space Chart";
     private final JSplitPane split;
     private final Map<GreenhouseCharacteristics, JTextField> fieldMap;
     private final DefaultPieDataset dataSet;
@@ -50,12 +49,12 @@ public class GreenhouseTab implements GUIComponent, Observer {
     public GreenhouseTab() {
         final GUIFactory factory = new MyGUIFactory();
         this.fieldMap = new HashMap<>();
-
         final JPanel detailsPanel = new JPanel(new GridBagLayout());
         final GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(INSET_Y, 0, INSET_Y, INSET_X);
         gbc.gridx = 0;
         gbc.gridy = 0;
+        //insert greenhouse characteristics
         for (final GreenhouseCharacteristics elem : GreenhouseCharacteristics.values()) {
             gbc.anchor = GridBagConstraints.WEST;
             detailsPanel.add(factory.createLabel(elem.toString()), gbc);
@@ -68,17 +67,18 @@ public class GreenhouseTab implements GUIComponent, Observer {
             gbc.gridx = 0;
             ++gbc.gridy;
         }
-
         this.dataSet = new DefaultPieDataset();
-        final JFreeChart chart =  ChartFactory.createPieChart(CHART_TITLE, this.dataSet, true, true, false);
+        //chart
+        final JFreeChart chart =  ChartFactory.createPieChart("Greenhouse Space Chart", this.dataSet, true, true, false);
+        final PiePlot plot = (PiePlot) chart.getPlot();
+        plot.setLabelGenerator(new StandardPieItemLabelGenerator("({0}) {2}")); 
         final ChartPanel chartPanel = new ChartPanel(chart);
-
         this.split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, detailsPanel, chartPanel);
         final Dimension minimumSize = new Dimension(MINIMUM_X_SIZE, 0);
         detailsPanel.setMinimumSize(minimumSize);
         chartPanel.setMinimumSize(minimumSize);
-        split.setOneTouchExpandable(true);
-        split.setContinuousLayout(true);
+        this.split.setOneTouchExpandable(true);
+        this.split.setContinuousLayout(true);
     }
 
     /**
@@ -94,22 +94,24 @@ public class GreenhouseTab implements GUIComponent, Observer {
     public void setGreenhouse(final String name, final double size, final double cost, final String typology, 
             final double freeSpace, final double occupiedSpace, final int numberOfPlants) {
         this.fieldMap.get(GreenhouseCharacteristics.NAME).setText(name);
-        this.fieldMap.get(GreenhouseCharacteristics.DIMENSION).setText(Double.toString(size));
-        this.fieldMap.get(GreenhouseCharacteristics.COST).setText(Double.toString(cost / CENT_FACTOR));
+        this.fieldMap.get(GreenhouseCharacteristics.DIMENSION).setText(Utilities.customFormat(size));
+        this.fieldMap.get(GreenhouseCharacteristics.COST).setText(Utilities.customFormat(cost / CENT_FACTOR));
         this.fieldMap.get(GreenhouseCharacteristics.TYPOLOGY).setText(typology);
-        this.fieldMap.get(GreenhouseCharacteristics.FREE_SPACE).setText(Double.toString(freeSpace));
-        this.fieldMap.get(GreenhouseCharacteristics.USED_SPACE).setText(Double.toString(occupiedSpace));
+        this.fieldMap.get(GreenhouseCharacteristics.FREE_SPACE).setText(Utilities.customFormat(freeSpace));
+        this.fieldMap.get(GreenhouseCharacteristics.USED_SPACE).setText(Utilities.customFormat(occupiedSpace));
         this.fieldMap.get(GreenhouseCharacteristics.NUMBER_OF_PLANTS).setText(Integer.toString(numberOfPlants));
     }
 
     @Override
     public void update(final Observable arg0, final Object arg1) {
-        final Greenhouse green = ControllerImpl.getController().getGreenhouse();
-        this.fieldMap.get(GreenhouseCharacteristics.FREE_SPACE).setText(Double.toString(green.getFreeSize()));
-        this.fieldMap.get(GreenhouseCharacteristics.USED_SPACE).setText(Double.toString(green.getOccSize()));
-        this.fieldMap.get(GreenhouseCharacteristics.NUMBER_OF_PLANTS).setText(Integer.toString(green.getNumberOfPlants()));
-        this.dataSet.setValue(OCCUPIED_SPACE, green.getOccSize());
-        this.dataSet.setValue(FREE_SPACE, green.getFreeSize());
+        this.fieldMap.get(GreenhouseCharacteristics.FREE_SPACE).
+            setText(Utilities.customFormat(ControllerImpl.getController().getGreenhouse().getFreeSize()));
+        this.fieldMap.get(GreenhouseCharacteristics.USED_SPACE).
+            setText(Utilities.customFormat(ControllerImpl.getController().getGreenhouse().getOccSize()));
+        this.fieldMap.get(GreenhouseCharacteristics.NUMBER_OF_PLANTS)
+            .setText(Integer.toString(ControllerImpl.getController().getGreenhouse().getNumberOfPlants()));
+        this.dataSet.setValue("Occupied Space", ControllerImpl.getController().getGreenhouse().getOccSize());
+        this.dataSet.setValue("Free Space", ControllerImpl.getController().getGreenhouse().getFreeSize());
     }
 
     @Override

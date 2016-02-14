@@ -17,7 +17,6 @@ import org.hsm.view.gui.VisibleComponent;
  *The abstract dialog for every window which that has the task of adding something.
  *
  */
-
 public abstract class AbstractAddDialog implements VisibleComponent {
 
     private static final double DIM_FACTOR = 1.1;
@@ -33,10 +32,12 @@ public abstract class AbstractAddDialog implements VisibleComponent {
         this.dialog = new JDialog(frame, name, type);
         this.dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         this.dialog.setLayout(new BorderLayout());
+        //buttons
         final JButton addButton = new JButton("Add");
         final JPanel southPanel = new JPanel(new FlowLayout());
         southPanel.add(addButton);
         addButton.addActionListener(e -> addAction());
+        this.dialog.getRootPane().setDefaultButton(addButton);
         this.dialog.getContentPane().add(southPanel, BorderLayout.SOUTH);
     }
 

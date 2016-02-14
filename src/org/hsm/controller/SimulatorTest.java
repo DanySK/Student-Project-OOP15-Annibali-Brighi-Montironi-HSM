@@ -4,7 +4,6 @@ package org.hsm.controller;
 import static org.junit.Assert.assertTrue;
 
 
-import org.hsm.model.GreenHouseType;
 import org.junit.Test;
 
 /**
@@ -22,7 +21,7 @@ public class SimulatorTest {
     public void testSimulator() {
 
         final Controller cont = ControllerImpl.getController();
-        cont.createGreenhouse("Test", GreenHouseType.GRID, 120, 100);
+        cont.createGreenhouse("Test", "Grid", 120, 100);
         cont.createNewPlant("Lettuce", "Lactuca sativa", 6, 2500, 11, 28, 23, 35, 250);
         final Simulator sim = new SimulatorImpl();
 
