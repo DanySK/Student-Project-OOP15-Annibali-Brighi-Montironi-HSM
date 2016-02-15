@@ -60,7 +60,7 @@ public class Tabs implements GUIComponent {
      * Get the Database tab.
      * @return the database tab
      */
-    public DatabaseTab getDatabaseTab() {
+    protected DatabaseTab getDatabaseTab() {
         return this.databaseTab;
     }
 
@@ -68,7 +68,7 @@ public class Tabs implements GUIComponent {
      * Get the Plants tab.
      * @return the plants tab
      */
-    public PlantsTab getPlantsTab() {
+    protected PlantsTab getPlantsTab() {
         return this.plantsTab;
     }
 
@@ -76,7 +76,7 @@ public class Tabs implements GUIComponent {
      * Get the greenhouse tab.
      * @return the greenhouse tab
      */
-    public GreenhouseTab getGreenhouseTab() {
+    protected GreenhouseTab getGreenhouseTab() {
         return this.greenhouseTab;
     }
 
