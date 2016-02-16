@@ -32,7 +32,7 @@ public class AutoUpdater extends Thread {
             this.controller.getView().cleanGreenhouse();
 
             this.controller.getGreenhouse().getPlants().forEach((a, b) -> {
-                this.controller.getView().insertNewPlant(a, b.getModel().getName(), 1,
+                this.controller.getView().insertPlant(a, b.getModel().getName(), 1,
                         this.simulator.getSimulatedPh(b.getModel().getBotanicalName()),
                         this.simulator.getSimulatedBrightness(b.getModel().getBotanicalName()),
                         this.simulator.getSimulatedConductibility(b.getModel().getBotanicalName()),

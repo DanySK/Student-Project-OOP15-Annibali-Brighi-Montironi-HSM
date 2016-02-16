@@ -10,6 +10,7 @@ import java.util.Optional;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
+import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -105,7 +106,9 @@ public class MainFrame implements View {
     @Override
     public void insertPlant(final int id, final String name, final double cost, final double ph, final double brightness, 
             final double conductivity, final double temperature) {
-        this.tab.getPlantsTab().updateRow(id, name, cost, ph, brightness, conductivity, temperature);
+        SwingUtilities.invokeLater(() -> {
+            this.tab.getPlantsTab().updateRow(id, name, cost, ph, brightness, conductivity, temperature);
+        });
     }
 
     @Override
