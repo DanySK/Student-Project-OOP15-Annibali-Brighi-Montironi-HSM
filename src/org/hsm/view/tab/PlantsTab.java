@@ -50,7 +50,7 @@ public class PlantsTab extends Observable implements GUIComponent, UpgradeableTa
         remove.addActionListener(e -> ControllerImpl.getController().delPlant());
         final JButton updateValues = new JButton("Update Plant Values");
         updateValues.addActionListener(e -> ControllerImpl.getController().autoUpdate(1));
-        final JButton stop = new JButton("Stop");
+        final JButton stop = new JButton("Stop Updating");
         stop.addActionListener(e -> ControllerImpl.getController().stopUpdate());
         final JButton add = new JButton("Add Plant");
         add.addActionListener(e -> {
