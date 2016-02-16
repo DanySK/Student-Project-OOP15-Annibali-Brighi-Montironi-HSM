@@ -49,6 +49,9 @@ public class PlantsTab extends Observable implements GUIComponent, UpgradeableTa
         final JButton remove = new JButton("Remove Plant");
         remove.addActionListener(e -> ControllerImpl.getController().delPlant());
         final JButton updateValues = new JButton("Update Plant Values");
+        updateValues.addActionListener(e -> ControllerImpl.getController().autoUpdate(1));
+        final JButton stop = new JButton("Stop");
+        stop.addActionListener(e -> ControllerImpl.getController().stopUpdate());
         final JButton add = new JButton("Add Plant");
         add.addActionListener(e -> {
             if (ControllerImpl.getController().isDbEmpty()) {
@@ -84,6 +87,7 @@ public class PlantsTab extends Observable implements GUIComponent, UpgradeableTa
         southPanel.add(add);
         southPanel.add(remove);
         southPanel.add(updateValues);
+        southPanel.add(stop);
         southPanel.setAlignmentX(Component.RIGHT_ALIGNMENT);
         this.panel = new JPanel();
         this.panel.setLayout(new BoxLayout(this.panel, BoxLayout.Y_AXIS));
