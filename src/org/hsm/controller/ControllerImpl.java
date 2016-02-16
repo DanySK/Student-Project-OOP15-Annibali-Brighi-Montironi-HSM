@@ -79,6 +79,7 @@ public final class ControllerImpl implements Controller, Serializable {
 
     @Override
     public void createGreenhouse(final String name, final String greenhouseType, final int cost, final int size) {
+        this.stopUpdating();
         this.ghMod = true;
         this.loadGh = true;
         if (!this.loadDb) {
@@ -93,7 +94,7 @@ public final class ControllerImpl implements Controller, Serializable {
             this.ghMod = false;
             this.loadGh = false;
         }
-        this.checkUpdater();
+
     }
 
     private GreenHouseType getGreenhouseType(final String type) {
@@ -113,10 +114,7 @@ public final class ControllerImpl implements Controller, Serializable {
 
     @Override
     public Greenhouse getGreenhouse() {
-        this.checkUpdater();
-        final Greenhouse tmp = this.greenhouse.get();
-        this.restoreUpdater();
-        return tmp;
+        return this.greenhouse.get();
     }
 
     @Override
@@ -143,6 +141,7 @@ public final class ControllerImpl implements Controller, Serializable {
 
     @Override
     public void deleteGreenhouse() {
+        this.stopUpdating();
         this.checkSave();
         if (!this.loadGh) {
             Utilities.errorMessage(this.view.getFrame(), "No greenhouse is loaded");
@@ -151,10 +150,11 @@ public final class ControllerImpl implements Controller, Serializable {
         this.database = null;
         this.loadGh = false;
         this.loadDb = false;
+        this.dbMod = false;
+        this.ghMod = false;
         this.view.cleanGreenhouse();
         this.view.cleanDatabase();
         this.view.setActive(false);
-        this.checkUpdater();
     }
 
     @Override
@@ -213,6 +213,10 @@ public final class ControllerImpl implements Controller, Serializable {
 
     @Override
     public void stopUpdate() {
+        if (!this.updating) {
+            Utilities.errorMessage(this.view.getFrame(), "Updater not start");
+            return;
+        }
         this.updating = false;
         try {
             this.updater.get().interrupt();
@@ -290,12 +294,11 @@ public final class ControllerImpl implements Controller, Serializable {
             Utilities.errorMessage(this.view.getFrame(), e.toString());
         }
         this.restoreUpdater();
-
     }
 
     @Override
     public void loadGreenhouse() {
-        this.checkUpdater();
+        this.stopUpdating();
         if (this.ghMod) {
             if (Utilities.saveGreenhouseMessage(this.view.getFrame())) {
                 this.saveGreenhouse();
@@ -473,6 +476,15 @@ public final class ControllerImpl implements Controller, Serializable {
         return list;
     }
 
+    /**
+     * Stop auto updater if it runs.
+     */
+    private void stopUpdating(){
+        if (this.updating){
+            this.stopUpdate();
+        }
+    }
+
     private void checkUpdater() {
         if (this.updating) {
             this.stopUpdate();
@@ -483,6 +495,7 @@ public final class ControllerImpl implements Controller, Serializable {
     private void restoreUpdater() {
         if (this.updated) {
             this.autoUpdate(this.updatetime);
+            this.updated = false;
         }
     }
 

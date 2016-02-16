@@ -12,7 +12,7 @@ public class AutoUpdater extends Thread {
     private final Controller controller = ControllerImpl.getController();
     private final Simulator simulator = new SimulatorImpl();
 
-    private int time = 1;
+    private int time;
     private volatile boolean stopped;
 
     /**
@@ -43,8 +43,7 @@ public class AutoUpdater extends Thread {
                 final double bright = simulator.getSimulatedBrightness(b);
                 final double cond = simulator.getSimulatedConductibility(b);
                 final double temp = simulator.getSimulatedTemperature(b);
-                this.controller.getView().insertNewPlant(a, b.getModel().getName(), b.getCost() / 100, ph, bright, cond,
-                        temp);
+                this.controller.getView().insertNewPlant(a, b.getModel().getName(), b.getCost() / 100, ph, bright, cond, temp);
                 b.addPhValue(ph);
                 b.addBrightValue(bright);
                 b.addConductValue(cond);
