@@ -296,7 +296,7 @@ public final class ControllerImpl implements Controller, Serializable {
                 this.greenhouse.get().getFreeSize(), this.greenhouse.get().getOccSize(),
                 this.greenhouse.get().getNumberOfPlants());
         for (final Map.Entry<Integer, Plant> elem : this.greenhouse.get().getPlants().entrySet()) {
-            this.view.insertNewPlant(elem.getKey(), elem.getValue().getModel().getName(), elem.getValue().getCost(),
+            this.view.insertPlant(elem.getKey(), elem.getValue().getModel().getName(), elem.getValue().getCost(),
                     elem.getValue().getLastPhValue(), elem.getValue().getLastBrightValue(),
                     elem.getValue().getLastConductValue(), elem.getValue().getLastTempValue());
         }
