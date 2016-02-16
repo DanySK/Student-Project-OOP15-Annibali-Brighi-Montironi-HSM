@@ -2,6 +2,8 @@ package org.hsm.controller;
 
 import java.util.List;
 
+import org.hsm.model.Plant;
+
 /**
  *
  * Interface for Greenhouse simulator.
@@ -11,107 +13,107 @@ import java.util.List;
 public interface Simulator {
 
     /**
-    *
-    * @param botanicalName
-    *            the name of the plant
-    * @return the Optimal Ph (pH)
-    */
-    Double getOptimalPh(String botanicalName);
-
-   /**
-    *
-    * @param botanicalName
-    *            the name of the plant
-    * @return the Optimal Brightness (lumen)
-    */
-    Double getOptimalBrightness(String botanicalName);
-
-   /**
-    *
-    * @param botanicalName
-    *            the name of the plant
-    * @return the Optimal Conductibility (cF)
-    */
-    Double getOptimalConductibility(String botanicalName);
-
-   /**
-    *
-    * @param botanicalName
-    *            the name of the plant
-    * @return the Optimal Temperature (°C)
-    */
-    Double getOptimalTemperature(String botanicalName);
+     *
+     * @param plant
+     *            the plant
+     * @return the Optimal Ph (pH)
+     */
+    Double getOptimalPh(Plant plant);
 
     /**
      *
-     * @param botanicalName
-     *            the name of the plant
+     * @param plant
+     *            the plant
+     * @return the Optimal Brightness (lumen)
+     */
+    Double getOptimalBrightness(Plant plant);
+
+    /**
+     *
+     * @param plant
+     *            the plant
+     * @return the Optimal Conductibility (cF)
+     */
+    Double getOptimalConductibility(Plant plant);
+
+    /**
+     *
+     * @param plant
+     *            the plant
+     * @return the Optimal Temperature (°C)
+     */
+    Double getOptimalTemperature(Plant plant);
+
+    /**
+     *
+     * @param plant
+     *            the plant
      * @return the simulated Ph (pH)
      */
-    double getSimulatedPh(String botanicalName);
+    double getSimulatedPh(Plant plant);
 
     /**
      *
-     * @param botanicalName
-     *            the name of the plant
+     * @param plant
+     *            the plant
      * @return the simulated Brightness (lumen)
      */
-    double getSimulatedBrightness(String botanicalName);
+    double getSimulatedBrightness(Plant plant);
 
     /**
      *
-     * @param botanicalName
-     *            the name of the plant
+     * @param plant
+     *            the plant
      * @return the simulated Conductibility (cF)
      */
-    double getSimulatedConductibility(String botanicalName);
+    double getSimulatedConductibility(Plant plant);
 
     /**
      *
-     * @param botanicalName
-     *            the name of the plant
+     * @param plant
+     *            the plant
      * @return the simulated Temperature (°C)
      */
-    double getSimulatedTemperature(String botanicalName);
+    double getSimulatedTemperature(Plant plant);
 
     /**
      *
-     * @param botanicalName
-     *            the name of the plant
+     * @param plant
+     *            the plant
      * @param days
      *            the dimension of array data in days
      * @return the List of simulated values of Ph
      */
-    List<Double> getPhDays(String botanicalName, int days);
+    List<Double> getPhDays(Plant plant, int days);
 
     /**
      *
-     * @param botanicalName
-     *            the name of the plant
+     * @param plant
+     *            the plant
      * @param days
      *            the dimension of array data in days
      * @return the List of simulated values of Brightness
      */
-    List<Double> getBrightnessDays(String botanicalName, int days);
+    List<Double> getBrightnessDays(Plant plant, int days);
 
     /**
      *
-     * @param botanicalName
-     *            the name of the plant
+     * @param plant
+     *            the plant
      * @param days
      *            the dimension of array data in days
      * @return the List of simulated values of Conducibility
      */
-    List<Double> getConductibilityDays(String botanicalName, int days);
+    List<Double> getConductibilityDays(Plant plant, int days);
 
     /**
      *
-     * @param botanicalName
-     *            the name of the plant
+     * @param plant
+     *            the plant
      * @param days
      *            the dimension of array data in days
      * @return the List of simulated values of Temperature
      */
-    List<Double> getTemperatureDays(String botanicalName, int days);
+    List<Double> getTemperatureDays(Plant plant, int days);
 
 }
