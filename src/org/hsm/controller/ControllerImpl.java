@@ -59,6 +59,8 @@ public final class ControllerImpl implements Controller, Serializable {
     private boolean loadDb = true;
 
     private boolean updating;
+    private boolean updated;
+    private int updatetime;
 
     /**
      *
@@ -91,7 +93,7 @@ public final class ControllerImpl implements Controller, Serializable {
             this.ghMod = false;
             this.loadGh = false;
         }
-
+        this.checkUpdater();
     }
 
     private GreenHouseType getGreenhouseType(final String type) {
@@ -111,7 +113,10 @@ public final class ControllerImpl implements Controller, Serializable {
 
     @Override
     public Greenhouse getGreenhouse() {
-        return this.greenhouse.get();
+        this.checkUpdater();
+        final Greenhouse tmp = this.greenhouse.get();
+        this.restoreUpdater();
+        return tmp;
     }
 
     @Override
@@ -149,10 +154,12 @@ public final class ControllerImpl implements Controller, Serializable {
         this.view.cleanGreenhouse();
         this.view.cleanDatabase();
         this.view.setActive(false);
+        this.checkUpdater();
     }
 
     @Override
     public void addPlants(final PlantModel plant, final int cost, final int n) {
+        this.checkUpdater();
         this.ghMod = true;
         for (int i = 0; i < n; i++) {
             int id;
@@ -163,10 +170,12 @@ public final class ControllerImpl implements Controller, Serializable {
                 Utilities.errorMessage(this.view.getFrame(), "Insufficient space in Greenhouse");
             }
         }
+        this.restoreUpdater();
     }
 
     @Override
     public void delPlant() {
+        this.checkUpdater();
         try {
             final int id = this.view.getSelectedIDPlant();
             this.ghMod = true;
@@ -175,12 +184,15 @@ public final class ControllerImpl implements Controller, Serializable {
         } catch (IllegalStateException e) {
             Utilities.errorMessage(this.view.getFrame(), "No plant is selected");
         }
+        this.restoreUpdater();
     }
 
     @Override
     public void delPLants(final PlantModel plant) {
+        this.checkUpdater();
         this.ghMod = true;
         this.greenhouse.get().delPlants(plant);
+        this.restoreUpdater();
     }
 
     @Override
@@ -189,6 +201,7 @@ public final class ControllerImpl implements Controller, Serializable {
             this.updater = Optional.of(new AutoUpdater());
         }
         this.updating = true;
+        this.updatetime = time;
 
         this.updater.get().setTime(time);
         try {
@@ -260,6 +273,7 @@ public final class ControllerImpl implements Controller, Serializable {
 
     @Override
     public void saveGreenhouse() {
+        this.checkUpdater();
         final Optional<String> filenameGh = this.view.saveGreenhouseDialog();
         if (!filenameGh.isPresent()) {
             return;
@@ -275,11 +289,13 @@ public final class ControllerImpl implements Controller, Serializable {
         } catch (IOException e) {
             Utilities.errorMessage(this.view.getFrame(), e.toString());
         }
+        this.restoreUpdater();
 
     }
 
     @Override
     public void loadGreenhouse() {
+        this.checkUpdater();
         if (this.ghMod) {
             if (Utilities.saveGreenhouseMessage(this.view.getFrame())) {
                 this.saveGreenhouse();
@@ -460,6 +476,13 @@ public final class ControllerImpl implements Controller, Serializable {
     private void checkUpdater() {
         if (this.updating) {
             this.stopUpdate();
+            this.updated = true;
+        }
+    }
+
+    private void restoreUpdater() {
+        if (this.updated) {
+            this.autoUpdate(this.updatetime);
         }
     }
 
