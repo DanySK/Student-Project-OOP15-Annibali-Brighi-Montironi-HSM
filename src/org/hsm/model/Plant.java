@@ -19,7 +19,7 @@ public interface Plant {
      *
      * @return the cost of the plant
      */
-    int getCost();
+    double getCost();
 
     /**
      *

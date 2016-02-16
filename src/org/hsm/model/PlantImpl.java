@@ -12,7 +12,7 @@ import java.util.List;
 public class PlantImpl implements Plant, Serializable {
 
     private static final long serialVersionUID = 1101353617623045838L;
-
+    private static final int CENT_FACTOR = 100;
     private final PlantModel model;
     private final int cost;
     private final List<Double> phList;
@@ -49,8 +49,8 @@ public class PlantImpl implements Plant, Serializable {
     }
 
     @Override
-    public int getCost() {
-        return cost;
+    public double getCost() {
+        return (double) cost / CENT_FACTOR;
     }
 
     @Override
