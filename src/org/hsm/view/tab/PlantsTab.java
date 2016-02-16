@@ -103,8 +103,7 @@ public class PlantsTab extends Observable implements GUIComponent, UpgradeableTa
 
     @Override
     public void insertRow(final Object... row) {
-        final DefaultTableModel model = (DefaultTableModel) this.table.getModel();
-        model.addRow(row);
+        this.addRow(row);
         this.setChanged();
         this.notifyObservers();
     }
@@ -119,6 +118,10 @@ public class PlantsTab extends Observable implements GUIComponent, UpgradeableTa
 
     @Override
     public void updateRow(final Object... row) {
+        this.addRow(row);
+    }
+
+    private void addRow(final Object... row) {
         final DefaultTableModel model = (DefaultTableModel) this.table.getModel();
         model.addRow(row);
     }
