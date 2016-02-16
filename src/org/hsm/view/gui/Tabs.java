@@ -1,6 +1,7 @@
 package org.hsm.view.gui;
 
 import java.awt.BorderLayout;
+import java.util.Observable;
 
 import javax.swing.BorderFactory;
 import javax.swing.JComponent;
@@ -13,6 +14,8 @@ import org.hsm.view.tab.DatabaseTab;
 import org.hsm.view.tab.GreenhouseChartTab;
 import org.hsm.view.tab.GreenhouseTab;
 import org.hsm.view.tab.PlantsTab;
+import org.hsm.view.tab.Table;
+import org.hsm.view.tab.UpgradeableTable;
 
 /**
  *The class which create and use the Tabbes.
@@ -22,8 +25,8 @@ public class Tabs implements GUIComponent {
 
     private final JPanel panel;
     private final JTabbedPane tab;
-    private final DatabaseTab databaseTab;
-    private final PlantsTab plantsTab;
+    private final Table<String> databaseTab;
+    private final UpgradeableTable<Integer> plantsTab;
     private final GreenhouseTab greenhouseTab;
 
     /**
@@ -44,7 +47,7 @@ public class Tabs implements GUIComponent {
         this.tab.add("Plants", this.plantsTab.getComponent());
         this.tab.add("Plants Database", this.databaseTab.getComponent());
         //observer
-        this.plantsTab.addObserver(this.greenhouseTab);
+        ((Observable) this.plantsTab).addObserver(this.greenhouseTab);
         this.panel.add(tab, BorderLayout.CENTER);
     }
 
@@ -60,7 +63,7 @@ public class Tabs implements GUIComponent {
      * Get the Database tab.
      * @return the database tab
      */
-    protected DatabaseTab getDatabaseTab() {
+    protected Table<String> getDatabaseTab() {
         return this.databaseTab;
     }
 
@@ -68,7 +71,7 @@ public class Tabs implements GUIComponent {
      * Get the Plants tab.
      * @return the plants tab
      */
-    protected PlantsTab getPlantsTab() {
+    protected UpgradeableTable<Integer> getPlantsTab() {
         return this.plantsTab;
     }
 

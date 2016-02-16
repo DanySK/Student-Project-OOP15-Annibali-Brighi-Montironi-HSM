@@ -146,12 +146,12 @@ public class MainFrame implements View {
 
     @Override
     public String getSelectedBotanicalName() throws IllegalStateException {
-        return this.tab.getDatabaseTab().getSelectedBotanicalName();
+        return this.tab.getDatabaseTab().getSelectedRowIdentifier();
     }
 
     @Override
     public int getSelectedIDPlant() throws IllegalStateException {
-        return this.tab.getPlantsTab().getSelectedIDPlant();
+        return this.tab.getPlantsTab().getSelectedRowIdentifier();
     }
 
     private void setSystemLook() {

@@ -30,7 +30,7 @@ import org.hsm.view.utility.Utilities;
  *This tab contains all the information about the plants inside the current greenhouse.
  *
  */
-public class PlantsTab extends Observable implements GUIComponent, Table {
+public class PlantsTab extends Observable implements GUIComponent, UpgradeableTable<Integer> {
 
     private static final int FILTER_TXT_SIZE = 50;
     private final JTable table;
@@ -92,12 +92,8 @@ public class PlantsTab extends Observable implements GUIComponent, Table {
         this.panel.add(southPanel);
     }
 
-    /**
-     * Get the ID of the raw selected.
-     * @return the ID of the plant
-     * @throws IllegalStateException no row is selected
-     */
-    public int getSelectedIDPlant() throws IllegalStateException {
+    @Override
+    public Integer getSelectedRowIdentifier() throws IllegalStateException {
         if (this.table.getSelectedRow() == -1) {
             throw new IllegalStateException();
         }
@@ -121,10 +117,7 @@ public class PlantsTab extends Observable implements GUIComponent, Table {
         this.notifyObservers();
     }
 
-    /**
-     * Insert the row in the table without change the Greenhouse state.
-     * @param row the row to insert
-     */
+    @Override
     public void updateRow(final Object... row) {
         final DefaultTableModel model = (DefaultTableModel) this.table.getModel();
         model.addRow(row);

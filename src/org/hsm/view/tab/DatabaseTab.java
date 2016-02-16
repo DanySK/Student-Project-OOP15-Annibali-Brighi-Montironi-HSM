@@ -19,7 +19,7 @@ import org.hsm.view.utility.MyGUIFactory;
  *This tab contains all the information about the database of plants.
  *
  */
-public class DatabaseTab implements GUIComponent, Table {
+public class DatabaseTab implements GUIComponent, Table<String> {
 
     private final JTable table;
     private final JPanel panel;
@@ -53,12 +53,8 @@ public class DatabaseTab implements GUIComponent, Table {
         return this.panel;
     }
 
-    /**
-     * Get the botanical name of the raw selected.
-     * @return the botanical name selected
-     * @throws IllegalStateException no row is selected
-     */
-    public String getSelectedBotanicalName() throws IllegalStateException {
+    @Override
+    public String getSelectedRowIdentifier() throws IllegalStateException {
         if (this.table.getSelectedRow() == -1) {
             throw new IllegalStateException();
         }
