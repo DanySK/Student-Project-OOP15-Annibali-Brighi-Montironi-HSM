@@ -50,6 +50,7 @@ public final class ControllerImpl implements Controller, Serializable {
 
     private Optional<Database> database;
     private Optional<Greenhouse> greenhouse;
+    private Optional<AutoUpdater> updater = Optional.empty();
     private final View view = new MainFrame();
 
     private boolean ghMod;
@@ -114,6 +115,11 @@ public final class ControllerImpl implements Controller, Serializable {
     }
 
     @Override
+    public View getView() {
+        return this.view;
+    }
+
+    @Override
     public void newDatabase() {
         if (this.dbMod) {
             if (Utilities.saveDatabaseMessage(this.view.getFrame())) {
@@ -150,7 +156,6 @@ public final class ControllerImpl implements Controller, Serializable {
                 Utilities.errorMessage(this.view.getFrame(), "Insufficient space in Greenhouse");
             }
         }
-
     }
 
     @Override
@@ -173,7 +178,21 @@ public final class ControllerImpl implements Controller, Serializable {
 
     @Override
     public void autoUpdate(final int time) {
-        new AutoUpdater(time).start();
+        this.updater = Optional.of(new AutoUpdater(time));
+        try {
+            this.updater.get().start();
+        } catch (IllegalThreadStateException e) {
+            Utilities.errorMessage(this.view.getFrame(), "Updater already start");
+        }
+    }
+
+    @Override
+    public void stopUpdate() {
+        try {
+            this.updater.get().interrupt();
+        } catch (SecurityException e) {
+            Utilities.errorMessage(this.view.getFrame(), "Unable to stop auto Update");
+        }
     }
 
     @Override
@@ -188,7 +207,7 @@ public final class ControllerImpl implements Controller, Serializable {
                     temperature);
         } catch (IllegalStateException e) {
             Utilities.errorMessage(this.view.getFrame(), "This plant is already in database");
-        } catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             Utilities.errorMessage(this.view.getFrame(), "Pant name can't be empty");
         }
 

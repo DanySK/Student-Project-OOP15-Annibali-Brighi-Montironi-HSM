@@ -15,12 +15,12 @@ import org.hsm.model.PlantModel;
  */
 public class SimulatorImpl implements Simulator {
 
-    private static final double MAXRAND_PH = 0.5;
-    private static final double MAXRAND_BRIGHT = 50.0;
-    private static final double MAXRAND_COND = 2.0;
-    private static final double MAXRAND_TEMP = 1.5;
+    private static final double MAXRAND_PH = 0.3;
+    private static final double MAXRAND_BRIGHT = 25.0;
+    private static final double MAXRAND_COND = 1.0;
+    private static final double MAXRAND_TEMP = 0.6;
 
-    private static final double ROUND_TO = 100.00;
+    private static final double ROUND_TO = 10.00;
 
     private final Random random = new Random();
     private final Database db = ControllerImpl.getController().getDatabase();

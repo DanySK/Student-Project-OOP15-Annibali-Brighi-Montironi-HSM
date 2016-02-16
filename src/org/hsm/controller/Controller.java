@@ -5,6 +5,7 @@ import java.util.List;
 import org.hsm.model.Database;
 import org.hsm.model.Greenhouse;
 import org.hsm.model.PlantModel;
+import org.hsm.view.gui.View;
 
 /**
  * Interface for controller operations.
@@ -41,6 +42,13 @@ public interface Controller {
     Database getDatabase();
 
     /**
+     * Get the View.
+     *
+     * @return the view object
+     */
+    View getView();
+
+    /**
      * Delete the Greenhouse actually loaded.
      */
     void deleteGreenhouse();
@@ -65,7 +73,6 @@ public interface Controller {
 
     /**
      * Delete the selected plant in the greenhouse.
-     *
      */
     void delPlant();
 
@@ -85,6 +92,11 @@ public interface Controller {
      *            update rate in seconds
      */
     void autoUpdate(int time);
+
+    /**
+     * Stop the autoUpdate.
+     */
+    void stopUpdate();
 
     /**
      * Create a new type of plant for the database.
@@ -187,6 +199,7 @@ public interface Controller {
 
     /**
      * Get a set with all the greenhouse possible types.
+     *
      * @return a set whith all the greenhouse possible types
      */
     List<String> getGreenhouseTypes();
