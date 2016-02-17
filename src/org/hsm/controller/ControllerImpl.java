@@ -24,6 +24,7 @@ import org.hsm.model.GreenhouseImpl;
 import org.hsm.model.Plant;
 import org.hsm.model.PlantModel;
 import org.hsm.view.chart.BarChartDialog;
+import org.hsm.view.chart.LineChartDialog;
 import org.hsm.view.gui.MainFrame;
 import org.hsm.view.gui.View;
 import org.hsm.view.utility.Utilities;
@@ -429,6 +430,15 @@ public final class ControllerImpl implements Controller, Serializable {
             final int id = this.view.getSelectedIDPlant();
             new BarChartDialog("Brightness", "lumen",
                     this.greenhouse.get().getPlants().get(id).getModel().getBrightness(), 0).start();
+        } catch (IllegalStateException e) {
+            Utilities.errorMessage(this.view.getFrame(), "No plant is selected!");
+        }
+    }
+    
+    public void showBrightnessLineChart() {
+        try {
+            final int id = this.view.getSelectedIDPlant();
+            new LineChartDialog("Brightness", "lumen", this.greenhouse.get().getPlants().get(id).getBrightList()).start();
         } catch (IllegalStateException e) {
             Utilities.errorMessage(this.view.getFrame(), "No plant is selected!");
         }

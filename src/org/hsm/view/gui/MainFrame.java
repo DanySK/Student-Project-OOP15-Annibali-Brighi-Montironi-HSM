@@ -138,7 +138,9 @@ public class MainFrame implements View {
 
     @Override
     public void cleanGreenhouse() {
-        this.tab.getPlantsTab().clean();
+        SwingUtilities.invokeLater(() -> {
+            this.tab.getPlantsTab().clean();
+        });
     }
 
     @Override

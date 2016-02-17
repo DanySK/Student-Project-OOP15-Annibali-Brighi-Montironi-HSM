@@ -43,7 +43,7 @@ public class AutoUpdater extends Thread {
                 final double bright = simulator.getSimulatedBrightness(b);
                 final double cond = simulator.getSimulatedConductibility(b);
                 final double temp = simulator.getSimulatedTemperature(b);
-                this.controller.getView().insertNewPlant(a, b.getModel().getName(), b.getCost() / 100, ph, bright, cond, temp);
+                this.controller.getView().insertPlant(a, b.getModel().getName(), b.getCost() / 100, ph, bright, cond, temp);
                 b.addPhValue(ph);
                 b.addBrightValue(bright);
                 b.addConductValue(cond);

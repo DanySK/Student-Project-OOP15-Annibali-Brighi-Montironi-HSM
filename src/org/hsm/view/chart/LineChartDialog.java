@@ -21,12 +21,12 @@ public class LineChartDialog extends AbstractChartDialog {
      * @param unitsOfMeasure the unit of measure to use
      * @param valueList the list of values
      */
-    public LineChartDialog(final String characteristic, final String unitsOfMeasure, final List<Number> valueList) {
+    public LineChartDialog(final String characteristic, final String unitsOfMeasure, final List<Double> valueList) {
         super(characteristic);
         //chart
         final DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         for (int i = 0; i < valueList.size(); ++i) {
-            dataset.addValue(valueList.get(i), "Value", i);
+            dataset.addValue(valueList.get(i), "", Integer.toString(i));
         }
         final JFreeChart chart = ChartFactory.createLineChart(characteristic + " Line Chart", 
                                                               "Survey Period",

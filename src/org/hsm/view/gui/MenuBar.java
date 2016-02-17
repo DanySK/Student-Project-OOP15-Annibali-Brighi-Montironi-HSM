@@ -115,6 +115,7 @@ public class MenuBar implements GUIComponent {
         this.chart.addSeparator();
         final JMenuItem brightnessLineChart = new JMenuItem("Show Brightness Line Chart");
         this.chart.add(brightnessLineChart);
+        brightnessLineChart.addActionListener(e -> ControllerImpl.getController().showBrightnessLineChart());
         final JMenuItem phLineChart = new JMenuItem("Show Basicity Line Chart");
         this.chart.add(phLineChart);
         final JMenuItem temperatureLineChart = new JMenuItem("Show Temperature Line Chart");
