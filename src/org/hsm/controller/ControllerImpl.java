@@ -48,14 +48,19 @@ public final class ControllerImpl implements Controller, Serializable {
     private ControllerImpl() {
     };
 
-    private Optional<Database> database;
+    private Database database = new DatabaseImpl();
     private Optional<Greenhouse> greenhouse;
-    private Optional<AutoUpdater> updater = Optional.empty();
+    private Optional<AutoUpdater> updater;
     private final View view = new MainFrame();
 
     private boolean ghMod;
     private boolean loadGh;
     private boolean dbMod;
+    private boolean loadDb = true;
+
+    private boolean updating;
+    private boolean updated;
+    private int updatetime;
 
     /**
      *
@@ -74,11 +79,14 @@ public final class ControllerImpl implements Controller, Serializable {
 
     @Override
     public void createGreenhouse(final String name, final String greenhouseType, final int cost, final int size) {
+        this.stopUpdating();
         this.ghMod = true;
         this.loadGh = true;
+        if (!this.loadDb) {
+            this.database = new DatabaseImpl();
+        }
         try {
             this.greenhouse = Optional.of(new GreenhouseImpl(name, size, cost, this.getGreenhouseType(greenhouseType)));
-            this.database = Optional.of(new DatabaseImpl());
             this.view.setActive(true);
             this.view.insertGreenhouse(name, size, cost, greenhouseType, size, 0, 0);
         } catch (IllegalArgumentException e) {
@@ -111,7 +119,7 @@ public final class ControllerImpl implements Controller, Serializable {
 
     @Override
     public Database getDatabase() {
-        return this.database.get();
+        return this.database;
     }
 
     @Override
@@ -121,24 +129,29 @@ public final class ControllerImpl implements Controller, Serializable {
 
     @Override
     public void newDatabase() {
+        this.loadDb = true;
         if (this.dbMod) {
             if (Utilities.saveDatabaseMessage(this.view.getFrame())) {
                 this.saveDatabase();
             }
         }
-        this.database = Optional.of(new DatabaseImpl());
+        this.database = new DatabaseImpl();
         this.view.cleanDatabase();
     }
 
     @Override
     public void deleteGreenhouse() {
+        this.stopUpdating();
         this.checkSave();
         if (!this.loadGh) {
             Utilities.errorMessage(this.view.getFrame(), "No greenhouse is loaded");
         }
         this.greenhouse = Optional.empty();
-        this.database = Optional.empty();
+        this.database = null;
         this.loadGh = false;
+        this.loadDb = false;
+        this.dbMod = false;
+        this.ghMod = false;
         this.view.cleanGreenhouse();
         this.view.cleanDatabase();
         this.view.setActive(false);
@@ -146,6 +159,7 @@ public final class ControllerImpl implements Controller, Serializable {
 
     @Override
     public void addPlants(final PlantModel plant, final int cost, final int n) {
+        this.checkUpdater();
         this.ghMod = true;
         for (int i = 0; i < n; i++) {
             int id;
@@ -156,10 +170,12 @@ public final class ControllerImpl implements Controller, Serializable {
                 Utilities.errorMessage(this.view.getFrame(), "Insufficient space in Greenhouse");
             }
         }
+        this.restoreUpdater();
     }
 
     @Override
     public void delPlant() {
+        this.checkUpdater();
         try {
             final int id = this.view.getSelectedIDPlant();
             this.ghMod = true;
@@ -168,17 +184,26 @@ public final class ControllerImpl implements Controller, Serializable {
         } catch (IllegalStateException e) {
             Utilities.errorMessage(this.view.getFrame(), "No plant is selected");
         }
+        this.restoreUpdater();
     }
 
     @Override
     public void delPLants(final PlantModel plant) {
+        this.checkUpdater();
         this.ghMod = true;
         this.greenhouse.get().delPlants(plant);
+        this.restoreUpdater();
     }
 
     @Override
     public void autoUpdate(final int time) {
-        this.updater = Optional.of(new AutoUpdater(time));
+        if (!this.updating) {
+            this.updater = Optional.of(new AutoUpdater());
+        }
+        this.updating = true;
+        this.updatetime = time;
+
+        this.updater.get().setTime(time);
         try {
             this.updater.get().start();
         } catch (IllegalThreadStateException e) {
@@ -188,11 +213,17 @@ public final class ControllerImpl implements Controller, Serializable {
 
     @Override
     public void stopUpdate() {
+        if (!this.updating) {
+            Utilities.errorMessage(this.view.getFrame(), "Updater not start");
+            return;
+        }
+        this.updating = false;
         try {
             this.updater.get().interrupt();
         } catch (SecurityException e) {
             Utilities.errorMessage(this.view.getFrame(), "Unable to stop auto Update");
         }
+        this.updater = Optional.empty();
     }
 
     @Override
@@ -201,7 +232,7 @@ public final class ControllerImpl implements Controller, Serializable {
             final int size) {
         this.dbMod = true;
         try {
-            this.database.get().addPlantModel(name, botanicalName, ph, brightness, optimalGrowthTime, life, size,
+            this.database.addPlantModel(name, botanicalName, ph, brightness, optimalGrowthTime, life, size,
                     conductivity, temperature);
             this.view.insertModelPlant(name, botanicalName, ph, brightness, optimalGrowthTime, life, size, conductivity,
                     temperature);
@@ -218,7 +249,7 @@ public final class ControllerImpl implements Controller, Serializable {
         try {
             final String botanicalName = this.view.getSelectedBotanicalName();
             this.dbMod = true;
-            this.database.get().removePlantModel(botanicalName);
+            this.database.removePlantModel(botanicalName);
             this.view.removeSelectedModelPlant();
         } catch (IllegalStateException e) {
             Utilities.errorMessage(this.view.getFrame(), "No plant is selected");
@@ -233,7 +264,7 @@ public final class ControllerImpl implements Controller, Serializable {
     @Override
     public boolean isDbEmpty() {
         if (this.loadGh) {
-            return this.database.get().isEmpty();
+            return this.database.isEmpty();
         } else {
             return false;
         }
@@ -246,6 +277,7 @@ public final class ControllerImpl implements Controller, Serializable {
 
     @Override
     public void saveGreenhouse() {
+        this.checkUpdater();
         final Optional<String> filenameGh = this.view.saveGreenhouseDialog();
         if (!filenameGh.isPresent()) {
             return;
@@ -261,11 +293,12 @@ public final class ControllerImpl implements Controller, Serializable {
         } catch (IOException e) {
             Utilities.errorMessage(this.view.getFrame(), e.toString());
         }
-
+        this.restoreUpdater();
     }
 
     @Override
     public void loadGreenhouse() {
+        this.stopUpdating();
         if (this.ghMod) {
             if (Utilities.saveGreenhouseMessage(this.view.getFrame())) {
                 this.saveGreenhouse();
@@ -275,7 +308,10 @@ public final class ControllerImpl implements Controller, Serializable {
         if (!filenameGh.isPresent()) {
             return;
         }
-        this.database = Optional.of(new DatabaseImpl());
+        if (!this.loadDb) {
+            this.database = new DatabaseImpl();
+            this.loadDb = true;
+        }
         this.loadGh = true;
         try {
             ObjectInput shmGh = new ObjectInputStream(new BufferedInputStream(new FileInputStream(filenameGh.get())));
@@ -296,7 +332,7 @@ public final class ControllerImpl implements Controller, Serializable {
                 this.greenhouse.get().getFreeSize(), this.greenhouse.get().getOccSize(),
                 this.greenhouse.get().getNumberOfPlants());
         for (final Map.Entry<Integer, Plant> elem : this.greenhouse.get().getPlants().entrySet()) {
-            this.view.insertPlant(elem.getKey(), elem.getValue().getModel().getName(), elem.getValue().getCost(),
+            this.view.insertNewPlant(elem.getKey(), elem.getValue().getModel().getName(), elem.getValue().getCost(),
                     elem.getValue().getLastPhValue(), elem.getValue().getLastBrightValue(),
                     elem.getValue().getLastConductValue(), elem.getValue().getLastTempValue());
         }
@@ -311,7 +347,7 @@ public final class ControllerImpl implements Controller, Serializable {
         this.dbMod = false;
         try (final ObjectOutput shmDb = new ObjectOutputStream(
                 new BufferedOutputStream(new FileOutputStream(filenameDb.get())))) {
-            shmDb.writeObject(this.database.get());
+            shmDb.writeObject(this.database);
             shmDb.close();
         } catch (FileNotFoundException e) {
             Utilities.errorMessage(this.view.getFrame(), e.toString());
@@ -332,10 +368,11 @@ public final class ControllerImpl implements Controller, Serializable {
         if (!filenameDb.isPresent()) {
             return;
         }
+        this.loadDb = true;
         try (final ObjectInput shmDb = new ObjectInputStream(
                 new BufferedInputStream(new FileInputStream(filenameDb.get())))) {
             try {
-                this.database = Optional.of((Database) shmDb.readObject());
+                this.database = (Database) shmDb.readObject();
                 shmDb.close();
             } catch (ClassNotFoundException e) {
                 Utilities.errorMessage(this.view.getFrame(), "Nothing to load");
@@ -346,7 +383,7 @@ public final class ControllerImpl implements Controller, Serializable {
             Utilities.errorMessage(this.view.getFrame(), e.toString());
         }
         this.view.cleanDatabase();
-        for (final PlantModel elem : this.database.get().getDb().values()) {
+        for (final PlantModel elem : this.database.getDb().values()) {
             this.view.insertModelPlant(elem.getName(), elem.getBotanicalName(), elem.getPH(), elem.getBrightness(),
                     elem.getOptimalGrowthTime(), elem.getLife(), elem.getSize(), elem.getConductivity(),
                     elem.getOptimalTemperature());
@@ -437,6 +474,29 @@ public final class ControllerImpl implements Controller, Serializable {
             list.add(elem.toString());
         }
         return list;
+    }
+
+    /**
+     * Stop auto updater if it runs.
+     */
+    private void stopUpdating(){
+        if (this.updating){
+            this.stopUpdate();
+        }
+    }
+
+    private void checkUpdater() {
+        if (this.updating) {
+            this.stopUpdate();
+            this.updated = true;
+        }
+    }
+
+    private void restoreUpdater() {
+        if (this.updated) {
+            this.autoUpdate(this.updatetime);
+            this.updated = false;
+        }
     }
 
     /**

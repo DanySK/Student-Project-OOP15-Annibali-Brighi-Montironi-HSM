@@ -12,16 +12,23 @@ public class AutoUpdater extends Thread {
     private final Controller controller = ControllerImpl.getController();
     private final Simulator simulator = new SimulatorImpl();
 
-    private final int time;
+    private int time;
     private volatile boolean stopped;
 
     /**
+     * Create a thread called Auto_Updater_Thread.
+     */
+    public AutoUpdater() {
+        super("Auto_Updater_Thread");
+    }
+
+    /**
+     * Set refresh rate.
      *
      * @param time
-     *            refresh rate
+     *            the refresh rate in seconds
      */
-    public AutoUpdater(final int time) {
-        super("Auto_Updater_Thread");
+    public void setTime(final int time) {
         this.time = time;
     }
 
@@ -32,11 +39,15 @@ public class AutoUpdater extends Thread {
             this.controller.getView().cleanGreenhouse();
 
             this.controller.getGreenhouse().getPlants().forEach((a, b) -> {
-                this.controller.getView().insertPlant(a, b.getModel().getName(), 1,
-                        this.simulator.getSimulatedPh(b.getModel().getBotanicalName()),
-                        this.simulator.getSimulatedBrightness(b.getModel().getBotanicalName()),
-                        this.simulator.getSimulatedConductibility(b.getModel().getBotanicalName()),
-                        this.simulator.getSimulatedTemperature(b.getModel().getBotanicalName()));
+                final double ph = simulator.getSimulatedPh(b);
+                final double bright = simulator.getSimulatedBrightness(b);
+                final double cond = simulator.getSimulatedConductibility(b);
+                final double temp = simulator.getSimulatedTemperature(b);
+                this.controller.getView().insertNewPlant(a, b.getModel().getName(), b.getCost() / 100, ph, bright, cond, temp);
+                b.addPhValue(ph);
+                b.addBrightValue(bright);
+                b.addConductValue(cond);
+                b.addTempValue(temp);
             });
 
             try {
@@ -49,7 +60,6 @@ public class AutoUpdater extends Thread {
 
     @Override
     public void interrupt() {
-        super.interrupt();
         this.stopped = true;
     }
 
