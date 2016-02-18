@@ -183,9 +183,19 @@ public interface Controller {
     void showBrightnessBarChart();
 
     /**
+     * Show Brightness Line Chart to see the trend of brightness values of the selected plant.
+     */
+    void showBrightnessLineChart();
+
+    /**
      * Show Ph Bar Chart to compare values of the selected plant.
      */
     void showPhBarChart();
+
+    /**
+     * Show Ph Line Chart to see the trend of ph values of the selected plant.
+     */
+    void showPhLineChart();
 
     /**
      * Show Temperature Bar Chart to compare values of the selected plant.
@@ -193,9 +203,19 @@ public interface Controller {
     void showTemperatureBarChart();
 
     /**
+     * Show Temperature Line Chart to see the trend of temperature values of the selected plant.
+     */
+    void showTemperatureLineChart();
+
+    /**
      * Show Conductivity Bar Chart to compare values of the selected plant.
      */
     void showConductivityBarChart();
+
+    /**
+     * Show Conductivity Line Chart to see the trend of conductivity values of the selected plant.
+     */
+    void showConductivityLineChart();
 
     /**
      * Get a set with all the greenhouse possible types.

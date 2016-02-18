@@ -433,6 +433,7 @@ public final class ControllerImpl implements Controller, Serializable {
         }
     }
 
+    @Override
     public void showBrightnessLineChart() {
         try {
             final int id = this.view.getSelectedIDPlant();
@@ -453,6 +454,17 @@ public final class ControllerImpl implements Controller, Serializable {
             Utilities.errorMessage(this.view.getFrame(), "No plant is selected!");
         }
     }
+    
+    @Override
+    public void showPhLineChart() {
+        try {
+            final int id = this.view.getSelectedIDPlant();
+            new LineChartDialog("Basicity", "ph", this.greenhouse.get().getPlants().get(id).getPhList())
+                    .start();
+        } catch (IllegalStateException e) {
+            Utilities.errorMessage(this.view.getFrame(), "No plant is selected!");
+        }
+    }
 
     @Override
     public void showTemperatureBarChart() {
@@ -464,6 +476,17 @@ public final class ControllerImpl implements Controller, Serializable {
             Utilities.errorMessage(this.view.getFrame(), "No plant is selected!");
         }
     }
+    
+    @Override
+    public void showTemperatureLineChart() {
+        try {
+            final int id = this.view.getSelectedIDPlant();
+            new LineChartDialog("Temperature", "Celsius degrees", this.greenhouse.get().getPlants().get(id).getTempList())
+                    .start();
+        } catch (IllegalStateException e) {
+            Utilities.errorMessage(this.view.getFrame(), "No plant is selected!");
+        }
+    }
 
     @Override
     public void showConductivityBarChart() {
@@ -471,6 +494,17 @@ public final class ControllerImpl implements Controller, Serializable {
             final int id = this.view.getSelectedIDPlant();
             new BarChartDialog("Conductivity", "cf",
                     this.greenhouse.get().getPlants().get(id).getModel().getConductivity(), 0).start();
+        } catch (IllegalStateException e) {
+            Utilities.errorMessage(this.view.getFrame(), "No plant is selected!");
+        }
+    }
+    
+    @Override
+    public void showConductivityLineChart() {
+        try {
+            final int id = this.view.getSelectedIDPlant();
+            new LineChartDialog("Conductivity", "cf", this.greenhouse.get().getPlants().get(id).getConductList())
+                    .start();
         } catch (IllegalStateException e) {
             Utilities.errorMessage(this.view.getFrame(), "No plant is selected!");
         }

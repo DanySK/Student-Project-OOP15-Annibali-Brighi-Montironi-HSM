@@ -117,10 +117,13 @@ public class MenuBar implements GUIComponent {
         this.chart.add(brightnessLineChart);
         brightnessLineChart.addActionListener(e -> ControllerImpl.getController().showBrightnessLineChart());
         final JMenuItem phLineChart = new JMenuItem("Show Basicity Line Chart");
+        phLineChart.addActionListener(e -> ControllerImpl.getController().showPhLineChart());
         this.chart.add(phLineChart);
         final JMenuItem temperatureLineChart = new JMenuItem("Show Temperature Line Chart");
+        temperatureLineChart.addActionListener(e -> ControllerImpl.getController().showTemperatureLineChart());
         this.chart.add(temperatureLineChart);
         final JMenuItem conductivityLineChart = new JMenuItem("Show Conductivity Line Chart");
+        conductivityLineChart.addActionListener(e -> ControllerImpl.getController().showConductivityLineChart());
         this.chart.add(conductivityLineChart);
         //Menu Information Item
         final JMenuItem whatsHydroponic = new JMenuItem("What is Hydroponic? (Wiki)");
