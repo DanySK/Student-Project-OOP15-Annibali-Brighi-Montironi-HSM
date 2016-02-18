@@ -38,7 +38,6 @@ public class GreenhouseTab implements GUIComponent, Observer {
     private static final int INSET_X = 7;
     private static final int TXT_FIELD_SIZE = 20;
     private static final int MINIMUM_X_SIZE = 355;
-    private static final int CENT_FACTOR = 100;
     private final JSplitPane split;
     private final Map<GreenhouseCharacteristics, JTextField> fieldMap;
     private final DefaultPieDataset dataSet;
@@ -90,16 +89,18 @@ public class GreenhouseTab implements GUIComponent, Observer {
      * @param freeSpace the greenhouse free space
      * @param occupiedSpace the greenhouse occupied space
      * @param numberOfPlants the number of plants of the greenhouse
+     * @param overCost the overall cost of the greenhouse
      */
     public void setGreenhouse(final String name, final double size, final double cost, final String typology, 
-            final double freeSpace, final double occupiedSpace, final int numberOfPlants) {
+            final double freeSpace, final double occupiedSpace, final int numberOfPlants, final double overCost) {
         this.fieldMap.get(GreenhouseCharacteristics.NAME).setText(name);
         this.fieldMap.get(GreenhouseCharacteristics.DIMENSION).setText(Utilities.customFormat(size));
-        this.fieldMap.get(GreenhouseCharacteristics.COST).setText(Utilities.customFormat(cost / CENT_FACTOR));
+        this.fieldMap.get(GreenhouseCharacteristics.COST).setText(Utilities.customFormat(cost));
         this.fieldMap.get(GreenhouseCharacteristics.TYPOLOGY).setText(typology);
         this.fieldMap.get(GreenhouseCharacteristics.FREE_SPACE).setText(Utilities.customFormat(freeSpace));
         this.fieldMap.get(GreenhouseCharacteristics.USED_SPACE).setText(Utilities.customFormat(occupiedSpace));
         this.fieldMap.get(GreenhouseCharacteristics.NUMBER_OF_PLANTS).setText(Integer.toString(numberOfPlants));
+        this.fieldMap.get(GreenhouseCharacteristics.OVERALL_COST).setText(Utilities.customFormat(overCost));
         this.dataSet.setValue("Occupied Space", occupiedSpace);
         this.dataSet.setValue("Free Space", freeSpace);
     }
@@ -112,6 +113,8 @@ public class GreenhouseTab implements GUIComponent, Observer {
             setText(Utilities.customFormat(ControllerImpl.getController().getGreenhouse().getOccSize()));
         this.fieldMap.get(GreenhouseCharacteristics.NUMBER_OF_PLANTS)
             .setText(Integer.toString(ControllerImpl.getController().getGreenhouse().getNumberOfPlants()));
+        this.fieldMap.get(GreenhouseCharacteristics.OVERALL_COST)
+            .setText(Utilities.customFormat(ControllerImpl.getController().getGreenhouse().totalCost()));
         this.dataSet.setValue("Occupied Space", ControllerImpl.getController().getGreenhouse().getOccSize());
         this.dataSet.setValue("Free Space", ControllerImpl.getController().getGreenhouse().getFreeSize());
     }

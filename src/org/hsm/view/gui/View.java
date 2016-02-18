@@ -31,9 +31,10 @@ public interface View extends VisibleComponent {
      * @param freeSpace the greenhouse free space
      * @param occupiedSpace the greenhouse occupied space
      * @param numberOfPlants the number of plants of the greenhouse
+     * @param overCost the overall cost of the greenhouse
      */
     void insertGreenhouse(final String name, final double size, final double cost, final String typology, 
-                          final double freeSpace, final double occupiedSpace, final int numberOfPlants);
+                          final double freeSpace, final double occupiedSpace, final int numberOfPlants, final double overCost);
 
      /**
       * Insert a plant into Greenhouse View.

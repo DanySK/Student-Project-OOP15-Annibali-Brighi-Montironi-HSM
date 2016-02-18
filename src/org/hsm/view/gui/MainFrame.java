@@ -78,8 +78,8 @@ public class MainFrame implements View {
 
     @Override
     public void insertGreenhouse(final String name, final double size, final double cost, final String typology, 
-            final double freeSpace, final double occupiedSpace, final int numberOfPlants) {
-        this.tab.getGreenhouseTab().setGreenhouse(name, size, cost, typology, freeSpace, occupiedSpace, numberOfPlants);
+            final double freeSpace, final double occupiedSpace, final int numberOfPlants, final double overCost) {
+        this.tab.getGreenhouseTab().setGreenhouse(name, size, cost, typology, freeSpace, occupiedSpace, numberOfPlants, overCost);
         this.tab.getPlantsTab().clean();
     }
 

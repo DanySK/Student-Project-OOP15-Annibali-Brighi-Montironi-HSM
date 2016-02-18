@@ -33,7 +33,11 @@ public enum GreenhouseCharacteristics {
     /**
      *The typology of the greenhouse.
      */
-    TYPOLOGY("Typology");
+    TYPOLOGY("Typology"),
+    /**
+     *The overall cost of the greenhouse.
+     */
+    OVERALL_COST("Overall Cost");
 
     private final String name;
 

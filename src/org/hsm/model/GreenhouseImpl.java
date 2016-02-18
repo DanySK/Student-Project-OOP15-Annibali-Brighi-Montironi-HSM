@@ -192,7 +192,7 @@ public class GreenhouseImpl implements Greenhouse, Serializable {
 
     @Override
     public double totalCost() {
-        return this.costGreenhouse + this.plantMap.values().stream().mapToDouble(i -> i.getCost()).sum();
+        return this.getCost() + this.plantMap.values().stream().mapToDouble(i -> i.getCost()).sum();
     }
     
 

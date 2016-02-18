@@ -89,7 +89,8 @@ public final class ControllerImpl implements Controller, Serializable {
         try {
             this.greenhouse = Optional.of(new GreenhouseImpl(name, size, cost, this.getGreenhouseType(greenhouseType)));
             this.view.setActive(true);
-            this.view.insertGreenhouse(name, size, cost, greenhouseType, size, 0, 0);
+            this.view.insertGreenhouse(name, size, this.greenhouse.get().getCost(), greenhouseType, size, 0, 0, 
+                                      this.greenhouse.get().getCost());
         } catch (IllegalArgumentException e) {
             Utilities.errorMessage(this.view.getFrame(), "Greenhouse name can't be empty");
             this.ghMod = false;
@@ -328,9 +329,9 @@ public final class ControllerImpl implements Controller, Serializable {
         this.view.insertGreenhouse(this.greenhouse.get().getName(), this.greenhouse.get().getSize(),
                 this.greenhouse.get().getCost(), this.greenhouse.get().getType().toString(),
                 this.greenhouse.get().getFreeSize(), this.greenhouse.get().getOccSize(),
-                this.greenhouse.get().getNumberOfPlants());
+                this.greenhouse.get().getNumberOfPlants(), this.greenhouse.get().totalCost());
         for (final Map.Entry<Integer, Plant> elem : this.greenhouse.get().getPlants().entrySet()) {
-            this.view.insertNewPlant(elem.getKey(), elem.getValue().getModel().getName(), elem.getValue().getCost(),
+            this.view.insertPlant(elem.getKey(), elem.getValue().getModel().getName(), elem.getValue().getCost(),
                     elem.getValue().getLastPhValue(), elem.getValue().getLastBrightValue(),
                     elem.getValue().getLastConductValue(), elem.getValue().getLastTempValue());
         }
