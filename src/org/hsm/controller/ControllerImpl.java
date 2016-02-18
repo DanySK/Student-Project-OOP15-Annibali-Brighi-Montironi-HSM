@@ -202,6 +202,8 @@ public final class ControllerImpl implements Controller, Serializable {
         this.updating = true;
         try {
             this.updater.get().start();
+            this.updater.get().setTime(time);
+            this.updatetime = time;
         } catch (IllegalThreadStateException e) {
             Utilities.errorMessage(this.view.getFrame(), "Updater already start");
         }
@@ -278,9 +280,8 @@ public final class ControllerImpl implements Controller, Serializable {
             return;
         }
         this.ghMod = false;
-        try {
-            ObjectOutput shmGh = new ObjectOutputStream(
-                    new BufferedOutputStream(new FileOutputStream(filenameGh.get())));
+        try (ObjectOutput shmGh = new ObjectOutputStream(
+                new BufferedOutputStream(new FileOutputStream(filenameGh.get())))) {
             shmGh.writeObject(this.greenhouse.get());
             shmGh.close();
         } catch (FileNotFoundException e) {
@@ -308,13 +309,15 @@ public final class ControllerImpl implements Controller, Serializable {
             this.loadDb = true;
         }
         this.loadGh = true;
-        try {
-            ObjectInput shmGh = new ObjectInputStream(new BufferedInputStream(new FileInputStream(filenameGh.get())));
+        try (ObjectInput shmGh = new ObjectInputStream(
+                new BufferedInputStream(new FileInputStream(filenameGh.get())))) {
             try {
                 this.greenhouse = Optional.of((Greenhouse) shmGh.readObject());
                 shmGh.close();
             } catch (ClassNotFoundException e) {
                 Utilities.errorMessage(this.view.getFrame(), "Nothing to load");
+                this.deleteGreenhouse();
+                return;
             }
         } catch (FileNotFoundException e) {
             Utilities.errorMessage(this.view.getFrame(), "File not found");
@@ -371,6 +374,7 @@ public final class ControllerImpl implements Controller, Serializable {
                 shmDb.close();
             } catch (ClassNotFoundException e) {
                 Utilities.errorMessage(this.view.getFrame(), "Nothing to load");
+                this.deleteDbPlant();
             }
         } catch (FileNotFoundException e) {
             Utilities.errorMessage(this.view.getFrame(), "File not found");
