@@ -199,6 +199,7 @@ public final class ControllerImpl implements Controller, Serializable {
     @Override
     public void autoUpdate(final int time) {
         this.updater = Optional.of(new AutoUpdater());
+        this.updating = true;
         try {
             this.updater.get().start();
         } catch (IllegalThreadStateException e) {
@@ -208,9 +209,7 @@ public final class ControllerImpl implements Controller, Serializable {
 
     @Override
     public void stopUpdate() {
-        /*
         if (!this.updating) {
-            Utilities.errorMessage(this.view.getFrame(), "Updater not start");
             return;
         }
         this.updating = false;
@@ -220,7 +219,6 @@ public final class ControllerImpl implements Controller, Serializable {
             Utilities.errorMessage(this.view.getFrame(), "Unable to stop auto Update");
         }
         this.updater = Optional.empty();
-        */
     }
 
     @Override

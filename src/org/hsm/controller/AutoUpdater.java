@@ -16,7 +16,7 @@ public class AutoUpdater extends Thread {
     private final Controller controller = ControllerImpl.getController();
     private final Simulator simulator = new SimulatorImpl();
 
-    private int time;
+    private int time = 1;
     private volatile boolean stopped;
 
     /**
