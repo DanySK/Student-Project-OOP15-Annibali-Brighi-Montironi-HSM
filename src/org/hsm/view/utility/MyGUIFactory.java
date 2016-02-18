@@ -78,7 +78,12 @@ public class MyGUIFactory implements GUIFactory {
 
             @Override
             public Class<?> getColumnClass(final int colNum) {
-                return getValueAt(0, colNum).getClass();
+                try {
+                    final Object obj = getValueAt(0, colNum);
+                    return obj.getClass();
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    return Object.class;
+                }
             }
 
         };

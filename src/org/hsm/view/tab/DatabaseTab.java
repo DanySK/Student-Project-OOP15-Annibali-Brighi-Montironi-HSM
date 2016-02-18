@@ -8,6 +8,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 import org.hsm.controller.ControllerImpl;
 import org.hsm.view.dialog.PlantCreateDialog;
@@ -33,6 +35,8 @@ public class DatabaseTab implements GUIComponent, Table<String> {
         this.panel.setLayout(new BoxLayout(this.panel, BoxLayout.Y_AXIS));
         //insert columns in table
         this.table = new MyGUIFactory().createTable(PlantModelCharacteristics.getNameList().toArray());
+        final TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(this.table.getModel());
+        this.table.setRowSorter(sorter);
         final JPanel southPanel = new JPanel();
         southPanel.setLayout(new BoxLayout(southPanel, BoxLayout.X_AXIS));
         //buttons
@@ -73,7 +77,9 @@ public class DatabaseTab implements GUIComponent, Table<String> {
     @Override
     public void removeSelectedRow() {
         final DefaultTableModel model = (DefaultTableModel) this.table.getModel();
-        model.removeRow(this.table.getSelectedRow());
+        final int row = this.table.getSelectedRow();
+        final int modelRow = this.table.convertRowIndexToModel(row);
+        model.removeRow(modelRow);
     }
 
     @Override
