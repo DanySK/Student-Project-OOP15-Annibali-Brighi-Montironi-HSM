@@ -189,6 +189,11 @@ public class GreenhouseImpl implements Greenhouse, Serializable {
         
         return tmpMap;
     }
+
+    @Override
+    public double totalCost() {
+        return this.costGreenhouse + this.plantMap.values().stream().mapToDouble(i -> i.getCost()).sum();
+    }
     
 
 }

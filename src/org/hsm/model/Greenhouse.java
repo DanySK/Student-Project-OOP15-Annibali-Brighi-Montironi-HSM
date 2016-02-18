@@ -88,6 +88,12 @@ public interface Greenhouse {
      *            cost of the greenhouse
      */
     void setCost(double cost);
+    
+    /**
+     * @return  
+     *      total cost of the greenhouse (greenhouse cost + plants cost)  
+     */
+    double totalCost();
 
     /**
      * @return return the type of the greenhouse
