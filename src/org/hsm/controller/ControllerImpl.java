@@ -430,11 +430,12 @@ public final class ControllerImpl implements Controller, Serializable {
             Utilities.errorMessage(this.view.getFrame(), "No plant is selected!");
         }
     }
-    
+
     public void showBrightnessLineChart() {
         try {
             final int id = this.view.getSelectedIDPlant();
-            new LineChartDialog("Brightness", "lumen", this.greenhouse.get().getPlants().get(id).getBrightList()).start();
+            new LineChartDialog("Brightness", "lumen", this.greenhouse.get().getPlants().get(id).getBrightList())
+                    .start();
         } catch (IllegalStateException e) {
             Utilities.errorMessage(this.view.getFrame(), "No plant is selected!");
         }
@@ -485,8 +486,8 @@ public final class ControllerImpl implements Controller, Serializable {
     /**
      * Stop auto updater if it runs.
      */
-    private void stopUpdating(){
-        if (this.updating){
+    private void stopUpdating() {
+        if (this.updating) {
             this.stopUpdate();
         }
     }

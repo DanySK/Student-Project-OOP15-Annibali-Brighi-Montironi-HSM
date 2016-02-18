@@ -1,5 +1,7 @@
 package org.hsm.controller;
 
+import java.lang.reflect.InvocationTargetException;
+
 import javax.swing.SwingUtilities;
 
 /**
@@ -36,28 +38,35 @@ public class AutoUpdater extends Thread {
 
     @Override
     public void run() {
-        SwingUtilities.invokeLater(() -> {
-            this.controller.getView().cleanGreenhouse();
-            this.controller.getGreenhouse().getPlants().forEach((a, b) -> {
-                final double ph = simulator.getSimulatedPh(b);
-                final double bright = simulator.getSimulatedBrightness(b);
-                final double cond = simulator.getSimulatedConductibility(b);
-                final double temp = simulator.getSimulatedTemperature(b);
-                this.controller.getView().insertPlant(a, b.getModel().getName(), b.getCost(), ph, bright, cond, temp);
-                b.addPhValue(ph);
-                b.addBrightValue(bright);
-                b.addConductValue(cond);
-                b.addTempValue(temp);
-        });
-
-            });
-            /*
+        while (!this.stopped) {
             try {
-                Thread.sleep(this.time * MS_TO_S);
+                SwingUtilities.invokeAndWait(() -> {
+                    this.controller.getView().cleanGreenhouse();
+                    this.controller.getGreenhouse().getPlants().forEach((a, b) -> {
+                        final double ph = simulator.getSimulatedPh(b);
+                        final double bright = simulator.getSimulatedBrightness(b);
+                        final double cond = simulator.getSimulatedConductibility(b);
+                        final double temp = simulator.getSimulatedTemperature(b);
+                        this.controller.getView().insertPlant(a, b.getModel().getName(), b.getCost(), ph, bright, cond,
+                                temp);
+                        b.addPhValue(ph);
+                        b.addBrightValue(bright);
+                        b.addConductValue(cond);
+                        b.addTempValue(temp);
+                    });
+
+                });
+            } catch (InvocationTargetException | InterruptedException e1) {
+                e1.printStackTrace();
+            }
+
+            try {
+                Thread.sleep(time * MS_TO_S);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            */
+
+        }
     }
 
     @Override
