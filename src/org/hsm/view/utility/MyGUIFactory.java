@@ -75,10 +75,12 @@ public class MyGUIFactory implements GUIFactory {
             public boolean isCellEditable(final int rowIndex, final int mColIndex) {
                 return false;
             }
+
             @Override
             public Class<?> getColumnClass(final int colNum) {
                 return getValueAt(0, colNum).getClass();
             }
+
         };
         final JTable table = new JTable(model);
         table.setAutoscrolls(true);

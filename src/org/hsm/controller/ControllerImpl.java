@@ -51,7 +51,7 @@ public final class ControllerImpl implements Controller, Serializable {
 
     private Database database = new DatabaseImpl();
     private Optional<Greenhouse> greenhouse;
-    private Optional<AutoUpdater> updater;
+    private Optional<AutoUpdater> updater = Optional.empty();
     private final View view = new MainFrame();
 
     private boolean ghMod;
@@ -198,13 +198,7 @@ public final class ControllerImpl implements Controller, Serializable {
 
     @Override
     public void autoUpdate(final int time) {
-        if (!this.updating) {
-            this.updater = Optional.of(new AutoUpdater());
-        }
-        this.updating = true;
-        this.updatetime = time;
-
-        this.updater.get().setTime(time);
+        this.updater = Optional.of(new AutoUpdater());
         try {
             this.updater.get().start();
         } catch (IllegalThreadStateException e) {
@@ -214,6 +208,7 @@ public final class ControllerImpl implements Controller, Serializable {
 
     @Override
     public void stopUpdate() {
+        /*
         if (!this.updating) {
             Utilities.errorMessage(this.view.getFrame(), "Updater not start");
             return;
@@ -225,6 +220,7 @@ public final class ControllerImpl implements Controller, Serializable {
             Utilities.errorMessage(this.view.getFrame(), "Unable to stop auto Update");
         }
         this.updater = Optional.empty();
+        */
     }
 
     @Override

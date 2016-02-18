@@ -50,8 +50,10 @@ public class PlantsTab extends Observable implements GUIComponent, UpgradeableTa
         remove.addActionListener(e -> ControllerImpl.getController().delPlant());
         final JButton updateValues = new JButton("Update Plant Values");
         updateValues.addActionListener(e -> ControllerImpl.getController().autoUpdate(1));
+        /*
         final JButton stop = new JButton("Stop Updating");
         stop.addActionListener(e -> ControllerImpl.getController().stopUpdate());
+        */
         final JButton add = new JButton("Add Plant");
         add.addActionListener(e -> {
             if (ControllerImpl.getController().isDbEmpty()) {
@@ -87,7 +89,7 @@ public class PlantsTab extends Observable implements GUIComponent, UpgradeableTa
         southPanel.add(add);
         southPanel.add(remove);
         southPanel.add(updateValues);
-        southPanel.add(stop);
+        //southPanel.add(stop);
         southPanel.setAlignmentX(Component.RIGHT_ALIGNMENT);
         this.panel = new JPanel();
         this.panel.setLayout(new BoxLayout(this.panel, BoxLayout.Y_AXIS));
@@ -115,7 +117,9 @@ public class PlantsTab extends Observable implements GUIComponent, UpgradeableTa
     @Override
     public void removeSelectedRow() {
         final DefaultTableModel model = (DefaultTableModel) this.table.getModel();
-        model.removeRow(this.table.getSelectedRow());
+        final int row = this.table.getSelectedRow();
+        final int modelRow = this.table.convertRowIndexToModel(row);
+        model.removeRow(modelRow);
         this.setChanged();
         this.notifyObservers();
     }
@@ -132,8 +136,10 @@ public class PlantsTab extends Observable implements GUIComponent, UpgradeableTa
 
     @Override
     public void clean() {
-        final DefaultTableModel model = (DefaultTableModel) this.table.getModel();
-        model.setRowCount(0);
+        final DefaultTableModel dm = (DefaultTableModel) table.getModel();
+        while (dm.getRowCount() > 0) {
+            dm.removeRow(0);
+        }
     }
 
     @Override
