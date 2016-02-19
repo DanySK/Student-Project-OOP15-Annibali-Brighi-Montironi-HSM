@@ -79,10 +79,8 @@ public interface Controller {
     /**
      * Delete all plants of the same type of plant provided in input.
      *
-     * @param plant
-     *            type of plant to be delete
      */
-    void delPLants(PlantModel plant);
+    void delPLants();
 
     /**
      * Start the auto updater thread for update plants values evrey time.

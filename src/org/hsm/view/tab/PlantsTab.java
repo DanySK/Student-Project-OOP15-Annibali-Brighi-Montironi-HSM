@@ -48,6 +48,8 @@ public class PlantsTab extends Observable implements GUIComponent, UpgradeableTa
         //buttons
         final JButton remove = new JButton("Remove Plant");
         remove.addActionListener(e -> ControllerImpl.getController().delPlant());
+        final JButton removeType = new JButton("Remove Type");
+        removeType.addActionListener(e -> ControllerImpl.getController().delPLants());
         final JButton updateValues = new JButton("Update Plant Values");
         updateValues.addActionListener(e -> {
             this.table.setRowSelectionAllowed(false);
@@ -69,7 +71,6 @@ public class PlantsTab extends Observable implements GUIComponent, UpgradeableTa
         final JLabel filterLabel = new JLabel("Find:");
         final JTextField filterField = new JTextField(FILTER_TXT_SIZE);
         final JButton findButton = new JButton("Filter");
-        final JButton exitFilter = new JButton("Exit");
         filterField.setMaximumSize(new Dimension(filterField.getPreferredSize().width, filterField.getPreferredSize().height));
         //filter
         final TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(this.table.getModel());
@@ -82,16 +83,13 @@ public class PlantsTab extends Observable implements GUIComponent, UpgradeableTa
                 sorter.setRowFilter(RowFilter.regexFilter(text));
               }
         });
-        exitFilter.addActionListener(e -> {
-            sorter.setRowFilter(null);
-        });
         southPanel.add(filterLabel);
         southPanel.add(filterField);
         southPanel.add(findButton);
-        southPanel.add(exitFilter);
         southPanel.add(Box.createHorizontalGlue());
         southPanel.add(add);
         southPanel.add(remove);
+        southPanel.add(removeType);
         southPanel.add(updateValues);
         southPanel.add(stop);
         southPanel.setAlignmentX(Component.RIGHT_ALIGNMENT);

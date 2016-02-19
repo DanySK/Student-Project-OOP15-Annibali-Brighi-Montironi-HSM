@@ -190,10 +190,25 @@ public final class ControllerImpl implements Controller, Serializable {
     }
 
     @Override
-    public void delPLants(final PlantModel plant) {
+    public void delPLants() {
         this.checkUpdater();
-        this.ghMod = true;
-        this.greenhouse.get().delPlants(plant);
+        try {
+            final int id = this.view.getSelectedIDPlant();
+            this.ghMod = true;
+            this.greenhouse.get().delPlants(this.greenhouse.get().getPlants().get(id).getModel());
+            this.view.cleanGreenhouse();
+            this.view.insertGreenhouse(this.greenhouse.get().getName(), this.greenhouse.get().getSize(),
+                    this.greenhouse.get().getCost(), this.greenhouse.get().getType().toString(),
+                    this.greenhouse.get().getFreeSize(), this.greenhouse.get().getOccSize(),
+                    this.greenhouse.get().getNumberOfPlants(), this.greenhouse.get().totalCost());
+            for (final Map.Entry<Integer, Plant> elem : this.greenhouse.get().getPlants().entrySet()) {
+                this.view.insertPlant(elem.getKey(), elem.getValue().getModel().getName(), elem.getValue().getCost(),
+                        elem.getValue().getLastPhValue(), elem.getValue().getLastBrightValue(),
+                        elem.getValue().getLastConductValue(), elem.getValue().getLastTempValue());
+            }
+        } catch (IllegalStateException e) {
+            Utilities.errorMessage(this.view.getFrame(), "No plant is selected");
+        }
         this.restoreUpdater();
     }
 
