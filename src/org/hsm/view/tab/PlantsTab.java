@@ -106,7 +106,8 @@ public class PlantsTab extends Observable implements GUIComponent, UpgradeableTa
             throw new IllegalStateException();
         }
         final int selectedRowIndex = this.table.getSelectedRow();
-        return (int) this.table.getModel().getValueAt(selectedRowIndex, PlantCharacteristics.ID.ordinal());
+        final int modelRow = this.table.convertRowIndexToModel(selectedRowIndex);
+        return (int) this.table.getModel().getValueAt(modelRow, PlantCharacteristics.ID.ordinal());
     }
 
     @Override

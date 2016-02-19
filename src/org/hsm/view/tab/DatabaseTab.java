@@ -63,7 +63,8 @@ public class DatabaseTab implements GUIComponent, Table<String> {
             throw new IllegalStateException();
         }
         final int selectedRowIndex = this.table.getSelectedRow();
-        final String botanicalName = (String) this.table.getModel().getValueAt(selectedRowIndex, 
+        final int modelRow = this.table.convertRowIndexToModel(selectedRowIndex);
+        final String botanicalName = (String) this.table.getModel().getValueAt(modelRow, 
                                      PlantModelCharacteristics.BOTANICAL_NAME.ordinal());
         return botanicalName;
     }
@@ -84,8 +85,10 @@ public class DatabaseTab implements GUIComponent, Table<String> {
 
     @Override
     public void clean() {
-        final DefaultTableModel model = (DefaultTableModel) this.table.getModel();
-        model.setRowCount(0);
+        final DefaultTableModel dm = (DefaultTableModel) table.getModel();
+        while (dm.getRowCount() > 0) {
+            dm.removeRow(0);
+        }
     }
 
 }
