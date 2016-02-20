@@ -179,7 +179,6 @@ public final class ControllerImpl implements Controller, Serializable {
 
     @Override
     public void delPlant() {
-        this.checkUpdater();
         try {
             final int id = this.view.getSelectedIDPlant();
             this.ghMod = true;
@@ -188,7 +187,6 @@ public final class ControllerImpl implements Controller, Serializable {
         } catch (IllegalStateException e) {
             Utilities.errorMessage(this.view.getFrame(), "No plant is selected");
         }
-        this.restoreUpdater();
     }
 
     @Override
@@ -412,7 +410,6 @@ public final class ControllerImpl implements Controller, Serializable {
         if (this.isDbEmpty()) {
             this.dbMod = false;
         }
-
         this.checkSave();
         System.exit(0);
     }

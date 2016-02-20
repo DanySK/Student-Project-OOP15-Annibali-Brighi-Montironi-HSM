@@ -61,10 +61,9 @@ public class AutoUpdater extends Thread {
                         b.addConductValue(cond);
                         b.addTempValue(temp);
                     });
-
                 });
-            } catch (InvocationTargetException | InterruptedException e1) {
-                e1.printStackTrace();
+            } catch (InvocationTargetException | InterruptedException e) {
+                e.printStackTrace();
             }
 
             try {

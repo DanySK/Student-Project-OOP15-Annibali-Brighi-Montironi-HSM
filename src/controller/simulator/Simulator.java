@@ -18,7 +18,7 @@ public interface Simulator {
      *            the plant
      * @return the Optimal Ph (pH)
      */
-    Double getOptimalPh(Plant plant);
+    double getOptimalPh(Plant plant);
 
     /**
      *
@@ -26,7 +26,7 @@ public interface Simulator {
      *            the plant
      * @return the Optimal Brightness (lumen)
      */
-    Double getOptimalBrightness(Plant plant);
+    double getOptimalBrightness(Plant plant);
 
     /**
      *
@@ -34,7 +34,7 @@ public interface Simulator {
      *            the plant
      * @return the Optimal Conductibility (cF)
      */
-    Double getOptimalConductibility(Plant plant);
+    double getOptimalConductibility(Plant plant);
 
     /**
      *
@@ -42,7 +42,7 @@ public interface Simulator {
      *            the plant
      * @return the Optimal Temperature (°C)
      */
-    Double getOptimalTemperature(Plant plant);
+    double getOptimalTemperature(Plant plant);
 
     /**
      *
@@ -77,6 +77,20 @@ public interface Simulator {
     double getSimulatedTemperature(Plant plant);
 
     /**
+     * Provide a list of water consuption of the greenhouse.
+     *
+     * @return the list of simulated water consuption
+     */
+    List<Double> getSimulatedWaterConsuption();
+
+    /**
+     * Provide a list of plants grown.
+     *
+     * @return the list of simulated plant grow
+     */
+    List<Double> getSimulatedPlantGrow();
+
+    /**
     *
     * @param plant
     *            the plant
@@ -108,44 +122,18 @@ public interface Simulator {
     */
    double getRealTemperature(Plant plant);
 
-    /**
-     *
-     * @param plant
-     *            the plant
-     * @param days
-     *            the dimension of array data in days
-     * @return the List of simulated values of Ph
-     */
-    List<Double> getPhDays(Plant plant, int days);
+   /**
+    * Provide a list of water consuption of the traditional coltivation.
+    *
+    * @return the list of water consuption
+    */
+   List<Double> getRealWaterConsuption();
 
-    /**
-     *
-     * @param plant
-     *            the plant
-     * @param days
-     *            the dimension of array data in days
-     * @return the List of simulated values of Brightness
-     */
-    List<Double> getBrightnessDays(Plant plant, int days);
-
-    /**
-     *
-     * @param plant
-     *            the plant
-     * @param days
-     *            the dimension of array data in days
-     * @return the List of simulated values of Conducibility
-     */
-    List<Double> getConductibilityDays(Plant plant, int days);
-
-    /**
-     *
-     * @param plant
-     *            the plant
-     * @param days
-     *            the dimension of array data in days
-     * @return the List of simulated values of Temperature
-     */
-    List<Double> getTemperatureDays(Plant plant, int days);
+   /**
+    * Provide a list of plants grown in traditional coltivation.
+    *
+    * @return the list of plant grow
+    */
+   List<Double> getRealPlantGrow();
 
 }

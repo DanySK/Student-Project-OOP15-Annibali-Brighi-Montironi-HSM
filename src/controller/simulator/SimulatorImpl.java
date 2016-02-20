@@ -1,6 +1,5 @@
 package controller.simulator;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -28,22 +27,22 @@ public class SimulatorImpl implements Simulator {
     private final Random random = new Random();
 
     @Override
-    public Double getOptimalPh(final Plant plant) {
+    public double getOptimalPh(final Plant plant) {
         return plant.getModel().getPH();
     }
 
     @Override
-    public Double getOptimalBrightness(final Plant plant) {
+    public double getOptimalBrightness(final Plant plant) {
         return plant.getModel().getBrightness();
     }
 
     @Override
-    public Double getOptimalConductibility(final Plant plant) {
+    public double getOptimalConductibility(final Plant plant) {
         return plant.getModel().getConductivity();
     }
 
     @Override
-    public Double getOptimalTemperature(final Plant plant) {
+    public double getOptimalTemperature(final Plant plant) {
         return plant.getModel().getOptimalTemperature();
     }
 
@@ -113,39 +112,28 @@ public class SimulatorImpl implements Simulator {
     }
 
     @Override
-    public List<Double> getPhDays(final Plant plant, final int days) {
-        List<Double> list = new ArrayList<>();
-        for (int i = 0; i < days; i++) {
-            list.add(this.getSimulatedPh(plant));
-        }
-        return list;
+    public List<Double> getSimulatedWaterConsuption() {
+        //for(int i = 0; i < )
+
+        return null;
     }
 
     @Override
-    public List<Double> getBrightnessDays(final Plant plant, final int days) {
-        List<Double> list = new ArrayList<>();
-        for (int i = 0; i < days; i++) {
-            list.add(this.getSimulatedBrightness(plant));
-        }
-        return list;
+    public List<Double> getSimulatedPlantGrow() {
+        // TODO Auto-generated method stub
+        return null;
     }
 
     @Override
-    public List<Double> getConductibilityDays(final Plant plant, final int days) {
-        List<Double> list = new ArrayList<>();
-        for (int i = 0; i < days; i++) {
-            list.add(this.getSimulatedConductibility(plant));
-        }
-        return list;
+    public List<Double> getRealWaterConsuption() {
+        // TODO Auto-generated method stub
+        return null;
     }
 
     @Override
-    public List<Double> getTemperatureDays(final Plant plant, final int days) {
-        List<Double> list = new ArrayList<>();
-        for (int i = 0; i < days; i++) {
-            list.add(this.getSimulatedTemperature(plant));
-        }
-        return list;
+    public List<Double> getRealPlantGrow() {
+        // TODO Auto-generated method stub
+        return null;
     }
 
     private double roundTo(final double value) {
