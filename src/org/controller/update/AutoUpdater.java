@@ -1,14 +1,13 @@
-package controller.update;
+package org.controller.update;
 
 import java.lang.reflect.InvocationTargetException;
 
 import javax.swing.SwingUtilities;
 
+import org.controller.simulator.Simulator;
+import org.controller.simulator.SimulatorImpl;
 import org.hsm.controller.Controller;
 import org.hsm.controller.ControllerImpl;
-
-import controller.simulator.Simulator;
-import controller.simulator.SimulatorImpl;
 
 /**
  *
@@ -60,6 +59,10 @@ public class AutoUpdater extends Thread {
                         b.addBrightValue(bright);
                         b.addConductValue(cond);
                         b.addTempValue(temp);
+                        b.addPhValueTraditional(simulator.getRealPh(b));
+                        b.addBrightValueTraditional(simulator.getRealBrightness(b));
+                        b.addConductValueTraditional(simulator.getRealConductibility(b));
+                        b.addTempValueTraditional(simulator.getRealTemperature(b));
                     });
                 });
             } catch (InvocationTargetException | InterruptedException e) {

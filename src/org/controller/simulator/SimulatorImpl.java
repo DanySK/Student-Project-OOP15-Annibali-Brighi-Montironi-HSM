@@ -1,8 +1,10 @@
-package controller.simulator;
+package org.controller.simulator;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import org.hsm.controller.ControllerImpl;
 import org.hsm.model.Plant;
 
 /**
@@ -113,7 +115,10 @@ public class SimulatorImpl implements Simulator {
 
     @Override
     public List<Double> getSimulatedWaterConsuption() {
-        //for(int i = 0; i < )
+        List<Double> list = new ArrayList<>();
+        for (int i = 0; i < ControllerImpl.getController().getGreenhouse().getFreeSize(); i++) {
+            list.add(3.0);
+        }
 
         return null;
     }

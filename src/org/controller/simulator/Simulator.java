@@ -1,4 +1,4 @@
-package controller.simulator;
+package org.controller.simulator;
 
 import java.util.List;
 
