@@ -1,7 +1,9 @@
-package org.hsm.controller;
+package controller.simulator;
 
 import static org.junit.Assert.assertTrue;
 
+import org.hsm.controller.Controller;
+import org.hsm.controller.ControllerImpl;
 import org.hsm.model.Plant;
 import org.junit.Test;
 

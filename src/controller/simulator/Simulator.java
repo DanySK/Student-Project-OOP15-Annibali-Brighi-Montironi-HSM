@@ -1,4 +1,4 @@
-package org.hsm.controller;
+package controller.simulator;
 
 import java.util.List;
 
@@ -75,6 +75,38 @@ public interface Simulator {
      * @return the simulated Temperature (°C)
      */
     double getSimulatedTemperature(Plant plant);
+
+    /**
+    *
+    * @param plant
+    *            the plant
+    * @return the real simulated Ph (pH)
+    */
+   double getRealPh(Plant plant);
+
+   /**
+    *
+    * @param plant
+    *            the plant
+    * @return the real simulated Brightness (lumen)
+    */
+   double getRealBrightness(Plant plant);
+
+   /**
+    *
+    * @param plant
+    *            the plant
+    * @return the real simulated Conductibility (cF)
+    */
+   double getRealConductibility(Plant plant);
+
+   /**
+    *
+    * @param plant
+    *            the plant
+    * @return the real simulated Temperature (°C)
+    */
+   double getRealTemperature(Plant plant);
 
     /**
      *

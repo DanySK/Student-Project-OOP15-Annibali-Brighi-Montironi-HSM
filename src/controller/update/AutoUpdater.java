@@ -1,8 +1,14 @@
-package org.hsm.controller;
+package controller.update;
 
 import java.lang.reflect.InvocationTargetException;
 
 import javax.swing.SwingUtilities;
+
+import org.hsm.controller.Controller;
+import org.hsm.controller.ControllerImpl;
+
+import controller.simulator.Simulator;
+import controller.simulator.SimulatorImpl;
 
 /**
  *
@@ -38,6 +44,7 @@ public class AutoUpdater extends Thread {
 
     @Override
     public void run() {
+        this.stopped = false;
         while (!this.stopped) {
             try {
                 SwingUtilities.invokeAndWait(() -> {

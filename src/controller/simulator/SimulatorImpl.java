@@ -1,4 +1,4 @@
-package org.hsm.controller;
+package controller.simulator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +17,11 @@ public class SimulatorImpl implements Simulator {
     private static final double MAXRAND_BRIGHT = 25.0;
     private static final double MAXRAND_COND = 1.0;
     private static final double MAXRAND_TEMP = 0.6;
+
+    private static final double MAXRAND_REAL_PH = 1.5;
+    private static final double MAXRAND_REAL_BRIGHT = 900.0;
+    private static final double MAXRAND_REAL_COND = 11.0;
+    private static final double MAXRAND_REAL_TEMP = 15.0;
 
     private static final double ROUND_TO = 10.00;
 
@@ -71,6 +76,38 @@ public class SimulatorImpl implements Simulator {
     public double getSimulatedTemperature(final Plant plant) {
         double min = getOptimalTemperature(plant) - MAXRAND_TEMP;
         double max = getOptimalTemperature(plant) + MAXRAND_TEMP;
+
+        return this.roundTo(min + (max - min) * random.nextDouble());
+    }
+
+    @Override
+    public double getRealPh(final Plant plant) {
+        double min = getOptimalPh(plant) - MAXRAND_REAL_PH;
+        double max = getOptimalPh(plant) + MAXRAND_REAL_PH;
+
+        return this.roundTo(min + (max - min) * random.nextDouble());
+    }
+
+    @Override
+    public double getRealBrightness(final Plant plant) {
+        double min = getOptimalBrightness(plant) - MAXRAND_REAL_BRIGHT;
+        double max = getOptimalBrightness(plant) + MAXRAND_REAL_BRIGHT;
+
+        return this.roundTo(min + (max - min) * random.nextDouble());
+    }
+
+    @Override
+    public double getRealConductibility(final Plant plant) {
+        double min = getOptimalConductibility(plant) - MAXRAND_REAL_COND;
+        double max = getOptimalConductibility(plant) + MAXRAND_REAL_COND;
+
+        return this.roundTo(min + (max - min) * random.nextDouble());
+    }
+
+    @Override
+    public double getRealTemperature(final Plant plant) {
+        double min = getOptimalTemperature(plant) - MAXRAND_REAL_TEMP;
+        double max = getOptimalTemperature(plant) + MAXRAND_REAL_TEMP;
 
         return this.roundTo(min + (max - min) * random.nextDouble());
     }
