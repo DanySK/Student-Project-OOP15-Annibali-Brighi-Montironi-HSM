@@ -88,10 +88,10 @@ public interface Greenhouse {
      *            cost of the greenhouse
      */
     void setCost(double cost);
-    
+
     /**
-     * @return  
-     *      total cost of the greenhouse (greenhouse cost + plants cost)  
+     * @return
+     *      total cost of the greenhouse (greenhouse cost + plants cost)
      */
     double totalCost();
 
@@ -99,15 +99,19 @@ public interface Greenhouse {
      * @return return the type of the greenhouse
      */
     GreenHouseType getType();
-    
+
     /**
      * @return a map: keys are botanical names, values are quantity
      */
     Map<String, Integer> getCompositionByNumber();
-    
+
     /**
-     *@return a map: Keys are botanical names, values are occupied space by plants 
+     *@return a map: Keys are botanical names, values are occupied space by plants
      */
     Map<String, Double> getCompositionByOccupiedSpace();
+
+    public void incrementCounter();
+
+    public int getUpdateCounter();
 
 }

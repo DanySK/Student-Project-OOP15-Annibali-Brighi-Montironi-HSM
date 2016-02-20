@@ -77,9 +77,9 @@ public interface Simulator {
     double getSimulatedTemperature(Plant plant);
 
     /**
-     * Provide a list of water consuption of the greenhouse.
+     * Provide a list of water comsuption of the greenhouse.
      *
-     * @return the list of simulated water consuption
+     * @return the list of simulated water comsuption
      */
     List<Double> getSimulatedWaterConsuption();
 
@@ -88,7 +88,7 @@ public interface Simulator {
      *
      * @return the list of simulated plant grow
      */
-    List<Double> getSimulatedPlantGrow();
+    List<Integer> getSimulatedPlantGrow();
 
     /**
     *
@@ -123,9 +123,9 @@ public interface Simulator {
    double getRealTemperature(Plant plant);
 
    /**
-    * Provide a list of water consuption of the traditional coltivation.
+    * Provide a list of water comsuption of the traditional coltivation.
     *
-    * @return the list of water consuption
+    * @return the list of water comsuption
     */
    List<Double> getRealWaterConsuption();
 
@@ -134,6 +134,6 @@ public interface Simulator {
     *
     * @return the list of plant grow
     */
-   List<Double> getRealPlantGrow();
+   List<Integer> getRealPlantGrow();
 
 }

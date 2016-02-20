@@ -24,6 +24,7 @@ public class GreenhouseImpl implements Greenhouse, Serializable {
     private int size;
     private double costGreenhouse;
     private GreenHouseType type;
+    private int updateCount = 0;
 
     /**
      * @param name
@@ -35,9 +36,10 @@ public class GreenhouseImpl implements Greenhouse, Serializable {
      * @param t
      *            Type of greenhouse
      */
-    public GreenhouseImpl(final String name, final int size, final int cost, final GreenHouseType t) throws IllegalArgumentException {
+    public GreenhouseImpl(final String name, final int size, final int cost, final GreenHouseType t)
+            throws IllegalArgumentException {
         super();
-        if(name.equals("")){
+        if (name.equals("")) {
             throw new IllegalArgumentException();
         }
         this.name = name;
@@ -159,34 +161,35 @@ public class GreenhouseImpl implements Greenhouse, Serializable {
     public int getNumberOfPlants() {
         return plantMap.size();
     }
-    
+
     @Override
-    public Map<String, Integer> getCompositionByNumber(){
-        final Map<String,Integer> tmpMap = new HashMap<>();
+    public Map<String, Integer> getCompositionByNumber() {
+        final Map<String, Integer> tmpMap = new HashMap<>();
         this.plantMap.values().stream().forEach(i -> {
-            if (tmpMap.containsKey(i.getModel().getBotanicalName())){
-               tmpMap.put(i.getModel().getBotanicalName(),tmpMap.get(i.getModel().getBotanicalName())+1 );
+            if (tmpMap.containsKey(i.getModel().getBotanicalName())) {
+                tmpMap.put(i.getModel().getBotanicalName(), tmpMap.get(i.getModel().getBotanicalName()) + 1);
             } else {
                 tmpMap.put(i.getModel().getBotanicalName(), 1);
             }
-        
+
         });
-        
+
         return tmpMap;
     }
-    
+
     @Override
-    public Map<String, Double> getCompositionByOccupiedSpace(){
+    public Map<String, Double> getCompositionByOccupiedSpace() {
         final Map<String, Double> tmpMap = new HashMap<>();
         this.plantMap.values().stream().forEach(i -> {
-            if (tmpMap.containsKey(i.getModel().getBotanicalName())){
-               tmpMap.put(i.getModel().getBotanicalName(),tmpMap.get(i.getModel().getBotanicalName()) + i.getModel().getSize());
+            if (tmpMap.containsKey(i.getModel().getBotanicalName())) {
+                tmpMap.put(i.getModel().getBotanicalName(),
+                        tmpMap.get(i.getModel().getBotanicalName()) + i.getModel().getSize());
             } else {
                 tmpMap.put(i.getModel().getBotanicalName(), i.getModel().getSize());
             }
-        
+
         });
-        
+
         return tmpMap;
     }
 
@@ -194,6 +197,13 @@ public class GreenhouseImpl implements Greenhouse, Serializable {
     public double totalCost() {
         return this.getCost() + this.plantMap.values().stream().mapToDouble(i -> i.getCost()).sum();
     }
-    
+
+    public void incrementCounter() {
+        this.updateCount++;
+    }
+
+    public int getUpdateCounter() {
+        return this.updateCount;
+    }
 
 }

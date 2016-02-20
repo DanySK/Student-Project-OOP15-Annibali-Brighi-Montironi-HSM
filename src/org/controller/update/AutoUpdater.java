@@ -49,20 +49,21 @@ public class AutoUpdater extends Thread {
                 SwingUtilities.invokeAndWait(() -> {
                     this.controller.getView().cleanGreenhouse();
                     this.controller.getGreenhouse().getPlants().forEach((a, b) -> {
-                        final double ph = simulator.getSimulatedPh(b);
-                        final double bright = simulator.getSimulatedBrightness(b);
-                        final double cond = simulator.getSimulatedConductibility(b);
-                        final double temp = simulator.getSimulatedTemperature(b);
+                        final double ph = this.simulator.getSimulatedPh(b);
+                        final double bright = this.simulator.getSimulatedBrightness(b);
+                        final double cond = this.simulator.getSimulatedConductibility(b);
+                        final double temp = this.simulator.getSimulatedTemperature(b);
                         this.controller.getView().insertPlant(a, b.getModel().getName(), b.getCost(), ph, bright, cond,
                                 temp);
                         b.addPhValue(ph);
                         b.addBrightValue(bright);
                         b.addConductValue(cond);
                         b.addTempValue(temp);
-                        b.addPhValueTraditional(simulator.getRealPh(b));
-                        b.addBrightValueTraditional(simulator.getRealBrightness(b));
-                        b.addConductValueTraditional(simulator.getRealConductibility(b));
-                        b.addTempValueTraditional(simulator.getRealTemperature(b));
+                        b.addPhValueTraditional(this.simulator.getRealPh(b));
+                        b.addBrightValueTraditional(this.simulator.getRealBrightness(b));
+                        b.addConductValueTraditional(this.simulator.getRealConductibility(b));
+                        b.addTempValueTraditional(this.simulator.getRealTemperature(b));
+                        this.controller.getGreenhouse().incrementCounter();
                     });
                 });
             } catch (InvocationTargetException | InterruptedException e) {

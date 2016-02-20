@@ -535,6 +535,10 @@ public final class ControllerImpl implements Controller, Serializable {
         return list;
     }
 
+    public int getRefreshTime(){
+        return this.updatetime;
+    }
+
     /**
      * Stop auto updater if it runs.
      */
