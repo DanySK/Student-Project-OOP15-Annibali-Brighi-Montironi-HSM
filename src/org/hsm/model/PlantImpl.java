@@ -19,6 +19,11 @@ public class PlantImpl implements Plant, Serializable {
     private final List<Double> brightList;
     private final List<Double> conductList;
     private final List<Double> tempList;
+    
+    private final List<Double> phListTrad;
+    private final List<Double> brightListTrad;
+    private final List<Double> conductListTrad;
+    private final List<Double> tempListTrad;
 
     /**
      *
@@ -36,6 +41,11 @@ public class PlantImpl implements Plant, Serializable {
         this.brightList = new LinkedList<>();
         this.conductList = new LinkedList<>();
         this.tempList = new LinkedList<>();
+        
+        this.phListTrad = new LinkedList<>();
+        this.brightListTrad = new LinkedList<>();
+        this.conductListTrad = new LinkedList<>();
+        this.tempListTrad = new LinkedList<>();
     }
 
     @Override
@@ -45,7 +55,7 @@ public class PlantImpl implements Plant, Serializable {
 
     @Override
     public PlantModel getModel() {
-        return model;
+        return this.model;
     }
 
     @Override
@@ -55,22 +65,22 @@ public class PlantImpl implements Plant, Serializable {
 
     @Override
     public List<Double> getPhList() {
-        return phList;
+        return this.phList;
     }
 
     @Override
     public List<Double> getBrightList() {
-        return brightList;
+        return this.brightList;
     }
 
     @Override
     public List<Double> getConductList() {
-        return conductList;
+        return this.conductList;
     }
 
     @Override
     public List<Double> getTempList() {
-        return tempList;
+        return this.tempList;
     }
 
     @Override
@@ -124,6 +134,84 @@ public class PlantImpl implements Plant, Serializable {
             return 0;
         }
         return this.phList.get(this.phList.size() -1);
+    }
+
+    @Override
+    public List<Double> getPhListTraditional() {
+        return this.phListTrad;
+    }
+
+    @Override
+    public List<Double> getBrightListTraditional() {
+       return this.brightListTrad;
+    }
+
+    @Override
+    public List<Double> getConductListTraditional() {
+       return this.conductListTrad;
+    }
+
+    @Override
+    public List<Double> getTempListTraditional() {
+        return this.tempListTrad;
+    }
+
+    @Override
+    public void addBrightValueTraditional(final double value) {
+        this.brightListTrad.add(value);
+    }
+
+    @Override
+    public void addConductValueTraditional(final double value) {
+       this.conductListTrad.add(value);
+        
+    }
+
+    @Override
+    public void addTempValueTraditional( final double value) {
+       this.tempListTrad.add(value);
+    }
+
+    @Override
+    public void addPhValueTraditional(double value) {
+       this.phListTrad.add(value);
+    }
+
+    @Override
+    public double getLastBrightValueTraditional() {
+        if (this.brightListTrad.isEmpty()){
+            return 0;
+        }
+        return this.brightListTrad.get(this.brightListTrad.size() -1);
+    }
+
+    @Override
+    public double getLastConductValueTraditional() {
+       if (this.conductListTrad.isEmpty()){
+           return 0;
+       }
+       return this.conductListTrad.get(this.conductListTrad.size() -1);
+    }
+
+    @Override
+    public double getLastTempValueTraditional() {
+        if (this.tempListTrad.isEmpty()){
+            return 0;
+        }
+        return this.tempListTrad.get(this.tempListTrad.size() -1);
+    }
+
+    @Override
+    public double getLastPhValueTraditional() {
+        if (this.phListTrad.isEmpty()){
+            return 0;
+        }
+        return this.phListTrad.get(this.phListTrad.size() -1);
+    }
+
+    @Override
+    public int nUpdate() {
+        return this.phList.size();
     }
 
 }

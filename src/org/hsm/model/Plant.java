@@ -88,4 +88,77 @@ public interface Plant {
     * @return the last PH value added in phList
     */
     double getLastPhValue();
+    
+    /**
+     * return the number of elements in the lists of the plant
+     */
+    int nUpdate();
+       
+    /**
+    *
+    * @return the list of pH values of a traditional cultivation
+    */
+   List<Double> getPhListTraditional();
+
+   /**
+    *
+    * @return the list of Brightness values of a traditional cultivation
+    */
+   List<Double> getBrightListTraditional();
+
+   /**
+    *
+    * @return the list of Conductivity values of a traditional cultivation
+    */
+   List<Double> getConductListTraditional();
+
+   /**
+    *
+    * @return the list of Temperature values of a traditional cultivation
+    */
+   List<Double> getTempListTraditional();
+
+   /**
+    *
+    * @param value Brightness value (lumen) of a traditional cultivation
+    */
+   void addBrightValueTraditional(final double value);
+
+   /**
+    *
+    * @param value Countuctivity value (cF) of a traditional cultivation
+    */
+   void addConductValueTraditional(final double value);
+
+   /**
+    *
+    * @param value Temperatur value (�C) of a traditional cultivation
+    */
+   void addTempValueTraditional(final double value);
+
+   /**
+    *
+    * @param value pH value (pH) of a traditional cultivation
+    */
+   void addPhValueTraditional(final double value);
+
+   /**
+    * @return the last bright value added in brightListTrad 
+    */
+   double getLastBrightValueTraditional();
+
+   /**
+   * @return the last conduct value added in conductListTrad
+   */
+   double getLastConductValueTraditional();
+
+   /**
+   * @return the last temperature value added in tempListTrad
+   */
+   double getLastTempValueTraditional();
+
+   /**
+   * @return the last PH value added in phListTrad
+   */
+   double getLastPhValueTraditional();
 }
