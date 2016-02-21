@@ -30,9 +30,9 @@ public class BarChartDialog extends AbstractChartDialog {
         super(characteristic);
         //chart
         final DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-        dataset.addValue(currentValue, "Current Value", characteristic);
-        dataset.addValue(optimalValue, "Optimal Value", characteristic);
-        dataset.addValue(traditionalValue, "Traditional Culture Value", characteristic);
+        dataset.addValue(currentValue, "Current", characteristic);
+        dataset.addValue(optimalValue, "Optimal", characteristic);
+        dataset.addValue(traditionalValue, "Traditional Culture", characteristic);
         final JFreeChart chart = ChartFactory.createBarChart(characteristic + " Comparing Chart", 
                                                              "", 
                                                              unitsOfMeasure, 

@@ -27,16 +27,17 @@ public class LineChartDialog extends AbstractChartDialog {
         super(characteristic);
         //chart
         final DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-        for (int i = 0; i < valueList.size(); ++i) {
-            dataset.addValue(valueList.get(i), "Current Value", Integer.toString(i));
-            dataset.addValue(tradList.get(i), "Traditional Culture Value", Integer.toString(i));
+        final int size = valueList.size() <= tradList.size() ? valueList.size() : tradList.size();
+        for (int i = 0; i < size; ++i) {
+            dataset.addValue(valueList.get(i), "Current", Integer.toString(i));
+            dataset.addValue(tradList.get(i), "Traditional Culture", Integer.toString(i));
         }
         final JFreeChart chart = ChartFactory.createLineChart(characteristic + " Line Chart", 
                                                               "Survey Period",
                                                               unitsOfMeasure, 
                                                               dataset, 
                                                               PlotOrientation.VERTICAL, 
-                                                              false, 
+                                                              true, 
                                                               true, 
                                                               false);
         final ChartPanel panel = new ChartPanel(chart, false);
