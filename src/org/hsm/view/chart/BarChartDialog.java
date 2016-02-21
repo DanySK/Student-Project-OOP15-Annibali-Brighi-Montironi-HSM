@@ -15,7 +15,7 @@ import org.jfree.data.category.DefaultCategoryDataset;
  */
 public class BarChartDialog extends AbstractChartDialog {
 
-    private static final double BAR_WIDTH_FACTOR = 0.1;
+    private static final double BAR_WIDTH_FACTOR = 0.2;
 
     /**
      * Create the bar chart for comparing values.
@@ -23,13 +23,16 @@ public class BarChartDialog extends AbstractChartDialog {
      * @param unitsOfMeasure the unit of measure to use
      * @param optimalValue the optimal value
      * @param currentValue the current value
+     * @param traditionalValue the value in a traditional culture
      */
-    public BarChartDialog(final String characteristic, final String unitsOfMeasure, final double optimalValue, final double currentValue) {
+    public BarChartDialog(final String characteristic, final String unitsOfMeasure, final double optimalValue, final double currentValue,
+            final double traditionalValue) {
         super(characteristic);
         //chart
         final DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-        dataset.addValue(optimalValue, "Optimal Value", characteristic);
         dataset.addValue(currentValue, "Current Value", characteristic);
+        dataset.addValue(optimalValue, "Optimal Value", characteristic);
+        dataset.addValue(traditionalValue, "Traditional Culture Value", characteristic);
         final JFreeChart chart = ChartFactory.createBarChart(characteristic + " Comparing Chart", 
                                                              "", 
                                                              unitsOfMeasure, 

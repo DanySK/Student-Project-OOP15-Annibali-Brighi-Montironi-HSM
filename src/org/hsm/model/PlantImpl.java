@@ -19,7 +19,7 @@ public class PlantImpl implements Plant, Serializable {
     private final List<Double> brightList;
     private final List<Double> conductList;
     private final List<Double> tempList;
-    
+
     private final List<Double> phListTrad;
     private final List<Double> brightListTrad;
     private final List<Double> conductListTrad;
