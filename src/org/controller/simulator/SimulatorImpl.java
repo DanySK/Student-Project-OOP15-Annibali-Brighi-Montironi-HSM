@@ -1,26 +1,37 @@
-package controller.simulator;
+package org.controller.simulator;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import org.hsm.controller.ControllerImpl;
 import org.hsm.model.Plant;
 
 /**
  *
- * Simulator class: provide a simulates paramters for an Hydroponic Greenhouse.
+ * Simulator class: provide a simulated paramters for an Hydroponic Greenhouse.
  *
  */
 public class SimulatorImpl implements Simulator {
 
+    // Hydroponic values
     private static final double MAXRAND_PH = 0.3;
     private static final double MAXRAND_BRIGHT = 25.0;
     private static final double MAXRAND_COND = 1.0;
     private static final double MAXRAND_TEMP = 0.6;
+    private static final double MAXRAND_WATER = 0.9; // in mL
+    private static final double MINRAND_WATER = 0.4; // in mL
+    private static final int MAXRAND_GROW = 50; // in days
+    private static final int MINRAND_GROW = 20; // in days
 
+    // Conventional coltivation values
     private static final double MAXRAND_REAL_PH = 1.5;
     private static final double MAXRAND_REAL_BRIGHT = 900.0;
     private static final double MAXRAND_REAL_COND = 11.0;
     private static final double MAXRAND_REAL_TEMP = 15.0;
+    private static final double CONVENTIONAL_WATER_MULTIPLIER = 7; // 70%
+    private static final int CONVENTIONAL_GROW_MULTIPLIER = 4; // times than
+                                                               // hydroponic
 
     private static final double ROUND_TO = 10.00;
 
@@ -113,27 +124,43 @@ public class SimulatorImpl implements Simulator {
 
     @Override
     public List<Double> getSimulatedWaterConsuption() {
-        //for(int i = 0; i < )
 
-        return null;
+        List<Double> list = new ArrayList<>();
+        for (int i = 0; i < ControllerImpl.getController().getGreenhouse().getUpdateCounter(); i++) {
+            list.add(this.roundTo((MINRAND_WATER + (MAXRAND_WATER - MINRAND_WATER)) * random.nextDouble())
+                    * ControllerImpl.getController().getRefreshTime());
+        }
+        return list;
     }
 
     @Override
-    public List<Double> getSimulatedPlantGrow() {
-        // TODO Auto-generated method stub
-        return null;
+    public List<Integer> getSimulatedPlantGrow() {
+        List<Integer> list = new ArrayList<>();
+        for (int i = 0; i < ControllerImpl.getController().getGreenhouse().getUpdateCounter(); i++) {
+            list.add((MINRAND_GROW + (MAXRAND_GROW - MINRAND_GROW)) * random.nextInt()
+                    * ControllerImpl.getController().getRefreshTime());
+        }
+        return list;
     }
 
     @Override
     public List<Double> getRealWaterConsuption() {
-        // TODO Auto-generated method stub
-        return null;
+        List<Double> list = new ArrayList<>();
+        for (int i = 0; i < ControllerImpl.getController().getGreenhouse().getUpdateCounter(); i++) {
+            list.add(this.roundTo((MINRAND_WATER + (MAXRAND_WATER - MINRAND_WATER)) * random.nextDouble())
+                    * ControllerImpl.getController().getRefreshTime() * CONVENTIONAL_WATER_MULTIPLIER);
+        }
+        return list;
     }
 
     @Override
-    public List<Double> getRealPlantGrow() {
-        // TODO Auto-generated method stub
-        return null;
+    public List<Integer> getRealPlantGrow() {
+        List<Integer> list = new ArrayList<>();
+        for (int i = 0; i < ControllerImpl.getController().getGreenhouse().getUpdateCounter(); i++) {
+            list.add((MINRAND_GROW + (MAXRAND_GROW - MINRAND_GROW)) * random.nextInt()
+                    * ControllerImpl.getController().getRefreshTime() * CONVENTIONAL_GROW_MULTIPLIER);
+        }
+        return list;
     }
 
     private double roundTo(final double value) {

@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import org.controller.update.AutoUpdater;
 import org.hsm.model.Database;
 import org.hsm.model.DatabaseImpl;
 import org.hsm.model.GreenHouseType;
@@ -28,8 +29,6 @@ import org.hsm.view.chart.LineChartDialog;
 import org.hsm.view.gui.MainFrame;
 import org.hsm.view.gui.View;
 import org.hsm.view.utility.Utilities;
-
-import controller.update.AutoUpdater;
 
 /**
  * Implementation of Controller Interface.
@@ -539,6 +538,10 @@ public final class ControllerImpl implements Controller, Serializable {
             list.add(elem.toString());
         }
         return list;
+    }
+
+    public int getRefreshTime(){
+        return this.updatetime;
     }
 
     /**
