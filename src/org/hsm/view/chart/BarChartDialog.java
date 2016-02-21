@@ -1,6 +1,7 @@
 package org.hsm.view.chart;
 
 import java.awt.BorderLayout;
+
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -33,14 +34,14 @@ public class BarChartDialog extends AbstractChartDialog {
         dataset.addValue(currentValue, "Current", characteristic);
         dataset.addValue(optimalValue, "Optimal", characteristic);
         dataset.addValue(traditionalValue, "Traditional Culture", characteristic);
-        final JFreeChart chart = ChartFactory.createBarChart(characteristic + " Comparing Chart", 
-                                                             "", 
-                                                             unitsOfMeasure, 
-                                                             dataset, 
-                                                             PlotOrientation.VERTICAL, 
-                                                             true, 
-                                                             true, 
-                                                             false);
+        final JFreeChart chart = ChartFactory.createBarChart3D(characteristic + " Comparing Chart", 
+                                                               "", 
+                                                               unitsOfMeasure, 
+                                                               dataset, 
+                                                               PlotOrientation.VERTICAL, 
+                                                               true, 
+                                                               true, 
+                                                               false);
         final ChartPanel panel = new ChartPanel(chart, false);
         final CategoryPlot categoryPlot = chart.getCategoryPlot();
         final BarRenderer br = (BarRenderer) categoryPlot.getRenderer();
