@@ -1,10 +1,15 @@
 package org.hsm.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import org.controller.simulator.Simulator;
+import org.controller.simulator.SimulatorImpl;
 
 /**
  * implementation of the Greenhouse interface.
@@ -26,6 +31,13 @@ public class GreenhouseImpl implements Greenhouse, Serializable {
     private GreenHouseType type;
     private int updateCount = 0;
 
+    private final Simulator simulator = new SimulatorImpl();
+
+    private final List<Integer> simulatedGrow = new ArrayList<>();
+    private final List<Integer> realGrow = new ArrayList<>();
+    private final List<Double> simulatedWater = new ArrayList<>();
+    private final List<Double> realWater = new ArrayList<>();
+
     /**
      * @param name
      *            name of the greenhouse
@@ -35,6 +47,8 @@ public class GreenhouseImpl implements Greenhouse, Serializable {
      *            cost of the greenhouse
      * @param t
      *            Type of greenhouse
+     * @exception IllegalArgumentException
+     *                throw if greenhouse already exist
      */
     public GreenhouseImpl(final String name, final int size, final int cost, final GreenHouseType t)
             throws IllegalArgumentException {
@@ -198,12 +212,38 @@ public class GreenhouseImpl implements Greenhouse, Serializable {
         return this.getCost() + this.plantMap.values().stream().mapToDouble(i -> i.getCost()).sum();
     }
 
+    @Override
     public void incrementCounter() {
         this.updateCount++;
     }
 
+    @Override
     public int getUpdateCounter() {
         return this.updateCount;
+    }
+
+    @Override
+    public List<Double> getSimulatedWaterConsuption() {
+        this.simulatedWater.addAll(this.simulator.getSimulatedWaterConsuption());
+        return this.simulatedWater;
+    }
+
+    @Override
+    public List<Integer> getSimulatedPlantGrow() {
+        this.simulatedGrow.addAll(this.simulator.getSimulatedPlantGrow());
+        return this.simulatedGrow;
+    }
+
+    @Override
+    public List<Double> getRealWaterConsuption() {
+        this.realWater.addAll(this.simulator.getRealWaterConsuption());
+        return this.realWater;
+    }
+
+    @Override
+    public List<Integer> getRealPlantGrow() {
+        this.realGrow.addAll(this.simulator.getRealPlantGrow());
+        return this.realGrow;
     }
 
 }

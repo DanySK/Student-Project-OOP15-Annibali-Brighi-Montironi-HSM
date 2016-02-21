@@ -1,5 +1,6 @@
 package org.hsm.model;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -90,8 +91,7 @@ public interface Greenhouse {
     void setCost(double cost);
 
     /**
-     * @return
-     *      total cost of the greenhouse (greenhouse cost + plants cost)
+     * @return total cost of the greenhouse (greenhouse cost + plants cost)
      */
     double totalCost();
 
@@ -106,12 +106,48 @@ public interface Greenhouse {
     Map<String, Integer> getCompositionByNumber();
 
     /**
-     *@return a map: Keys are botanical names, values are occupied space by plants
+     * @return a map: Keys are botanical names, values are occupied space by
+     *         plants
      */
     Map<String, Double> getCompositionByOccupiedSpace();
 
-    public void incrementCounter();
+    /**
+     * Increment the number of refresh.
+     */
+    void incrementCounter();
 
-    public int getUpdateCounter();
+    /**
+     * @return the number of refresh.
+     */
+    int getUpdateCounter();
+
+    /**
+     * Provide a list of water comsuption of the greenhouse from simulator.
+     *
+     * @return the list of simulated water comsuption
+     */
+    List<Double> getSimulatedWaterConsuption();
+
+    /**
+     * Provide a list of plants grown from simulator.
+     *
+     * @return the list of simulated plant grow
+     */
+    List<Integer> getSimulatedPlantGrow();
+
+    /**
+     * Provide a list of water comsuption of the traditional coltivation from
+     * simulator.
+     *
+     * @return the list of water comsuption
+     */
+    List<Double> getRealWaterConsuption();
+
+    /**
+     * Provide a list of plants grown in traditional coltivation from simulator.
+     *
+     * @return the list of plant grow
+     */
+    List<Integer> getRealPlantGrow();
 
 }

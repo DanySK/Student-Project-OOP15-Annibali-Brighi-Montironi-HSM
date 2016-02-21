@@ -41,7 +41,7 @@ public class PlantImpl implements Plant, Serializable {
         this.brightList = new LinkedList<>();
         this.conductList = new LinkedList<>();
         this.tempList = new LinkedList<>();
-        
+
         this.phListTrad = new LinkedList<>();
         this.brightListTrad = new LinkedList<>();
         this.conductListTrad = new LinkedList<>();
@@ -106,34 +106,34 @@ public class PlantImpl implements Plant, Serializable {
 
     @Override
     public double getLastBrightValue() {
-        if (this.brightList.isEmpty()){
+        if (this.brightList.isEmpty()) {
             return 0;
         }
-        return this.brightList.get(this.brightList.size() -1);
+        return this.brightList.get(this.brightList.size() - 1);
     }
 
     @Override
     public double getLastConductValue() {
-        if (this.brightList.isEmpty()){
+        if (this.brightList.isEmpty()) {
             return 0;
         }
-        return this.conductList.get(this.conductList.size() -1);
+        return this.conductList.get(this.conductList.size() - 1);
     }
 
     @Override
     public double getLastTempValue() {
-        if (this.tempList.isEmpty()){
+        if (this.tempList.isEmpty()) {
             return 0;
         }
-        return this.tempList.get(this.tempList.size() -1);
+        return this.tempList.get(this.tempList.size() - 1);
     }
 
     @Override
     public double getLastPhValue() {
-        if (this.phList.isEmpty()){
+        if (this.phList.isEmpty()) {
             return 0;
         }
-        return this.phList.get(this.phList.size() -1);
+        return this.phList.get(this.phList.size() - 1);
     }
 
     @Override
@@ -143,12 +143,12 @@ public class PlantImpl implements Plant, Serializable {
 
     @Override
     public List<Double> getBrightListTraditional() {
-       return this.brightListTrad;
+        return this.brightListTrad;
     }
 
     @Override
     public List<Double> getConductListTraditional() {
-       return this.conductListTrad;
+        return this.conductListTrad;
     }
 
     @Override
@@ -163,50 +163,50 @@ public class PlantImpl implements Plant, Serializable {
 
     @Override
     public void addConductValueTraditional(final double value) {
-       this.conductListTrad.add(value);
-        
+        this.conductListTrad.add(value);
+
     }
 
     @Override
-    public void addTempValueTraditional( final double value) {
-       this.tempListTrad.add(value);
+    public void addTempValueTraditional(final double value) {
+        this.tempListTrad.add(value);
     }
 
     @Override
-    public void addPhValueTraditional(double value) {
-       this.phListTrad.add(value);
+    public void addPhValueTraditional(final double value) {
+        this.phListTrad.add(value);
     }
 
     @Override
     public double getLastBrightValueTraditional() {
-        if (this.brightListTrad.isEmpty()){
+        if (this.brightListTrad.isEmpty()) {
             return 0;
         }
-        return this.brightListTrad.get(this.brightListTrad.size() -1);
+        return this.brightListTrad.get(this.brightListTrad.size() - 1);
     }
 
     @Override
     public double getLastConductValueTraditional() {
-       if (this.conductListTrad.isEmpty()){
-           return 0;
-       }
-       return this.conductListTrad.get(this.conductListTrad.size() -1);
+        if (this.conductListTrad.isEmpty()) {
+            return 0;
+        }
+        return this.conductListTrad.get(this.conductListTrad.size() - 1);
     }
 
     @Override
     public double getLastTempValueTraditional() {
-        if (this.tempListTrad.isEmpty()){
+        if (this.tempListTrad.isEmpty()) {
             return 0;
         }
-        return this.tempListTrad.get(this.tempListTrad.size() -1);
+        return this.tempListTrad.get(this.tempListTrad.size() - 1);
     }
 
     @Override
     public double getLastPhValueTraditional() {
-        if (this.phListTrad.isEmpty()){
+        if (this.phListTrad.isEmpty()) {
             return 0;
         }
-        return this.phListTrad.get(this.phListTrad.size() -1);
+        return this.phListTrad.get(this.phListTrad.size() - 1);
     }
 
     @Override
