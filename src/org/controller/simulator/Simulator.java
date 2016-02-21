@@ -88,7 +88,7 @@ public interface Simulator {
      *
      * @return the list of simulated plant grow
      */
-    List<Integer> getSimulatedPlantGrow();
+    List<Double> getSimulatedPlantGrow();
 
     /**
     *
@@ -134,6 +134,6 @@ public interface Simulator {
     *
     * @return the list of plant grow
     */
-   List<Integer> getRealPlantGrow();
+   List<Double> getRealPlantGrow();
 
 }

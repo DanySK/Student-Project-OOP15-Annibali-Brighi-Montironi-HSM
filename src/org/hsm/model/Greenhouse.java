@@ -133,7 +133,7 @@ public interface Greenhouse {
      *
      * @return the list of simulated plant grow
      */
-    List<Integer> getSimulatedPlantGrow();
+    List<Double> getSimulatedPlantGrow();
 
     /**
      * Provide a list of water comsuption of the traditional coltivation from
@@ -148,6 +148,6 @@ public interface Greenhouse {
      *
      * @return the list of plant grow
      */
-    List<Integer> getRealPlantGrow();
+    List<Double> getRealPlantGrow();
 
 }

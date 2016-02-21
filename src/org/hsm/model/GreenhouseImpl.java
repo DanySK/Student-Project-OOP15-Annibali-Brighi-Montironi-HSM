@@ -1,7 +1,6 @@
 package org.hsm.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -29,14 +28,9 @@ public class GreenhouseImpl implements Greenhouse, Serializable {
     private int size;
     private double costGreenhouse;
     private GreenHouseType type;
-    private int updateCount = 0;
+    private int updateCount;
 
     private final Simulator simulator = new SimulatorImpl();
-
-    private final List<Integer> simulatedGrow = new ArrayList<>();
-    private final List<Integer> realGrow = new ArrayList<>();
-    private final List<Double> simulatedWater = new ArrayList<>();
-    private final List<Double> realWater = new ArrayList<>();
 
     /**
      * @param name
@@ -60,6 +54,7 @@ public class GreenhouseImpl implements Greenhouse, Serializable {
         this.size = size;
         this.setCost(cost);
         this.type = t;
+        this.updateCount = 0;
     }
 
     /**
@@ -224,26 +219,22 @@ public class GreenhouseImpl implements Greenhouse, Serializable {
 
     @Override
     public List<Double> getSimulatedWaterConsuption() {
-        this.simulatedWater.addAll(this.simulator.getSimulatedWaterConsuption());
-        return this.simulatedWater;
+        return this.simulator.getSimulatedWaterConsuption();
     }
 
     @Override
-    public List<Integer> getSimulatedPlantGrow() {
-        this.simulatedGrow.addAll(this.simulator.getSimulatedPlantGrow());
-        return this.simulatedGrow;
+    public List<Double> getSimulatedPlantGrow() {
+        return this.simulator.getSimulatedPlantGrow();
     }
 
     @Override
     public List<Double> getRealWaterConsuption() {
-        this.realWater.addAll(this.simulator.getRealWaterConsuption());
-        return this.realWater;
+        return this.simulator.getRealWaterConsuption();
     }
 
     @Override
-    public List<Integer> getRealPlantGrow() {
-        this.realGrow.addAll(this.simulator.getRealPlantGrow());
-        return this.realGrow;
+    public List<Double> getRealPlantGrow() {
+        return this.simulator.getRealPlantGrow();
     }
 
 }

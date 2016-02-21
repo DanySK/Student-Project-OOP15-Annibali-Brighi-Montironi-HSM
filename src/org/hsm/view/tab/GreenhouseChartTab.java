@@ -21,7 +21,7 @@ import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
 /**
- *This tab is used to show charts about the greenhouse. 
+ *This tab is used to show charts about the greenhouse.
  *
  */
 public class GreenhouseChartTab implements GUIComponent {
@@ -71,8 +71,8 @@ public class GreenhouseChartTab implements GUIComponent {
             dataset.addSeries(currentSeries);
             final int size = ControllerImpl.getController().getGreenhouse().getRealWaterConsuption().size();
             for (int i = 0; i < size; ++i) {
-                currentSeries.add(i, ControllerImpl.getController().getGreenhouse().getRealWaterConsuption().get(i));
-                traditionalSeries.add(i, ControllerImpl.getController().getGreenhouse().getSimulatedWaterConsuption().get(i));
+                currentSeries.add(i, ControllerImpl.getController().getGreenhouse().getSimulatedWaterConsuption().get(i));
+                traditionalSeries.add(i, ControllerImpl.getController().getGreenhouse().getRealWaterConsuption().get(i));
             }
             chartPanel.setChart(ChartFactory.createXYLineChart("", "", "ml", dataset, PlotOrientation.VERTICAL, true, true, false));
         });
@@ -84,8 +84,8 @@ public class GreenhouseChartTab implements GUIComponent {
             dataset.addSeries(currentSeries);
             final int size = ControllerImpl.getController().getGreenhouse().getRealPlantGrow().size();
             for (int i = 0; i < size; ++i) {
-                currentSeries.add(i, ControllerImpl.getController().getGreenhouse().getRealPlantGrow().get(i));
-                traditionalSeries.add(i, ControllerImpl.getController().getGreenhouse().getSimulatedPlantGrow().get(i));
+                currentSeries.add(i, ControllerImpl.getController().getGreenhouse().getSimulatedPlantGrow().get(i));
+                traditionalSeries.add(i, ControllerImpl.getController().getGreenhouse().getRealPlantGrow().get(i));
             }
             chartPanel.setChart(ChartFactory.createXYLineChart("", "", "days", dataset, PlotOrientation.VERTICAL, true, true, false));
         });

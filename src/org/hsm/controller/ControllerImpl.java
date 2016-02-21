@@ -213,7 +213,9 @@ public final class ControllerImpl implements Controller, Serializable {
 
     @Override
     public void autoUpdate(final int time) {
-        this.updater = Optional.of(new AutoUpdater());
+        if (!this.updater.isPresent()) {
+            this.updater = Optional.of(new AutoUpdater());
+        }
         this.updating = true;
         try {
             this.updater.get().start();
@@ -222,6 +224,7 @@ public final class ControllerImpl implements Controller, Serializable {
         } catch (IllegalThreadStateException e) {
             Utilities.errorMessage(this.view.getFrame(), "Updater already start");
         }
+
     }
 
     @Override
@@ -454,7 +457,7 @@ public final class ControllerImpl implements Controller, Serializable {
         try {
             final int id = this.view.getSelectedIDPlant();
             new LineChartDialog("Brightness", "lumen", this.greenhouse.get().getPlants().get(id).getBrightList(),
-                                this.greenhouse.get().getPlants().get(id).getBrightListTraditional()).start();               
+                    this.greenhouse.get().getPlants().get(id).getBrightListTraditional()).start();
         } catch (IllegalStateException e) {
             Utilities.errorMessage(this.view.getFrame(), "No plant is selected!");
         }
@@ -477,7 +480,7 @@ public final class ControllerImpl implements Controller, Serializable {
         try {
             final int id = this.view.getSelectedIDPlant();
             new LineChartDialog("Basicity", "ph", this.greenhouse.get().getPlants().get(id).getPhList(),
-                                this.greenhouse.get().getPlants().get(id).getPhListTraditional()).start();
+                    this.greenhouse.get().getPlants().get(id).getPhListTraditional()).start();
         } catch (IllegalStateException e) {
             Utilities.errorMessage(this.view.getFrame(), "No plant is selected!");
         }
@@ -500,8 +503,9 @@ public final class ControllerImpl implements Controller, Serializable {
     public void showTemperatureLineChart() {
         try {
             final int id = this.view.getSelectedIDPlant();
-            new LineChartDialog("Temperature", "Celsius degrees", this.greenhouse.get().getPlants().get(id).getTempList(),
-                                this.greenhouse.get().getPlants().get(id).getTempListTraditional()).start();
+            new LineChartDialog("Temperature", "Celsius degrees",
+                    this.greenhouse.get().getPlants().get(id).getTempList(),
+                    this.greenhouse.get().getPlants().get(id).getTempListTraditional()).start();
         } catch (IllegalStateException e) {
             Utilities.errorMessage(this.view.getFrame(), "No plant is selected!");
         }
@@ -525,7 +529,7 @@ public final class ControllerImpl implements Controller, Serializable {
         try {
             final int id = this.view.getSelectedIDPlant();
             new LineChartDialog("Conductivity", "cf", this.greenhouse.get().getPlants().get(id).getConductList(),
-                                this.greenhouse.get().getPlants().get(id).getConductListTraditional()).start();       
+                    this.greenhouse.get().getPlants().get(id).getConductListTraditional()).start();
         } catch (IllegalStateException e) {
             Utilities.errorMessage(this.view.getFrame(), "No plant is selected!");
         }
@@ -540,7 +544,7 @@ public final class ControllerImpl implements Controller, Serializable {
         return list;
     }
 
-    public int getRefreshTime(){
+    public int getRefreshTime() {
         return this.updatetime;
     }
 

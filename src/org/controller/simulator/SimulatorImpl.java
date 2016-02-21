@@ -25,17 +25,17 @@ public class SimulatorImpl implements Simulator, Serializable {
     private static final double MAXRAND_TEMP = 0.6;
     private static final double MAXRAND_WATER = 0.9; // in mL
     private static final double MINRAND_WATER = 0.4; // in mL
-    private static final int MAXRAND_GROW = 50; // in days
-    private static final int MINRAND_GROW = 20; // in days
+    private static final double MAXRAND_GROW = 0.05; // in days
+    private static final double MINRAND_GROW = 0.01; // in days
 
     // Conventional coltivation values
     private static final double MAXRAND_REAL_PH = 1.5;
-    private static final double MAXRAND_REAL_BRIGHT = 900.0;
+    private static final double MAXRAND_REAL_BRIGHT = 500.0;
     private static final double MAXRAND_REAL_COND = 11.0;
     private static final double MAXRAND_REAL_TEMP = 10.0;
     private static final double CONVENTIONAL_WATER_MULTIPLIER = 7; // 70%
-    private static final int CONVENTIONAL_GROW_MULTIPLIER = 4; // times than
-                                                               // hydroponic
+    private static final double CONVENTIONAL_GROW_MULTIPLIER = 4; // times than
+                                                                  // hydroponic
 
     private static final double ROUND_TO = 10.00;
 
@@ -99,7 +99,8 @@ public class SimulatorImpl implements Simulator, Serializable {
         double min = getOptimalPh(plant) - MAXRAND_REAL_PH;
         double max = getOptimalPh(plant) + MAXRAND_REAL_PH;
 
-        return this.roundTo(min + (max - min) * random.nextDouble());
+        return this.roundTo(min + (max - min) * random.nextDouble()) == 0 ? 0
+                : this.roundTo(min + (max - min) * random.nextDouble());
     }
 
     @Override
@@ -107,7 +108,8 @@ public class SimulatorImpl implements Simulator, Serializable {
         double min = getOptimalBrightness(plant) - MAXRAND_REAL_BRIGHT;
         double max = getOptimalBrightness(plant) + MAXRAND_REAL_BRIGHT;
 
-        return this.roundTo(min + (max - min) * random.nextDouble());
+        return this.roundTo(min + (max - min) * random.nextDouble()) == 0 ? 0
+                : this.roundTo(min + (max - min) * random.nextDouble());
     }
 
     @Override
@@ -115,7 +117,8 @@ public class SimulatorImpl implements Simulator, Serializable {
         double min = getOptimalConductibility(plant) - MAXRAND_REAL_COND;
         double max = getOptimalConductibility(plant) + MAXRAND_REAL_COND;
 
-        return this.roundTo(min + (max - min) * random.nextDouble());
+        return this.roundTo(min + (max - min) * random.nextDouble()) == 0 ? 0
+                : this.roundTo(min + (max - min) * random.nextDouble());
     }
 
     @Override
@@ -123,26 +126,29 @@ public class SimulatorImpl implements Simulator, Serializable {
         double min = getOptimalTemperature(plant) - MAXRAND_REAL_TEMP;
         double max = getOptimalTemperature(plant) + MAXRAND_REAL_TEMP;
 
-        return this.roundTo(min + (max - min) * random.nextDouble());
+        return this.roundTo(min + (max - min) * random.nextDouble()) == 0 ? 0
+                : this.roundTo(min + (max - min) * random.nextDouble());
     }
 
     @Override
     public List<Double> getSimulatedWaterConsuption() {
-
         List<Double> list = new ArrayList<>();
-        for (int i = 0; i < ControllerImpl.getController().getGreenhouse().getUpdateCounter(); i++) {
-            list.add(this.roundTo((MINRAND_WATER + (MAXRAND_WATER - MINRAND_WATER)) * random.nextDouble())
-                    * ControllerImpl.getController().getRefreshTime());
+        list.add(0.0);
+        for (int i = 1; i < ControllerImpl.getController().getGreenhouse().getUpdateCounter(); i++) {
+            list.add(list.get(i - 1)
+                    + (this.roundTo((MINRAND_WATER + (MAXRAND_WATER - MINRAND_WATER)) * random.nextDouble())
+                            * ControllerImpl.getController().getRefreshTime()));
         }
         return list;
     }
 
     @Override
-    public List<Integer> getSimulatedPlantGrow() {
-        List<Integer> list = new ArrayList<>();
-        for (int i = 0; i < ControllerImpl.getController().getGreenhouse().getUpdateCounter(); i++) {
-            list.add((MINRAND_GROW + (MAXRAND_GROW - MINRAND_GROW)) * random.nextInt()
-                    * ControllerImpl.getController().getRefreshTime());
+    public List<Double> getSimulatedPlantGrow() {
+        List<Double> list = new ArrayList<>();
+        list.add(0.0);
+        for (int i = 1; i < ControllerImpl.getController().getGreenhouse().getUpdateCounter(); i++) {
+            list.add(list.get(i - 1) + ((MINRAND_GROW + (MAXRAND_GROW - MINRAND_GROW) * random.nextDouble())
+                    * ControllerImpl.getController().getRefreshTime()));
         }
         return list;
     }
@@ -150,19 +156,22 @@ public class SimulatorImpl implements Simulator, Serializable {
     @Override
     public List<Double> getRealWaterConsuption() {
         List<Double> list = new ArrayList<>();
-        for (int i = 0; i < ControllerImpl.getController().getGreenhouse().getUpdateCounter(); i++) {
-            list.add(this.roundTo((MINRAND_WATER + (MAXRAND_WATER - MINRAND_WATER)) * random.nextDouble())
-                    * ControllerImpl.getController().getRefreshTime() * CONVENTIONAL_WATER_MULTIPLIER);
+        list.add(0.0);
+        for (int i = 1; i < ControllerImpl.getController().getGreenhouse().getUpdateCounter(); i++) {
+            list.add(list.get(i - 1)
+                    + (this.roundTo((MINRAND_WATER + (MAXRAND_WATER - MINRAND_WATER)) * random.nextDouble())
+                            * ControllerImpl.getController().getRefreshTime() * CONVENTIONAL_WATER_MULTIPLIER));
         }
         return list;
     }
 
     @Override
-    public List<Integer> getRealPlantGrow() {
-        List<Integer> list = new ArrayList<>();
-        for (int i = 0; i < ControllerImpl.getController().getGreenhouse().getUpdateCounter(); i++) {
-            list.add((MINRAND_GROW + (MAXRAND_GROW - MINRAND_GROW)) * random.nextInt()
-                    * ControllerImpl.getController().getRefreshTime() * CONVENTIONAL_GROW_MULTIPLIER);
+    public List<Double> getRealPlantGrow() {
+        List<Double> list = new ArrayList<>();
+        list.add(0.0);
+        for (int i = 1; i < ControllerImpl.getController().getGreenhouse().getUpdateCounter(); i++) {
+            list.add(list.get(i - 1) + ((MINRAND_GROW + (MAXRAND_GROW - MINRAND_GROW) * random.nextDouble())
+                    * ControllerImpl.getController().getRefreshTime() * CONVENTIONAL_GROW_MULTIPLIER));
         }
         return list;
     }
