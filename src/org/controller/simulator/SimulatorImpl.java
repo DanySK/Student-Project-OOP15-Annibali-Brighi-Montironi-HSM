@@ -1,5 +1,6 @@
 package org.controller.simulator;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -12,8 +13,11 @@ import org.hsm.model.Plant;
  * Simulator class: provide a simulated paramters for an Hydroponic Greenhouse.
  *
  */
-public class SimulatorImpl implements Simulator {
-
+public class SimulatorImpl implements Simulator, Serializable {
+    /**
+     *
+     */
+    private static final long serialVersionUID = -5168313834926068201L;
     // Hydroponic values
     private static final double MAXRAND_PH = 0.3;
     private static final double MAXRAND_BRIGHT = 25.0;
@@ -28,7 +32,7 @@ public class SimulatorImpl implements Simulator {
     private static final double MAXRAND_REAL_PH = 1.5;
     private static final double MAXRAND_REAL_BRIGHT = 900.0;
     private static final double MAXRAND_REAL_COND = 11.0;
-    private static final double MAXRAND_REAL_TEMP = 15.0;
+    private static final double MAXRAND_REAL_TEMP = 10.0;
     private static final double CONVENTIONAL_WATER_MULTIPLIER = 7; // 70%
     private static final int CONVENTIONAL_GROW_MULTIPLIER = 4; // times than
                                                                // hydroponic
