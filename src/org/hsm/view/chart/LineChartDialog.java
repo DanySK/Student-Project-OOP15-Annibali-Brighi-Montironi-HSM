@@ -7,7 +7,8 @@ import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
-import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.xy.XYSeries;
+import org.jfree.data.xy.XYSeriesCollection;
 
 /**
  * The dialog that contains the line chart to see the trend of values.
@@ -26,13 +27,15 @@ public class LineChartDialog extends AbstractChartDialog {
                            final List<Double> tradList) {
         super(characteristic);
         //chart
-        final DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-        final int size = valueList.size() <= tradList.size() ? valueList.size() : tradList.size();
-        for (int i = 0; i < size; ++i) {
-            dataset.addValue(valueList.get(i), "Current", Integer.toString(i));
-            dataset.addValue(tradList.get(i), "Traditional Culture", Integer.toString(i));
+        final XYSeries tradSeries = new XYSeries("Traditional Culture");
+        final XYSeries currentSeries = new XYSeries("Current");
+        final XYSeriesCollection dataset = new XYSeriesCollection(tradSeries);
+        dataset.addSeries(currentSeries);
+        for (int i = 0; i < valueList.size(); ++i) {
+            currentSeries.add(i, valueList.get(i));
+            tradSeries.add(i, tradList.get(i));
         }
-        final JFreeChart chart = ChartFactory.createLineChart(characteristic + " Line Chart", 
+        final JFreeChart chart = ChartFactory.createXYLineChart(characteristic + " Line Chart", 
                                                               "Survey Period",
                                                               unitsOfMeasure, 
                                                               dataset, 

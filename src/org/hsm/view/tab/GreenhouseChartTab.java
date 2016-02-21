@@ -16,8 +16,9 @@ import org.hsm.view.utility.MyGUIFactory;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.plot.PlotOrientation;
-import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
+import org.jfree.data.xy.XYSeries;
+import org.jfree.data.xy.XYSeriesCollection;
 
 /**
  *This tab is used to show charts about the greenhouse. 
@@ -63,30 +64,30 @@ public class GreenhouseChartTab implements GUIComponent {
             chartPanel.setChart(factory.createPieChart(dataset));
         });
         waterConsuption.addActionListener(e -> {
-            final DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+            final XYSeries traditionalSeries = new XYSeries("Traditional Water Consuption");
+            final XYSeries currentSeries = new XYSeries("Current Water Consuption");
+            final XYSeriesCollection dataset = new XYSeriesCollection();
+            dataset.addSeries(traditionalSeries);
+            dataset.addSeries(currentSeries);
             final int size = ControllerImpl.getController().getGreenhouse().getRealWaterConsuption().size();
             for (int i = 0; i < size; ++i) {
-                dataset.addValue(ControllerImpl.getController().getGreenhouse().getRealWaterConsuption().get(i), 
-                                "Traditional Consuption", 
-                                Integer.toString(i));
-                dataset.addValue(ControllerImpl.getController().getGreenhouse().getSimulatedWaterConsuption().get(i), 
-                                "Current Consuption", 
-                                Integer.toString(i));
+                currentSeries.add(i, ControllerImpl.getController().getGreenhouse().getRealWaterConsuption().get(i));
+                traditionalSeries.add(i, ControllerImpl.getController().getGreenhouse().getSimulatedWaterConsuption().get(i));
             }
-            chartPanel.setChart(ChartFactory.createLineChart("", "", "ml", dataset, PlotOrientation.VERTICAL, true, true, false));
+            chartPanel.setChart(ChartFactory.createXYLineChart("", "", "ml", dataset, PlotOrientation.VERTICAL, true, true, false));
         });
         growthTime.addActionListener(e -> {
-            final DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+            final XYSeries traditionalSeries = new XYSeries("Traditional Plant Growth");
+            final XYSeries currentSeries = new XYSeries("Current Plant Growth");
+            final XYSeriesCollection dataset = new XYSeriesCollection();
+            dataset.addSeries(traditionalSeries);
+            dataset.addSeries(currentSeries);
             final int size = ControllerImpl.getController().getGreenhouse().getRealPlantGrow().size();
             for (int i = 0; i < size; ++i) {
-                dataset.addValue(ControllerImpl.getController().getGreenhouse().getRealPlantGrow().get(i), 
-                                "Traditional Consuption", 
-                                Integer.toString(i));
-                dataset.addValue(ControllerImpl.getController().getGreenhouse().getSimulatedPlantGrow().get(i), 
-                                "Current Consuption", 
-                                Integer.toString(i));
+                currentSeries.add(i, ControllerImpl.getController().getGreenhouse().getRealPlantGrow().get(i));
+                traditionalSeries.add(i, ControllerImpl.getController().getGreenhouse().getSimulatedPlantGrow().get(i));
             }
-            chartPanel.setChart(ChartFactory.createLineChart("", "", "days", dataset, PlotOrientation.VERTICAL, true, true, false));
+            chartPanel.setChart(ChartFactory.createXYLineChart("", "", "days", dataset, PlotOrientation.VERTICAL, true, true, false));
         });
         this.panel.add(buttonPanel, BorderLayout.NORTH);
         this.panel.add(scrollPane, BorderLayout.CENTER);
