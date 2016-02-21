@@ -2,6 +2,7 @@ package org.hsm.view.utility;
 
 import java.awt.Component;
 import java.awt.Font;
+import java.util.List;
 
 import javax.swing.Icon;
 import javax.swing.JButton;
@@ -18,8 +19,11 @@ import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.labels.StandardPieItemLabelGenerator;
 import org.jfree.chart.plot.PiePlot;
+import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.title.LegendTitle;
 import org.jfree.data.general.DefaultPieDataset;
+import org.jfree.data.xy.XYSeries;
+import org.jfree.data.xy.XYSeriesCollection;
 import org.jfree.ui.RectangleEdge;
 
 /**
@@ -100,6 +104,28 @@ public class MyGUIFactory implements GUIFactory {
         legend.setPosition(RectangleEdge.LEFT);
         final PiePlot plot = (PiePlot) chart.getPlot();
         plot.setLabelGenerator(new StandardPieItemLabelGenerator("({0}) {2}")); 
+        return chart;
+    }
+
+    @Override
+    public JFreeChart createXYTwoLineChart(final List<? extends Number> firstLine, final String firstLineName, 
+                                           final List<? extends Number> secondLine, final String secondLineName,
+                                           final String unitOfMeasure) {
+        final XYSeries firstSeries = new XYSeries(firstLineName);
+        final XYSeries secondSeries = new XYSeries(secondLineName);
+        final XYSeriesCollection collection = new XYSeriesCollection(firstSeries);
+        collection.addSeries(secondSeries);
+        final int size = firstLine.size() >= secondLine.size() ? firstLine.size() : secondLine.size();
+        for (int i = 0; i < size; ++i) {
+            if (i < firstLine.size()) {
+                firstSeries.add(i, firstLine.get(i));
+            }
+            if (i < secondLine.size()) {
+                secondSeries.add(i, secondLine.get(i));
+            }
+        }
+        final JFreeChart chart = ChartFactory.createXYLineChart("", "Time", unitOfMeasure, collection, 
+                                                                PlotOrientation.VERTICAL, true, true, false);
         return chart;
     }
 }

@@ -1,5 +1,7 @@
 package org.hsm.view.utility;
 
+import java.util.List;
+
 import javax.swing.Icon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -60,5 +62,18 @@ public interface GUIFactory {
      * @return a new chart with the specific dataset
      */
     JFreeChart createPieChart(final DefaultPieDataset dataset);
+
+    /**
+     * Create the XY Line chart with 2 lines for comparing them through time.
+     * @param firstLine the list of elements of the first line
+     * @param firstLineName the first line name
+     * @param secondLine the list of elements of the second line
+     * @param secondLineName the second line name
+     * @param unitOfMeasure the unit of Measure
+     * @return the two line chart
+     */
+    JFreeChart createXYTwoLineChart(final List<? extends Number> firstLine, final String firstLineName, 
+            final List<? extends Number> secondLine, final String secondLineName,
+            final String unitOfMeasure);
 
 }
