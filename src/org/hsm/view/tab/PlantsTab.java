@@ -2,6 +2,7 @@ package org.hsm.view.tab;
 
 import java.awt.Component;
 import java.awt.Dimension;
+import java.util.Objects;
 import java.util.Observable;
 
 import javax.swing.Box;
@@ -10,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -23,6 +25,7 @@ import org.hsm.controller.ControllerImpl;
 import org.hsm.view.dialog.PlantAddDialog;
 import org.hsm.view.enumeration.PlantCharacteristics;
 import org.hsm.view.gui.GUIComponent;
+import org.hsm.view.utility.GUIFactory;
 import org.hsm.view.utility.MyGUIFactory;
 import org.hsm.view.utility.Utilities;
 
@@ -32,7 +35,8 @@ import org.hsm.view.utility.Utilities;
  */
 public class PlantsTab extends Observable implements GUIComponent, UpgradeableTable<Integer> {
 
-    private static final int FILTER_TXT_SIZE = 50;
+    private static final int FILTER_TXT_SIZE = 35;
+    private static final Integer[] UPDATE_RANGE = new Integer[]{1, 10, 30, 60};
     private final JTable table;
     private final JPanel panel;
 
@@ -42,7 +46,8 @@ public class PlantsTab extends Observable implements GUIComponent, UpgradeableTa
      */
     public PlantsTab(final JFrame frame) {
         //table
-        this.table = new MyGUIFactory().createTable(PlantCharacteristics.getNameList().toArray());
+        final GUIFactory factory = new MyGUIFactory();
+        this.table = factory.createTable(PlantCharacteristics.getNameList().toArray());
         final JPanel southPanel = new JPanel();
         southPanel.setLayout(new BoxLayout(southPanel, BoxLayout.X_AXIS));
         //buttons
@@ -53,7 +58,16 @@ public class PlantsTab extends Observable implements GUIComponent, UpgradeableTa
         final JButton updateValues = new JButton("Update Plant Values");
         updateValues.addActionListener(e -> {
             this.table.setRowSelectionAllowed(false);
-            ControllerImpl.getController().autoUpdate(1);
+            final Integer timeUpdate = (Integer) JOptionPane.showInputDialog(frame, 
+                                   "Chose the refresh interval",
+                                   "Update Values",
+                                   JOptionPane.QUESTION_MESSAGE, 
+                                   null, 
+                                   UPDATE_RANGE, 
+                                   UPDATE_RANGE[0]);
+            if (Objects.nonNull(timeUpdate)) {
+                ControllerImpl.getController().autoUpdate(timeUpdate);
+            } 
         });
         final JButton stop = new JButton("Stop Updating");
         stop.addActionListener(e -> {
