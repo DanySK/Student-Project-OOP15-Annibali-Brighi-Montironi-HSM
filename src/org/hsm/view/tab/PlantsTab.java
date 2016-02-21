@@ -59,7 +59,7 @@ public class PlantsTab extends Observable implements GUIComponent, UpgradeableTa
         updateValues.addActionListener(e -> {
             this.table.setRowSelectionAllowed(false);
             final Integer timeUpdate = (Integer) JOptionPane.showInputDialog(frame, 
-                                   "Chose the refresh interval",
+                                   "Chose the refresh interval (sec)",
                                    "Update Values",
                                    JOptionPane.QUESTION_MESSAGE, 
                                    null, 

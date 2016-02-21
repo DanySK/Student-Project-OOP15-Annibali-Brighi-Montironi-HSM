@@ -69,18 +69,24 @@ public class GreenhouseChartTab implements GUIComponent {
                 dataset.addValue(ControllerImpl.getController().getGreenhouse().getRealWaterConsuption().get(i), 
                                 "Traditional Consuption", 
                                 Integer.toString(i));
+                dataset.addValue(ControllerImpl.getController().getGreenhouse().getSimulatedWaterConsuption().get(i), 
+                                "Current Consuption", 
+                                Integer.toString(i));
+            }
+            chartPanel.setChart(ChartFactory.createLineChart("", "", "ml", dataset, PlotOrientation.VERTICAL, true, true, false));
+        });
+        growthTime.addActionListener(e -> {
+            final DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+            final int size = ControllerImpl.getController().getGreenhouse().getRealPlantGrow().size();
+            for (int i = 0; i < size; ++i) {
+                dataset.addValue(ControllerImpl.getController().getGreenhouse().getRealPlantGrow().get(i), 
+                                "Traditional Consuption", 
+                                Integer.toString(i));
                 dataset.addValue(ControllerImpl.getController().getGreenhouse().getSimulatedPlantGrow().get(i), 
                                 "Current Consuption", 
                                 Integer.toString(i));
             }
-            chartPanel.setChart(ChartFactory.createLineChart("", 
-                                                             "",
-                                                             "", 
-                                                             dataset, 
-                                                             PlotOrientation.VERTICAL, 
-                                                             true, 
-                                                             true, 
-                                                             false));
+            chartPanel.setChart(ChartFactory.createLineChart("", "", "days", dataset, PlotOrientation.VERTICAL, true, true, false));
         });
         this.panel.add(buttonPanel, BorderLayout.NORTH);
         this.panel.add(scrollPane, BorderLayout.CENTER);
