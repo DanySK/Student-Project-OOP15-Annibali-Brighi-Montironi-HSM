@@ -135,12 +135,13 @@ public class MainFrame implements View {
 
     @Override
     public void cleanGreenhouse() {
-            this.tab.getPlantsTab().clean();
+        this.tab.getGreenhouseChartTab().clean();
+        this.tab.getPlantsTab().clean();
     }
 
     @Override
     public void cleanDatabase() {
-            this.tab.getDatabaseTab().clean();
+        this.tab.getDatabaseTab().clean();
     }
 
     @Override

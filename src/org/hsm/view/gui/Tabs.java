@@ -28,6 +28,7 @@ public class Tabs implements GUIComponent {
     private final Table<String> databaseTab;
     private final UpgradeableTable<Integer> plantsTab;
     private final GreenhouseTab greenhouseTab;
+    private final Resettable greenhouseChartTab;
 
     /**
      *Create the Tabbes.
@@ -41,9 +42,9 @@ public class Tabs implements GUIComponent {
         this.greenhouseTab = new GreenhouseTab();
         this.plantsTab = new PlantsTab(frame);
         this.databaseTab = new DatabaseTab(frame);
-        final GreenhouseChartTab chartTab = new GreenhouseChartTab();
+        this.greenhouseChartTab = new GreenhouseChartTab();
         this.tab.add("Greenhouse", this.greenhouseTab.getComponent());
-        this.tab.add("Greenhouse Composition", chartTab.getComponent());
+        this.tab.add("Greenhouse Composition", this.greenhouseChartTab.getComponent());
         this.tab.add("Plants", this.plantsTab.getComponent());
         this.tab.add("Plants Database", this.databaseTab.getComponent());
         //observer
@@ -81,6 +82,14 @@ public class Tabs implements GUIComponent {
      */
     protected GreenhouseTab getGreenhouseTab() {
         return this.greenhouseTab;
+    }
+
+    /**
+     * Get the greenhouse chart tab.
+     * @return the greenhouse chart tab
+     */
+    protected Resettable getGreenhouseChartTab() {
+        return this.greenhouseChartTab;
     }
 
     @Override

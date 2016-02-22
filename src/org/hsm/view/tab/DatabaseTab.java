@@ -14,14 +14,13 @@ import javax.swing.table.TableRowSorter;
 import org.hsm.controller.ControllerImpl;
 import org.hsm.view.dialog.PlantCreateDialog;
 import org.hsm.view.enumeration.PlantModelCharacteristics;
-import org.hsm.view.gui.GUIComponent;
 import org.hsm.view.utility.MyGUIFactory;
 
 /**
  *This tab contains all the information about the database of plants.
  *
  */
-public class DatabaseTab implements GUIComponent, Table<String> {
+public class DatabaseTab implements Table<String> {
 
     private final JTable table;
     private final JPanel panel;

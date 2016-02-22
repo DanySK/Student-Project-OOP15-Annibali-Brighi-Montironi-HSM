@@ -24,7 +24,6 @@ import javax.swing.table.TableRowSorter;
 import org.hsm.controller.ControllerImpl;
 import org.hsm.view.dialog.PlantAddDialog;
 import org.hsm.view.enumeration.PlantCharacteristics;
-import org.hsm.view.gui.GUIComponent;
 import org.hsm.view.utility.GUIFactory;
 import org.hsm.view.utility.MyGUIFactory;
 import org.hsm.view.utility.Utilities;
@@ -33,7 +32,7 @@ import org.hsm.view.utility.Utilities;
  *This tab contains all the information about the plants inside the current greenhouse.
  *
  */
-public class PlantsTab extends Observable implements GUIComponent, UpgradeableTable<Integer> {
+public class PlantsTab extends Observable implements UpgradeableTable<Integer> {
 
     private static final int FILTER_TXT_SIZE = 35;
     private static final Integer[] UPDATE_RANGE = new Integer[]{1, 10, 30, 60};

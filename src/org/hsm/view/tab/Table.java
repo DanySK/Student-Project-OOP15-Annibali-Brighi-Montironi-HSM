@@ -1,13 +1,13 @@
 package org.hsm.view.tab;
 
-import org.hsm.view.gui.GUIComponent;
+import org.hsm.view.gui.Resettable;
 
 /**
  * This interface contains the basic methods to operate on a table.
  *
  * @param <X> the row identifier type
  */
-public interface Table<X> extends GUIComponent {
+public interface Table<X> extends Resettable {
 
     /**
      * Insert row in the table.
@@ -27,10 +27,5 @@ public interface Table<X> extends GUIComponent {
      * @throws IllegalStateException no row is selected
      */
     X getSelectedRowIdentifier() throws IllegalStateException;
-
-    /**
-     *Clean the table.
-     */
-    void clean();
 
 }
