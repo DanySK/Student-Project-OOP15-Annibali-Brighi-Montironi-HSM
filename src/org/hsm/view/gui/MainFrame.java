@@ -81,6 +81,7 @@ public class MainFrame implements View {
             final double freeSpace, final double occupiedSpace, final int numberOfPlants, final double overCost) {
         this.tab.getGreenhouseTab().setGreenhouse(name, size, cost, typology, freeSpace, occupiedSpace, numberOfPlants, overCost);
         this.tab.getPlantsTab().clean();
+        this.tab.getGreenhouseChartTab().clean();
     }
 
     @Override

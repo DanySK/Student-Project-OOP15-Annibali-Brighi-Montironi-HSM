@@ -84,7 +84,6 @@ public final class ControllerImpl implements Controller, Serializable {
         this.stopUpdating();
         this.ghMod = true;
         this.loadGh = true;
-        this.view.cleanGreenhouse();
         if (!this.loadDb) {
             this.database = new DatabaseImpl();
         }
