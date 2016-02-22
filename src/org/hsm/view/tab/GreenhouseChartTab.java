@@ -71,7 +71,7 @@ public class GreenhouseChartTab implements GUIComponent {
                                                              "Current Plant Growth", 
                                                              ControllerImpl.getController().getGreenhouse().getSimulatedPlantGrow(), 
                                                              "Traditional Plant Growth", 
-                                                             "days"));
+                                                             "Growth %"));
         });
         this.panel.add(buttonPanel, BorderLayout.NORTH);
         this.panel.add(scrollPane, BorderLayout.CENTER);
