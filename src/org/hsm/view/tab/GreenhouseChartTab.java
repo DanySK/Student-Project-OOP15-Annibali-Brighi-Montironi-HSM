@@ -60,16 +60,16 @@ public class GreenhouseChartTab implements GUIComponent {
             chartPanel.setChart(factory.createPieChart(dataset));
         });
         waterConsuption.addActionListener(e -> {
-            chartPanel.setChart(factory.createXYTwoLineChart(ControllerImpl.getController().getGreenhouse().getRealWaterConsuption(), 
-                                                             "Current Water Consuption", 
-                                                             ControllerImpl.getController().getGreenhouse().getSimulatedWaterConsuption(), 
+            chartPanel.setChart(factory.createXYTwoLineChart(ControllerImpl.getController().getGreenhouse().getSimulatedWaterConsuption(), 
+                                                             "Current Water Consuption",
+                                                             ControllerImpl.getController().getGreenhouse().getRealWaterConsuption(),
                                                              "Traditional Water Consuption", 
                                                              "ml"));
         });
         growthTime.addActionListener(e -> {
-            chartPanel.setChart(factory.createXYTwoLineChart(ControllerImpl.getController().getGreenhouse().getRealPlantGrow(), 
+            chartPanel.setChart(factory.createXYTwoLineChart(ControllerImpl.getController().getGreenhouse().getSimulatedPlantGrow(),
                                                              "Current Plant Growth", 
-                                                             ControllerImpl.getController().getGreenhouse().getSimulatedPlantGrow(), 
+                                                             ControllerImpl.getController().getGreenhouse().getRealPlantGrow(),
                                                              "Traditional Plant Growth", 
                                                              "Growth %"));
         });
