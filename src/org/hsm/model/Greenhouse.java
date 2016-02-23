@@ -46,31 +46,20 @@ public interface Greenhouse {
      */
     String getName();
 
+    
     /**
-     *
-     * @param n
-     *            new name of the greenhouse
-     */
-    void setName(final String n);
-
-    /**
-     * @return total size of the greenhouse in m³
+     * @return total size of the greenhouse in m²
      */
     double getSize();
 
-    /**
-     * @param s
-     *            the size of the greenhouse in m³
-     */
-    void setSize(int s);
-
+    
     /**
      * @return Free space of the greenhouse
      */
     double getFreeSize();
 
     /**
-     * @return Return the space occupied by plants in m³
+     * @return Return the space occupied by plants in m²
      */
     double getOccSize();
 
@@ -122,9 +111,9 @@ public interface Greenhouse {
     int getUpdateCounter();
 
     /**
-     * Provide a list of water comsuption of the greenhouse from simulator.
+     * Provide a list of water consumption of the greenhouse from simulator.
      *
-     * @return the list of simulated water comsuption
+     * @return the list of simulated water consumption
      */
     List<Double> getSimulatedWaterConsuption();
 
@@ -136,15 +125,15 @@ public interface Greenhouse {
     List<Double> getSimulatedPlantGrow();
 
     /**
-     * Provide a list of water comsuption of the traditional coltivation from
+     * Provide a list of water consumption of the traditional cultivation from
      * simulator.
      *
-     * @return the list of water comsuption
+     * @return the list of water consumption
      */
     List<Double> getRealWaterConsuption();
 
     /**
-     * Provide a list of plants grown in traditional coltivation from simulator.
+     * Provide a list of plants grown in traditional cultivation from simulator.
      *
      * @return the list of plant grow
      */

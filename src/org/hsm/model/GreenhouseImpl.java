@@ -118,20 +118,13 @@ public class GreenhouseImpl implements Greenhouse, Serializable {
         return this.name;
     }
 
-    @Override
-    public void setName(final String n) {
-        this.name = n;
-    }
 
     @Override
     public double getSize() {
         return size;
     }
 
-    @Override
-    public void setSize(final int s) {
-        this.size = s;
-    }
+
 
     @Override
     public double getFreeSize() {
