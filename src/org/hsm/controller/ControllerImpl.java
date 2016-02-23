@@ -196,7 +196,6 @@ public final class ControllerImpl implements Controller, Serializable {
             final int id = this.view.getSelectedIDPlant();
             this.ghMod = true;
             this.greenhouse.get().delPlants(this.greenhouse.get().getPlants().get(id).getModel());
-            this.view.cleanGreenhouse();
             this.view.insertGreenhouse(this.greenhouse.get().getName(), this.greenhouse.get().getSize(),
                     this.greenhouse.get().getCost(), this.greenhouse.get().getType().toString(),
                     this.greenhouse.get().getFreeSize(), this.greenhouse.get().getOccSize(),
