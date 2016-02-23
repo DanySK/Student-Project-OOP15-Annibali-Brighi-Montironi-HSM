@@ -47,7 +47,7 @@ public class AutoUpdater extends Thread {
         while (!this.stopped) {
             try {
                 SwingUtilities.invokeAndWait(() -> {
-                    this.controller.getView().cleanGreenhouse();
+                    this.controller.getView().cleanGreenhousePlants();
                     this.controller.getGreenhouse().getPlants().forEach((a, b) -> {
                         final double ph = this.simulator.getSimulatedPh(b);
                         final double bright = this.simulator.getSimulatedBrightness(b);
