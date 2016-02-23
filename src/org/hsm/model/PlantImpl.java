@@ -106,34 +106,22 @@ public class PlantImpl implements Plant, Serializable {
 
     @Override
     public double getLastBrightValue() {
-        if (this.brightList.isEmpty()) {
-            return 0;
-        }
-        return this.brightList.get(this.brightList.size() - 1);
+        return getLastValue(brightList);
     }
 
     @Override
     public double getLastConductValue() {
-        if (this.brightList.isEmpty()) {
-            return 0;
-        }
-        return this.conductList.get(this.conductList.size() - 1);
+        return getLastValue(conductList);
     }
 
     @Override
     public double getLastTempValue() {
-        if (this.tempList.isEmpty()) {
-            return 0;
-        }
-        return this.tempList.get(this.tempList.size() - 1);
+        return getLastValue(tempList);
     }
 
     @Override
     public double getLastPhValue() {
-        if (this.phList.isEmpty()) {
-            return 0;
-        }
-        return this.phList.get(this.phList.size() - 1);
+        return getLastValue(phList);
     }
 
     @Override
@@ -179,39 +167,38 @@ public class PlantImpl implements Plant, Serializable {
 
     @Override
     public double getLastBrightValueTraditional() {
-        if (this.brightListTrad.isEmpty()) {
-            return 0;
-        }
-        return this.brightListTrad.get(this.brightListTrad.size() - 1);
+        return getLastValue(brightListTrad);
     }
 
     @Override
     public double getLastConductValueTraditional() {
-        if (this.conductListTrad.isEmpty()) {
-            return 0;
-        }
-        return this.conductListTrad.get(this.conductListTrad.size() - 1);
+        return getLastValue(conductListTrad);
     }
 
     @Override
     public double getLastTempValueTraditional() {
-        if (this.tempListTrad.isEmpty()) {
-            return 0;
-        }
-        return this.tempListTrad.get(this.tempListTrad.size() - 1);
+        return getLastValue(tempListTrad);
     }
 
     @Override
     public double getLastPhValueTraditional() {
-        if (this.phListTrad.isEmpty()) {
-            return 0;
-        }
-        return this.phListTrad.get(this.phListTrad.size() - 1);
+        return getLastValue(phListTrad);
     }
 
     @Override
     public int nUpdate() {
         return this.phList.size();
+    }
+    
+    /*
+     * method used by some getters to return a List of double
+     */
+    private Double getLastValue(final List<Double> l){
+        if(l.isEmpty()){
+            return 0.0;
+        } else {
+            return l.get(l.size() - 1);
+        }
     }
 
 }
