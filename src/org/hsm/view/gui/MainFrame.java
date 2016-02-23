@@ -81,7 +81,6 @@ public class MainFrame implements View {
             final double freeSpace, final double occupiedSpace, final int numberOfPlants, final double overCost) {
         this.tab.getGreenhouseTab().setGreenhouse(name, size, cost, typology, freeSpace, occupiedSpace, numberOfPlants, overCost);
         this.tab.getPlantsTab().clean();
-        this.tab.getGreenhouseChartTab().clean();
     }
 
     @Override
@@ -106,7 +105,7 @@ public class MainFrame implements View {
     @Override
     public void insertPlant(final int id, final String name, final double cost, final double ph, final double brightness, 
             final double conductivity, final double temperature) {
-            this.tab.getPlantsTab().updateRow(id, name, cost, ph, brightness, conductivity, temperature);
+        this.tab.getPlantsTab().updateRow(id, name, cost, ph, brightness, conductivity, temperature);
     }
 
     @Override

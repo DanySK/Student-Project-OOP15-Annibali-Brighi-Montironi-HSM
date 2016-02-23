@@ -90,6 +90,7 @@ public final class ControllerImpl implements Controller, Serializable {
         try {
             this.greenhouse = Optional.of(new GreenhouseImpl(name, size, cost, this.getGreenhouseType(greenhouseType)));
             this.view.setActive(true);
+            this.view.cleanGreenhouse();
             this.view.insertGreenhouse(name, size, this.greenhouse.get().getCost(), greenhouseType, size, 0, 0,
                     this.greenhouse.get().getCost());
         } catch (IllegalArgumentException e) {
