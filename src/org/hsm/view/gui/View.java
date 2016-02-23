@@ -91,7 +91,7 @@ public interface View extends VisibleComponent {
     /**
      *Clean all the data in the View about Greenhouse.
      */
-    void cleanGreenhouse();
+    void cleanGreenhousePlants();
 
     /**
      *Clean all the data in the View about Database.
