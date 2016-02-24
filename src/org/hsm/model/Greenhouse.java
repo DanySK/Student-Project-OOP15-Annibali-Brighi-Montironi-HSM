@@ -3,6 +3,9 @@ package org.hsm.model;
 import java.util.List;
 import java.util.Map;
 
+import org.hsm.model.plant.Plant;
+import org.hsm.model.plant.PlantModel;
+
 /**
  * interface for the communication between the model and the controller.
  */

@@ -1,4 +1,4 @@
-package org.hsm.model;
+package org.hsm.model.plant;
 
 import java.io.Serializable;
 import java.util.LinkedList;

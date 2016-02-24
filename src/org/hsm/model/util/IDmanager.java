@@ -1,4 +1,4 @@
-package org.hsm.model;
+package org.hsm.model.util;
 
 import java.io.Serializable;
 
@@ -20,7 +20,7 @@ public class IDmanager implements Serializable {
      *
      * @return id
      */
-    protected int getID() {
+    public int getID() {
         return ++this.id;
     }
 }

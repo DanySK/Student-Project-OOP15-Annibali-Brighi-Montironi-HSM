@@ -2,6 +2,8 @@ package org.hsm.model;
 
 import java.util.Map;
 
+import org.hsm.model.plant.PlantModel;
+
 /**
  * Interface for DBplants.
  */

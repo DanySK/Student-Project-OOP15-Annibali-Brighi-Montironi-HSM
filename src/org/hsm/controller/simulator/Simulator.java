@@ -2,7 +2,7 @@ package org.hsm.controller.simulator;
 
 import java.util.List;
 
-import org.hsm.model.Plant;
+import org.hsm.model.plant.Plant;
 
 /**
  *

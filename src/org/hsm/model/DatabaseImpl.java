@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.hsm.model.plant.BuilderPlant;
+import org.hsm.model.plant.PlantModel;
+
 /**
  * Database of the plants that the user can add to his Greenhouse.
  */

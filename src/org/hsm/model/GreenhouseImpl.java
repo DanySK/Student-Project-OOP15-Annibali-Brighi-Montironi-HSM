@@ -9,6 +9,10 @@ import java.util.Set;
 
 import org.hsm.controller.simulator.Simulator;
 import org.hsm.controller.simulator.SimulatorImpl;
+import org.hsm.model.plant.Plant;
+import org.hsm.model.plant.PlantImpl;
+import org.hsm.model.plant.PlantModel;
+import org.hsm.model.util.IDmanager;
 
 /**
  * implementation of the Greenhouse interface.

@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Random;
 
 import org.hsm.controller.ControllerImpl;
-import org.hsm.model.Plant;
+import org.hsm.model.plant.Plant;
 
 /**
  *
