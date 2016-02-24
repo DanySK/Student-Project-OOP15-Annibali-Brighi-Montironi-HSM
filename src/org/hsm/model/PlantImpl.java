@@ -191,7 +191,7 @@ public class PlantImpl implements Plant, Serializable {
     }
     
     /*
-     * method used by some getters to return a List of double
+     * method used by some getters to return a double
      */
     private Double getLastValue(final List<Double> l){
         if(l.isEmpty()){
