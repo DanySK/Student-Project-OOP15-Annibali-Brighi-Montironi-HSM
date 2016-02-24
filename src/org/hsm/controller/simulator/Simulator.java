@@ -1,4 +1,4 @@
-package org.controller.simulator;
+package org.hsm.controller.simulator;
 
 import java.util.List;
 
@@ -40,7 +40,7 @@ public interface Simulator {
      *
      * @param plant
      *            the plant
-     * @return the Optimal Temperature (°C)
+     * @return the Optimal Temperature (ï¿½C)
      */
     double getOptimalTemperature(Plant plant);
 
@@ -72,7 +72,7 @@ public interface Simulator {
      *
      * @param plant
      *            the plant
-     * @return the simulated Temperature (°C)
+     * @return the simulated Temperature (ï¿½C)
      */
     double getSimulatedTemperature(Plant plant);
 
@@ -118,7 +118,7 @@ public interface Simulator {
     *
     * @param plant
     *            the plant
-    * @return the real simulated Temperature (°C)
+    * @return the real simulated Temperature (ï¿½C)
     */
    double getRealTemperature(Plant plant);
 

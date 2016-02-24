@@ -20,7 +20,7 @@ public class ControllerTest {
     //CHECKSTYLE:OFF: checkstyle:magicnumber
     @Test
     public void controllerTeset() {
-        ControllerImpl controller = ControllerImpl.getController();
+       final ControllerImpl controller = ControllerImpl.getController();
 
         controller.createGreenhouse("Test", "Grid", 450, 1500);
         controller.createNewPlant("name", "botanical name", 25, 550, 340, 30, 27, 365, 25);

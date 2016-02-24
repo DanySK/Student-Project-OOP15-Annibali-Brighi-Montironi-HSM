@@ -132,7 +132,7 @@ public interface Controller {
      *
      * @return true if a greenhouse is load
      */
-    boolean getLoadState();
+    boolean isLoad();
 
     /**
      *

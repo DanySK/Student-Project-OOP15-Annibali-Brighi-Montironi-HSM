@@ -1,4 +1,4 @@
-package org.controller.simulator;
+package org.hsm.controller.simulator;
 
 import static org.junit.Assert.assertTrue;
 
