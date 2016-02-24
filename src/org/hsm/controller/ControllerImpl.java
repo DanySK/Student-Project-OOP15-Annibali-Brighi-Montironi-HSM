@@ -58,7 +58,6 @@ public final class ControllerImpl implements Controller, Serializable {
     private boolean loadDb = true;
 
     private boolean updating;
-    private boolean updated;
     private int updatetime;
 
     private ControllerImpl() {
@@ -155,8 +154,7 @@ public final class ControllerImpl implements Controller, Serializable {
     }
 
     @Override
-    public void addPlants(final PlantModel plant, final int cost, final int n) {
-        this.checkUpdater();
+    public synchronized void addPlants(final PlantModel plant, final int cost, final int n) {
         this.ghMod = true;
         for (int i = 0; i < n; i++) {
             int id;
@@ -167,7 +165,6 @@ public final class ControllerImpl implements Controller, Serializable {
                 Utilities.errorMessage(this.view.getFrame(), "Insufficient space in Greenhouse");
             }
         }
-        this.restoreUpdater();
     }
 
     @Override
@@ -183,8 +180,7 @@ public final class ControllerImpl implements Controller, Serializable {
     }
 
     @Override
-    public void delPLants() {
-        this.checkUpdater();
+    public synchronized void delPLants() {
         try {
             final int id = this.view.getSelectedIDPlant();
             this.ghMod = true;
@@ -201,7 +197,6 @@ public final class ControllerImpl implements Controller, Serializable {
         } catch (IllegalStateException e) {
             Utilities.errorMessage(this.view.getFrame(), "No plant is selected");
         }
-        this.restoreUpdater();
     }
 
     @Override
@@ -285,8 +280,7 @@ public final class ControllerImpl implements Controller, Serializable {
     }
 
     @Override
-    public void saveGreenhouse() {
-        this.checkUpdater();
+    public synchronized void saveGreenhouse() {
         final Optional<String> filenameGh = this.view.saveGreenhouseDialog();
         if (!filenameGh.isPresent()) {
             return;
@@ -301,7 +295,6 @@ public final class ControllerImpl implements Controller, Serializable {
         } catch (IOException e) {
             Utilities.errorMessage(this.view.getFrame(), e.toString());
         }
-        this.restoreUpdater();
     }
 
     @Override
@@ -548,20 +541,6 @@ public final class ControllerImpl implements Controller, Serializable {
     private void stopUpdating() {
         if (this.updating) {
             this.stopUpdate();
-        }
-    }
-
-    private void checkUpdater() {
-        if (this.updating) {
-            this.stopUpdate();
-            this.updated = true;
-        }
-    }
-
-    private void restoreUpdater() {
-        if (this.updated) {
-            this.autoUpdate(this.updatetime);
-            this.updated = false;
         }
     }
 
