@@ -1,4 +1,4 @@
-package org.hsm.model;
+package org.hsm.model.db;
 
 import java.io.Serializable;
 import java.util.HashMap;

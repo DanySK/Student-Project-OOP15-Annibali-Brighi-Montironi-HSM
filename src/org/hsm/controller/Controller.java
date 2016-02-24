@@ -2,8 +2,8 @@ package org.hsm.controller;
 
 import java.util.List;
 
-import org.hsm.model.Database;
 import org.hsm.model.Greenhouse;
+import org.hsm.model.db.Database;
 import org.hsm.model.plant.PlantModel;
 import org.hsm.view.gui.View;
 

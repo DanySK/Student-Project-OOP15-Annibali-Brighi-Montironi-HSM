@@ -1,5 +1,8 @@
 package org.hsm.model;
 
+import org.hsm.model.db.Database;
+import org.hsm.model.db.DatabaseImpl;
+
 /**
  *
  *

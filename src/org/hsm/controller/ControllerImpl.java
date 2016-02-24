@@ -17,11 +17,11 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.hsm.controller.updater.AutoUpdater;
-import org.hsm.model.Database;
-import org.hsm.model.DatabaseImpl;
 import org.hsm.model.GreenHouseType;
 import org.hsm.model.Greenhouse;
 import org.hsm.model.GreenhouseImpl;
+import org.hsm.model.db.Database;
+import org.hsm.model.db.DatabaseImpl;
 import org.hsm.model.plant.Plant;
 import org.hsm.model.plant.PlantModel;
 import org.hsm.view.chart.BarChartDialog;
