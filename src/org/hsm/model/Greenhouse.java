@@ -46,13 +46,11 @@ public interface Greenhouse {
      */
     String getName();
 
-    
     /**
      * @return total size of the greenhouse in m²
      */
     double getSize();
 
-    
     /**
      * @return Free space of the greenhouse
      */

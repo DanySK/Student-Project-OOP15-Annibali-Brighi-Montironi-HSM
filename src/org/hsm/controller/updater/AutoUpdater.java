@@ -1,13 +1,13 @@
-package org.controller.update;
+package org.hsm.controller.updater;
 
 import java.lang.reflect.InvocationTargetException;
 
 import javax.swing.SwingUtilities;
 
-import org.controller.simulator.Simulator;
-import org.controller.simulator.SimulatorImpl;
 import org.hsm.controller.Controller;
 import org.hsm.controller.ControllerImpl;
+import org.hsm.controller.simulator.Simulator;
+import org.hsm.controller.simulator.SimulatorImpl;
 
 /**
  *
@@ -45,6 +45,7 @@ public class AutoUpdater extends Thread {
     public void run() {
         this.stopped = false;
         while (!this.stopped) {
+            this.controller.getGreenhouse().incrementCounter();
             try {
                 SwingUtilities.invokeAndWait(() -> {
                     this.controller.getView().cleanGreenhouse();
@@ -63,7 +64,6 @@ public class AutoUpdater extends Thread {
                         b.addBrightValueTraditional(this.simulator.getRealBrightness(b));
                         b.addConductValueTraditional(this.simulator.getRealConductibility(b));
                         b.addTempValueTraditional(this.simulator.getRealTemperature(b));
-                        this.controller.getGreenhouse().incrementCounter();
                     });
                 });
             } catch (InvocationTargetException | InterruptedException e) {

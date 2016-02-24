@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import org.controller.update.AutoUpdater;
+import org.hsm.controller.updater.AutoUpdater;
 import org.hsm.model.Database;
 import org.hsm.model.DatabaseImpl;
 import org.hsm.model.GreenHouseType;
@@ -45,10 +45,7 @@ public final class ControllerImpl implements Controller, Serializable {
      * Singleton istance of controller.
      */
     // CHECKSTYLE:OFF
-    private static ControllerImpl CONTROLLER_IMPL;
-
-    private ControllerImpl() {
-    };
+    private final static ControllerImpl CONTROLLER_IMPL = new ControllerImpl();
 
     private Database database = new DatabaseImpl();
     private Optional<Greenhouse> greenhouse;
@@ -64,18 +61,14 @@ public final class ControllerImpl implements Controller, Serializable {
     private boolean updated;
     private int updatetime;
 
+    private ControllerImpl() {
+    };
+
     /**
      *
      * @return the istance of controller
      */
     public static ControllerImpl getController() {
-        if (CONTROLLER_IMPL == null) {
-            synchronized (ControllerImpl.class) {
-                if (CONTROLLER_IMPL == null) {
-                    CONTROLLER_IMPL = new ControllerImpl();
-                }
-            }
-        }
         return CONTROLLER_IMPL;
     }
 
@@ -254,7 +247,8 @@ public final class ControllerImpl implements Controller, Serializable {
         } catch (IllegalStateException e) {
             Utilities.errorMessage(this.view.getFrame(), "This plant is already in database");
         } catch (IllegalArgumentException e) {
-            Utilities.errorMessage(this.view.getFrame(), "Pant name can't be empty");
+            Utilities.errorMessage(this.view.getFrame(),
+                    "Plant name can't be empty and fields must be greater than zero");
         }
 
     }
@@ -272,7 +266,7 @@ public final class ControllerImpl implements Controller, Serializable {
     }
 
     @Override
-    public boolean getLoadState() {
+    public boolean isLoad() {
         return this.loadGh;
     }
 
@@ -448,7 +442,7 @@ public final class ControllerImpl implements Controller, Serializable {
                     this.greenhouse.get().getPlants().get(id).getLastBrightValue(),
                     this.greenhouse.get().getPlants().get(id).getLastBrightValueTraditional()).start();
         } catch (IllegalStateException e) {
-            Utilities.errorMessage(this.view.getFrame(), "No plant is selected!");
+            this.showNoPlant();
         }
     }
 
@@ -459,7 +453,7 @@ public final class ControllerImpl implements Controller, Serializable {
             new LineChartDialog("Brightness", "lumen", this.greenhouse.get().getPlants().get(id).getBrightList(),
                     this.greenhouse.get().getPlants().get(id).getBrightListTraditional()).start();
         } catch (IllegalStateException e) {
-            Utilities.errorMessage(this.view.getFrame(), "No plant is selected!");
+            this.showNoPlant();
         }
     }
 
@@ -471,7 +465,7 @@ public final class ControllerImpl implements Controller, Serializable {
                     this.greenhouse.get().getPlants().get(id).getLastPhValue(),
                     this.greenhouse.get().getPlants().get(id).getLastPhValueTraditional()).start();
         } catch (IllegalStateException e) {
-            Utilities.errorMessage(this.view.getFrame(), "No plant is selected!");
+            this.showNoPlant();
         }
     }
 
@@ -482,7 +476,7 @@ public final class ControllerImpl implements Controller, Serializable {
             new LineChartDialog("Basicity", "ph", this.greenhouse.get().getPlants().get(id).getPhList(),
                     this.greenhouse.get().getPlants().get(id).getPhListTraditional()).start();
         } catch (IllegalStateException e) {
-            Utilities.errorMessage(this.view.getFrame(), "No plant is selected!");
+            this.showNoPlant();
         }
     }
 
@@ -495,7 +489,7 @@ public final class ControllerImpl implements Controller, Serializable {
                     this.greenhouse.get().getPlants().get(id).getLastTempValue(),
                     this.greenhouse.get().getPlants().get(id).getLastTempValueTraditional()).start();
         } catch (IllegalStateException e) {
-            Utilities.errorMessage(this.view.getFrame(), "No plant is selected!");
+            this.showNoPlant();
         }
     }
 
@@ -507,7 +501,7 @@ public final class ControllerImpl implements Controller, Serializable {
                     this.greenhouse.get().getPlants().get(id).getTempList(),
                     this.greenhouse.get().getPlants().get(id).getTempListTraditional()).start();
         } catch (IllegalStateException e) {
-            Utilities.errorMessage(this.view.getFrame(), "No plant is selected!");
+            this.showNoPlant();
         }
     }
 
@@ -520,7 +514,7 @@ public final class ControllerImpl implements Controller, Serializable {
                     this.greenhouse.get().getPlants().get(id).getLastConductValue(),
                     this.greenhouse.get().getPlants().get(id).getLastConductValueTraditional()).start();
         } catch (IllegalStateException e) {
-            Utilities.errorMessage(this.view.getFrame(), "No plant is selected!");
+            this.showNoPlant();
         }
     }
 
@@ -531,7 +525,7 @@ public final class ControllerImpl implements Controller, Serializable {
             new LineChartDialog("Conductivity", "cf", this.greenhouse.get().getPlants().get(id).getConductList(),
                     this.greenhouse.get().getPlants().get(id).getConductListTraditional()).start();
         } catch (IllegalStateException e) {
-            Utilities.errorMessage(this.view.getFrame(), "No plant is selected!");
+            this.showNoPlant();
         }
     }
 
@@ -569,6 +563,10 @@ public final class ControllerImpl implements Controller, Serializable {
             this.autoUpdate(this.updatetime);
             this.updated = false;
         }
+    }
+
+    private void showNoPlant() {
+        Utilities.errorMessage(this.view.getFrame(), "No plant is selected!");
     }
 
     /**

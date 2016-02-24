@@ -7,8 +7,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.controller.simulator.Simulator;
-import org.controller.simulator.SimulatorImpl;
+import org.hsm.controller.simulator.Simulator;
+import org.hsm.controller.simulator.SimulatorImpl;
 
 /**
  * implementation of the Greenhouse interface.
