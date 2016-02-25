@@ -201,6 +201,10 @@ public final class ControllerImpl implements Controller, Serializable {
 
     @Override
     public void autoUpdate(final int time) {
+        if(this.greenhouse.get().getNumberOfPlants() == 0){
+            Utilities.errorMessage(this.view.getFrame(), "Nothing to update");
+            return;
+        }
         if (!this.updater.isPresent()) {
             this.updater = Optional.of(new AutoUpdater());
         }

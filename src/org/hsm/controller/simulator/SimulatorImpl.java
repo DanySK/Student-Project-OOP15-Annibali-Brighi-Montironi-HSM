@@ -18,21 +18,43 @@ public class SimulatorImpl implements Simulator, Serializable {
      *
      */
     private static final long serialVersionUID = -5168313834926068201L;
-    // Hydroponic values
-    private static final double MAXRAND_PH = 0.3;
-    private static final double MAXRAND_BRIGHT = 25.0;
-    private static final double MAXRAND_COND = 1.0;
-    private static final double MAXRAND_TEMP = 0.6;
+    /**
+     *  Hydroponic Delta values for PH.
+     */
+    protected static final double MAXRAND_PH = 0.3;
+    /**
+     *  Hydroponic Delta values for Brightness.
+     */
+    protected static final double MAXRAND_BRIGHT = 25.0;
+    /**
+     *  Hydroponic Delta values for Conductivity.
+     */
+    protected static final double MAXRAND_COND = 1.0;
+    /**
+     *  Hydroponic Delta values for Temperature.
+     */
+    protected static final double MAXRAND_TEMP = 0.7;
     private static final double MAXRAND_WATER = 0.9; // in mL
     private static final double MINRAND_WATER = 0.4; // in mL
     private static final double MAXRAND_GROW = 0.015; // in %
     private static final double MINRAND_GROW = 0.008; // in %
 
-    // Conventional coltivation values
-    private static final double MAXRAND_REAL_PH = 1.5;
-    private static final double MAXRAND_REAL_BRIGHT = 500.0;
-    private static final double MAXRAND_REAL_COND = 11.0;
-    private static final double MAXRAND_REAL_TEMP = 10.0;
+    /**
+     *  Conventional coltivation Delta values for PH.
+     */
+    protected static final double MAXRAND_REAL_PH = 1.5;
+    /**
+     *  Conventional coltivation Delta values for Brightness.
+     */
+    protected static final double MAXRAND_REAL_BRIGHT = 500.0;
+    /**
+     *  Conventional coltivation Delta values for Conductivity.
+     */
+    protected static final double MAXRAND_REAL_COND = 11.0;
+    /**
+     *  Conventional coltivation Delta values for Temperature.
+     */
+    protected static final double MAXRAND_REAL_TEMP = 10.0;
     private static final double CONVENTIONAL_WATER_MULTIPLIER = 7; // 70%
     private static final double CONVENTIONAL_GROW_MULTIPLIER = 4; // times than
                                                                   // hydroponic
