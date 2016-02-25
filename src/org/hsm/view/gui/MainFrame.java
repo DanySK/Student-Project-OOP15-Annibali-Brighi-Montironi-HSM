@@ -16,6 +16,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 import org.hsm.controller.ControllerImpl;
 import org.hsm.view.dialog.OpenFileDialog;
 import org.hsm.view.dialog.SaveFileDialog;
+import org.hsm.view.tab.PlantsTab;
 
 /**
  * The main frame of the application.
@@ -82,6 +83,7 @@ public class MainFrame implements View {
         this.tab.getGreenhouseTab().setGreenhouse(name, size, cost, typology, freeSpace, occupiedSpace, numberOfPlants, overCost);
         this.tab.getGreenhouseChartTab().clean();
         this.tab.getPlantsTab().clean();
+        ((PlantsTab) this.tab.getPlantsTab()).setRowSelectionAllowed(true);
     }
 
     @Override
