@@ -33,8 +33,9 @@ import org.hsm.view.utility.Utilities;
  */
 public class GreenhouseCreateDialog extends AbstractAddDialog {
 
-    private static final int START_VALUE = 100;
-    private static final int MAX_VALUE = 10000;
+    private static final int START_SIZE = 100;
+    private static final int MAX_SIZE = 10000;
+    private static final int MAX_COST = 5000000;
     private static final int INSET = 5;
     private static final int TXT_DIM = 21;
     private static final int SPINNER_TXT_DIM = 19;
@@ -57,9 +58,9 @@ public class GreenhouseCreateDialog extends AbstractAddDialog {
         this.nameField = new JTextField(TXT_DIM);
         final JPanel panelUp = new JPanel();
         panelUp.add(new MyGUIFactory().createLabel("Insert information about the new Greenhouse"));
-        final JLabel name = new JLabel("Greenhouse name : ");
-        final JLabel type = new JLabel("Greenhouse type : ");
-        final JLabel size = new JLabel("Greenhouse size (m2) : ");
+        final JLabel name = new JLabel("Greenhouse Name : ");
+        final JLabel type = new JLabel("Greenhouse Type : ");
+        final JLabel size = new JLabel("Greenhouse Size (m2) : ");
         final JPanel panel = new JPanel(new GridBagLayout());
         final GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
@@ -72,16 +73,18 @@ public class GreenhouseCreateDialog extends AbstractAddDialog {
         gbc.gridx = 0;
         ++gbc.gridy;
         panel.add(size, gbc);
-        this.spinnerSize = factory.createSpinner(SPINNER_TXT_DIM, new SpinnerNumberModel(START_VALUE, 1, MAX_VALUE, 1));
+        this.spinnerSize = factory.createSpinner(SPINNER_TXT_DIM, new SpinnerNumberModel(START_SIZE, 1, MAX_SIZE, 1));
         ++gbc.gridx;
         panel.add(this.spinnerSize, gbc);
         gbc.gridx = 0;
         ++gbc.gridy;
-        final JLabel costLabel = new JLabel("Cost:");
-        this.euroPanel = new EuroPanelImpl();
+        final JLabel costLabel = new JLabel("Greenhouse Cost (€) :");
+        this.euroPanel = new EuroPanelImpl(MAX_COST);
         panel.add(costLabel, gbc);
         ++gbc.gridx;
+        gbc.anchor = GridBagConstraints.LINE_END;
         panel.add(this.euroPanel.getComponent(), gbc);
+        gbc.anchor = GridBagConstraints.LINE_START;
         gbc.gridy++;
         gbc.gridx = 0;
         panel.add(type, gbc);

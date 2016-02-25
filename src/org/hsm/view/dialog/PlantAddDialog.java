@@ -29,6 +29,7 @@ import org.hsm.view.utility.MyGUIFactory;
 public class PlantAddDialog extends AbstractAddDialog {
 
     private static final int NUM_MAX_PLANT = 100;
+    private static final int MAX_COST = 100;
     private static final int INSET = 3;
     private final JComboBox<Object> plantsList;
     private final EuroPanel euroPanel;
@@ -54,13 +55,13 @@ public class PlantAddDialog extends AbstractAddDialog {
         gbc.insets = new Insets(INSET, INSET, INSET, INSET);
         gbc.anchor = GridBagConstraints.LINE_START;
         //labels
-        final JLabel typeLabel = new JLabel("Type:");
+        final JLabel typeLabel = new JLabel("Type :");
         centerPanel.add(typeLabel, gbc);
         ++gbc.gridy;
-        final JLabel numLabel = new JLabel("Number:");
+        final JLabel numLabel = new JLabel("Number :");
         centerPanel.add(numLabel, gbc);
         ++gbc.gridy;
-        final JLabel costLabel = new JLabel("Cost:");
+        final JLabel costLabel = new JLabel("Cost (€) :");
         centerPanel.add(costLabel, gbc);
         gbc.gridy = 0;
         ++gbc.gridx;
@@ -72,7 +73,7 @@ public class PlantAddDialog extends AbstractAddDialog {
         this.numberSpinner = new JSpinner(model);
         centerPanel.add(this.numberSpinner, gbc);
         ++gbc.gridy;
-        this.euroPanel = new EuroPanelImpl();
+        this.euroPanel = new EuroPanelImpl(MAX_COST);
         centerPanel.add(this.euroPanel.getComponent(), gbc);
         final JLabel label = new MyGUIFactory().createLabel("Choose the plant");
         northPanel.add(label);
