@@ -18,7 +18,7 @@ public class ControllerTest {
     private static final int GH_COST = 450;
 
     private static final String NAME = "name";
-    private static final String B_NAME = "botanical";
+    private static final String B_NAME = "botanical name";
     private static final int PH = 6;
     private static final int LUX = 4500;
     private static final int COND = 23;

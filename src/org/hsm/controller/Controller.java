@@ -64,7 +64,7 @@ public interface Controller {
      * @param plant
      *            the type of plant to insert
      * @param cost
-     *            the cont in euro of the plant
+     *            the cost in euro of the plant
      * @param n
      *            number of platns to add
      *

@@ -1,5 +1,6 @@
 package org.hsm.controller;
 
+import org.hsm.controller.simulator.SimulatorImpl;
 import org.hsm.model.db.Database;
 
 /**
@@ -10,45 +11,65 @@ import org.hsm.model.db.Database;
 public class ApplicationTest {
 
     /**
-     *
+     * Method preloading software information.
      */
     // CHECKSTYLE:OFF:
     public ApplicationTest() {
         final Controller controller = ControllerImpl.getController();
         final Database db = controller.getDatabase();
+        final SimulatorImpl simulator = new SimulatorImpl();
 
-        controller.createGreenhouse("Greenhouse Test", "Grid", 400, 50);
+        controller.createGreenhouse("Greenhouse Test", "Grid", 800, 30);
 
-        controller.createNewPlant("Onion", "Allium cepa", 6, 4000, 16, 6, 23, 90, 230);
-        controller.createNewPlant("Eggplant", "Solanum melongena", 6, 6000, 6, 80, 160, 28, 280);
-        controller.createNewPlant("Turnip", "Brassica rapa", 6, 5300, 3, 45, 90, 20, 240);
-        controller.createNewPlant("Carrots", "Daucus carota", 6, 5300, 6, 65, 75, 18, 250);
-        controller.createNewPlant("Tomato", "Solanum lycopersicum", 6, 5100, 6, 70, 220, 35, 250);
-        controller.createNewPlant("Watermelon", "Citrullus lanatus", 6, 3500, 4, 110, 500, 20, 350);
-        controller.createNewPlant("Cabbage", "Brassica oleracea (capitata)", 6, 5300, 6, 100, 300, 26, 270);
-        controller.createNewPlant("Basil", "Ocimum basilicum", 6, 5000, 7, 70, 90, 12, 210);
-        controller.createNewPlant("Squash blossoms", "Cucurbita (winter)", 6, 4200, 4, 65, 130, 20, 350);
-        controller.createNewPlant("Strawberrie", "Fragaria × ananassa", 6, 5600, 10, 120, 110, 20, 270);
-        controller.createNewPlant("Cucumber", "Cucumis sativus", 6, 5300, 3, 50, 120, 20, 330);
-        controller.createNewPlant("Spinach", "Spinacia oleracea", 6, 5100, 5, 45, 300, 20, 210);
-        controller.createNewPlant("Blueberry", "Vaccinium myrtilloides", 5, 4500, 5, 60, 120, 19, 220);
-        controller.createNewPlant("Broccoli", "Brassica oleracea", 6, 5400, 5, 65, 100, 31, 250);
-        controller.createNewPlant("Artichoke", "Cynara cardunculus", 7, 5000, 15, 80, 220, 12, 210);
-        controller.createNewPlant("Bean (Common)", "Phaseolus vulgaris", 6, 5100, 7, 50, 30, 30, 240);
-        controller.createNewPlant("Pumpkin", "Cucurbita", 6, 5800, 4, 90, 500, 22, 360);
-        controller.createNewPlant("Pea", "Pisum sativum", 6, 4600, 6, 60, 120, 12, 230);
-        controller.createNewPlant("Leek", "Allium porrum", 7, 5200, 7, 120, 60, 16, 260);
-        controller.createNewPlant("Bell Pepper", "Capsicum annuum", 6, 6000, 8, 75, 230, 25, 260);
-        controller.createNewPlant("Radish", "Raphanus sativus", 6, 4000, 4, 30, 85, 18, 240);
-        controller.createNewPlant("Lettuce", "Lactuca sativa", 6, 6300, 3, 53, 380, 10, 230);
+        controller.createNewPlant("Onion", "Allium cepa", 6, 4000, 16, 6, 23, 90, 800);
+        controller.createNewPlant("Eggplant", "Solanum melongena", 6, 6000, 28, 6, 28, 80, 1600);
+        controller.createNewPlant("Turnip", "Brassica rapa", 6, 5300, 20, 3, 24, 45, 900);
+        controller.createNewPlant("Carrots", "Daucus carota", 6, 5300, 18, 6, 25, 65, 750);
+        controller.createNewPlant("Tomato", "Solanum lycopersicum", 6, 5100, 35, 6, 25, 70, 2200);
+        controller.createNewPlant("Watermelon", "Citrullus lanatus", 6, 3500, 20, 4, 35, 110, 5000);
+        controller.createNewPlant("Cabbage", "Brassica oleracea (capitata)", 6, 5300, 26, 6, 27, 100, 3000);
+        controller.createNewPlant("Basil", "Ocimum basilicum", 6, 5000, 12, 7, 21, 70, 900);
+        controller.createNewPlant("Squash blossoms", "Cucurbita (winter)", 6, 4200, 20, 4, 35, 65, 1300);
+        controller.createNewPlant("Strawberrie", "Fragaria × ananassa", 6, 5600, 20, 10, 27, 120, 1100);
+        controller.createNewPlant("Cucumber", "Cucumis sativus", 6, 5300, 20, 3, 33, 50, 1200);
+        controller.createNewPlant("Spinach", "Spinacia oleracea", 6, 5100, 20, 5, 21, 45, 3000);
+        controller.createNewPlant("Blueberry", "Vaccinium myrtilloides", 5, 4500, 19, 5, 22, 60, 1200);
+        controller.createNewPlant("Broccoli", "Brassica oleracea", 6, 5400, 31, 5, 25, 65, 1000);
+        controller.createNewPlant("Artichoke", "Cynara cardunculus", 7, 5000, 12, 15, 21, 80, 2200);
+        controller.createNewPlant("Bean (Common)", "Phaseolus vulgaris", 6, 5100, 30, 7, 24, 50, 300);
+        controller.createNewPlant("Pumpkin", "Cucurbita", 6, 5800, 22, 4, 36, 90, 5000);
+        controller.createNewPlant("Pea", "Pisum sativum", 6, 4600, 12, 6, 23, 60, 1200);
+        controller.createNewPlant("Leek", "Allium porrum", 7, 5200, 16, 7, 26, 120, 600);
+        controller.createNewPlant("Bell Pepper", "Capsicum annuum", 6, 6000, 25, 8, 26, 75, 2300);
+        controller.createNewPlant("Radish", "Raphanus sativus", 6, 4000, 18, 4, 24, 30, 850);
+        controller.createNewPlant("Lettuce", "Lactuca sativa", 6, 6300, 10, 3, 23, 53, 3800);
 
-        controller.addPlants(db.getPlantModel("Allium cepa"), 6, 5);
-        controller.addPlants(db.getPlantModel("Daucus carota"), 3, 4);
-        controller.addPlants(db.getPlantModel("Ocimum basilicum"), 4, 2);
-        controller.addPlants(db.getPlantModel("Solanum lycopersicum"), 5, 20);
-        controller.addPlants(db.getPlantModel("Fragaria × ananassa"), 7, 10);
-        controller.addPlants(db.getPlantModel("Capsicum annuum"), 6, 5);
-        controller.addPlants(db.getPlantModel("Lactuca sativa"), 3, 15);
+        controller.addPlants(db.getPlantModel("Allium cepa"), 640, 5);
+        controller.addPlants(db.getPlantModel("Daucus carota"), 320, 4);
+        controller.addPlants(db.getPlantModel("Ocimum basilicum"), 430, 2);
+        controller.addPlants(db.getPlantModel("Solanum lycopersicum"), 570, 20);
+        controller.addPlants(db.getPlantModel("Fragaria × ananassa"), 700, 10);
+        controller.addPlants(db.getPlantModel("Capsicum annuum"), 610, 5);
+        controller.addPlants(db.getPlantModel("Lactuca sativa"), 335, 15);
+
+        controller.autoUpdate(1);
+
+        for (int i = 0; i < 70; i++) {
+            controller.getGreenhouse().incrementCounter();
+            controller.getGreenhouse().getPlants().forEach((a, b) -> {
+                b.addPhValue(simulator.getSimulatedPh(b));
+                b.addBrightValue(simulator.getSimulatedBrightness(b));
+                b.addConductValue(simulator.getSimulatedConductibility(b));
+                b.addTempValue(simulator.getSimulatedTemperature(b));
+                b.addPhValueTraditional(simulator.getRealPh(b));
+                b.addBrightValueTraditional(simulator.getRealBrightness(b));
+                b.addConductValueTraditional(simulator.getRealConductibility(b));
+                b.addTempValueTraditional(simulator.getRealTemperature(b));
+
+            });
+        }
+
+        controller.stopUpdate();
     }
 
 }
