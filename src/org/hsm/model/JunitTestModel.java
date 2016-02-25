@@ -10,6 +10,7 @@ public class JunitTestModel {
 
     @Test
     public void test() {
+        //used to convert ns in ms in the time test
         final int TO_MS = 1000000;
         //create new database
         final Database db = new DatabaseImpl();
