@@ -122,12 +122,20 @@ public class BuilderPlant {
      * @throws IllegalArgumentException
      */
     public PlantModel build() throws IllegalArgumentException, IllegalStateException {
-        if(this.name.equals("") || this.botanicalName.equals("") || 
-                (this.size & this.ph & this.brightness & this.optimalGrowthTime & this.life & this.conductivity & this.optimalTemperature) == 0){
+        if(this.name.equals("") || this.botanicalName.equals("") || isZero(this.size) || isZero(this.ph) || isZero(this.brightness) || 
+                isZero(this.optimalGrowthTime) || isZero(this.life) || isZero(this.conductivity) || isZero(this.optimalTemperature)){
             throw new IllegalArgumentException();
         }
         return new PlantModelImpl(this.name, this.botanicalName, this.ph, this.brightness, this.optimalGrowthTime,
                 this.life, this.size, this.cost, this.conductivity, this.optimalTemperature);
+    }
+    
+    private boolean isZero(final int elem){
+        if(elem==0){
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }
