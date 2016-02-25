@@ -539,6 +539,11 @@ public final class ControllerImpl implements Controller, Serializable {
         return this.updatetime;
     }
 
+    @Override
+    public void applicationTest(){
+        new ApplicationTest();
+    }
+
     /**
      * Stop auto updater if it runs.
      */
@@ -560,6 +565,7 @@ public final class ControllerImpl implements Controller, Serializable {
      */
     public static void main(final String... args) {
         ControllerImpl.getController().view.start();
+        ControllerImpl.getController().applicationTest();
     }
 
 }

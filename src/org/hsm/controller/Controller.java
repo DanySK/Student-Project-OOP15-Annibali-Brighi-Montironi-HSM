@@ -181,7 +181,8 @@ public interface Controller {
     void showBrightnessBarChart();
 
     /**
-     * Show Brightness Line Chart to see the trend of brightness values of the selected plant.
+     * Show Brightness Line Chart to see the trend of brightness values of the
+     * selected plant.
      */
     void showBrightnessLineChart();
 
@@ -201,7 +202,8 @@ public interface Controller {
     void showTemperatureBarChart();
 
     /**
-     * Show Temperature Line Chart to see the trend of temperature values of the selected plant.
+     * Show Temperature Line Chart to see the trend of temperature values of the
+     * selected plant.
      */
     void showTemperatureLineChart();
 
@@ -211,7 +213,8 @@ public interface Controller {
     void showConductivityBarChart();
 
     /**
-     * Show Conductivity Line Chart to see the trend of conductivity values of the selected plant.
+     * Show Conductivity Line Chart to see the trend of conductivity values of
+     * the selected plant.
      */
     void showConductivityLineChart();
 
@@ -221,5 +224,10 @@ public interface Controller {
      * @return a set whith all the greenhouse possible types
      */
     List<String> getGreenhouseTypes();
+
+    /**
+     * Run a configuration to test the app.
+     */
+    void applicationTest();
 
 }
