@@ -13,6 +13,8 @@ public class PlantImpl implements Plant, Serializable {
 
     private static final long serialVersionUID = 1101353617623045838L;
     private static final int CENT_FACTOR = 100;
+    private static final int MAX_NUMB_OF_VALUE = 1000;
+    private static final int NUMB_OF_ERASABLE_ELEMENTS = 200;
     private final PlantModel model;
     private final int cost;
     private final List<Double> phList;
@@ -49,11 +51,6 @@ public class PlantImpl implements Plant, Serializable {
     }
 
     @Override
-    public void addPhValue(final double value) {
-        this.phList.add(value);
-    }
-
-    @Override
     public PlantModel getModel() {
         return this.model;
     }
@@ -83,26 +80,7 @@ public class PlantImpl implements Plant, Serializable {
         return this.tempList;
     }
 
-    @Override
-    public void addBrightValue(final double value) {
-        this.brightList.add(value);
-    }
-
-    @Override
-    public void addConductValue(final double value) {
-        this.conductList.add(value);
-    }
-
-    @Override
-    public void addTempValue(final double value) {
-        this.tempList.add(value);
-    }
-
-    @Override
-    public String toString() {
-        return "PlantImpl [model=" + model + ", cost=" + cost + ", phList=" + phList + ", brightList=" + brightList
-                + ", conductList=" + conductList + ", tempList=" + tempList + "]";
-    }
+   
 
     @Override
     public double getLastBrightValue() {
@@ -145,27 +123,6 @@ public class PlantImpl implements Plant, Serializable {
     }
 
     @Override
-    public void addBrightValueTraditional(final double value) {
-        this.brightListTrad.add(value);
-    }
-
-    @Override
-    public void addConductValueTraditional(final double value) {
-        this.conductListTrad.add(value);
-
-    }
-
-    @Override
-    public void addTempValueTraditional(final double value) {
-        this.tempListTrad.add(value);
-    }
-
-    @Override
-    public void addPhValueTraditional(final double value) {
-        this.phListTrad.add(value);
-    }
-
-    @Override
     public double getLastBrightValueTraditional() {
         return getLastValue(brightListTrad);
     }
@@ -184,12 +141,53 @@ public class PlantImpl implements Plant, Serializable {
     public double getLastPhValueTraditional() {
         return getLastValue(phListTrad);
     }
+    
+    @Override
+    public void addPhValue(final double value) {
+        addElement(this.phList, value);
+    }
+
+    @Override
+    public void addBrightValue(final double value) {
+        addElement(this.brightList, value);
+    }
+
+    @Override
+    public void addConductValue(final double value) {
+        addElement(this.conductList, value);
+    }
+
+    @Override
+    public void addTempValue(final double value) {
+        addElement(this.tempList, value);
+    }
+
+    @Override
+    public void addBrightValueTraditional(final double value) {
+        addElement(this.brightListTrad, value);
+    }
+
+    @Override
+    public void addConductValueTraditional(final double value) {
+        addElement(this.conductListTrad, value);
+
+    }
+
+    @Override
+    public void addTempValueTraditional(final double value) {
+        addElement(this.tempListTrad, value);
+    }
+
+    @Override
+    public void addPhValueTraditional(final double value) {
+        addElement(this.phListTrad, value);
+    }
 
     @Override
     public int nUpdate() {
         return this.phList.size();
     }
-    
+
     /*
      * method used by some getters to return a double
      */
@@ -199,6 +197,23 @@ public class PlantImpl implements Plant, Serializable {
         } else {
             return l.get(l.size() - 1);
         }
+    }
+    
+    /*
+     * method used to add a value in the list. If the list is too big, then delete old values
+     */
+    private void addElement(List<Double> l, final Double value){
+        if(l.size() >= MAX_NUMB_OF_VALUE){
+            List<Double> tmp = new LinkedList<>( l.subList(NUMB_OF_ERASABLE_ELEMENTS, l.size()-1));
+           l = tmp;
+        }
+        l.add(value);
+    }
+    
+    @Override
+    public String toString() {
+        return "PlantImpl [model=" + model + ", cost=" + cost + ", phList=" + phList + ", brightList=" + brightList
+                + ", conductList=" + conductList + ", tempList=" + tempList + "]";
     }
 
 }
