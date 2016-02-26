@@ -56,7 +56,6 @@ public class PlantsTab extends Observable implements UpgradeableTable<Integer> {
         removeType.addActionListener(e -> ControllerImpl.getController().delPLants());
         final JButton updateValues = new JButton("Update Plant Values");
         updateValues.addActionListener(e -> {
-            this.table.setRowSelectionAllowed(false);
             final Integer timeUpdate = (Integer) JOptionPane.showInputDialog(frame, 
                                    "Choose the refresh interval (sec)",
                                    "Update Values",
@@ -66,6 +65,7 @@ public class PlantsTab extends Observable implements UpgradeableTable<Integer> {
                                    UPDATE_RANGE[0]);
             if (Objects.nonNull(timeUpdate)) {
                 ControllerImpl.getController().autoUpdate(timeUpdate);
+                this.table.setRowSelectionAllowed(false);
             } 
         });
         final JButton stop = new JButton("Stop Updating");
@@ -115,7 +115,7 @@ public class PlantsTab extends Observable implements UpgradeableTable<Integer> {
 
     @Override
     public Integer getSelectedRowIdentifier() throws IllegalStateException {
-        if (this.table.getSelectedRow() == -1) {
+        if (this.table.getSelectedRow() == -1 || !this.table.getRowSelectionAllowed()) {
             throw new IllegalStateException();
         }
         final int selectedRowIndex = this.table.getSelectedRow();

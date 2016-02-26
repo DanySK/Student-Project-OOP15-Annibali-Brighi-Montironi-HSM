@@ -51,7 +51,7 @@ public final class Utilities {
      * @return true if the user wants to save otherwise false
      */
     public static boolean saveGreenhouseAndDBMessage(final Component component) {
-        return JOptionPane.showConfirmDialog(component, "Do you want to save the Grenhouse and the Database?", 
+        return JOptionPane.showConfirmDialog(component, "Do you want to save the Greenhouse and the Database?", 
                SAVE, JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION;
     }
 
