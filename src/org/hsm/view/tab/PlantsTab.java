@@ -115,7 +115,7 @@ public class PlantsTab extends Observable implements UpgradeableTable<Integer> {
 
     @Override
     public Integer getSelectedRowIdentifier() throws IllegalStateException {
-        if (this.table.getSelectedRow() == -1) {
+        if (this.table.getSelectedRow() == -1 || !this.table.getRowSelectionAllowed()) {
             throw new IllegalStateException();
         }
         final int selectedRowIndex = this.table.getSelectedRow();
