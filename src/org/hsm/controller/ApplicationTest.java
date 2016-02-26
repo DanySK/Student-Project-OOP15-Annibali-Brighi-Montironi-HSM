@@ -18,6 +18,9 @@ public class ApplicationTest {
         final Controller controller = ControllerImpl.getController();
         final Database db = controller.getDatabase();
         final SimulatorImpl simulator = new SimulatorImpl();
+        if (controller.isGhLoad()) {
+            controller.deleteGreenhouse();
+        }
 
         controller.createGreenhouse("Greenhouse Test", "Grid", 800, 30);
 
