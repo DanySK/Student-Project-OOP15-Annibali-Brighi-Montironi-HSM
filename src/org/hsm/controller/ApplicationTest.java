@@ -16,13 +16,13 @@ public class ApplicationTest {
     // CHECKSTYLE:OFF:
     public ApplicationTest() {
         final Controller controller = ControllerImpl.getController();
-        final Database db = controller.getDatabase();
         final SimulatorImpl simulator = new SimulatorImpl();
         if (controller.isGhLoad()) {
             controller.deleteGreenhouse();
         }
 
         controller.createGreenhouse("Greenhouse Test", "Grid", 800, 30);
+        final Database db = controller.getDatabase();
 
         controller.createNewPlant("Onion", "Allium cepa", 6, 4000, 16, 6, 23, 90, 800);
         controller.createNewPlant("Eggplant", "Solanum melongena", 6, 6000, 28, 6, 28, 80, 1600);
