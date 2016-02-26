@@ -82,7 +82,7 @@ public final class ControllerImpl implements Controller, Serializable {
         try {
             this.greenhouse = Optional.of(new GreenhouseImpl(name, size, cost, this.getGreenhouseType(greenhouseType)));
             this.view.setActive(true);
-            this.view.cleanGreenhouse();
+            this.view.cleanGreenhousePlants();
             this.view.insertGreenhouse(name, size, this.greenhouse.get().getCost(), greenhouseType, size, 0, 0,
                     this.greenhouse.get().getCost());
         } catch (IllegalArgumentException e) {
@@ -148,7 +148,7 @@ public final class ControllerImpl implements Controller, Serializable {
         this.loadDb = false;
         this.dbMod = false;
         this.ghMod = false;
-        this.view.cleanGreenhouse();
+        this.view.cleanGreenhousePlants();
         this.view.cleanDatabase();
         this.view.setActive(false);
     }
@@ -201,6 +201,10 @@ public final class ControllerImpl implements Controller, Serializable {
 
     @Override
     public void autoUpdate(final int time) {
+        if(this.greenhouse.get().getNumberOfPlants() == 0){
+            Utilities.errorMessage(this.view.getFrame(), "Nothing to update");
+            return;
+        }
         if (!this.updater.isPresent()) {
             this.updater = Optional.of(new AutoUpdater());
         }
@@ -533,6 +537,11 @@ public final class ControllerImpl implements Controller, Serializable {
 
     public int getRefreshTime() {
         return this.updatetime;
+    }
+
+    @Override
+    public void applicationTest(){
+        new ApplicationTest();
     }
 
     /**

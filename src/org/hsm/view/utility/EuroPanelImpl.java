@@ -1,9 +1,9 @@
 package org.hsm.view.utility;
 
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 
 import javax.swing.JComponent;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
@@ -14,32 +14,30 @@ import javax.swing.SpinnerNumberModel;
  */
 public class EuroPanelImpl implements EuroPanel {
 
-        private static final int MAX_COST = 1000000000;
-        private static final int MAX_CENT = 99;
+        private static final double STEP = 0.01;
         private static final int CENT_FACTOR = 100;
+        private static final int WIDTH = 100;
         private final JPanel panel;
         private final JSpinner euros;
-        private final JSpinner cents;
 
         /**
          *Create the euro panel.
+         *@param maxValue the max value to show
          */
-        public EuroPanelImpl() {
+        public EuroPanelImpl(final double maxValue) {
             this.panel = new JPanel();
-            this.euros = new JSpinner(new SpinnerNumberModel(0, 0, MAX_COST, 1));
-            this.cents = new JSpinner(new SpinnerNumberModel(0, 0, MAX_CENT, 1));
             this.panel.setLayout(new FlowLayout(FlowLayout.RIGHT, 0, 0));
-            final JLabel comma = new JLabel(", ");
+            this.euros = new JSpinner(new SpinnerNumberModel(0, 0, maxValue, STEP));
+            final JComponent field = ((JSpinner.DefaultEditor) this.euros.getEditor());
+            final Dimension prefSize = field.getPreferredSize();
+            final Dimension newSize = new Dimension(WIDTH, prefSize.height);
+            field.setPreferredSize(newSize);
             this.panel.add(this.euros);
-            this.panel.add(comma);
-            this.panel.add(this.cents);
         }
 
         @Override
         public int getValue() {
-            final int euro = ((SpinnerNumberModel) this.euros.getModel()).getNumber().intValue() * CENT_FACTOR;
-            final int cent = ((SpinnerNumberModel) this.cents.getModel()).getNumber().intValue();
-            return (euro + cent);
+            return (int) (((SpinnerNumberModel) this.euros.getModel()).getNumber().doubleValue() * CENT_FACTOR);
         }
 
         @Override

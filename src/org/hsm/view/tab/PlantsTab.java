@@ -158,6 +158,14 @@ public class PlantsTab extends Observable implements UpgradeableTable<Integer> {
         }
     }
 
+    /**
+     * Set the possibility to select rows in the table.
+     * @param state true if the selection is possible otherwise false
+     */
+    public void setRowSelectionAllowed(final boolean state) {
+        this.table.setRowSelectionAllowed(true);
+    }
+
     @Override
     public JComponent getComponent() {
         return this.panel;

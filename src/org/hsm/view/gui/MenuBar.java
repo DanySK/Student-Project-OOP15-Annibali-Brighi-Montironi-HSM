@@ -193,8 +193,12 @@ public class MenuBar implements GUIComponent {
              }
         });
         //Menu Help Item
+        final JMenuItem loadTest = new JMenuItem("Load Example");
         final JMenuItem about = new JMenuItem("About Hydroponic System Manager");
         about.addActionListener(e -> new InfoDialog(frame).start());
+        loadTest.addActionListener(e -> ControllerImpl.getController().applicationTest());
+        help.add(loadTest);
+        help.addSeparator();
         help.add(about);
         //Add menus in MenuBar
         this.bar.add(file);

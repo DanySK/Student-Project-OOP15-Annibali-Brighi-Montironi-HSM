@@ -35,7 +35,7 @@ public class LineChartDialog extends AbstractChartDialog {
         final XYLineAndShapeRenderer renderer = new XYLineAndShapeRenderer();
         plot.setRenderer(renderer);
         plot.setBackgroundPaint(Color.DARK_GRAY);
-        final ChartPanel panel = new ChartPanel(chart, false);
+        final ChartPanel panel = new ChartPanel(chart, false); 
         super.getJDialog().add(panel, BorderLayout.CENTER);
     }
 

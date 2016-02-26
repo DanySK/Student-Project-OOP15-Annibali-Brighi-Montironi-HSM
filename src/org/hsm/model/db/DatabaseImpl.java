@@ -58,7 +58,7 @@ public class DatabaseImpl implements Database, Serializable {
                 .conductivity(conductivity)
                 .optimalTemperature(optimalTemperature)
                 .build();
-        if(!this.db.containsKey(botanicalName)){
+        if (!this.db.containsKey(botanicalName)) {
             this.db.put(botanicalName, p);
         } else {
             throw new IllegalStateException();
