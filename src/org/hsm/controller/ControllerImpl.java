@@ -264,10 +264,6 @@ public final class ControllerImpl implements Controller, Serializable {
         }
     }
 
-    @Override
-    public boolean isLoad() {
-        return this.loadGh;
-    }
 
     @Override
     public boolean isDbEmpty() {

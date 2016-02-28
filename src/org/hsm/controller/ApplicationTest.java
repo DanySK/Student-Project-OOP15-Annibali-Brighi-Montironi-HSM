@@ -11,7 +11,7 @@ import org.hsm.model.db.Database;
 public class ApplicationTest {
 
     /**
-     * Method preloading software information.
+     * Method that preloading software information.
      */
     // CHECKSTYLE:OFF:
     public ApplicationTest() {

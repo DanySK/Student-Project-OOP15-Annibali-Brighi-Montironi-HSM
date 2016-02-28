@@ -28,7 +28,7 @@ public interface Controller {
     void createGreenhouse(String name, String greenhouseType, int cost, int size);
 
     /**
-     * Get the atcually load Greenhouse.
+     * Get the atcually loaded Greenhouse.
      *
      * @return the actual Greenhouse
      */
@@ -54,12 +54,12 @@ public interface Controller {
     void deleteGreenhouse();
 
     /**
-     * Delete the Greenhouse actually loaded.
+     * Delete the Database actually loaded.
      */
     void newDatabase();
 
     /**
-     * Add n plants to Greenhouse loaded.
+     * Add n plants to loaded Greenhouse.
      *
      * @param plant
      *            the type of plant to insert
@@ -77,14 +77,14 @@ public interface Controller {
     void delPlant();
 
     /**
-     * Delete all plants of the same type of plant provided in input.
+     * Delete all plants of the same type provided in input(view).
      *
      */
     void delPLants();
 
     /**
-     * Start the auto updater thread for update plants values evrey time.
-     * seconds;
+     * Start the auto updater thread for update plants values every time
+     * seconds.
      *
      * @param time
      *            update rate in seconds
@@ -122,51 +122,37 @@ public interface Controller {
             int optimalGrowthTime, int temperature, int life, int size);
 
     /**
-     *
-     * Delete the selected plant id database.
+     * Delete the selected plant in database.
      */
     void deleteDbPlant();
 
     /**
-     * Check the currently state of greenhouse.
-     *
-     * @return true if a greenhouse is load
-     */
-    boolean isLoad();
-
-    /**
-     *
      * @return true if Database is empty
      */
     boolean isDbEmpty();
 
     /**
-     *
      * @return true if a Greenhouse is currently load.
      */
     boolean isGhLoad();
 
     /**
-     * Save the current Greenhouse opened in the program.
-     *
+     * Save on file the current Greenhouse opened in the program.
      */
     void saveGreenhouse();
 
     /**
      * Load a saved Greenhouse in the program.
-     *
      */
     void loadGreenhouse();
 
     /**
-     * Save the current Database.
-     *
+     * Save the current Database on file.
      */
     void saveDatabase();
 
     /**
      * Load a saved Database.
-     *
      */
     void loadDatabase();
 
