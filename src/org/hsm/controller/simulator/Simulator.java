@@ -15,7 +15,7 @@ public interface Simulator {
     /**
      *
      * @param plant
-     *            the plant
+     *            the plant to simulate
      * @return the Optimal Ph (pH)
      */
     double getOptimalPh(Plant plant);
@@ -23,7 +23,7 @@ public interface Simulator {
     /**
      *
      * @param plant
-     *            the plant
+     *            the plant to simulate
      * @return the Optimal Brightness (lumen)
      */
     double getOptimalBrightness(Plant plant);
@@ -31,7 +31,7 @@ public interface Simulator {
     /**
      *
      * @param plant
-     *            the plant
+     *            the plant to simulate
      * @return the Optimal Conductibility (cF)
      */
     double getOptimalConductibility(Plant plant);
@@ -39,15 +39,15 @@ public interface Simulator {
     /**
      *
      * @param plant
-     *            the plant
-     * @return the Optimal Temperature (�C)
+     *            the plant to simulate
+     * @return the Optimal Temperature (°C)
      */
     double getOptimalTemperature(Plant plant);
 
     /**
      *
      * @param plant
-     *            the plant
+     *            the plant to simulate
      * @return the simulated Ph (pH)
      */
     double getSimulatedPh(Plant plant);
@@ -55,7 +55,7 @@ public interface Simulator {
     /**
      *
      * @param plant
-     *            the plant
+     *            the plant to simulate
      * @return the simulated Brightness (lumen)
      */
     double getSimulatedBrightness(Plant plant);
@@ -63,7 +63,7 @@ public interface Simulator {
     /**
      *
      * @param plant
-     *            the plant
+     *            the plant to simulate
      * @return the simulated Conductibility (cF)
      */
     double getSimulatedConductibility(Plant plant);
@@ -71,7 +71,7 @@ public interface Simulator {
     /**
      *
      * @param plant
-     *            the plant
+     *            the plant to simulate
      * @return the simulated Temperature (�C)
      */
     double getSimulatedTemperature(Plant plant);
@@ -93,7 +93,7 @@ public interface Simulator {
     /**
     *
     * @param plant
-    *            the plant
+    *            the plant to simulate
     * @return the real simulated Ph (pH)
     */
    double getRealPh(Plant plant);
@@ -101,7 +101,7 @@ public interface Simulator {
    /**
     *
     * @param plant
-    *            the plant
+    *            the plant to simulate
     * @return the real simulated Brightness (lumen)
     */
    double getRealBrightness(Plant plant);
@@ -109,7 +109,7 @@ public interface Simulator {
    /**
     *
     * @param plant
-    *            the plant
+    *            the plant to simulate
     * @return the real simulated Conductibility (cF)
     */
    double getRealConductibility(Plant plant);
@@ -117,8 +117,8 @@ public interface Simulator {
    /**
     *
     * @param plant
-    *            the plant
-    * @return the real simulated Temperature (�C)
+    *            the plant to simulate
+    * @return the real simulated Temperature (°C)
     */
    double getRealTemperature(Plant plant);
 
