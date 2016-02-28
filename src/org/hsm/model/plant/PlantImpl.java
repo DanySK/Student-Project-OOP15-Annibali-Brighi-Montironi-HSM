@@ -13,7 +13,7 @@ public class PlantImpl implements Plant, Serializable {
 
     private static final long serialVersionUID = 1101353617623045838L;
     private static final int CENT_FACTOR = 100;
-    private static final int MAX_NUMB_OF_VALUE = 1000;
+    private static final int MAX_NUMB_OF_VALUE = 1000;//THIS VALUE MUST BE GREATER THAN NUMB_OF_ERASABLE_ELEMENTS
     private static final int NUMB_OF_ERASABLE_ELEMENTS = 200;
     private final PlantModel model;
     private final int cost;
@@ -62,22 +62,22 @@ public class PlantImpl implements Plant, Serializable {
 
     @Override
     public List<Double> getPhList() {
-        return this.phList;
+        return new LinkedList<>(this.phList);
     }
 
     @Override
     public List<Double> getBrightList() {
-        return this.brightList;
+        return new LinkedList<>(this.brightList);
     }
 
     @Override
     public List<Double> getConductList() {
-        return this.conductList;
+        return new LinkedList<>(this.conductList);
     }
 
     @Override
     public List<Double> getTempList() {
-        return this.tempList;
+        return new LinkedList<>(this.tempList);
     }
 
    
@@ -104,22 +104,22 @@ public class PlantImpl implements Plant, Serializable {
 
     @Override
     public List<Double> getPhListTraditional() {
-        return this.phListTrad;
+        return new LinkedList<>(this.phListTrad);
     }
 
     @Override
     public List<Double> getBrightListTraditional() {
-        return this.brightListTrad;
+        return new LinkedList<>(this.brightListTrad);
     }
 
     @Override
     public List<Double> getConductListTraditional() {
-        return this.conductListTrad;
+        return new LinkedList<>(this.conductListTrad);
     }
 
     @Override
     public List<Double> getTempListTraditional() {
-        return this.tempListTrad;
+        return new LinkedList<>(this.tempListTrad);
     }
 
     @Override
@@ -204,7 +204,7 @@ public class PlantImpl implements Plant, Serializable {
      */
     private void addElement(List<Double> l, final Double value){
         if(l.size() >= MAX_NUMB_OF_VALUE){
-            List<Double> tmp = new LinkedList<>( l.subList(NUMB_OF_ERASABLE_ELEMENTS, l.size()-1));
+            List<Double> tmp = new LinkedList<>(l.subList(NUMB_OF_ERASABLE_ELEMENTS, l.size()-1));
            l = tmp;
         }
         l.add(value);
