@@ -27,9 +27,8 @@ import org.jfree.chart.labels.StandardPieItemLabelGenerator;
 import org.jfree.chart.plot.PiePlot;
 import org.jfree.data.general.DefaultPieDataset;
 
-
 /**
- *This tab contains all the information about the current greenhouse.
+ * This tab contains all the information about the current greenhouse.
  *
  */
 public class GreenhouseTab implements GUIComponent, Observer {
@@ -43,7 +42,7 @@ public class GreenhouseTab implements GUIComponent, Observer {
     private final DefaultPieDataset dataSet;
 
     /**
-     *Create the tab for the greenhouse.
+     * Create the tab for the greenhouse.
      */
     public GreenhouseTab() {
         final GUIFactory factory = new MyGUIFactory();
@@ -53,7 +52,7 @@ public class GreenhouseTab implements GUIComponent, Observer {
         gbc.insets = new Insets(INSET_Y, 0, INSET_Y, INSET_X);
         gbc.gridx = 0;
         gbc.gridy = 0;
-        //insert greenhouse characteristics
+        // insert greenhouse characteristics
         for (final GreenhouseCharacteristics elem : GreenhouseCharacteristics.values()) {
             gbc.anchor = GridBagConstraints.WEST;
             detailsPanel.add(factory.createLabel(elem.toString()), gbc);
@@ -67,10 +66,10 @@ public class GreenhouseTab implements GUIComponent, Observer {
             ++gbc.gridy;
         }
         this.dataSet = new DefaultPieDataset();
-        //chart
-        final JFreeChart chart =  ChartFactory.createPieChart("Greenhouse Space Chart", this.dataSet, true, true, false);
+        // chart
+        final JFreeChart chart = ChartFactory.createPieChart("Greenhouse Space Chart", this.dataSet, true, true, false);
         final PiePlot plot = (PiePlot) chart.getPlot();
-        plot.setLabelGenerator(new StandardPieItemLabelGenerator("({0}) {2}")); 
+        plot.setLabelGenerator(new StandardPieItemLabelGenerator("({0}) {2}"));
         final ChartPanel chartPanel = new ChartPanel(chart);
         this.split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, detailsPanel, chartPanel);
         final Dimension minimumSize = new Dimension(MINIMUM_X_SIZE, 0);
@@ -81,17 +80,26 @@ public class GreenhouseTab implements GUIComponent, Observer {
     }
 
     /**
-     *  Set greenhouse view.
-     * @param name the greenhouse name
-     * @param size the greenhouse size
-     * @param cost the greenhouse cost
-     * @param typology the greenhouse typology
-     * @param freeSpace the greenhouse free space
-     * @param occupiedSpace the greenhouse occupied space
-     * @param numberOfPlants the number of plants of the greenhouse
-     * @param overCost the overall cost of the greenhouse
+     * Set greenhouse view.
+     * 
+     * @param name
+     *            the greenhouse name
+     * @param size
+     *            the greenhouse size
+     * @param cost
+     *            the greenhouse cost
+     * @param typology
+     *            the greenhouse typology
+     * @param freeSpace
+     *            the greenhouse free space
+     * @param occupiedSpace
+     *            the greenhouse occupied space
+     * @param numberOfPlants
+     *            the number of plants of the greenhouse
+     * @param overCost
+     *            the overall cost of the greenhouse
      */
-    public void setGreenhouse(final String name, final double size, final double cost, final String typology, 
+    public void setGreenhouse(final String name, final double size, final double cost, final String typology,
             final double freeSpace, final double occupiedSpace, final int numberOfPlants, final double overCost) {
         this.fieldMap.get(GreenhouseCharacteristics.NAME).setText(name);
         this.fieldMap.get(GreenhouseCharacteristics.DIMENSION).setText(Utilities.customFormat(size));
@@ -107,14 +115,14 @@ public class GreenhouseTab implements GUIComponent, Observer {
 
     @Override
     public void update(final Observable arg0, final Object arg1) {
-        this.fieldMap.get(GreenhouseCharacteristics.FREE_SPACE).
-            setText(Utilities.customFormat(ControllerImpl.getController().getGreenhouse().getFreeSize()));
-        this.fieldMap.get(GreenhouseCharacteristics.USED_SPACE).
-            setText(Utilities.customFormat(ControllerImpl.getController().getGreenhouse().getOccSize()));
+        this.fieldMap.get(GreenhouseCharacteristics.FREE_SPACE)
+                .setText(Utilities.customFormat(ControllerImpl.getController().getGreenhouse().getFreeSize()));
+        this.fieldMap.get(GreenhouseCharacteristics.USED_SPACE)
+                .setText(Utilities.customFormat(ControllerImpl.getController().getGreenhouse().getOccSize()));
         this.fieldMap.get(GreenhouseCharacteristics.NUMBER_OF_PLANTS)
-            .setText(Integer.toString(ControllerImpl.getController().getGreenhouse().getNumberOfPlants()));
+                .setText(Integer.toString(ControllerImpl.getController().getGreenhouse().getNumberOfPlants()));
         this.fieldMap.get(GreenhouseCharacteristics.OVERALL_COST)
-            .setText(Utilities.customFormat(ControllerImpl.getController().getGreenhouse().totalCost()));
+                .setText(Utilities.customFormat(ControllerImpl.getController().getGreenhouse().totalCost()));
         this.dataSet.setValue("Occupied Space", ControllerImpl.getController().getGreenhouse().getOccSize());
         this.dataSet.setValue("Free Space", ControllerImpl.getController().getGreenhouse().getFreeSize());
     }

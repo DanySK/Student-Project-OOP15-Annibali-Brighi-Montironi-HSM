@@ -27,7 +27,7 @@ import org.jfree.data.xy.XYSeriesCollection;
 import org.jfree.ui.RectangleEdge;
 
 /**
- *My GUI Factory implementation for Hsm.
+ * My GUI Factory implementation for Hsm.
  *
  */
 public class MyGUIFactory implements GUIFactory {
@@ -75,6 +75,7 @@ public class MyGUIFactory implements GUIFactory {
     public JTable createTable(final Object... columns) {
         final TableModel model = new DefaultTableModel(columns, 0) {
             private static final long serialVersionUID = 8517517831747874057L;
+
             @Override
             public boolean isCellEditable(final int rowIndex, final int mColIndex) {
                 return false;
@@ -103,14 +104,13 @@ public class MyGUIFactory implements GUIFactory {
         final LegendTitle legend = (LegendTitle) chart.getSubtitle(0);
         legend.setPosition(RectangleEdge.LEFT);
         final PiePlot plot = (PiePlot) chart.getPlot();
-        plot.setLabelGenerator(new StandardPieItemLabelGenerator("({0}) {2}")); 
+        plot.setLabelGenerator(new StandardPieItemLabelGenerator("({0}) {2}"));
         return chart;
     }
 
     @Override
-    public JFreeChart createXYTwoLineChart(final List<? extends Number> firstLine, final String firstLineName, 
-                                           final List<? extends Number> secondLine, final String secondLineName,
-                                           final String unitOfMeasure) {
+    public JFreeChart createXYTwoLineChart(final List<? extends Number> firstLine, final String firstLineName,
+            final List<? extends Number> secondLine, final String secondLineName, final String unitOfMeasure) {
         final XYSeries firstSeries = new XYSeries(firstLineName);
         final XYSeries secondSeries = new XYSeries(secondLineName);
         final XYSeriesCollection collection = new XYSeriesCollection(firstSeries);
@@ -124,8 +124,8 @@ public class MyGUIFactory implements GUIFactory {
                 secondSeries.add(i, secondLine.get(i));
             }
         }
-        final JFreeChart chart = ChartFactory.createXYLineChart("", "Time", unitOfMeasure, collection, 
-                                                                PlotOrientation.VERTICAL, true, true, false);
+        final JFreeChart chart = ChartFactory.createXYLineChart("", "Time", unitOfMeasure, collection,
+                PlotOrientation.VERTICAL, true, true, false);
         return chart;
     }
 }

@@ -20,28 +20,28 @@ public class BarChartDialog extends AbstractChartDialog {
 
     /**
      * Create the bar chart for comparing values.
-     * @param characteristic the name of the characteristic to compare
-     * @param unitsOfMeasure the unit of measure to use
-     * @param optimalValue the optimal value
-     * @param currentValue the current value
-     * @param traditionalValue the value in a traditional culture
+     * 
+     * @param characteristic
+     *            the name of the characteristic to compare
+     * @param unitsOfMeasure
+     *            the unit of measure to use
+     * @param optimalValue
+     *            the optimal value
+     * @param currentValue
+     *            the current value
+     * @param traditionalValue
+     *            the value in a traditional culture
      */
-    public BarChartDialog(final String characteristic, final String unitsOfMeasure, final double optimalValue, final double currentValue,
-            final double traditionalValue) {
+    public BarChartDialog(final String characteristic, final String unitsOfMeasure, final double optimalValue,
+            final double currentValue, final double traditionalValue) {
         super(characteristic);
-        //chart
+        // chart
         final DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         dataset.addValue(currentValue, "Current", characteristic);
         dataset.addValue(optimalValue, "Optimal", characteristic);
         dataset.addValue(traditionalValue, "Traditional Culture", characteristic);
-        final JFreeChart chart = ChartFactory.createBarChart3D(characteristic + " Comparing Chart", 
-                                                               "", 
-                                                               unitsOfMeasure, 
-                                                               dataset, 
-                                                               PlotOrientation.VERTICAL, 
-                                                               true, 
-                                                               true, 
-                                                               false);
+        final JFreeChart chart = ChartFactory.createBarChart3D(characteristic + " Comparing Chart", "", unitsOfMeasure,
+                dataset, PlotOrientation.VERTICAL, true, true, false);
         final ChartPanel panel = new ChartPanel(chart, false);
         final CategoryPlot categoryPlot = chart.getCategoryPlot();
         final BarRenderer br = (BarRenderer) categoryPlot.getRenderer();

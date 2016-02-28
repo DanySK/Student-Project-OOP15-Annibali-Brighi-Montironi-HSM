@@ -17,7 +17,7 @@ import org.hsm.view.enumeration.PlantModelCharacteristics;
 import org.hsm.view.utility.MyGUIFactory;
 
 /**
- *This tab contains all the information about the database of plants.
+ * This tab contains all the information about the database of plants.
  *
  */
 public class DatabaseTab implements Table<String> {
@@ -27,18 +27,20 @@ public class DatabaseTab implements Table<String> {
 
     /**
      * Create the tab for the plant database.
-     * @param frame the main frame of the app
+     * 
+     * @param frame
+     *            the main frame of the app
      */
     public DatabaseTab(final JFrame frame) {
         this.panel = new JPanel();
         this.panel.setLayout(new BoxLayout(this.panel, BoxLayout.Y_AXIS));
-        //insert columns in table
+        // insert columns in table
         this.table = new MyGUIFactory().createTable(PlantModelCharacteristics.getNameList().toArray());
         final TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(this.table.getModel());
         this.table.setRowSorter(sorter);
         final JPanel southPanel = new JPanel();
         southPanel.setLayout(new BoxLayout(southPanel, BoxLayout.X_AXIS));
-        //buttons
+        // buttons
         final JButton createPlant = new JButton("Insert new type of plant");
         createPlant.addActionListener(e -> new PlantCreateDialog(frame).start());
         final JButton removePlant = new JButton("Remove selected plant");
@@ -63,8 +65,8 @@ public class DatabaseTab implements Table<String> {
         }
         final int selectedRowIndex = this.table.getSelectedRow();
         final int modelRow = this.table.convertRowIndexToModel(selectedRowIndex);
-        final String botanicalName = (String) this.table.getModel().getValueAt(modelRow, 
-                                     PlantModelCharacteristics.BOTANICAL_NAME.ordinal());
+        final String botanicalName = (String) this.table.getModel().getValueAt(modelRow,
+                PlantModelCharacteristics.BOTANICAL_NAME.ordinal());
         return botanicalName;
     }
 

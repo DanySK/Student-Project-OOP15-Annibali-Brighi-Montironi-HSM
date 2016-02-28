@@ -12,7 +12,7 @@ import org.hsm.view.utility.GUIFactory;
 import org.hsm.view.utility.MyGUIFactory;
 
 /**
- *The class which create the toolbar for main frame.
+ * The class which create the toolbar for the main frame.
  *
  */
 public class ToolBar implements GUIComponent {
@@ -25,20 +25,28 @@ public class ToolBar implements GUIComponent {
     private final JButton saveGreenhouseButton;
 
     /**
-     *Create a toolbar.
-     *@param frame
-     *the main frame of the app
+     * Create a toolbar.
+     * 
+     * @param frame
+     *            the main frame of the app
      */
     public ToolBar(final JFrame frame) {
         final GUIFactory factory = new MyGUIFactory();
         this.bar = new JToolBar("Toolbar");
-        final JButton createGreenhouseButton = factory.createButton("Create Greenhouse", new ImageIcon(getClass().getResource("/new.png"))); 
-        this.removeGreenhouseButton  = factory.createButton("Remove Greenhouse", new ImageIcon(getClass().getResource("/delete.png")));
-        final JButton openGreenhouseButton = factory.createButton("Open Greenhouse", new ImageIcon(getClass().getResource("/open.png")));
-        this.saveGreenhouseButton = factory.createButton("Save Greenhouse", new ImageIcon(getClass().getResource("/save.png")));
-        this.importDatabaseButton = factory.createButton("Import Database", new ImageIcon(getClass().getResource("/import.png")));
-        this.exportDatabaseButton = factory.createButton("Export Database", new ImageIcon(getClass().getResource("/export.png")));
-        this.newDatabaseButton = factory.createButton("New Database", new ImageIcon(getClass().getResource("/newDatabase.png")));
+        final JButton createGreenhouseButton = factory.createButton("Create Greenhouse",
+                new ImageIcon(getClass().getResource("/new.png")));
+        this.removeGreenhouseButton = factory.createButton("Remove Greenhouse",
+                new ImageIcon(getClass().getResource("/delete.png")));
+        final JButton openGreenhouseButton = factory.createButton("Open Greenhouse",
+                new ImageIcon(getClass().getResource("/open.png")));
+        this.saveGreenhouseButton = factory.createButton("Save Greenhouse",
+                new ImageIcon(getClass().getResource("/save.png")));
+        this.importDatabaseButton = factory.createButton("Import Database",
+                new ImageIcon(getClass().getResource("/import.png")));
+        this.exportDatabaseButton = factory.createButton("Export Database",
+                new ImageIcon(getClass().getResource("/export.png")));
+        this.newDatabaseButton = factory.createButton("New Database",
+                new ImageIcon(getClass().getResource("/newDatabase.png")));
         createGreenhouseButton.addActionListener(e -> new GreenhouseCreateDialog(frame).start());
         this.saveGreenhouseButton.addActionListener(e -> ControllerImpl.getController().saveGreenhouse());
         openGreenhouseButton.addActionListener(e -> ControllerImpl.getController().loadGreenhouse());
@@ -58,7 +66,9 @@ public class ToolBar implements GUIComponent {
 
     /**
      * Set the state of edit commands in the Toolbar.
-     * @param state the state of the commands
+     * 
+     * @param state
+     *            the state of the commands
      */
     public void setEditCommands(final boolean state) {
         this.exportDatabaseButton.setEnabled(state);

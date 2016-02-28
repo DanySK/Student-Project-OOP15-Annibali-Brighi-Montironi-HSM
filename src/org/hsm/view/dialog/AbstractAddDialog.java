@@ -12,9 +12,9 @@ import javax.swing.JPanel;
 
 import org.hsm.view.gui.VisibleComponent;
 
-
 /**
- *The abstract dialog for every window which that has the task of adding something.
+ * The abstract dialog for every window which that has the task of adding
+ * something.
  *
  */
 public abstract class AbstractAddDialog implements VisibleComponent {
@@ -24,15 +24,19 @@ public abstract class AbstractAddDialog implements VisibleComponent {
 
     /**
      * Create an AbstractAddDialog.
-     * @param frame the frame of the dialog
-     * @param name the name of the dialog
-     * @param type the type of dialog
+     * 
+     * @param frame
+     *            the frame of the dialog
+     * @param name
+     *            the name of the dialog
+     * @param type
+     *            the type of dialog
      */
     public AbstractAddDialog(final JFrame frame, final String name, final Dialog.ModalityType type) {
         this.dialog = new JDialog(frame, name, type);
         this.dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         this.dialog.setLayout(new BorderLayout());
-        //buttons
+        // buttons
         final JButton addButton = new JButton("Add");
         final JPanel southPanel = new JPanel(new FlowLayout());
         southPanel.add(addButton);
@@ -43,6 +47,7 @@ public abstract class AbstractAddDialog implements VisibleComponent {
 
     /**
      * Get the JDialog component.
+     * 
      * @return the JDialog component
      */
     protected JDialog getJDialog() {
@@ -52,14 +57,15 @@ public abstract class AbstractAddDialog implements VisibleComponent {
     @Override
     public void start() {
         this.dialog.pack();
-        final Dimension dimensione = new Dimension((int) (this.dialog.getWidth() * DIM_FACTOR), (int) (this.dialog.getHeight() * DIM_FACTOR));
+        final Dimension dimensione = new Dimension((int) (this.dialog.getWidth() * DIM_FACTOR),
+                (int) (this.dialog.getHeight() * DIM_FACTOR));
         this.dialog.setSize(dimensione);
         this.dialog.setLocationByPlatform(true);
         this.dialog.setVisible(true);
     }
 
     /**
-     *Add a specific action for the add button.
+     * Add a specific action for the add button.
      */
     protected abstract void addAction();
 

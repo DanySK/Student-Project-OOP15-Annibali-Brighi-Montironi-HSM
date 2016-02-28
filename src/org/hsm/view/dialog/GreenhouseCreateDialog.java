@@ -26,41 +26,42 @@ import org.hsm.view.utility.GUIFactory;
 import org.hsm.view.utility.MyGUIFactory;
 import org.hsm.view.utility.Utilities;
 
-
 /**
- *This frame can be used to create a new greenhouse.
+ * This dialog can be used to create a new greenhouse.
  *
  */
 public class GreenhouseCreateDialog extends AbstractAddDialog {
 
-    private static final int START_SIZE = 100;
+    private static final int START_SIZE = 20;
     private static final int MAX_SIZE = 10000;
     private static final int MAX_COST = 5000000;
     private static final int INSET = 5;
     private static final int TXT_DIM = 21;
     private static final int SPINNER_TXT_DIM = 19;
     private final JLabel pictureLabel;
-    private final JTextField nameField; 
+    private final JTextField nameField;
     private final JSpinner spinnerSize;
     private final ButtonGroup group;
     private final EuroPanel euroPanel;
 
     /**
-     *Create the dialog to make a new Greenhouse.
-     *@param frame
-     *the main frame of the app.
+     * Create the dialog to make a new Greenhouse.
+     * 
+     * @param frame
+     *            the main frame of the app
      */
     public GreenhouseCreateDialog(final JFrame frame) {
         super(frame, "Create new Greenhouse", Dialog.ModalityType.APPLICATION_MODAL);
         final GUIFactory factory = new MyGUIFactory();
-        //picture and labels
+        // picture and labels
         this.pictureLabel = new JLabel("", new ImageIcon(this.getClass().getResource("/linear.jpg")), JLabel.CENTER);
         this.nameField = new JTextField(TXT_DIM);
         final JPanel panelUp = new JPanel();
-        panelUp.add(new MyGUIFactory().createLabel("Insert information about the new Greenhouse"));
+        panelUp.add(factory.createLabel("Insert information about the new Greenhouse"));
         final JLabel name = new JLabel("Greenhouse Name : ");
         final JLabel type = new JLabel("Greenhouse Type : ");
         final JLabel size = new JLabel("Greenhouse Size (m2) : ");
+        final JLabel costLabel = new JLabel("Greenhouse Cost (€) :");
         final JPanel panel = new JPanel(new GridBagLayout());
         final GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
@@ -78,7 +79,6 @@ public class GreenhouseCreateDialog extends AbstractAddDialog {
         panel.add(this.spinnerSize, gbc);
         gbc.gridx = 0;
         ++gbc.gridy;
-        final JLabel costLabel = new JLabel("Greenhouse Cost (€) :");
         this.euroPanel = new EuroPanelImpl(MAX_COST);
         panel.add(costLabel, gbc);
         ++gbc.gridx;
@@ -90,11 +90,11 @@ public class GreenhouseCreateDialog extends AbstractAddDialog {
         panel.add(type, gbc);
         gbc.gridy++;
         gbc.gridx = 0;
-        //radio buttons
+        // radio buttons
         final JPanel panelButtons = new JPanel();
         panelButtons.setLayout(new BoxLayout(panelButtons, BoxLayout.Y_AXIS));
         this.group = new ButtonGroup();
-        for (final String elem: ControllerImpl.getController().getGreenhouseTypes()) {
+        for (final String elem : ControllerImpl.getController().getGreenhouseTypes()) {
             final JRadioButton button = new JRadioButton(elem);
             button.setActionCommand(elem);
             if (button.getActionCommand().equals("Linear")) {
@@ -122,8 +122,8 @@ public class GreenhouseCreateDialog extends AbstractAddDialog {
     @Override
     protected void addAction() {
         final SpinnerNumberModel model = (SpinnerNumberModel) this.spinnerSize.getModel();
-        ControllerImpl.getController().createGreenhouse(this.nameField.getText(), this.group.getSelection().getActionCommand(), 
-                                                        this.euroPanel.getValue(), model.getNumber().intValue());
+        ControllerImpl.getController().createGreenhouse(this.nameField.getText(),
+                this.group.getSelection().getActionCommand(), this.euroPanel.getValue(), model.getNumber().intValue());
         getJDialog().dispose();
     }
 

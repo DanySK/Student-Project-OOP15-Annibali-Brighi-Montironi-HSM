@@ -7,7 +7,7 @@ package org.hsm.view.gui;
 public interface Resettable extends GUIComponent {
 
     /**
-     *Clean the component.
+     * Clean the component.
      */
     void clean();
 }

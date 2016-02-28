@@ -18,7 +18,7 @@ import org.hsm.view.tab.Table;
 import org.hsm.view.tab.UpgradeableTable;
 
 /**
- *The class which create and use the Tabbes.
+ * The class which create and use the Tabbes.
  *
  */
 public class Tabs implements GUIComponent {
@@ -31,14 +31,16 @@ public class Tabs implements GUIComponent {
     private final Resettable greenhouseChartTab;
 
     /**
-     *Create the Tabbes.
-     *@param frame the main frame of the app
+     * Create the Tabbes.
+     * 
+     * @param frame
+     *            the main frame of the app
      */
     public Tabs(final JFrame frame) {
         this.tab = new JTabbedPane();
         this.panel = new JPanel(new BorderLayout());
         this.panel.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED));
-        //tabs
+        // tabs
         this.greenhouseTab = new GreenhouseTab();
         this.plantsTab = new PlantsTab(frame);
         this.databaseTab = new DatabaseTab(frame);
@@ -47,14 +49,16 @@ public class Tabs implements GUIComponent {
         this.tab.add("Greenhouse Composition", this.greenhouseChartTab.getComponent());
         this.tab.add("Plants", this.plantsTab.getComponent());
         this.tab.add("Plants Database", this.databaseTab.getComponent());
-        //observer
+        // observer
         ((Observable) this.plantsTab).addObserver(this.greenhouseTab);
         this.panel.add(tab, BorderLayout.CENTER);
     }
 
     /**
-     *Set the tabbed visible and usable.
-     *@param state the visibility state.
+     * Set the tabbed visible and usable.
+     * 
+     * @param state
+     *            the visibility state.
      */
     public void setVisible(final boolean state) {
         this.tab.setVisible(state);
@@ -62,6 +66,7 @@ public class Tabs implements GUIComponent {
 
     /**
      * Get the Database tab.
+     * 
      * @return the database tab
      */
     protected Table<String> getDatabaseTab() {
@@ -70,6 +75,7 @@ public class Tabs implements GUIComponent {
 
     /**
      * Get the Plants tab.
+     * 
      * @return the plants tab
      */
     protected UpgradeableTable<Integer> getPlantsTab() {
@@ -78,6 +84,7 @@ public class Tabs implements GUIComponent {
 
     /**
      * Get the greenhouse tab.
+     * 
      * @return the greenhouse tab
      */
     protected GreenhouseTab getGreenhouseTab() {
@@ -86,6 +93,7 @@ public class Tabs implements GUIComponent {
 
     /**
      * Get the greenhouse chart tab.
+     * 
      * @return the greenhouse chart tab
      */
     protected Resettable getGreenhouseChartTab() {

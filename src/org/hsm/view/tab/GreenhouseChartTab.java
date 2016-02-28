@@ -17,7 +17,7 @@ import org.jfree.chart.ChartPanel;
 import org.jfree.data.general.DefaultPieDataset;
 
 /**
- *This tab is used to show charts about the greenhouse. 
+ * This tab is used to show charts about the greenhouse.
  *
  */
 public class GreenhouseChartTab implements Resettable {
@@ -32,7 +32,7 @@ public class GreenhouseChartTab implements Resettable {
         this.panel = new JPanel(new BorderLayout());
         final GUIFactory factory = new MyGUIFactory();
         final JPanel buttonPanel = new JPanel();
-        //buttons
+        // buttons
         final JButton numPlantChart = new JButton("Composition by Number");
         final JButton spacePlantChart = new JButton("Composition by Occupied Space");
         final JButton waterConsuption = new JButton("Water Consuption");
@@ -41,38 +41,38 @@ public class GreenhouseChartTab implements Resettable {
         buttonPanel.add(spacePlantChart);
         buttonPanel.add(waterConsuption);
         buttonPanel.add(growthTime);
-        //chart
+        // chart
         this.chartPanel = new ChartPanel(null);
         final JScrollPane scrollPane = new JScrollPane(chartPanel);
         scrollPane.setBorder(BorderFactory.createEtchedBorder());
-        //button listeners
+        // button listeners
         numPlantChart.addActionListener(e -> {
             final DefaultPieDataset dataset = new DefaultPieDataset();
-            for (final Map.Entry<String, Integer> elem: ControllerImpl.getController().getGreenhouse().getCompositionByNumber().entrySet()) {
+            for (final Map.Entry<String, Integer> elem : ControllerImpl.getController().getGreenhouse()
+                    .getCompositionByNumber().entrySet()) {
                 dataset.setValue(elem.getKey(), elem.getValue());
             }
             this.chartPanel.setChart(factory.createPieChart(dataset));
         });
         spacePlantChart.addActionListener(e -> {
             final DefaultPieDataset dataset = new DefaultPieDataset();
-            for (final Map.Entry<String, Double> elem: ControllerImpl.getController().getGreenhouse().getCompositionByOccupiedSpace().entrySet()) {
+            for (final Map.Entry<String, Double> elem : ControllerImpl.getController().getGreenhouse()
+                    .getCompositionByOccupiedSpace().entrySet()) {
                 dataset.setValue(elem.getKey(), elem.getValue());
             }
             this.chartPanel.setChart(factory.createPieChart(dataset));
         });
         waterConsuption.addActionListener(e -> {
-            this.chartPanel.setChart(factory.createXYTwoLineChart(ControllerImpl.getController().getGreenhouse().getSimulatedWaterConsuption(), 
-                                                             "Current Water Consuption",
-                                                             ControllerImpl.getController().getGreenhouse().getRealWaterConsuption(),
-                                                             "Traditional Water Consuption", 
-                                                             "ml"));
+            this.chartPanel.setChart(factory.createXYTwoLineChart(
+                    ControllerImpl.getController().getGreenhouse().getSimulatedWaterConsuption(),
+                    "Current Water Consuption", ControllerImpl.getController().getGreenhouse().getRealWaterConsuption(),
+                    "Traditional Water Consuption", "ml"));
         });
         growthTime.addActionListener(e -> {
-            this.chartPanel.setChart(factory.createXYTwoLineChart(ControllerImpl.getController().getGreenhouse().getSimulatedPlantGrow(),
-                                                             "Current Plant Growth", 
-                                                             ControllerImpl.getController().getGreenhouse().getRealPlantGrow(),
-                                                             "Traditional Plant Growth", 
-                                                             "Growth %"));
+            this.chartPanel.setChart(
+                    factory.createXYTwoLineChart(ControllerImpl.getController().getGreenhouse().getSimulatedPlantGrow(),
+                            "Current Plant Growth", ControllerImpl.getController().getGreenhouse().getRealPlantGrow(),
+                            "Traditional Plant Growth", "Growth %"));
         });
         this.panel.add(buttonPanel, BorderLayout.NORTH);
         this.panel.add(scrollPane, BorderLayout.CENTER);

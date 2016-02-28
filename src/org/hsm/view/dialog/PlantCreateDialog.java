@@ -32,9 +32,9 @@ import org.hsm.view.utility.GUIFactory;
 import org.hsm.view.utility.MyGUIFactory;
 
 /**
- *The frame which you can add plants in the table.
+ * The dialog for creating a plant to insert in the database.
  *
- */
+ **/
 public class PlantCreateDialog extends AbstractAddDialog {
 
     private static final int NUM_CHAR = 15;
@@ -50,8 +50,9 @@ public class PlantCreateDialog extends AbstractAddDialog {
 
     /**
      * Create the add plant dialog.
+     * 
      * @param frame
-     * the main frame of the app
+     *            the main frame of the app
      */
     public PlantCreateDialog(final JFrame frame) {
         super(frame, "Create new Plant", Dialog.ModalityType.APPLICATION_MODAL);
@@ -63,18 +64,20 @@ public class PlantCreateDialog extends AbstractAddDialog {
         gbc.insets = new Insets(INSET, INSET, INSET, INSET);
         gbc.gridx = 0;
         gbc.gridy = 0;
-        //map
+        // map
         this.map.put(NAME, new JTextField(NUM_CHAR));
         this.map.put(BOTANICAL_NAME, new JTextField(NUM_CHAR));
         this.map.put(BRIGHTNESS, factory.createSpinner(NUM_CHAR, new SpinnerNumberModel(0, 0, MAX_BRIGHTNESS, DELTA)));
-        this.map.put(CONDUCTIVITY, factory.createSpinner(NUM_CHAR, new SpinnerNumberModel(0, 0, MAX_CONDUCTIVITY, DELTA)));
+        this.map.put(CONDUCTIVITY,
+                factory.createSpinner(NUM_CHAR, new SpinnerNumberModel(0, 0, MAX_CONDUCTIVITY, DELTA)));
         this.map.put(GROWTH_TIME, factory.createSpinner(NUM_CHAR, new SpinnerNumberModel(0, 0, MAX_DAYS, DELTA)));
         this.map.put(LIFE, factory.createSpinner(NUM_CHAR, new SpinnerNumberModel(0, 0, MAX_DAYS, DELTA)));
         this.map.put(PH, factory.createSpinner(NUM_CHAR, new SpinnerNumberModel(0, 0, MAX_PH, DELTA)));
         this.map.put(SIZE, factory.createSpinner(NUM_CHAR, new SpinnerNumberModel(0, 0, MAX_SIZE, DELTA)));
-        this.map.put(TEMPERATURE, factory.createSpinner(NUM_CHAR, new SpinnerNumberModel(0, 0, MAX_TEMPERATURE, DELTA)));
-        //labels
-        for (final PlantModelCharacteristics elem: PlantModelCharacteristics.values()) {
+        this.map.put(TEMPERATURE,
+                factory.createSpinner(NUM_CHAR, new SpinnerNumberModel(0, 0, MAX_TEMPERATURE, DELTA)));
+        // labels
+        for (final PlantModelCharacteristics elem : PlantModelCharacteristics.values()) {
             panel.add(new JLabel(elem.toString()), gbc);
             ++gbc.gridx;
             panel.add(this.map.get(elem), gbc);
@@ -88,17 +91,16 @@ public class PlantCreateDialog extends AbstractAddDialog {
 
     @Override
     protected void addAction() {
-        ControllerImpl.getController().createNewPlant(((JTextField) this.map.get(NAME)).getText(), 
-                                                     ((JTextField) this.map.get(BOTANICAL_NAME)).getText(), 
-                                                     ((SpinnerNumberModel) ((JSpinner) this.map.get(PH)).getModel()).getNumber().intValue(), 
-                                                     ((SpinnerNumberModel) ((JSpinner) this.map.get(BRIGHTNESS)).getModel()).getNumber().intValue(),
-                                                     ((SpinnerNumberModel) ((JSpinner) this.map.get(CONDUCTIVITY)).getModel()).getNumber().intValue(), 
-                                                     ((SpinnerNumberModel) ((JSpinner) this.map.get(GROWTH_TIME)).getModel()).getNumber().intValue(), 
-                                                     ((SpinnerNumberModel) ((JSpinner) this.map.get(TEMPERATURE)).getModel()).getNumber().intValue(),
-                                                     ((SpinnerNumberModel) ((JSpinner) this.map.get(LIFE)).getModel()).getNumber().intValue(),
-                                                     ((SpinnerNumberModel) ((JSpinner) this.map.get(SIZE)).getModel()).getNumber().intValue());
+        ControllerImpl.getController().createNewPlant(((JTextField) this.map.get(NAME)).getText(),
+                ((JTextField) this.map.get(BOTANICAL_NAME)).getText(),
+                ((SpinnerNumberModel) ((JSpinner) this.map.get(PH)).getModel()).getNumber().intValue(),
+                ((SpinnerNumberModel) ((JSpinner) this.map.get(BRIGHTNESS)).getModel()).getNumber().intValue(),
+                ((SpinnerNumberModel) ((JSpinner) this.map.get(CONDUCTIVITY)).getModel()).getNumber().intValue(),
+                ((SpinnerNumberModel) ((JSpinner) this.map.get(GROWTH_TIME)).getModel()).getNumber().intValue(),
+                ((SpinnerNumberModel) ((JSpinner) this.map.get(TEMPERATURE)).getModel()).getNumber().intValue(),
+                ((SpinnerNumberModel) ((JSpinner) this.map.get(LIFE)).getModel()).getNumber().intValue(),
+                ((SpinnerNumberModel) ((JSpinner) this.map.get(SIZE)).getModel()).getNumber().intValue());
         getJDialog().dispose();
     }
-
 
 }

@@ -8,7 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
- *The Save file dialog with a file chooser.
+ * The Save file dialog with a file chooser.
  *
  */
 public class SaveFileDialog implements FileDialog {
@@ -19,9 +19,13 @@ public class SaveFileDialog implements FileDialog {
 
     /**
      * Create the save file dialog.
-     * @param frame the frame for the dialog
-     * @param documentFormat the document format
-     * @param documentExtension the document extension
+     * 
+     * @param frame
+     *            the frame for the dialog
+     * @param documentFormat
+     *            the document format
+     * @param documentExtension
+     *            the document extension
      */
     public SaveFileDialog(final JFrame frame, final String documentFormat, final String documentExtension) {
         this.frame = frame;

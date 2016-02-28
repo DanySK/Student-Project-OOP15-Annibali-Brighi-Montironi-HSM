@@ -29,44 +29,42 @@ import org.hsm.view.utility.MyGUIFactory;
 import org.hsm.view.utility.Utilities;
 
 /**
- *This tab contains all the information about the plants inside the current greenhouse.
+ * This tab contains all the information about the plants inside the current
+ * greenhouse.
  *
  */
 public class PlantsTab extends Observable implements UpgradeableTable<Integer> {
 
     private static final int FILTER_TXT_SIZE = 35;
-    private static final Integer[] UPDATE_RANGE = new Integer[]{1, 10, 30, 60};
+    private static final Integer[] UPDATE_RANGE = new Integer[] { 1, 10, 30, 60 };
     private final JTable table;
     private final JPanel panel;
 
     /**
      * Create the tab for the plants inside the current greenhouse.
-     * @param frame the main frame of the app
+     * 
+     * @param frame
+     *            the main frame of the app
      */
     public PlantsTab(final JFrame frame) {
-        //table
+        // table
         final GUIFactory factory = new MyGUIFactory();
         this.table = factory.createTable(PlantCharacteristics.getNameList().toArray());
         final JPanel southPanel = new JPanel();
         southPanel.setLayout(new BoxLayout(southPanel, BoxLayout.X_AXIS));
-        //buttons
+        // buttons
         final JButton remove = new JButton("Remove Plant");
         remove.addActionListener(e -> ControllerImpl.getController().delPlant());
         final JButton removeType = new JButton("Remove Type");
         removeType.addActionListener(e -> ControllerImpl.getController().delPLants());
         final JButton updateValues = new JButton("Update Plant Values");
         updateValues.addActionListener(e -> {
-            final Integer timeUpdate = (Integer) JOptionPane.showInputDialog(frame, 
-                                   "Choose the refresh interval (sec)",
-                                   "Update Values",
-                                   JOptionPane.QUESTION_MESSAGE, 
-                                   null, 
-                                   UPDATE_RANGE, 
-                                   UPDATE_RANGE[0]);
+            final Integer timeUpdate = (Integer) JOptionPane.showInputDialog(frame, "Choose the refresh interval (sec)",
+                    "Update Values", JOptionPane.QUESTION_MESSAGE, null, UPDATE_RANGE, UPDATE_RANGE[0]);
             if (Objects.nonNull(timeUpdate)) {
                 ControllerImpl.getController().autoUpdate(timeUpdate);
                 this.table.setRowSelectionAllowed(false);
-            } 
+            }
         });
         final JButton stop = new JButton("Stop Updating");
         stop.addActionListener(e -> {
@@ -84,17 +82,18 @@ public class PlantsTab extends Observable implements UpgradeableTable<Integer> {
         final JLabel filterLabel = new JLabel("Find:");
         final JTextField filterField = new JTextField(FILTER_TXT_SIZE);
         final JButton findButton = new JButton("Filter");
-        filterField.setMaximumSize(new Dimension(filterField.getPreferredSize().width, filterField.getPreferredSize().height));
-        //filter
+        filterField.setMaximumSize(
+                new Dimension(filterField.getPreferredSize().width, filterField.getPreferredSize().height));
+        // filter
         final TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(this.table.getModel());
         this.table.setRowSorter(sorter);
         findButton.addActionListener(e -> {
             final String text = filterField.getText();
             if (text.length() == 0) {
                 sorter.setRowFilter(null);
-              } else {
+            } else {
                 sorter.setRowFilter(RowFilter.regexFilter(text));
-              }
+            }
         });
         southPanel.add(filterLabel);
         southPanel.add(filterField);
@@ -160,7 +159,9 @@ public class PlantsTab extends Observable implements UpgradeableTable<Integer> {
 
     /**
      * Set the possibility to select rows in the table.
-     * @param state true if the selection is possible otherwise false
+     * 
+     * @param state
+     *            true if the selection is possible otherwise false
      */
     public void setRowSelectionAllowed(final boolean state) {
         this.table.setRowSelectionAllowed(true);

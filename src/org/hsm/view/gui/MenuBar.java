@@ -18,7 +18,7 @@ import org.hsm.view.dialog.PlantCreateDialog;
 import org.hsm.view.utility.Utilities;
 
 /**
- *The MenuBar component for the main frame.
+ * The MenuBar component for the main frame.
  *
  */
 public class MenuBar implements GUIComponent {
@@ -35,11 +35,13 @@ public class MenuBar implements GUIComponent {
 
     /**
      * Create the MenuBar.
-     * @param frame the MainFrame for the MenuBar
+     * 
+     * @param frame
+     *            the MainFrame for the MenuBar
      */
     public MenuBar(final JFrame frame) {
         this.bar = new JMenuBar();
-        //Menus
+        // Menus
         final JMenu file = new JMenu("File");
         this.edit = new JMenu("Edit");
         this.chart = new JMenu("Charts");
@@ -52,7 +54,7 @@ public class MenuBar implements GUIComponent {
         information.setMnemonic(KeyEvent.VK_I);
         tools.setMnemonic(KeyEvent.VK_T);
         help.setMnemonic(KeyEvent.VK_H);
-        //Menù File Item
+        // Menù File Item
         final JMenuItem newGreenhouse = new JMenuItem("New Greenhouse");
         newGreenhouse.addActionListener(e -> new GreenhouseCreateDialog(frame).start());
         file.add(newGreenhouse);
@@ -79,7 +81,7 @@ public class MenuBar implements GUIComponent {
         exit.addActionListener(e -> ControllerImpl.getController().exit());
         file.addSeparator();
         file.add(exit);
-        //Menu Edit Item
+        // Menu Edit Item
         final JMenuItem addPlant = new JMenuItem("Add Plant");
         addPlant.addActionListener(e -> {
             if (ControllerImpl.getController().isDbEmpty()) {
@@ -99,7 +101,7 @@ public class MenuBar implements GUIComponent {
         final JMenuItem removeDBPlant = new JMenuItem("Remove plant from Database");
         removeDBPlant.addActionListener(e -> ControllerImpl.getController().deleteDbPlant());
         this.edit.add(removeDBPlant);
-        //Menu Chart Item
+        // Menu Chart Item
         final JMenuItem brightnessBarChart = new JMenuItem("Show Brightness Bar Chart");
         this.chart.add(brightnessBarChart);
         brightnessBarChart.addActionListener(e -> ControllerImpl.getController().showBrightnessBarChart());
@@ -125,7 +127,7 @@ public class MenuBar implements GUIComponent {
         final JMenuItem conductivityLineChart = new JMenuItem("Show Conductivity Line Chart");
         conductivityLineChart.addActionListener(e -> ControllerImpl.getController().showConductivityLineChart());
         this.chart.add(conductivityLineChart);
-        //Menu Information Item
+        // Menu Information Item
         final JMenuItem whatsHydroponic = new JMenuItem("What is Hydroponic? (Wiki)");
         information.add(whatsHydroponic);
         whatsHydroponic.addActionListener(e -> {
@@ -137,7 +139,7 @@ public class MenuBar implements GUIComponent {
                 } catch (final Exception ex) {
                     Utilities.errorMessage(frame, ERROR_MSG);
                 }
-             }
+            }
         });
         final JMenuItem growLight = new JMenuItem("Grow Light (Wiki)");
         information.add(growLight);
@@ -150,7 +152,7 @@ public class MenuBar implements GUIComponent {
                 } catch (final Exception ex) {
                     Utilities.errorMessage(frame, ERROR_MSG);
                 }
-             }
+            }
         });
         final JMenuItem buildhydro = new JMenuItem("Build your Hydroponic System");
         information.add(buildhydro);
@@ -163,7 +165,7 @@ public class MenuBar implements GUIComponent {
                 } catch (final Exception ex) {
                     Utilities.errorMessage(frame, ERROR_MSG);
                 }
-             }
+            }
         });
         final JMenuItem plantingGuide = new JMenuItem("Planting Guide");
         information.add(plantingGuide);
@@ -176,9 +178,9 @@ public class MenuBar implements GUIComponent {
                 } catch (final Exception ex) {
                     Utilities.errorMessage(frame, ERROR_MSG);
                 }
-             }
+            }
         });
-        //Menu Tools Item
+        // Menu Tools Item
         final JMenuItem nutrientSolutionCalc = new JMenuItem("Nutrient Solution Calculator");
         tools.add(nutrientSolutionCalc);
         nutrientSolutionCalc.addActionListener(e -> {
@@ -190,9 +192,9 @@ public class MenuBar implements GUIComponent {
                 } catch (final Exception ex) {
                     Utilities.errorMessage(frame, ERROR_MSG);
                 }
-             }
+            }
         });
-        //Menu Help Item
+        // Menu Help Item
         final JMenuItem loadTest = new JMenuItem("Load Example");
         final JMenuItem about = new JMenuItem("About Hydroponic System Manager");
         about.addActionListener(e -> new InfoDialog(frame).start());
@@ -200,7 +202,7 @@ public class MenuBar implements GUIComponent {
         help.add(loadTest);
         help.addSeparator();
         help.add(about);
-        //Add menus in MenuBar
+        // Add menus in MenuBar
         this.bar.add(file);
         this.bar.add(edit);
         this.bar.add(chart);
@@ -211,7 +213,9 @@ public class MenuBar implements GUIComponent {
 
     /**
      * Set the state of the Edit commands in the Menù.
-     * @param state the state of the commands
+     * 
+     * @param state
+     *            the state of the commands
      */
     public void setEditCommands(final boolean state) {
         this.edit.setEnabled(state);

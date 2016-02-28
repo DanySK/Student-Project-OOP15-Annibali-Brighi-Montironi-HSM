@@ -78,18 +78,19 @@ public class MainFrame implements View {
     }
 
     @Override
-    public void insertGreenhouse(final String name, final double size, final double cost, final String typology, 
+    public void insertGreenhouse(final String name, final double size, final double cost, final String typology,
             final double freeSpace, final double occupiedSpace, final int numberOfPlants, final double overCost) {
-        this.tab.getGreenhouseTab().setGreenhouse(name, size, cost, typology, freeSpace, occupiedSpace, numberOfPlants, overCost);
+        this.tab.getGreenhouseTab().setGreenhouse(name, size, cost, typology, freeSpace, occupiedSpace, numberOfPlants,
+                overCost);
         this.tab.getGreenhouseChartTab().clean();
         this.tab.getPlantsTab().clean();
         ((PlantsTab) this.tab.getPlantsTab()).setRowSelectionAllowed(true);
     }
 
     @Override
-    public void insertModelPlant(final String name, final String botanicalName, final double ph, final double brightness,
-            final int optimalGrowthTime, final int life, final double size, final double conductivity,
-            final double temperature) {
+    public void insertModelPlant(final String name, final String botanicalName, final double ph,
+            final double brightness, final int optimalGrowthTime, final int life, final double size,
+            final double conductivity, final double temperature) {
         this.tab.getDatabaseTab().insertRow(name, botanicalName, ph, brightness, optimalGrowthTime, life, size,
                 conductivity, temperature);
     }
@@ -100,14 +101,14 @@ public class MainFrame implements View {
     }
 
     @Override
-    public void insertNewPlant(final int id, final String name, final double cost, final double ph, final double brightness,
-                final double conductivity, final double temperature) {
+    public void insertNewPlant(final int id, final String name, final double cost, final double ph,
+            final double brightness, final double conductivity, final double temperature) {
         this.tab.getPlantsTab().insertRow(id, name, cost, ph, brightness, conductivity, temperature);
     }
 
     @Override
-    public void insertPlant(final int id, final String name, final double cost, final double ph, final double brightness, 
-            final double conductivity, final double temperature) {
+    public void insertPlant(final int id, final String name, final double cost, final double ph,
+            final double brightness, final double conductivity, final double temperature) {
         this.tab.getPlantsTab().updateRow(id, name, cost, ph, brightness, conductivity, temperature);
     }
 
@@ -159,8 +160,8 @@ public class MainFrame implements View {
     private void setSystemLook() {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (ClassNotFoundException | InstantiationException
-                | IllegalAccessException | UnsupportedLookAndFeelException e) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+                | UnsupportedLookAndFeelException e) {
             System.out.println("errore visualizzazione gui");
         }
     }
