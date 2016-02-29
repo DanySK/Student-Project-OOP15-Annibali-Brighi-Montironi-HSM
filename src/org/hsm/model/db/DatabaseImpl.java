@@ -12,9 +12,7 @@ import org.hsm.model.plant.PlantModel;
  */
 public class DatabaseImpl implements Database, Serializable {
 
-    /**
-     *
-     */
+   
     private static final long serialVersionUID = 1L;
     private final Map<String, PlantModel> db = new HashMap<>();
 

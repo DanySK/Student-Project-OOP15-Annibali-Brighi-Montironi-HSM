@@ -9,7 +9,6 @@ import org.hsm.model.plant.PlantModel;
  */
 public interface Database {
 
-    // TODO aggiungere getter tutti
     /**
      * Add a plant into database.
      *
