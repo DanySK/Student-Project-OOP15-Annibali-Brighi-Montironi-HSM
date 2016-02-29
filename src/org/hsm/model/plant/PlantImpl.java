@@ -5,8 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- *
- *
+ *implementation of Plant interface
  *
  */
 public class PlantImpl implements Plant, Serializable {
