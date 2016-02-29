@@ -13,7 +13,9 @@ public class PlantImpl implements Plant, Serializable {
 
     private static final long serialVersionUID = 1101353617623045838L;
     private static final int CENT_FACTOR = 100;
-    private static final int MAX_NUMB_OF_VALUE = 1000;//THIS VALUE MUST BE GREATER THAN NUMB_OF_ERASABLE_ELEMENTS
+    private static final int MAX_NUMB_OF_VALUE = 1000; // THIS VALUE MUST BE
+                                                       // GREATER THAN
+                                                       // NUMB_OF_ERASABLE_ELEMENTS
     private static final int NUMB_OF_ERASABLE_ELEMENTS = 200;
     private final PlantModel model;
     private final int cost;
@@ -80,8 +82,6 @@ public class PlantImpl implements Plant, Serializable {
         return new LinkedList<>(this.tempList);
     }
 
-   
-
     @Override
     public double getLastBrightValue() {
         return getLastValue(brightList);
@@ -141,7 +141,7 @@ public class PlantImpl implements Plant, Serializable {
     public double getLastPhValueTraditional() {
         return getLastValue(phListTrad);
     }
-    
+
     @Override
     public void addPhValue(final double value) {
         addElement(this.phList, value);
@@ -191,25 +191,26 @@ public class PlantImpl implements Plant, Serializable {
     /*
      * method used by some getters to return a double
      */
-    private Double getLastValue(final List<Double> l){
-        if(l.isEmpty()){
+    private Double getLastValue(final List<Double> l) {
+        if (l.isEmpty()) {
             return 0.0;
         } else {
             return l.get(l.size() - 1);
         }
     }
-    
+
     /*
-     * method used to add a value in the list. If the list is too big, then delete old values
+     * method used to add a value in the list. If the list is too big, then
+     * delete old values
      */
-    private void addElement(List<Double> l, final Double value){
-        if(l.size() >= MAX_NUMB_OF_VALUE){
-            List<Double> tmp = new LinkedList<>(l.subList(NUMB_OF_ERASABLE_ELEMENTS, l.size()-1));
-           l = tmp;
+    private void addElement(List<Double> l, final Double value) {
+        if (l.size() >= MAX_NUMB_OF_VALUE) {
+            final List<Double> tmp = new LinkedList<>(l.subList(NUMB_OF_ERASABLE_ELEMENTS, l.size() - 1));
+            l = tmp;
         }
         l.add(value);
     }
-    
+
     @Override
     public String toString() {
         return "PlantImpl [model=" + model + ", cost=" + cost + ", phList=" + phList + ", brightList=" + brightList

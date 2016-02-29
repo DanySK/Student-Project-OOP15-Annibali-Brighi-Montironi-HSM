@@ -28,10 +28,10 @@ public class GreenhouseImpl implements Greenhouse, Serializable {
 
     private final Map<Integer, Plant> plantMap = new HashMap<>();
     private final IDmanager productID = new IDmanager();
-    private String name;
-    private int size;
+    private final String name;
+    private final int size;
     private double costGreenhouse;
-    private GreenHouseType type;
+    private final GreenHouseType type;
     private int updateCount;
 
     private final Simulator simulator = new SimulatorImpl();
@@ -74,7 +74,7 @@ public class GreenhouseImpl implements Greenhouse, Serializable {
     @Override
     public int addPlant(final PlantModel model, final int cost) throws IllegalStateException {
         if ((model.getSize() / CMQ_TO_MQ) <= getFreeSize()) {
-            int tmp = productID.getID();
+            final int tmp = productID.getID();
             this.plantMap.put(tmp, new PlantImpl(model, cost));
             return tmp;
         } else {
@@ -102,7 +102,7 @@ public class GreenhouseImpl implements Greenhouse, Serializable {
     @Override
     public void delPlants(final PlantModel plant) {
         final Set<Integer> set = new HashSet<>();
-        for (Map.Entry<Integer, Plant> elem : this.plantMap.entrySet()) {
+        for (final Map.Entry<Integer, Plant> elem : this.plantMap.entrySet()) {
             if (elem.getValue().getModel().equals(plant)) {
                 set.add(elem.getKey());
             }
@@ -122,13 +122,10 @@ public class GreenhouseImpl implements Greenhouse, Serializable {
         return this.name;
     }
 
-
     @Override
     public double getSize() {
         return size;
     }
-
-
 
     @Override
     public double getFreeSize() {

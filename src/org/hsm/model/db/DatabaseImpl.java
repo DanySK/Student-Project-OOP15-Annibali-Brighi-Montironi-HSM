@@ -16,7 +16,7 @@ public class DatabaseImpl implements Database, Serializable {
      *
      */
     private static final long serialVersionUID = 1L;
-    private Map<String, PlantModel> db = new HashMap<>();
+    private final Map<String, PlantModel> db = new HashMap<>();
 
     /**
      * Add a plant in the database.

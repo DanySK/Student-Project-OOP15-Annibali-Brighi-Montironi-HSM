@@ -161,7 +161,7 @@ public class PlantModelImpl implements PlantModel, Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        PlantModelImpl other = (PlantModelImpl) obj;
+        final PlantModelImpl other = (PlantModelImpl) obj;
         if (botanicalName == null) {
             if (other.botanicalName != null) {
                 return false;
