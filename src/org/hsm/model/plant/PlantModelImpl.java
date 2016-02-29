@@ -3,7 +3,7 @@ package org.hsm.model.plant;
 import java.io.Serializable;
 
 /**
- *
+ *implementation of PlantModel Interface
  */
 
 public class PlantModelImpl implements PlantModel, Serializable {
